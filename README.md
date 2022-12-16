@@ -4,6 +4,14 @@ A package to load [TSDF data](https://arxiv.org/abs/2211.11294) into Python
 
 ## Installation
 
+### Using `poetry` (recommended)
+
+```bash
+poetry install
+```
+
+### Using `pip`
+
 ```bash
 $ pip install tsdf
 ```
