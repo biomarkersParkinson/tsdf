@@ -1,4 +1,5 @@
 import json
+from tsdf.constants import *
 
 def load(file):
     """ Loads a TSDF metadata file, returns a dictionary """
@@ -25,12 +26,12 @@ def loads(s):
 def _check(data):
     """ Fails if something is suspicious """
 
-    # Currently only version 0.1 is supported
-    supported_versions = ["0.1"]
-    for version in supported_versions:
-        assert data["metadata_version"] == version, f"TSDF file version {version} not supported."
+    # Check if the version is supported
+    version = data["metadata_version"]
+    assert version in SUPPORTED_VERSIONS, f"TSDF file version {version} not supported."
 
     # Check that mandatory keys are present
+    # TODO: move to constants.py
     mandatory_keys = ["subject_id","study_id","device_id",
                       "endianness","metadata_version","data_type",
                       "bits", "rows","channels",

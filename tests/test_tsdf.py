@@ -1,4 +1,4 @@
-from tsdf import tsdf
+from tsdf import *
 from test_fixtures import *
 
 def test_true():
