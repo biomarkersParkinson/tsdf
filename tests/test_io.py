@@ -8,14 +8,17 @@ TESTDATA = { "flat"         : os.path.join(os.path.dirname(__file__), 'data/flat
         }
 
 def test_flat():
+    """ Test that a flat json gets loaded """
     with open(TESTDATA["flat"]) as file:
         data = load(file)
 
 def test_hierarchical():
+    """ Test that the hierarchical json gets loaded """
     with open(TESTDATA["hierarchical"]) as file:
         data = load(file)
 
 class TestWrongVersion(unittest.TestCase):
+    """ Test that a file with a wrong version raises an exception """
     def test_exception(self):
         with open(TESTDATA["wrongversion"]) as file:
             with self.assertRaises(AssertionError) as context:

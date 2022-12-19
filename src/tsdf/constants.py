@@ -1,3 +1,6 @@
+# Reference: https://arxiv.org/abs/2211.11294
+
+# List of currently supported versions
 SUPPORTED_VERSIONS = ["0.1"]
 
 # Dictionary linking mandatory keys for different versions
