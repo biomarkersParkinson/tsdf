@@ -477,6 +477,20 @@ files = [
 devel = ["colorama", "json-spec", "jsonschema", "pylint", "pytest", "pytest-benchmark", "pytest-cache", "validictory"]
 
 [[package]]
+name = "flatten-json"
+version = "0.1.13"
+description = "Flatten JSON objects"
+category = "main"
+optional = false
+python-versions = "*"
+files = [
+    {file = "flatten_json-0.1.13.tar.gz", hash = "sha256:ee352333e8293e957ccb1b4597a111fc4f6da88ab74b8cb3f8f51eed1e12f500"},
+]
+
+[package.dependencies]
+six = "*"
+
+[[package]]
 name = "fqdn"
 version = "1.5.1"
 description = "Validates fully-qualified domain names against RFC 1123, so that they are acceptable to modern bowsers"
@@ -1779,7 +1793,7 @@ win32 = ["pywin32"]
 name = "six"
 version = "1.16.0"
 description = "Python 2 and 3 compatibility utilities"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*"
 files = [
@@ -2021,4 +2035,4 @@ testing = ["flake8 (<5)", "func-timeout", "jaraco.functools", "jaraco.itertools"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9"
-content-hash = "e3e36d0eb6facc29795747d1fdbf756ba5bbd89a3fc44ec74092fb9956e7e963"
+content-hash = "6e6e405624cda80a8ff031d993d7dc21390eb2a445317a7ffae20cdbe0efb3bb"
