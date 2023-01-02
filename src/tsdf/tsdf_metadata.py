@@ -18,13 +18,16 @@ class TSDFMetadata:
     data_type: str
     bits: int
     additional_properties: dict
-    """ Additional (non-obligatory) properties provided by the methadata. """
+    """ Additional (non-obligatory) properties provided by the metadata. """
 
     def __init__(self, dictionary: Dict[str, Any], version) -> None:
-        """ The default constructor takes a dictionary as an argument and creates each mandatory field as a separate property. The non-mandatory fields are stored as a dict property (additional_properties). """
+        """ The default constructor takes a dictionary as an argument and creates each mandatory
+            field as a separate property. The non-mandatory fields are stored as a dict property
+            (additional_properties). """
         for key in constants.MANDATORY_KEYS[version]:
-            assert key in dictionary.keys(), f"TSDF structue is missing key '{key}'"
-        assert len(dictionary["units"]) == len(dictionary["channels"]), "TSDF structure requires equal number of 'units' and 'channels'"
+            assert key in dictionary.keys(), f"TSDF structure is missing key '{key}'"
+        assert len(dictionary["units"]) == len(dictionary["channels"]), \
+            "TSDF structure requires equal number of 'units' and 'channels'"
 
         for key, value in dictionary.items():
             if key in constants.MANDATORY_KEYS:
@@ -41,7 +44,7 @@ class TSDFMetadata:
         except KeyError:
             print(f"AttributeError: 'TSDFMetadata' object has no attribute {__name}.")
             # An alternative would be to throw "AttributeError"
-            
+
 
     @staticmethod
     def read_data(data):
@@ -53,11 +56,11 @@ class TSDFMetadata:
 
         defined_properties:dict = {}
         return TSDFMetadata._read_struct(data, defined_properties.copy(), version)
-        
+
 
     @staticmethod
     def _read_struct(data, defined_properties, version) -> list:
-        """ Recursive method used to parse the TSDF matadata in a hiararchical order (from the root towards the leaves)."""
+        """ Recursive method used to parse the TSDF metadata in a hierarchical order (from the root towards the leaves)."""
         all_streams:List[TSDFMetadata] = []
 
         # First, make a list of all values provided at the current level of the TSDF structure
@@ -75,7 +78,7 @@ class TSDFMetadata:
                 leaf = False
                 if isinstance(value, dict):
                     all_streams.append(TSDFMetadata._read_struct(value, defined_properties.copy(), version))
-                elif isinstance(value, list): # Can we have a list of regular elements here? Ideally we would have an obligaroty key that allows "nesting"
+                elif isinstance(value, list): #TODO: Can we have a list of regular elements here? Ideally we would have an obligatory key that allows "nesting"
                     for each_value in value:
                         all_streams.append(TSDFMetadata._read_struct(each_value, defined_properties.copy(), version))
 
@@ -85,15 +88,10 @@ class TSDFMetadata:
         return all_streams
 
 
-
     @staticmethod
     def _check_format(key, value, version):
-        """
-        Method should check whether the given value is of the expeced format.
-        """
+        """ Checks whether the given value is of the expected format. """
         index = constants.MANDATORY_KEYS[version].index(key)
         type_name = constants.MANDATORY_KEYS_VALUES[version][index]
 
         assert isinstance(value,constants.KNOWN_TYPES[type_name]), f"The given value for {key} is not in the expected ({type_name}) format."
-
-
