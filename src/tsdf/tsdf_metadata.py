@@ -60,12 +60,14 @@ class TSDFMetadata:
         # Second, retrieve values provided at the lower levels of the TSDF structure
         for key, value in data.items():
             if key not in constants.MANDATORY_KEYS[version]:
-                leaf = False
                 if isinstance(value, dict):
+                    leaf = False
                     all_streams.append(TSDFMetadata._read_struct(value, defined_properties.copy(), version))
                 elif isinstance(value, list): #TODO: Can we have a list of regular elements here? Ideally we would have an obligatory key that allows "nesting"
                     for each_value in value:
-                        all_streams.append(TSDFMetadata._read_struct(each_value, defined_properties.copy(), version))
+                        if isinstance(each_value, dict):
+                            leaf = False
+                            all_streams.append(TSDFMetadata._read_struct(each_value, defined_properties.copy(), version))
 
         assert not leaf or "file_name" in defined_properties, "'file_name' was expected in the TSDF metadata."
 
