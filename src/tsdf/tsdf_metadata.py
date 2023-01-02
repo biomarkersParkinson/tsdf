@@ -17,8 +17,6 @@ class TSDFMetadata:
     units: List[str]
     data_type: str
     bits: int
-    additional_properties: dict
-    """ Additional (non-obligatory) properties provided by the metadata. """
 
     def __init__(self, dictionary: Dict[str, Any], version) -> None:
         """ The default constructor takes a dictionary as an argument and creates each mandatory
@@ -30,20 +28,7 @@ class TSDFMetadata:
             "TSDF structure requires equal number of 'units' and 'channels'"
 
         for key, value in dictionary.items():
-            if key in constants.MANDATORY_KEYS:
-                setattr(self, key, value)
-            else:
-                self.additional_properties = {}
-                self.additional_properties[key] = value
-
-
-    def __getattr__(self, __name: str) -> Any:
-        """ Method allows us to access the additional attributes. """
-        try:
-            return self.additional_properties[__name]
-        except KeyError:
-            print(f"AttributeError: 'TSDFMetadata' object has no attribute {__name}.")
-            # An alternative would be to throw "AttributeError"
+            setattr(self, key, value)
 
 
     @staticmethod
