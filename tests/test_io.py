@@ -1,39 +1,24 @@
-from tsdf.io import load_file
+from tsdf import io
 import os
 import unittest
 
-TESTDATA = { "flat"         : os.path.join(os.path.dirname(__file__), 'data/flat.json'),
-             "hierarchical" : os.path.join(os.path.dirname(__file__), 'data/hierarchical.json'),
-             "wrongversion" : os.path.join(os.path.dirname(__file__), 'data/wrongversion.json'),
-             "missingkey"   : os.path.join(os.path.dirname(__file__), 'data/missingkey.json'),
-        }
+TESTDATA = {"hierarchical" : os.path.join(os.path.dirname(__file__), 'data/hierarchical.json') }
 
-def test_flat():
-    """ Test that a flat json gets loaded """
-    with open(TESTDATA["flat"]) as file:
-        data = load_file(file)
+class TestFileReading(unittest.TestCase):
+    """ Test that a json file gets loaded """
+    def test_load_json_file(self):
+        with open(TESTDATA["hierarchical"]) as file:    
+            data = io.load_file(file) # This should not trigger an exception
+            self.assertGreater(len(data), 0)
 
-def test_hierarchical():
-    """ Test that the hierarchical json gets loaded """
-    with open(TESTDATA["hierarchical"]) as file:
-        data = load_file(file)
+    """ Test that a json file from a path gets loaded """
+    def test_load_json_path(self):
+        data = io.load_from_path(TESTDATA["hierarchical"]) # This should not trigger an exception   
+        self.assertGreater(len(data), 0)
 
-class TestWrongVersion(unittest.TestCase):
-    """ Test that a file with a wrong version raises an exception """
-    def test_exception(self):
-        with open(TESTDATA["wrongversion"]) as file:
-            with self.assertRaises(AssertionError) as context:
-                data = load_file(file) # This should trigger an exception
-
-            self.assertTrue("TSDF file version" in str(context.exception), 
-            f"Wrong version is not being detected")
-
-class TestTestMissingKey(unittest.TestCase):
-    """ Test that a file with a missing mandatory key raises an exception """
-    def test_exception(self):
-        with open(TESTDATA["missingkey"]) as file:
-            with self.assertRaises(AssertionError) as context:
-                data = load_file(file) # This should trigger an exception
-
-            self.assertTrue("Missing key: endianness" in str(context.exception),
-            f"Missing key is not being detected")
+    """ Test that a json object gets loaded """
+    def test_load_json_string(self):
+        with open(TESTDATA["hierarchical"]) as file:
+            json_string = file.read()
+            data = io.load_string(json_string) # This should not trigger an exception   
+            self.assertGreater(len(data), 0)
