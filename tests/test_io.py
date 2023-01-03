@@ -17,19 +17,19 @@ class TestFileReading(unittest.TestCase):
         """ Test that a json file gets loaded """
         with open(TESTDATA["hierarchical"]) as file:
             data = io.load_file(file) # This should not trigger an exception
-            self.assertEquals(len(data), 4)
+            self.assertEqual(len(data), 4)
 
     def test_load_json_path(self):
         """ Test that a json file from a path gets loaded """
         data = io.load_from_path(TESTDATA["hierarchical"]) # This should not trigger an exception   
-        self.assertEquals(len(data), 4)
+        self.assertEqual(len(data), 4)
 
     def test_load_json_string(self):
         """ Test that a json object gets loaded """
         with open(TESTDATA["hierarchical"]) as file:
             json_string = file.read()
             data = io.load_string(json_string) # This should not trigger an exception   
-            self.assertEquals(len(data), 4)
+            self.assertEqual(len(data), 4)
 
     def test_load_binary_float32(self):
         path = os.path.join(_TESTDATA_DIR, 'dummy_10_3_float32.json')
@@ -64,7 +64,7 @@ class TestFileReading(unittest.TestCase):
         path = os.path.join(_TESTDATA_DIR, 'like_ppp.json')
         metadata = io.load_from_path(path)
         time_data = io.load_binary_from_metadata(_TESTDATA_DIR, metadata[0])
-        self.assertEqual(time_data.shape, (17, 1))
+        self.assertEqual(time_data.shape, (17,))
         self.assertEqual(time_data.dtype, 'float32')
         sample_data = io.load_binary_from_metadata(_TESTDATA_DIR, metadata[1])
         self.assertEqual(sample_data.shape, (17, 6))

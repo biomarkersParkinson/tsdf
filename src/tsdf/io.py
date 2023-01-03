@@ -43,12 +43,18 @@ def load_string(json_str) -> List[TSDFMetadata]:
     return io_metadata.read_data(data)
 
 def load_binary_from_metadata(metadata_dir: str, metadata: TSDFMetadata) -> np.ndarray:
+    """ Use metadata properties to load and return numpy array from a binary file
+    """
     bin_path = os.path.join(metadata_dir, metadata.file_name)
     return load_binary_file(bin_path, metadata.data_type, metadata.bits,
         metadata.endianness, metadata.rows, len(metadata.channels))
 
 def load_binary_file(file_path: str, type: str, n_bits: int, endianness: str, 
         n_rows: int, n_columns: int) -> np.ndarray:
+    """ Use provided parameters to load and return a numpy array from a binary file
+    """
+
+    # Build format string that numpy understands
     dtype_mapping = {
         'float': 'f',
         'int': 'i'
@@ -58,11 +64,13 @@ def load_binary_file(file_path: str, type: str, n_bits: int, endianness: str,
     s_n_bytes = str(n_bits // 8)
     format_string = ''.join([s_endianness, s_type, s_n_bytes])
 
+    # Load the data and reshape
     with open(file_path, 'rb') as fid:
         values = np.fromfile(fid, dtype=format_string)
         if n_columns > 1:
             values = values.reshape((-1, n_columns))
 
+    # Check whether the number of rows matches the metadata
     if values.shape[0] != n_rows:
         raise Exception("number of rows doesn't match file length")
 
