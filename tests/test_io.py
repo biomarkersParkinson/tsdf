@@ -55,3 +55,13 @@ class TestFileReading(unittest.TestCase):
         data = io.load_binary_from_metadata(TESTDATA_DIR, metadata[0])
         self.assertEqual(data.shape, (10, 3))
         self.assertEqual(data.dtype, 'int16')
+
+    def test_like_ppp(self):
+        path = os.path.join(TESTDATA_DIR, 'like_ppp.json')
+        metadata = io.load_from_path(path)
+        time_data = io.load_binary_from_metadata(TESTDATA_DIR, metadata[0])
+        self.assertEqual(time_data.shape, (17, 1))
+        self.assertEqual(time_data.dtype, 'float32')
+        sample_data = io.load_binary_from_metadata(TESTDATA_DIR, metadata[1])
+        self.assertEqual(sample_data.shape, (17, 6))
+        self.assertEqual(sample_data.dtype, 'int16')
