@@ -2,6 +2,7 @@ import json
 import os
 import numpy as np
 from typing import List
+from tsdf import io_metadata
 from tsdf.tsdf_metadata import TSDFMetadata
 
 def load_file(file) -> List[TSDFMetadata]:
@@ -9,12 +10,12 @@ def load_file(file) -> List[TSDFMetadata]:
     
     Reference: https://arxiv.org/abs/2211.11294
     """
-
+    
     # The data is isomorphic to a JSON
     data = json.load(file)
-
+    
     # Parse the data and verify that it complies with TSDF requirements
-    return TSDFMetadata.read_data(data)
+    return io_metadata.read_data(data)
 
   
 def load_from_path(path: str) -> List[TSDFMetadata]:
@@ -27,7 +28,7 @@ def load_from_path(path: str) -> List[TSDFMetadata]:
         data = json.load(file)
     
     # Parse the data and verify that it complies with TSDF requirements
-    return TSDFMetadata.read_data(data)
+    return io_metadata.read_data(data)
 
 def load_string(json_str) -> List[TSDFMetadata]:
     """ Loads a TSDF metadata string, returns a dictionary
@@ -39,7 +40,7 @@ def load_string(json_str) -> List[TSDFMetadata]:
     data = json.loads(json_str)
     
     # Parse the data and verify that it complies with TSDF requirements
-    return TSDFMetadata.read_data(data)
+    return io_metadata.read_data(data)
 
 def load_binary_from_metadata(metadata_dir: str, metadata: TSDFMetadata) -> np.ndarray:
     bin_path = os.path.join(metadata_dir, metadata.file_name)
