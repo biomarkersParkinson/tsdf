@@ -27,9 +27,31 @@ class TestFileReading(unittest.TestCase):
             data = io.load_string(json_string) # This should not trigger an exception   
             self.assertGreater(len(data), 0)
 
-    def test_load_binary_from_metadata(self):
+    def test_load_binary_float32(self):
+        path = os.path.join(TESTDATA_DIR, 'dummy_10_3_float32.json')
+        metadata = io.load_from_path(path)
+        data = io.load_binary_from_metadata(TESTDATA_DIR, metadata[0])
+        self.assertEqual(data.shape, (10, 3))
+        self.assertEqual(data.dtype, 'float32')
+
+    def test_load_binary_float64(self):
+        path = os.path.join(TESTDATA_DIR, 'dummy_10_3_float64.json')
+        metadata = io.load_from_path(path)
+        data = io.load_binary_from_metadata(TESTDATA_DIR, metadata[0])
+        self.assertEqual(data.shape, (10, 3))
+        self.assertEqual(data.dtype, 'float64')
+
+    def test_load_binary_float64_fail(self):
+        """ Should raise an exception on reading binary data """
+        path = os.path.join(TESTDATA_DIR, 'dummy_10_3_float64_fail.json')
+        metadata = io.load_from_path(path)
+        with self.assertRaises(Exception) as exc_context:
+            io.load_binary_from_metadata(TESTDATA_DIR, metadata[0])
+        self.assertEqual(exc_context.exception.args[0], "number of rows doesn't match file length")
+
+    def test_load_binary_int16(self):
         path = os.path.join(TESTDATA_DIR, 'dummy_10_3_int16.json')
         metadata = io.load_from_path(path)
         data = io.load_binary_from_metadata(TESTDATA_DIR, metadata[0])
-        assert data.shape == (10, 3)
-        assert data.dtype == 'int16'
+        self.assertEqual(data.shape, (10, 3))
+        self.assertEqual(data.dtype, 'int16')

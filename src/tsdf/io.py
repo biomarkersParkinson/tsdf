@@ -44,22 +44,25 @@ def load_string(json_str) -> List[TSDFMetadata]:
 def load_binary_from_metadata(metadata_dir: str, metadata: TSDFMetadata) -> np.ndarray:
     bin_path = os.path.join(metadata_dir, metadata.file_name)
     return load_binary_file(bin_path, metadata.data_type, metadata.bits,
-        metadata.endianness, len(metadata.channels))
+        metadata.endianness, metadata.rows, len(metadata.channels))
 
-def load_binary_file(file_path: str, type: str, nbits: int, endianness: str, 
-        ncolumns: int) -> np.ndarray:
+def load_binary_file(file_path: str, type: str, n_bits: int, endianness: str, 
+        n_rows: int, n_columns: int) -> np.ndarray:
     dtype_mapping = {
         'float': 'f',
         'int': 'i'
     }
     s_endianness = '<' if endianness == 'little' else '>'
     s_type = dtype_mapping[type]
-    s_nbytes = str(nbits // 8)
-    format_string = ''.join([s_endianness, s_type, s_nbytes])
+    s_n_bytes = str(n_bits // 8)
+    format_string = ''.join([s_endianness, s_type, s_n_bytes])
 
     with open(file_path, 'rb') as fid:
         values = np.fromfile(fid, dtype=format_string)
-        if ncolumns > 1:
-            values = values.reshape((-1, ncolumns))
+        if n_columns > 1:
+            values = values.reshape((-1, n_columns))
+
+    if values.shape[0] != n_rows:
+        raise Exception("number of rows doesn't match file length")
 
     return values
