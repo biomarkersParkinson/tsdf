@@ -5,12 +5,12 @@ from tsdf import constants
 from tsdf.tsdf_metadata import TSDFMetadata
 
 
-def read_data(data: Any) -> List[TSDFMetadata]:
+def read_data(data: Any) -> Dict[str, TSDFMetadata]:
     """
     Function used to parse the JSON object containing TSDF metadata. It returns a
     list of TSDFMetadata objects, where each object describes formatting of a binary file.
     """
-
+    
     # Check if the version is supported
     version = data["metadata_version"]
     assert version in constants.SUPPORTED_VERSIONS, f"TSDF file version {version} not supported."
@@ -19,9 +19,9 @@ def read_data(data: Any) -> List[TSDFMetadata]:
     return _read_struct(data, defined_properties.copy(), version)
 
 
-def _read_struct(data: Any, defined_properties: Dict[str, Any], version: str) -> List[TSDFMetadata]:
+def _read_struct(data: Any, defined_properties: Dict[str, Any], version: str) -> Dict[str, TSDFMetadata]:
     """ Recursive method used to parse the TSDF metadata in a hierarchical order (from the root towards the leaves)."""
-    all_streams:List[TSDFMetadata] = []
+    all_streams:Dict[str, TSDFMetadata] = {}
     remaining_data = {}
     leaf:bool = True
 
@@ -37,16 +37,20 @@ def _read_struct(data: Any, defined_properties: Dict[str, Any], version: str) ->
 
     # 2) If the current element is a leaf in the structure, convert it into a TSDFMetadata object.
     if leaf:
-        all_streams.append(TSDFMetadata(defined_properties))
+        try:
+            file_name = defined_properties["file_name"]
+            all_streams[file_name] = TSDFMetadata(defined_properties)
+        except KeyError:
+            raise KeyError("A property 'file_name' is missing in the TSDF metadata file.")
 
     # 3) If the current element is not a leaf, `remaining_data`` will contain lower levels of the TSDF structure.
     # Extend the mapping recursively with values provided at those levels.
     for key, value in remaining_data.items():
         if _is_a_list(value):
             for each_value in value:
-                all_streams += _read_struct(each_value, defined_properties.copy(), version)
+                all_streams = all_streams | _read_struct(each_value, defined_properties.copy(), version)
         else:
-            all_streams += _read_struct(value, defined_properties.copy(), version)
+            all_streams = all_streams | _read_struct(value, defined_properties.copy(), version)
 
 
     return all_streams

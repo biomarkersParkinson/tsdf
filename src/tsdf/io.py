@@ -1,11 +1,11 @@
 import json
 import os
 import numpy as np
-from typing import List
+from typing import Dict, List
 from tsdf import io_metadata
 from tsdf.tsdf_metadata import TSDFMetadata
 
-def load_file(file) -> List[TSDFMetadata]:
+def load_file(file) -> Dict[str, TSDFMetadata]:
     """ Loads a TSDF metadata file, returns a dictionary 
     
     Reference: https://arxiv.org/abs/2211.11294
@@ -13,12 +13,12 @@ def load_file(file) -> List[TSDFMetadata]:
     
     # The data is isomorphic to a JSON
     data = json.load(file)
-    
+
     # Parse the data and verify that it complies with TSDF requirements
     return io_metadata.read_data(data)
 
   
-def load_from_path(path: str) -> List[TSDFMetadata]:
+def load_from_path(path: str) -> Dict[str, TSDFMetadata]:
     """ Loads a TSDF metadata file, returns a dictionary 
     
     Reference: https://arxiv.org/abs/2211.11294
@@ -30,7 +30,7 @@ def load_from_path(path: str) -> List[TSDFMetadata]:
     # Parse the data and verify that it complies with TSDF requirements
     return io_metadata.read_data(data)
 
-def load_string(json_str) -> List[TSDFMetadata]:
+def load_string(json_str) -> Dict[str, TSDFMetadata]:
     """ Loads a TSDF metadata string, returns a dictionary
     
     Reference: https://arxiv.org/abs/2211.11294

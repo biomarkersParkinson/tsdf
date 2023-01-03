@@ -6,7 +6,7 @@ from tsdf import io_metadata
 from tsdf.tsdf_metadata import TSDFMetadata
 
 _TESTDATA_DIR = os.path.join(os.path.dirname(__file__), 'data')
-TESTDATA = { "flat"         : os.path.join(_TESTDATA_DIR, 'data/flat.json'),
+TESTDATA = { "flat"         : os.path.join(_TESTDATA_DIR, 'flat.json'),
              "hierarchical" : os.path.join(_TESTDATA_DIR, 'hierarchical.json'),
              "wrongversion" : os.path.join(_TESTDATA_DIR, 'wrongversion.json'),
              "missingkey"   : os.path.join(_TESTDATA_DIR, 'missingkey.json'),
@@ -38,7 +38,12 @@ class TestTestMissingKey(unittest.TestCase):
 
 class TestParsing(unittest.TestCase):
     """ Test whether the TSDF objects are well specified are well defined. """
-    def test_one_level_structure(self):
-       with open(TESTDATA["hierarchical"]) as file:
-        data = json.load(file)
-        io_metadata.read_data(data) # This should trigger an exception
+    def test_flat_structure(self):
+        with open(TESTDATA["flat"]) as file:
+            data = json.load(file)
+            streams = io_metadata.read_data(data)
+        # for key, value in data:
+        #     if io_metadata._is_mandatory_type(key, )
+
+
+        
