@@ -19,7 +19,7 @@ class TSDFMetadata:
     bits: int
 
     def __init__(self, dictionary: Dict[str, Any]) -> None:
-        """ 
+        """
         The default constructor takes a dictionary as an argument and creates each
         field as a separate property.\\
         `Both, mandatory and non-mandatory fields are stored as object properties.`

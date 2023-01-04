@@ -24,7 +24,7 @@ def load_from_path(path: str) -> Dict[str, TSDFMetadata]:
     Reference: https://arxiv.org/abs/2211.11294
     """
     # The data is isomorphic to a JSON
-    with open(path) as file:
+    with open(path, 'rb') as file:
         data = json.load(file)
     
     # Parse the data and verify that it complies with TSDF requirements

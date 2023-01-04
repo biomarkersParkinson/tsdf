@@ -53,7 +53,6 @@ def _read_struct(data: Any, defined_properties: Dict[str, Any], version: str) ->
         else:
             all_streams = all_streams | _read_struct(value, defined_properties.copy(), version)
 
-
     return all_streams
 
 
@@ -65,13 +64,27 @@ def is_mandatory_type(key:str, version:str) -> bool:
     return True if key in constants.MANDATORY_KEYS[version] else False
 
 
-def _contains_file_name(value) -> bool:
+def _contains_file_name(data: Any) -> bool:
     """
-    Function return True if the field contains the "file_name" field,
+    Function return True if the data contains the "file_name" key,
     and thus, represents nested data elements.
-    otherwise it returns False.
+    Otherwise it returns False.
     """
-    return "file_name" in json.dumps(value)
+
+    if isinstance(data, list):
+        for elem in data:
+            if _contains_file_name(elem):
+                return True
+
+    if not isinstance(data, dict):
+        return False
+
+    for key, value in data.items():
+        if key == "file_name":
+            return True
+        if _contains_file_name(value):
+            return True
+    return False
 
 def _is_a_list(value) -> bool:
     """ Function returns True if the value is a list, otherwise it returns False."""
