@@ -1,4 +1,4 @@
-from tsdf import io
+from tsdf import io, io_metadata
 import os
 import unittest
 
@@ -23,7 +23,7 @@ class TestFileReading(unittest.TestCase):
 
     def test_load_json_path(self):
         """ Test that a json file from a path gets loaded """
-        data = io.load_from_path(TESTDATA["hierarchical"]) # This should not trigger an exception   
+        data = io.load_from_path(TESTDATA_FILES["hierarchical"]) # This should not trigger an exception   
         self.assertEqual(len(data), 4)
 
     def test_load_json_string(self):
@@ -36,7 +36,7 @@ class TestFileReading(unittest.TestCase):
     def test_load_binary_float32(self):
         path = os.path.join(TESTDATA_DIR, 'dummy_10_3_float32.json')
         metadata = io.load_from_path(path)
-        data = io.load_binary_from_metadata(TESTDATA_DIR, self.getFirstStream(metadata, 0))
+        data = io.load_binary_from_metadata(TESTDATA_DIR, io_metadata.get_file_metadata_at_index(metadata, 0))
         self.assertEqual(data.shape, (10, 3))
         self.assertEqual(data.dtype, 'float32')
 
@@ -44,7 +44,7 @@ class TestFileReading(unittest.TestCase):
         path = os.path.join(TESTDATA_DIR, 'dummy_10_3_float64.json')
         metadata = io.load_from_path(path)
         
-        data = io.load_binary_from_metadata(TESTDATA_DIR, self.getFirstStream(metadata, 0))
+        data = io.load_binary_from_metadata(TESTDATA_DIR, io_metadata.get_file_metadata_at_index(metadata, 0))
         self.assertEqual(data.shape, (10, 3))
         self.assertEqual(data.dtype, 'float64')
 
@@ -53,30 +53,22 @@ class TestFileReading(unittest.TestCase):
         path = os.path.join(TESTDATA_DIR, 'dummy_10_3_float64_fail.json')
         metadata = io.load_from_path(path)
         with self.assertRaises(Exception) as exc_context:
-            io.load_binary_from_metadata(TESTDATA_DIR, self.getFirstStream(metadata, 0))
+            io.load_binary_from_metadata(TESTDATA_DIR, io_metadata.get_file_metadata_at_index(metadata, 0))
         self.assertEqual(exc_context.exception.args[0], "number of rows doesn't match file length")
 
     def test_load_binary_int16(self):
         path = os.path.join(TESTDATA_DIR, 'dummy_10_3_int16.json')
         metadata = io.load_from_path(path)
-        data = io.load_binary_from_metadata(TESTDATA_DIR, self.getFirstStream(metadata, 0))
+        data = io.load_binary_from_metadata(TESTDATA_DIR, io_metadata.get_file_metadata_at_index(metadata, 0))
         self.assertEqual(data.shape, (10, 3))
         self.assertEqual(data.dtype, 'int16')
 
     def test_like_ppp(self):
         path = os.path.join(TESTDATA_DIR, 'like_ppp.json')
         metadata = io.load_from_path(path)
-        time_data = io.load_binary_from_metadata(_TESTDATA_DIR, metadata[0])
+        time_data = io.load_binary_from_metadata(TESTDATA_DIR, io_metadata.get_file_metadata_at_index(metadata, 0))
         self.assertEqual(time_data.shape, (17,))
         self.assertEqual(time_data.dtype, 'float32')
-        sample_data = io.load_binary_from_metadata(TESTDATA_DIR, self.getFirstStream(metadata, 1))
+        sample_data = io.load_binary_from_metadata(TESTDATA_DIR, io_metadata.get_file_metadata_at_index(metadata, 1))
         self.assertEqual(sample_data.shape, (17, 6))
         self.assertEqual(sample_data.dtype, 'int16')
-
-
-    def getFirstStream(self, metadata:dict, index:int) -> TSDFMetadata:
-        """ Returns the metadata object at the position defined by the index."""
-        for key, value in metadata.items():
-            if(index == 0):
-                return value
-            index -= 1

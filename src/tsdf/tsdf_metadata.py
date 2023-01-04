@@ -1,6 +1,6 @@
 from typing import Any, Dict, List
 
-from tsdf import constants, io_metadata
+from tsdf import io_metadata
 
 class TSDFMetadata:
     """Structure that should provide metadata needed for reading a data stream."""
@@ -24,6 +24,6 @@ class TSDFMetadata:
         field as a separate property.\\
         `Both, mandatory and non-mandatory fields are stored as object properties.`
         """
-        io_metadata._check_tsdf_mandatory_fields(dictionary)
+        io_metadata.check_tsdf_mandatory_fields(dictionary)
         for key, value in dictionary.items():
             setattr(self, key, value)

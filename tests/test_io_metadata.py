@@ -36,14 +36,19 @@ class TestTestMissingKey(unittest.TestCase):
             self.assertTrue("missing key 'endianness'" in str(context.exception),
             f"Missing key is not being detected")
 
-class TestParsing(unittest.TestCase):
+class TestTSDFMetadataParsing(unittest.TestCase):
     """ Test whether the TSDF objects are well specified are well defined. """
+
     def test_flat_structure(self):
+        """ """
         with open(TESTDATA["flat"]) as file:
             data = json.load(file)
             streams = io_metadata.read_data(data)
-        # for key, value in data:
-        #     if io_metadata._is_mandatory_type(key, )
-
-
-        
+            first_stream = io_metadata.get_file_metadata_at_index(streams, 0)
+            version:str = first_stream.metadata_version
+        for key, value in data.items():
+            if io_metadata.is_mandatory_type(key, version):
+                print(value)
+                print(first_stream.__getattribute__(key))
+                assert value == first_stream.__getattribute__(key)
+               

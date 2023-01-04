@@ -27,7 +27,7 @@ def _read_struct(data: Any, defined_properties: Dict[str, Any], version: str) ->
 
     # 1) Map all the values provided at the current level of the TSDF structure.
     for key, value in data.items():
-        if _is_mandatory_type(key, version):
+        if is_mandatory_type(key, version):
             defined_properties[key] = value
         elif not _contains_file_name(value):
             defined_properties[key] = value
@@ -40,10 +40,11 @@ def _read_struct(data: Any, defined_properties: Dict[str, Any], version: str) ->
         try:
             file_name = defined_properties["file_name"]
             all_streams[file_name] = TSDFMetadata(defined_properties)
-        except KeyError:
-            raise KeyError("A property 'file_name' is missing in the TSDF metadata file.")
+        except KeyError as exc:
+            raise KeyError("A property 'file_name' is missing in the TSDF metadata file.") from exc
 
-    # 3) If the current element is not a leaf, `remaining_data`` will contain lower levels of the TSDF structure.
+    # 3) If the current element is not a leaf, `remaining_data`` will contain lower
+    # levels of the TSDF structure.
     # Extend the mapping recursively with values provided at those levels.
     for key, value in remaining_data.items():
         if _is_a_list(value):
@@ -56,7 +57,7 @@ def _read_struct(data: Any, defined_properties: Dict[str, Any], version: str) ->
     return all_streams
 
 
-def _is_mandatory_type(key:str, version:str) -> bool:
+def is_mandatory_type(key:str, version:str) -> bool:
     """
     Function returns True if the field that corresponds to the
     key is mandatory for the given TSDF version, otherwise it returns False.
@@ -66,7 +67,7 @@ def _is_mandatory_type(key:str, version:str) -> bool:
 
 def _contains_file_name(value) -> bool:
     """
-    Function return True if the field contains the "file_name" field, 
+    Function return True if the field contains the "file_name" field,
     and thus, represents nested data elements.
     otherwise it returns False.
     """
@@ -77,7 +78,7 @@ def _is_a_list(value) -> bool:
     return isinstance(value, list)
 
 
-def _check_tsdf_mandatory_fields(dictionary: Dict[str, Any]) -> None:
+def check_tsdf_mandatory_fields(dictionary: Dict[str, Any]) -> None:
     """
     Verifies that all the mandatory properties for MSDF metadata are provided, and are in the right format.
     """
@@ -96,10 +97,20 @@ def _check_tsdf_property_format(key:str, value, version:str) -> None:
     is of the expected data format.\\
     `Note: If the key is not mandatory the function does not perform any checks.`
     """
-    if not _is_mandatory_type(key, version):
+    if not is_mandatory_type(key, version):
         return
 
     index = constants.MANDATORY_KEYS[version].index(key)
     type_name = constants.MANDATORY_KEYS_VALUES[version][index]
 
-    assert isinstance(value,constants.KNOWN_TYPES[type_name]), f"The given value for {key} is not in the expected ({type_name}) format."
+    assert isinstance(value,constants.KNOWN_TYPES[type_name]),\
+    f"The given value for {key} is not in the expected ({type_name}) format."
+
+
+def get_file_metadata_at_index(metadata:Dict[str, TSDFMetadata], index:int) -> TSDFMetadata:
+    """ Returns the metadata object at the position defined by the index."""
+    for _key, value in metadata.items():
+        if index == 0:
+            return value
+        index -= 1
+    raise IndexError("The index is out of range.")
