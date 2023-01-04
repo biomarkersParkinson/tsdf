@@ -54,7 +54,7 @@ class TestFileReading(unittest.TestCase):
         metadata = io.load_from_path(path)
         with self.assertRaises(Exception) as exc_context:
             io.load_binary_from_metadata(TESTDATA_DIR, io_metadata.get_file_metadata_at_index(metadata, 0))
-        self.assertEqual(exc_context.exception.args[0], "number of rows doesn't match file length")
+        self.assertEqual(exc_context.exception.args[0], "Number of rows doesn't match file length.")
 
     def test_load_binary_int16(self):
         path = os.path.join(TESTDATA_DIR, 'dummy_10_3_int16.json')

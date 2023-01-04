@@ -48,7 +48,5 @@ class TestTSDFMetadataParsing(unittest.TestCase):
             version:str = first_stream.metadata_version
         for key, value in data.items():
             if io_metadata.is_mandatory_type(key, version):
-                print(value)
-                print(first_stream.__getattribute__(key))
                 assert value == first_stream.__getattribute__(key)
                

@@ -72,6 +72,6 @@ def load_binary_file(file_path: str, data_type: str, n_bits: int, endianness: st
 
     # Check whether the number of rows matches the metadata
     if values.shape[0] != n_rows:
-        raise Exception("Rumber of rows doesn't match file length.")
+        raise Exception("Number of rows doesn't match file length.")
 
     return values
