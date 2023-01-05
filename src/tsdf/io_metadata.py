@@ -20,7 +20,10 @@ def read_data(data: Any) -> Dict[str, TSDFMetadata]:
 
 
 def _read_struct(data: Any, defined_properties: Dict[str, Any], version: str) -> Dict[str, TSDFMetadata]:
-    """ Recursive method used to parse the TSDF metadata in a hierarchical order (from the root towards the leaves)."""
+    """
+    Recursive method used to parse the TSDF metadata in a hierarchical
+    order (from the root towards the leaves).
+    """
     all_streams:Dict[str, TSDFMetadata] = {}
     remaining_data = {}
     leaf:bool = True
@@ -93,7 +96,8 @@ def _is_a_list(value) -> bool:
 
 def check_tsdf_mandatory_fields(dictionary: Dict[str, Any]) -> None:
     """
-    Verifies that all the mandatory properties for MSDF metadata are provided, and are in the right format.
+    Verifies that all the mandatory properties for TSDF metadata are provided,
+    and are in the right format.
     """
     version = dictionary["metadata_version"]
     for key in constants.MANDATORY_KEYS[version]:

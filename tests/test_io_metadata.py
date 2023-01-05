@@ -3,14 +3,12 @@ import os
 import unittest
 from tsdf import io_metadata
 
-from tsdf.tsdf_metadata import TSDFMetadata
-
-_TESTDATA_DIR = os.path.join(os.path.dirname(__file__), 'data')
-TESTDATA = { "flat"         : os.path.join(_TESTDATA_DIR, 'flat.json'),
-             "hierarchical" : os.path.join(_TESTDATA_DIR, 'hierarchical.json'),
-             "wrongversion" : os.path.join(_TESTDATA_DIR, 'wrongversion.json'),
-             "missingkey"   : os.path.join(_TESTDATA_DIR, 'missingkey.json'),
-             "dummy_10_3_int16"   : os.path.join(_TESTDATA_DIR, 'dummy_10_3_int16.json'),
+TESTDATA_DIR = os.path.join(os.path.dirname(__file__), 'data')
+TESTDATA = { "flat"         : os.path.join(TESTDATA_DIR, 'flat.json'),
+             "hierarchical" : os.path.join(TESTDATA_DIR, 'hierarchical.json'),
+             "wrongversion" : os.path.join(TESTDATA_DIR, 'wrongversion.json'),
+             "missingkey"   : os.path.join(TESTDATA_DIR, 'missingkey.json'),
+             "dummy_10_3_int16"   : os.path.join(TESTDATA_DIR, 'dummy_10_3_int16.json'),
         }
 
 
@@ -34,14 +32,14 @@ class TestTestMissingKey(unittest.TestCase):
                 io_metadata.read_data(data) # This should trigger an exception
 
             self.assertTrue("missing key 'endianness'" in str(context.exception),
-            f"Missing key is not being detected")
+            "Missing key is not being detected")
 
 class TestTSDFMetadataParsing(unittest.TestCase):
     """ Test whether the TSDF objects are well specified are well defined. """
 
     def test_flat_structure(self):
         """ """
-        with open(TESTDATA["flat"]) as file:
+        with open(TESTDATA["flat"], 'r') as file:
             data = json.load(file)
             streams = io_metadata.read_data(data)
             first_stream = io_metadata.get_file_metadata_at_index(streams, 0)

@@ -17,6 +17,11 @@ class TSDFMetadata:
     units: List[str]
     data_type: str
     bits: int
+    #metadata_hierarchy: List[str]
+    #TODO: The idea was to have a property to store the hierarchy of the metadata file.
+    # It contains the list of properties that lead to the file_name.
+    # However, it is challenging to track the indexes in this structure,
+    # e.g., it was the second element in the list under label "sensors".
 
     def __init__(self, dictionary: Dict[str, Any]) -> None:
         """

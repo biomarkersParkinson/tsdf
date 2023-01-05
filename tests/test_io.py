@@ -17,7 +17,7 @@ TESTDATA_FILES = { "flat"         : os.path.join(TESTDATA_DIR, 'flat.json'),
 class TestFileReading(unittest.TestCase):
     def test_load_json_file(self):
         """ Test that a json file gets loaded """
-        with open(TESTDATA_FILES["hierarchical"]) as file:
+        with open(TESTDATA_FILES["hierarchical"], 'r') as file:
             data = io.load_file(file) # This should not trigger an exception
             self.assertEqual(len(data), 4)
 
@@ -28,7 +28,7 @@ class TestFileReading(unittest.TestCase):
 
     def test_load_json_string(self):
         """ Test that a json object gets loaded """
-        with open(TESTDATA_FILES["hierarchical"]) as file:
+        with open(TESTDATA_FILES["hierarchical"], 'r') as file:
             json_string = file.read()
             data = io.load_string(json_string) # This should not trigger an exception   
             self.assertEqual(len(data), 4)
