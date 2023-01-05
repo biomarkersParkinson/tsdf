@@ -12,9 +12,11 @@ TESTDATA = { "flat"         : os.path.join(TESTDATA_DIR, 'flat.json'),
         }
 
 
-class TestWrongVersion(unittest.TestCase):
-    """ Test that a file with a wrong version raises an exception """
-    def test_exception(self):
+class TestWrongFormatting(unittest.TestCase):
+    """ Test whether the exceptions are thrown in case the metadata file is not well annotated."""
+
+    def load_wrong_version(self):
+        """ Test that a file with a wrong version raises an exception. """
         with open(TESTDATA["wrongversion"]) as file:
             with self.assertRaises(AssertionError) as context:
                 data = json.load(file)
@@ -23,9 +25,8 @@ class TestWrongVersion(unittest.TestCase):
             self.assertTrue("TSDF file version" in str(context.exception), 
             "Wrong version is not being detected")
 
-class TestTestMissingKey(unittest.TestCase):
-    """ Test that a file with a missing mandatory key raises an exception """
-    def test_exception(self):
+    def load_missing_key(self):
+        """ Test that a file with a missing mandatory key raises an exception """
         with open(TESTDATA["missingkey"]) as file:
             with self.assertRaises(AssertionError) as context:
                 data = json.load(file)
@@ -37,8 +38,8 @@ class TestTestMissingKey(unittest.TestCase):
 class TestTSDFMetadataParsing(unittest.TestCase):
     """ Test whether the TSDF objects are well specified are well defined. """
 
-    def test_flat_structure(self):
-        """ """
+    def load_flat_structure(self):
+        """ Test parsing of a flat TSDF metadata file. """
         with open(TESTDATA["flat"], 'r') as file:
             data = json.load(file)
             streams = io_metadata.read_data(data)
