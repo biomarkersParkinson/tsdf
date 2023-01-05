@@ -7,8 +7,7 @@ TESTDATA_DIR = os.path.join(os.path.dirname(__file__), 'data')
 TESTDATA = { "flat"         : os.path.join(TESTDATA_DIR, 'flat.json'),
              "hierarchical" : os.path.join(TESTDATA_DIR, 'hierarchical.json'),
              "wrongversion" : os.path.join(TESTDATA_DIR, 'wrongversion.json'),
-             "missingkey"   : os.path.join(TESTDATA_DIR, 'missingkey.json'),
-             "dummy_10_3_int16"   : os.path.join(TESTDATA_DIR, 'dummy_10_3_int16.json'),
+             "missingkey"   : os.path.join(TESTDATA_DIR, 'missingkey.json')
         }
 
 
@@ -47,5 +46,4 @@ class TestTSDFMetadataParsing(unittest.TestCase):
             version:str = first_stream.metadata_version
         for key, value in data.items():
             if io_metadata.is_mandatory_type(key, version):
-                assert value == first_stream.__getattribute__(key)
-               
+                assert value == first_stream.__getattribute__(key)               
