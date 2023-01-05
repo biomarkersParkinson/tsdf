@@ -1,6 +1,6 @@
-from tsdf import io, io_metadata
 import os
 import unittest
+from tsdf import io, io_metadata
 
 TESTDATA_DIR = os.path.join(os.path.dirname(__file__), 'data')
 TESTDATA_FILES = { "flat"         : os.path.join(TESTDATA_DIR, 'flat.json'),

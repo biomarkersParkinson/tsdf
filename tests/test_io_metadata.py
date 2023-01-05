@@ -13,11 +13,11 @@ TESTDATA = { "flat"         : os.path.join(TESTDATA_DIR, 'flat.json'),
 
 
 class TestWrongFormatting(unittest.TestCase):
-    """ Test whether the exceptions are thrown in case the metadata file is not well annotated."""
+    """ Test whether the exceptions are thrown in case the metadata file is not well annotated. """
 
     def load_wrong_version(self):
         """ Test that a file with a wrong version raises an exception. """
-        with open(TESTDATA["wrongversion"]) as file:
+        with open(TESTDATA["wrongversion"], 'r') as file:
             with self.assertRaises(AssertionError) as context:
                 data = json.load(file)
                 io_metadata.read_data(data) # This should trigger an exception
@@ -26,8 +26,8 @@ class TestWrongFormatting(unittest.TestCase):
             "Wrong version is not being detected")
 
     def load_missing_key(self):
-        """ Test that a file with a missing mandatory key raises an exception """
-        with open(TESTDATA["missingkey"]) as file:
+        """ Test that a file with a missing mandatory key raises an exception. """
+        with open(TESTDATA["missingkey"], 'r') as file:
             with self.assertRaises(AssertionError) as context:
                 data = json.load(file)
                 io_metadata.read_data(data) # This should trigger an exception
