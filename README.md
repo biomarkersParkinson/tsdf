@@ -1,3 +1,6 @@
+
+![Python package](https://github.com/biomarkersparkinson/tsdf/workflows/Python%20package/badge.svg)
+
 # tsdf
 
 A package to load [TSDF data](https://arxiv.org/abs/2211.11294) into Python
