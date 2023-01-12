@@ -13,7 +13,7 @@ MANDATORY_KEYS_VALUES = { "0.1" : ["str","str","str","str",
                                     "str","str","int","int",
                                     "list","list","str","str","str"] }
 
-
+# TODO: add description
 KNOWN_TYPES = {
     'int': int,
     'list': list,
