@@ -1,5 +1,6 @@
 import json
 import os
+import sys
 from typing import Dict
 import numpy as np
 from tsdf import io_metadata
@@ -75,3 +76,24 @@ def load_binary_file(file_path: str, data_type: str, n_bits: int, endianness: st
         raise Exception("Number of rows doesn't match file length.")
 
     return values
+
+def get_metadata_from_ndarray(data: np.ndarray) -> Dict:
+    dtype_mapping = {
+        'f': 'float',
+        'i': 'int'
+    }
+    endianness_mapping = {
+        '<': 'little',
+        '>': 'big',
+        '=': sys.byteorder
+    }
+    dtype = data.dtype
+    metadata = {
+        'data_type': dtype_mapping[dtype.kind],
+        'bits': dtype.itemsize * 8,
+        'endianness': endianness_mapping[dtype.byteorder]
+    }
+    return metadata
+
+def save_binary_file(file_path: str, data: np.ndarray) -> None:
+    data.tofile(file_path)
