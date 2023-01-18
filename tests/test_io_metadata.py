@@ -17,7 +17,7 @@ class TestWrongFormatting(unittest.TestCase):
     def test_load_wrong_version(self):
         """ Test that a file with a wrong version raises an exception. """
         with open(TESTDATA["wrongversion"], 'r') as file:
-            with self.assertRaises(AssertionError) as context:
+            with self.assertRaises(Exception) as context:
                 data = json.load(file)
                 io_metadata.read_data(data) # This should trigger an exception
 
@@ -27,7 +27,7 @@ class TestWrongFormatting(unittest.TestCase):
     def test_load_missing_key(self):
         """ Test that a file with a missing mandatory key raises an exception. """
         with open(TESTDATA["missingkey"], 'r') as file:
-            with self.assertRaises(AssertionError) as context:
+            with self.assertRaises(Exception) as context:
                 data = json.load(file)
                 io_metadata.read_data(data) # This should trigger an exception
 
@@ -46,4 +46,4 @@ class TestTSDFMetadataParsing(unittest.TestCase):
             version:str = first_stream.metadata_version
         for key, value in data.items():
             if io_metadata.is_mandatory_type(key, version):
-                assert value == first_stream.__getattribute__(key)               
+                self.assertTrue(value == first_stream.__getattribute__(key))

@@ -3,20 +3,21 @@ from typing import Any, Dict, List
 from tsdf import io_metadata
 
 class TSDFMetadata:
-    """Structure that should provide metadata needed for reading a data stream."""
-    subject_id: str
-    study_id: str
-    device_id: str
-    endianness: str
+    """Structure that provides metadata needed for reading a data stream."""
+
     metadata_version: str
+    study_id: str
+    subject_id: str
+    device_id: str
     start_iso8601: str
     end_iso8601: str
-    rows: int
     file_name: str
+    rows: int
     channels: List[str]
     units: List[str]
     data_type: str
     bits: int
+    endianness: str
     #metadata_hierarchy: List[str]
     #TODO: The idea was to have a property to store the hierarchy of the metadata file.
     # It contains the list of properties that lead to the file_name.

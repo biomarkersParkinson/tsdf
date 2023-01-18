@@ -13,7 +13,8 @@ def read_data(data: Any) -> Dict[str, TSDFMetadata]:
     
     # Check if the version is supported
     version = data["metadata_version"]
-    assert version in constants.SUPPORTED_VERSIONS, f"TSDF file version {version} not supported."
+    if not version in constants.SUPPORTED_VERSIONS:
+        raise Exception(f"TSDF file version {version} not supported.")
 
     defined_properties: Dict[str, Any] = {}
     return _read_struct(data, defined_properties.copy(), version)
@@ -101,9 +102,10 @@ def check_tsdf_mandatory_fields(dictionary: Dict[str, Any]) -> None:
     """
     version = dictionary["metadata_version"]
     for key in constants.MANDATORY_KEYS[version]:
-        assert key in dictionary.keys(), f"TSDF structure is missing key '{key}'"
-    assert len(dictionary["units"]) == len(dictionary["channels"]), \
-        "TSDF structure requires equal number of 'units' and 'channels'"
+        if not key in dictionary.keys():
+            raise Exception(f"TSDF structure is missing key '{key}'")
+    if not len(dictionary["units"]) == len(dictionary["channels"]):
+        raise Exception("TSDF structure requires equal number of 'units' and 'channels'")
 
     for key, value in dictionary.items():
         _check_tsdf_property_format(key, value, version)
@@ -120,8 +122,8 @@ def _check_tsdf_property_format(key:str, value, version:str) -> None:
     index = constants.MANDATORY_KEYS[version].index(key)
     type_name = constants.MANDATORY_KEYS_VALUES[version][index]
 
-    assert isinstance(value,constants.KNOWN_TYPES[type_name]),\
-    f"The given value for {key} is not in the expected ({type_name}) format."
+    if not isinstance(value,constants.KNOWN_TYPES[type_name]):
+        raise Exception(f"The given value for {key} is not in the expected ({type_name}) format.")
 
 
 def get_file_metadata_at_index(metadata:Dict[str, TSDFMetadata], index:int) -> TSDFMetadata:
