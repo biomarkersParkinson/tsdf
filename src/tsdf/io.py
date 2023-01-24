@@ -15,8 +15,10 @@ def load_file(file) -> Dict[str, TSDFMetadata]:
     # The data is isomorphic to a JSON
     data = json.load(file)
 
+    abs_path = os.path.realpath(file.name)
+
     # Parse the data and verify that it complies with TSDF requirements
-    return io_metadata.read_data(data)
+    return io_metadata.read_data(data, abs_path)
 
   
 def load_from_path(path: str) -> Dict[str, TSDFMetadata]:
@@ -28,8 +30,10 @@ def load_from_path(path: str) -> Dict[str, TSDFMetadata]:
     with open(path, 'r') as file:
         data = json.load(file)
     
+    abs_path = os.path.realpath(path)
+    
     # Parse the data and verify that it complies with TSDF requirements
-    return io_metadata.read_data(data)
+    return io_metadata.read_data(data, abs_path)
 
 def load_string(json_str) -> Dict[str, TSDFMetadata]:
     """ Loads a TSDF metadata string, returns a dictionary
@@ -41,7 +45,7 @@ def load_string(json_str) -> Dict[str, TSDFMetadata]:
     data = json.loads(json_str)
     
     # Parse the data and verify that it complies with TSDF requirements
-    return io_metadata.read_data(data)
+    return io_metadata.read_data(data, "")
 
 def load_binary_from_metadata(metadata_dir: str, metadata: TSDFMetadata) -> np.ndarray:
     """ Use metadata properties to load and return numpy array from a binary file

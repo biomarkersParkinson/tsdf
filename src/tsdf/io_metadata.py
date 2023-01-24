@@ -5,7 +5,7 @@ from tsdf import constants
 from tsdf.tsdf_metadata import TSDFMetadata
 
 
-def read_data(data: Any) -> Dict[str, TSDFMetadata]:
+def read_data(data: Any, source_path: str) -> Dict[str, TSDFMetadata]:
     """
     Function used to parse the JSON object containing TSDF metadata. It returns a
     list of TSDFMetadata objects, where each object describes formatting of a binary file.
@@ -17,10 +17,10 @@ def read_data(data: Any) -> Dict[str, TSDFMetadata]:
         raise Exception(f"TSDF file version {version} not supported.")
 
     defined_properties: Dict[str, Any] = {}
-    return _read_struct(data, defined_properties.copy(), version)
+    return _read_struct(data, defined_properties.copy(), source_path, version)
 
 
-def _read_struct(data: Any, defined_properties: Dict[str, Any], version: str) -> Dict[str, TSDFMetadata]:
+def _read_struct(data: Any, defined_properties: Dict[str, Any], source_path, version: str) -> Dict[str, TSDFMetadata]:
     """
     Recursive method used to parse the TSDF metadata in a hierarchical
     order (from the root towards the leaves).
@@ -43,7 +43,7 @@ def _read_struct(data: Any, defined_properties: Dict[str, Any], version: str) ->
     if leaf:
         try:
             file_name = defined_properties["file_name"]
-            all_streams[file_name] = TSDFMetadata(defined_properties)
+            all_streams[file_name] = TSDFMetadata(defined_properties, source_path)
         except KeyError as exc:
             raise KeyError("A property 'file_name' is missing in the TSDF metadata file.") from exc
 
@@ -53,9 +53,9 @@ def _read_struct(data: Any, defined_properties: Dict[str, Any], version: str) ->
     for key, value in remaining_data.items():
         if _is_a_list(value):
             for each_value in value:
-                all_streams = all_streams | _read_struct(each_value, defined_properties.copy(), version)
+                all_streams = all_streams | _read_struct(each_value, defined_properties.copy(), source_path, version)
         else:
-            all_streams = all_streams | _read_struct(value, defined_properties.copy(), version)
+            all_streams = all_streams | _read_struct(value, defined_properties.copy(), source_path, version)
 
     return all_streams
 
