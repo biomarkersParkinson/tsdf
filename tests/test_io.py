@@ -1,5 +1,6 @@
 import os
 import unittest
+import numpy as np
 from tsdf import io, io_metadata
 
 TESTDATA_DIR = os.path.join(os.path.dirname(__file__), 'data')
@@ -67,7 +68,7 @@ class TestBinaryFileReading(unittest.TestCase):
         self.assertEqual(data.shape, (10, 3))
         self.assertEqual(data.dtype, 'int16')
 
-    def test_like_ppp(self):
+    def test_load_like_ppp(self):
         path = os.path.join(TESTDATA_DIR, 'like_ppp.json')
         metadata = io.load_from_path(path)
         time_data = io.load_binary_from_metadata \
@@ -78,3 +79,15 @@ class TestBinaryFileReading(unittest.TestCase):
             (TESTDATA_DIR, io_metadata.get_file_metadata_at_index(metadata, 1))
         self.assertEqual(sample_data.shape, (17, 6))
         self.assertEqual(sample_data.dtype, 'int16')
+
+    def test_save_binary(self):
+        path = os.path.join(TESTDATA_DIR, 'test_output.bin')
+        rs = np.random.RandomState(seed=42)
+        data = rs.rand(17, 1).astype(np.float32)
+        io.save_binary_file(path, data)
+
+        # Read file again to check contents
+        with open(path, 'rb') as fid:
+            data2 = np.fromfile(fid, dtype='<f4')
+            data2 = data2.reshape(17, 1)
+            self.assertTrue(np.array_equal(data, data2))

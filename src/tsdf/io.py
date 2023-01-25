@@ -1,5 +1,6 @@
 import json
 import os
+import sys
 from typing import Dict
 import numpy as np
 from tsdf import io_metadata
@@ -14,8 +15,10 @@ def load_file(file) -> Dict[str, TSDFMetadata]:
     # The data is isomorphic to a JSON
     data = json.load(file)
 
+    abs_path = os.path.realpath(file.name)
+
     # Parse the data and verify that it complies with TSDF requirements
-    return io_metadata.read_data(data)
+    return io_metadata.read_data(data, abs_path)
 
   
 def load_from_path(path: str) -> Dict[str, TSDFMetadata]:
@@ -27,8 +30,10 @@ def load_from_path(path: str) -> Dict[str, TSDFMetadata]:
     with open(path, 'r') as file:
         data = json.load(file)
     
+    abs_path = os.path.realpath(path)
+    
     # Parse the data and verify that it complies with TSDF requirements
-    return io_metadata.read_data(data)
+    return io_metadata.read_data(data, abs_path)
 
 def load_string(json_str) -> Dict[str, TSDFMetadata]:
     """ Loads a TSDF metadata string, returns a dictionary
@@ -40,7 +45,7 @@ def load_string(json_str) -> Dict[str, TSDFMetadata]:
     data = json.loads(json_str)
     
     # Parse the data and verify that it complies with TSDF requirements
-    return io_metadata.read_data(data)
+    return io_metadata.read_data(data, "")
 
 def load_binary_from_metadata(metadata_dir: str, metadata: TSDFMetadata) -> np.ndarray:
     """ Use metadata properties to load and return numpy array from a binary file
@@ -75,3 +80,24 @@ def load_binary_file(file_path: str, data_type: str, n_bits: int, endianness: st
         raise Exception("Number of rows doesn't match file length.")
 
     return values
+
+def get_metadata_from_ndarray(data: np.ndarray) -> Dict:
+    dtype_mapping = {
+        'f': 'float',
+        'i': 'int'
+    }
+    endianness_mapping = {
+        '<': 'little',
+        '>': 'big',
+        '=': sys.byteorder
+    }
+    dtype = data.dtype
+    metadata = {
+        'data_type': dtype_mapping[dtype.kind],
+        'bits': dtype.itemsize * 8,
+        'endianness': endianness_mapping[dtype.byteorder]
+    }
+    return metadata
+
+def save_binary_file(file_path: str, data: np.ndarray) -> None:
+    data.tofile(file_path)
