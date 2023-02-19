@@ -1,11 +1,12 @@
 import pytest
 import json
 
+
 @pytest.fixture
 def example_flat():
-    """ Returns a string containing the flat json example.
+    """Returns a string containing the flat json example.
     Source: https://arxiv.org/abs/2211.11294"""
-    data = '''
+    data = """
     {
         "study_id": "voicedata",
         "subject_id": "recruit089",
@@ -29,14 +30,15 @@ def example_flat():
         bits": 16,
         file_name": "audio_voice_089.raw"
     }
-    '''
+    """
     return json.dumps(data)
+
 
 @pytest.fixture
 def example_hierarchical():
-    """ Returns a string containing the hierarchical json example.
+    """Returns a string containing the hierarchical json example.
     Source: https://arxiv.org/abs/2211.11294"""
-    data = '''
+    data = """
     {
     "subject_id": "PD0234",
     "study_id": "homestudy22",
@@ -109,5 +111,5 @@ def example_hierarchical():
         }
     ]
 }
-    '''
+    """
     return json.dumps(data)
