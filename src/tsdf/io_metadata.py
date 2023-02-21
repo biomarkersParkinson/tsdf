@@ -1,5 +1,5 @@
 import json
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 from tsdf import constants
 from tsdf.tsdf_metadata import TSDFMetadata
@@ -10,7 +10,7 @@ def read_data(data: Any, source_path: str) -> Dict[str, TSDFMetadata]:
     Function used to parse the JSON object containing TSDF metadata. It returns a
     list of TSDFMetadata objects, where each object describes formatting of a binary file.
     """
-    
+
     # Check if the version is supported
     version = data["metadata_version"]
     if not version in constants.SUPPORTED_VERSIONS:
@@ -20,14 +20,16 @@ def read_data(data: Any, source_path: str) -> Dict[str, TSDFMetadata]:
     return _read_struct(data, defined_properties.copy(), source_path, version)
 
 
-def _read_struct(data: Any, defined_properties: Dict[str, Any], source_path, version: str) -> Dict[str, TSDFMetadata]:
+def _read_struct(
+    data: Any, defined_properties: Dict[str, Any], source_path, version: str
+) -> Dict[str, TSDFMetadata]:
     """
     Recursive method used to parse the TSDF metadata in a hierarchical
     order (from the root towards the leaves).
     """
-    all_streams:Dict[str, TSDFMetadata] = {}
+    all_streams: Dict[str, TSDFMetadata] = {}
     remaining_data = {}
-    leaf:bool = True
+    leaf: bool = True
 
     # 1) Map all the values provided at the current level of the TSDF structure.
     for key, value in data.items():
@@ -45,7 +47,9 @@ def _read_struct(data: Any, defined_properties: Dict[str, Any], source_path, ver
             file_name = defined_properties["file_name"]
             all_streams[file_name] = TSDFMetadata(defined_properties, source_path)
         except KeyError as exc:
-            raise KeyError("A property 'file_name' is missing in the TSDF metadata file.") from exc
+            raise KeyError(
+                "A property 'file_name' is missing in the TSDF metadata file."
+            ) from exc
 
     # 3) If the current element is not a leaf, `remaining_data`` will contain lower
     # levels of the TSDF structure.
@@ -53,14 +57,18 @@ def _read_struct(data: Any, defined_properties: Dict[str, Any], source_path, ver
     for key, value in remaining_data.items():
         if _is_a_list(value):
             for each_value in value:
-                all_streams = all_streams | _read_struct(each_value, defined_properties.copy(), source_path, version)
+                all_streams = all_streams | _read_struct(
+                    each_value, defined_properties.copy(), source_path, version
+                )
         else:
-            all_streams = all_streams | _read_struct(value, defined_properties.copy(), source_path, version)
+            all_streams = all_streams | _read_struct(
+                value, defined_properties.copy(), source_path, version
+            )
 
     return all_streams
 
 
-def is_mandatory_type(key:str, version:str) -> bool:
+def is_mandatory_type(key: str, version: str) -> bool:
     """
     Function returns True if the field that corresponds to the
     key is mandatory for the given TSDF version, otherwise it returns False.
@@ -90,8 +98,9 @@ def _contains_file_name(data: Any) -> bool:
             return True
     return False
 
+
 def _is_a_list(value) -> bool:
-    """ Function returns True if the value is a list, otherwise it returns False."""
+    """Function returns True if the value is a list, otherwise it returns False."""
     return isinstance(value, list)
 
 
@@ -104,13 +113,16 @@ def check_tsdf_mandatory_fields(dictionary: Dict[str, Any]) -> None:
     for key in constants.MANDATORY_KEYS[version]:
         if not key in dictionary.keys():
             raise Exception(f"TSDF structure is missing key '{key}'")
-    if not len(dictionary["units"]) == len(dictionary["channels"]):
-        raise Exception("TSDF structure requires equal number of 'units' and 'channels'")
+    if len(dictionary["units"]) != len(dictionary["channels"]):
+        raise Exception(
+            "TSDF structure requires equal number of 'units' and 'channels'"
+        )
 
     for key, value in dictionary.items():
         _check_tsdf_property_format(key, value, version)
 
-def _check_tsdf_property_format(key:str, value, version:str) -> None:
+
+def _check_tsdf_property_format(key: str, value, version: str) -> None:
     """
     Function checks whether the value of the mandatory TSDF field specified by the key
     is of the expected data format.\\
@@ -122,12 +134,16 @@ def _check_tsdf_property_format(key:str, value, version:str) -> None:
     index = constants.MANDATORY_KEYS[version].index(key)
     type_name = constants.MANDATORY_KEYS_VALUES[version][index]
 
-    if not isinstance(value,constants.KNOWN_TYPES[type_name]):
-        raise Exception(f"The given value for {key} is not in the expected ({type_name}) format.")
+    if not isinstance(value, constants.KNOWN_TYPES[type_name]):
+        raise Exception(
+            f"The given value for {key} is not in the expected ({type_name}) format."
+        )
 
 
-def get_file_metadata_at_index(metadata:Dict[str, TSDFMetadata], index:int) -> TSDFMetadata:
-    """ Returns the metadata object at the position defined by the index."""
+def get_file_metadata_at_index(
+    metadata: Dict[str, TSDFMetadata], index: int
+) -> TSDFMetadata:
+    """Returns the metadata object at the position defined by the index."""
     for _key, value in metadata.items():
         if index == 0:
             return value

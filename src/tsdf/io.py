@@ -4,6 +4,7 @@ import sys
 from typing import Dict
 import numpy as np
 from tsdf import io_metadata
+from tsdf.constants import BINARY_EXTENSION
 from tsdf.tsdf_metadata import TSDFMetadata
 
 
@@ -116,6 +117,14 @@ def get_metadata_from_ndarray(data: np.ndarray) -> Dict:
     return metadata
 
 
+def save_binary_and_metadata_files(
+    folder_path: str, file_name: str, data: np.ndarray
+) -> None:
+    """Save binary file and the corresponding TSDF metadata file."""
+    file_no_extension = os.path.join(folder_path, file_name)
+    data.tofile(file_no_extension + BINARY_EXTENSION)
+
+
 def save_binary_file(file_path: str, data: np.ndarray) -> None:
-    """TODO"""
-    data.tofile(file_path)
+    """Save binary file and the corresponding TSDF metadata file."""
+    data.tofile(file_path + BINARY_EXTENSION)

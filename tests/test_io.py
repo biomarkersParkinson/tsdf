@@ -93,7 +93,23 @@ class TestBinaryFileReading(unittest.TestCase):
 
 
 class TestBinaryFileWriting(unittest.TestCase):
-    """Test writing of binary files based on the TSDF metadata."""
+    """Test writing of binary files from loaded data (e.g., NumPy array)."""
+
+    def test_save_binary(self):
+        path = os.path.join(TESTDATA_DIR, "test_output_1.bin")
+        rs = np.random.RandomState(seed=42)
+        data = rs.rand(17, 1).astype(np.float32)
+        io.save_binary_file(path, data)
+
+        # Read file again to check contents
+        with open(path, "rb") as fid:
+            data2 = np.fromfile(fid, dtype="<f4")
+            data2 = data2.reshape(17, 1)
+            self.assertTrue(np.array_equal(data, data2))
+
+
+class TestMetadataFileWriting(unittest.TestCase):
+    """Test writing of metadata files based on loaded data."""
 
     def test_save_binary(self):
         path = os.path.join(TESTDATA_DIR, "test_output_1.bin")
