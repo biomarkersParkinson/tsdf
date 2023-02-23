@@ -2,7 +2,11 @@ import json
 from typing import Any, Dict
 
 from tsdf import constants
-from tsdf.tsdf_metadata import TSDFMetadata
+from tsdf.tsdf_metadata import (
+    TSDFMetadataFieldError,
+    TSDFMetadata,
+    TSDFMetadataFieldValueError,
+)
 
 
 def read_data(data: Any, source_path: str) -> Dict[str, TSDFMetadata]:
@@ -13,8 +17,8 @@ def read_data(data: Any, source_path: str) -> Dict[str, TSDFMetadata]:
 
     # Check if the version is supported
     version = data["metadata_version"]
-    if not version in constants.SUPPORTED_VERSIONS:
-        raise Exception(f"TSDF file version {version} not supported.")
+    if not version in constants.SUPPORTED_TSDF_VERSIONS:
+        raise TSDFMetadataFieldValueError(f"TSDF file version {version} not supported.")
 
     defined_properties: Dict[str, Any] = {}
     return _read_struct(data, defined_properties.copy(), source_path, version)
@@ -46,8 +50,8 @@ def _read_struct(
         try:
             file_name = defined_properties["file_name"]
             all_streams[file_name] = TSDFMetadata(defined_properties, source_path)
-        except KeyError as exc:
-            raise KeyError(
+        except TSDFMetadataFieldError as exc:
+            raise TSDFMetadataFieldError(
                 "A property 'file_name' is missing in the TSDF metadata file."
             ) from exc
 
@@ -73,7 +77,7 @@ def is_mandatory_type(key: str, version: str) -> bool:
     Function returns True if the field that corresponds to the
     key is mandatory for the given TSDF version, otherwise it returns False.
     """
-    return True if key in constants.MANDATORY_KEYS[version] else False
+    return True if key in constants.MANDATORY_TSDF_KEYS[version] else False
 
 
 def _contains_file_name(data: Any) -> bool:
@@ -109,13 +113,19 @@ def check_tsdf_mandatory_fields(dictionary: Dict[str, Any]) -> None:
     Verifies that all the mandatory properties for TSDF metadata are provided,
     and are in the right format.
     """
-    version = dictionary["metadata_version"]
-    for key in constants.MANDATORY_KEYS[version]:
+    version_key = "metadata_version"
+    if not version_key in dictionary.keys():
+        raise TSDFMetadataFieldError(f"TSDF structure is missing key '{version_key}'")
+
+    version = dictionary[version_key]
+    for key in constants.MANDATORY_TSDF_KEYS[version]:
         if not key in dictionary.keys():
-            raise Exception(f"TSDF structure is missing key '{key}'")
-    if len(dictionary["units"]) != len(dictionary["channels"]):
-        raise Exception(
-            "TSDF structure requires equal number of 'units' and 'channels'"
+            raise TSDFMetadataFieldError(f"TSDF structure is missing key '{key}'")
+    units = "units"
+    channels = "channels"
+    if len(dictionary[units]) != len(dictionary[channels]):
+        raise TSDFMetadataFieldValueError(
+            f"TSDF structure requires equal number of {units} and {channels}"
         )
 
     for key, value in dictionary.items():
@@ -131,11 +141,11 @@ def _check_tsdf_property_format(key: str, value, version: str) -> None:
     if not is_mandatory_type(key, version):
         return
 
-    index = constants.MANDATORY_KEYS[version].index(key)
-    type_name = constants.MANDATORY_KEYS_VALUES[version][index]
+    index = constants.MANDATORY_TSDF_KEYS[version].index(key)
+    type_name = constants.MANDATORY_TSDF_KEYS_VALUES[version][index]
 
-    if not isinstance(value, constants.KNOWN_TYPES[type_name]):
-        raise Exception(
+    if not isinstance(value, constants.KEY_VALUE_TYPES[type_name]):
+        raise TSDFMetadataFieldValueError(
             f"The given value for {key} is not in the expected ({type_name}) format."
         )
 

@@ -146,3 +146,4 @@ dmypy.json
 
 #Test data
 tests/data/test_output*
+tests/data/local_data/*

@@ -3,6 +3,16 @@ from typing import Any, Dict, List
 from tsdf import io, io_metadata
 
 
+class TSDFMetadataFieldError(Exception):
+    "Raised when the TSDFMetadata is missing an obligatory field."
+    pass
+
+
+class TSDFMetadataFieldValueError(Exception):
+    "Raised when a TSDFMetadata field is wrongly annotated."
+    pass
+
+
 class TSDFMetadata:
     """Structure that provides metadata needed for reading a data stream."""
 

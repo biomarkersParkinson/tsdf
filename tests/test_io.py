@@ -19,19 +19,19 @@ class TestMetadataFileReading(unittest.TestCase):
     def test_load_json_file(self):
         """Test that a json file gets loaded"""
         with open(TESTDATA_FILES["hierarchical"], "r") as file:
-            data = io.load_file(file)
+            data = io.load_metadata_file(file)
             self.assertEqual(len(data), 4)
 
     def test_load_json_path(self):
         """Test that a json file from a path gets loaded"""
-        data = io.load_from_path(TESTDATA_FILES["hierarchical"])
+        data = io.load_metadata_from_path(TESTDATA_FILES["hierarchical"])
         self.assertEqual(len(data), 4)
 
     def test_load_json_string(self):
         """Test that a json object gets loaded"""
         with open(TESTDATA_FILES["hierarchical"], "r") as file:
             json_string = file.read()
-            data = io.load_string(json_string)
+            data = io.load_metadata_string(json_string)
             self.assertEqual(len(data), 4)
 
 
@@ -40,7 +40,7 @@ class TestBinaryFileReading(unittest.TestCase):
 
     def test_load_binary_float32(self):
         path = os.path.join(TESTDATA_DIR, "dummy_10_3_float32.json")
-        metadata = io.load_from_path(path)
+        metadata = io.load_metadata_from_path(path)
         data = io.load_binary_from_metadata(
             TESTDATA_DIR, io_metadata.get_file_metadata_at_index(metadata, 0)
         )
@@ -49,7 +49,7 @@ class TestBinaryFileReading(unittest.TestCase):
 
     def test_load_binary_float64(self):
         path = os.path.join(TESTDATA_DIR, "dummy_10_3_float64.json")
-        metadata = io.load_from_path(path)
+        metadata = io.load_metadata_from_path(path)
         data = io.load_binary_from_metadata(
             TESTDATA_DIR, io_metadata.get_file_metadata_at_index(metadata, 0)
         )
@@ -59,7 +59,7 @@ class TestBinaryFileReading(unittest.TestCase):
     def test_load_binary_float64_fail(self):
         """Should raise an exception on reading binary data"""
         path = os.path.join(TESTDATA_DIR, "dummy_10_3_float64_fail.json")
-        metadata = io.load_from_path(path)
+        metadata = io.load_metadata_from_path(path)
         with self.assertRaises(Exception) as exc_context:
             io.load_binary_from_metadata(
                 TESTDATA_DIR, io_metadata.get_file_metadata_at_index(metadata, 0)
@@ -70,7 +70,7 @@ class TestBinaryFileReading(unittest.TestCase):
 
     def test_load_binary_int16(self):
         path = os.path.join(TESTDATA_DIR, "dummy_10_3_int16.json")
-        metadata = io.load_from_path(path)
+        metadata = io.load_metadata_from_path(path)
         data = io.load_binary_from_metadata(
             TESTDATA_DIR, io_metadata.get_file_metadata_at_index(metadata, 0)
         )
@@ -79,7 +79,7 @@ class TestBinaryFileReading(unittest.TestCase):
 
     def test_load_like_ppp(self):
         path = os.path.join(TESTDATA_DIR, "like_ppp.json")
-        metadata = io.load_from_path(path)
+        metadata = io.load_metadata_from_path(path)
         time_data = io.load_binary_from_metadata(
             TESTDATA_DIR, io_metadata.get_file_metadata_at_index(metadata, 0)
         )
@@ -115,7 +115,10 @@ class TestMetadataFileWriting(unittest.TestCase):
         path = os.path.join(TESTDATA_DIR, "test_output_1.bin")
         rs = np.random.RandomState(seed=42)
         data = rs.rand(17, 1).astype(np.float32)
-        io.save_binary_file(path, data)
+
+        path = os.path.join(TESTDATA_DIR, "dummy_10_3_int16.json")
+        metadata = io.load_metadata_from_path(path)
+        io.save_binary_file(path, data, metadata)
 
         # Read file again to check contents
         with open(path, "rb") as fid:
