@@ -1,17 +1,14 @@
-# Welcome to MkDocs
+# Welcome to tsdf
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+Apackage to load [TSDF data](https://arxiv.org/abs/2211.11294) into Python.
 
-## Commands
+## What is `TSDF data`?
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
+`tsdf` stands for _time series data format_.
+It is a unified, standardized format for storing all types of physiological sensor data.
 
-## Project layout
+More information available in our [preprint](https://arxiv.org/abs/2211.11294).
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+## Installation
+
+Download or clone the content of [our repository](https://github.com/biomarkersParkinson/tsdf) and install using `poetry` or `pip`.
