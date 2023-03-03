@@ -4,10 +4,13 @@ site_url: https://biomarkersparkinson.github.io/tsdf/
 repo_url: https://github.com/biomarkersParkinson/tsdf/
 edit_uri: 'blob/main/docs/'
 
+plugins:
+  - mkdocs-jupyter
+
 theme: readthedocs
 
 nav:
   - Introduction: index.md
   - Installation: installation.md
-  - Usage: usage.md
+  - Usage: usage.ipynb
   - Contact: contact.md
