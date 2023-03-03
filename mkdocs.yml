@@ -1,5 +1,9 @@
 site_name: tsdf
 site_url: https://biomarkersparkinson.github.io/tsdf/
+
+repo_url: https://github.com/biomarkersParkinson/tsdf/
+edit_uri: 'blob/main/docs/'
+
 theme: readthedocs
 
 nav:
