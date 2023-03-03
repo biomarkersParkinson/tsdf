@@ -7,5 +7,7 @@ build:
 serve:
 	mkdocs serve
 
-gh-deploy:
-	mkdocs gh-deploy 
+#gh-deploy:
+#	mkdocs gh-deploy 
+#
+# Deployment is now managed automatically via GitHub actions
