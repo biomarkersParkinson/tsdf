@@ -1,6 +1,6 @@
 # Welcome to tsdf
 
-Apackage to load [TSDF data](https://arxiv.org/abs/2211.11294) into Python.
+A package to load [TSDF data](https://arxiv.org/abs/2211.11294) into Python.
 
 ## What is `TSDF data`?
 

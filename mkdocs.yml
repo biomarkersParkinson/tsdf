@@ -1,1 +1,7 @@
 site_name: tsdf
+site_url: https://biomarkersparkinson.github.io/tsdf/
+nav:
+  - Getting started: index.md
+  - Usage: usage.md
+  - Contact: contact.md
+theme: readthedocs
