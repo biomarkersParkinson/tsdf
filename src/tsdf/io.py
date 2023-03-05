@@ -124,28 +124,48 @@ def save_binary_file(
     return TSDFMetadata(metadata, file_dir)
 
 
-def metadata_in_same_dir(metadatas: List[TSDFMetadata]) -> bool:
+def confirm_dir_of_metadata(metadatas: List[TSDFMetadata]) -> bool:
+    """The method is used to confirm whether all the metadata files are expected in the same directory."""
     metadata_iter = iter(metadatas)
     init_metadata = next(metadata_iter)
 
     for curr_metadata in metadatas:
-        if init_metadata._source_path != curr_metadata._source_path:
-            return False
+        if init_metadata.file_dir_path != curr_metadata.file_dir_path:
+            raise Exception(
+                "Metadata files have to be in the same folder to be combined."
+            )
+        if init_metadata.file_name == curr_metadata.file_name:
+            raise Exception(
+                "Two metadata objects cannot reference the same binary file (file_name)."
+            )
 
     return True
 
 
-def save_metadata(metadatas: List[TSDFMetadata]) -> None:
+def save_metadata(metadatas: List[TSDFMetadata], file_name: str) -> None:
     """Combine and save the TSDF metadata objects as a json file."""
     if metadatas.__sizeof__ == 0:
         raise Exception(
             "Metadata cannot be saved, as the list of TSDFMetadata objects is empty."
         )
 
-    if not (metadata_in_same_dir(metadatas)):
-        raise Exception("Metadata files have to be in the same folder to be combined.")
+    if metadatas.__sizeof__ == 1:
+        meta = metadatas[0]
+        write_to_file(meta.__dict__, meta.file_dir_path, file_name)
 
-    metadata_iter = iter(metadatas)
-    init_metadata = next(metadata_iter)
-    # for curr_metadata in metadatas:
-    # metadata_iter.combine(curr_metadata)
+    confirm_dir_of_metadata(metadatas)
+    print(dir(metadatas[0]))
+    # overlap = get_overlap(metadatas, dict(metadatas[0]))
+
+
+def get_overlap(metadatas: List[TSDFMetadata], keys: List[str]) -> List[int]:
+    for meta in metadatas:
+        print("x")
+
+    return []
+
+
+def write_to_file(dict: dict, dir_path: str, file_name: str) -> None:
+    path = os.path.join(dir_path, file_name)
+    with open(path, "w") as convert_file:
+        convert_file.write(json.dumps(dict))

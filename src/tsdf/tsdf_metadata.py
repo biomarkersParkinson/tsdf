@@ -34,23 +34,24 @@ class TSDFMetadata:
     # It contains the list of properties that lead to the file_name.
     # However, it is challenging to track the indexes in this structure,
     # e.g., it was the second element in the list under label "sensors".
+    file_dir_path: str
+    _source_file_name: str
+    """ A reference to the source path, so we don't need it again when reading associated binary files. """
 
-    _source_path: str
-    """ A reference to the source path, so we don't need it again when reading associated binary files """
-
-    def __init__(self, dictionary: Dict[str, Any], source_path: str) -> None:
+    def __init__(
+        self, dictionary: Dict[str, Any], dir_path: str, file_name: str = ""
+    ) -> None:
         """
         The default constructor takes a dictionary as an argument and creates each
         field as a separate property.\\
         `Both, mandatory and non-mandatory fields are stored as object properties.`
         """
-        self._source_path = source_path
-
         io_metadata.check_tsdf_mandatory_fields(dictionary)
         for key, value in dictionary.items():
             setattr(self, key, value)
+        self.file_dir_path = dir_path
+        self._source_file_name = file_name
 
     def load_binary(self):
-        """TODO"""
-        metadata_dir = os.path.join(os.path.split(self._source_path)[0])
-        return io.load_binary_from_metadata(metadata_dir, self)
+        """Load the binary file from the same directory where the metadata is saved."""
+        return io.load_binary_from_metadata(self.file_dir_path, self)

@@ -2,6 +2,7 @@ import json
 import os
 import unittest
 from tsdf import io_metadata
+from tsdf.tsdf_metadata import TSDFMetadataFieldError, TSDFMetadataFieldValueError
 
 TESTDATA_DIR = os.path.join(os.path.dirname(__file__), "data")
 TESTDATA = {
@@ -19,27 +20,17 @@ class TestWrongFormatting(unittest.TestCase):
         """Test that a file with a wrong version raises an exception."""
         path = TESTDATA["wrongversion"]
         with open(path, "r") as file:
-            with self.assertRaises(Exception) as context:
+            with self.assertRaises(TSDFMetadataFieldValueError) as context:
                 data = json.load(file)
                 io_metadata.read_data(data, path)  # This should trigger an exception
-
-            self.assertTrue(
-                "TSDF file version" in str(context.exception),
-                "Wrong version is not being detected",
-            )
 
     def test_load_missing_key(self):
         """Test that a file with a missing mandatory key raises an exception."""
         path = TESTDATA["missingkey"]
         with open(path, "r") as file:
-            with self.assertRaises(Exception) as context:
+            with self.assertRaises(TSDFMetadataFieldError) as context:
                 data = json.load(file)
                 io_metadata.read_data(data, path)  # This should trigger an exception
-
-            self.assertTrue(
-                "missing key 'endianness'" in str(context.exception),
-                "Missing key is not being detected",
-            )
 
 
 class TestTSDFMetadataParsing(unittest.TestCase):

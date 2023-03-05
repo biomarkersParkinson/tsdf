@@ -1,4 +1,5 @@
 import json
+import os
 from typing import Any, Dict
 
 from tsdf import constants
@@ -48,8 +49,13 @@ def _read_struct(
     # 2) If the current element is a leaf in the structure, convert it into a TSDFMetadata object.
     if leaf:
         try:
-            file_name = defined_properties["file_name"]
-            all_streams[file_name] = TSDFMetadata(defined_properties, source_path)
+            bin_file_name = defined_properties["file_name"]
+            path = os.path.split(source_path)
+            file_dir = os.path.join(path[0])
+            meta_file_name = path[1]
+            all_streams[bin_file_name] = TSDFMetadata(
+                defined_properties, file_dir, meta_file_name
+            )
         except TSDFMetadataFieldError as exc:
             raise TSDFMetadataFieldError(
                 "A property 'file_name' is missing in the TSDF metadata file."
