@@ -146,3 +146,7 @@ dmypy.json
 
 #Test data
 tests/data/local_test_out/*
+
+#Binary outputs
+*output.bin
+

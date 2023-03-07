@@ -7,6 +7,8 @@ A package to load [TSDF data](https://arxiv.org/abs/2211.11294) into Python
 
 ## Installation
 
+Download or clone the content of [our repository](https://github.com/biomarkersParkinson/tsdf) and install using `poetry` or `pip`.
+
 ### Using `poetry` (recommended)
 
 ```bash

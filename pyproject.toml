@@ -11,6 +11,9 @@ python = "^3.9"
 flatten-json = "^0.1.13"
 numpy = "^1.24.1"
 mypy = "^1.0.1"
+mkdocs = "^1.4.2"
+mkdocs-jupyter = "^0.22.0"
+
 
 [tool.poetry.dev-dependencies]
 
