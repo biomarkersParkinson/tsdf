@@ -144,9 +144,6 @@ dmypy.json
 #VS Code
 .vscode/
 
-#Test data
-tests/data/local_test_out/*
-
 #Binary outputs
-*output.bin
+tests/data/tmp_test*
 
