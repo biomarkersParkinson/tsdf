@@ -1,6 +1,6 @@
 import json
 import os
-from typing import Any, Dict
+from typing import Any, Dict, List
 
 from tsdf import constants
 from tsdf.tsdf_metadata import (
@@ -165,3 +165,19 @@ def get_file_metadata_at_index(
             return value
         index -= 1
     raise IndexError("The index is out of range.")
+
+
+def confirm_dir_of_metadata(metadatas: List[TSDFMetadata]) -> None:
+    """The method is used to confirm whether all the metadata files are expected in the same directory."""
+    metadata_iter = iter(metadatas)
+    init_metadata = next(metadata_iter)
+
+    for curr_metadata in metadata_iter:
+        if init_metadata.file_dir_path != curr_metadata.file_dir_path:
+            raise Exception(
+                "Metadata files have to be in the same folder to be combined."
+            )
+        if init_metadata.file_name == curr_metadata.file_name:
+            raise Exception(
+                "Two metadata objects cannot reference the same binary file (file_name)."
+            )

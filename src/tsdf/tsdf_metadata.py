@@ -1,4 +1,5 @@
 import os
+import copy
 from typing import Any, Dict, List
 from tsdf import io, io_metadata
 
@@ -35,7 +36,7 @@ class TSDFMetadata:
     # However, it is challenging to track the indexes in this structure,
     # e.g., it was the second element in the list under label "sensors".
     file_dir_path: str
-    _source_file_name: str
+    source_file_name: str
     """ A reference to the source path, so we don't need it again when reading associated binary files. """
 
     def __init__(
@@ -50,7 +51,16 @@ class TSDFMetadata:
         for key, value in dictionary.items():
             setattr(self, key, value)
         self.file_dir_path = dir_path
-        self._source_file_name = file_name
+        self.source_file_name = file_name
+
+    def get_plain_tsdf_dict(self) -> Dict[str, Any]:
+        """Method returns the user defined fields needed for the final TSDF file."""
+        simple_dict = copy.deepcopy(self.__dict__)
+        if simple_dict.get("file_dir_path") != None:
+            simple_dict.pop("file_dir_path")
+        if simple_dict.get("source_file_name") != None:
+            simple_dict.pop("source_file_name")
+        return simple_dict
 
     def load_binary(self):
         """Load the binary file from the same directory where the metadata is saved."""

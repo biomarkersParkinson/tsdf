@@ -1,7 +1,7 @@
 import json
 import os
 import sys
-from typing import Dict, List
+from typing import Any, Dict, List
 import numpy as np
 from tsdf import io_metadata
 from tsdf.numpy_utils import (
@@ -41,7 +41,6 @@ def load_metadata_from_path(path: str) -> Dict[str, TSDFMetadata]:
         data = json.load(file)
 
     abs_path = os.path.realpath(path)
-
     # Parse the data and verify that it complies with TSDF requirements
     return io_metadata.read_data(data, abs_path)
 
@@ -100,7 +99,7 @@ def load_binary_file(
     return values
 
 
-def get_metadata_from_ndarray(data: np.ndarray) -> dict:
+def get_metadata_from_ndarray(data: np.ndarray) -> Dict[str, Any]:
     """Retrieve metadata information encoded in the NumPy array."""
 
     metadata = {
@@ -112,7 +111,7 @@ def get_metadata_from_ndarray(data: np.ndarray) -> dict:
     return metadata
 
 
-def save_binary_file(
+def write_binary_file(
     file_dir: str, file_name: str, data: np.ndarray, metadata: dict
 ) -> TSDFMetadata:
     """Save binary file based on the provided NumPy array."""
@@ -124,48 +123,56 @@ def save_binary_file(
     return TSDFMetadata(metadata, file_dir)
 
 
-def confirm_dir_of_metadata(metadatas: List[TSDFMetadata]) -> bool:
-    """The method is used to confirm whether all the metadata files are expected in the same directory."""
-    metadata_iter = iter(metadatas)
-    init_metadata = next(metadata_iter)
-
-    for curr_metadata in metadatas:
-        if init_metadata.file_dir_path != curr_metadata.file_dir_path:
-            raise Exception(
-                "Metadata files have to be in the same folder to be combined."
-            )
-        if init_metadata.file_name == curr_metadata.file_name:
-            raise Exception(
-                "Two metadata objects cannot reference the same binary file (file_name)."
-            )
-
-    return True
-
-
-def save_metadata(metadatas: List[TSDFMetadata], file_name: str) -> None:
+def write_metadata(metadatas: List[TSDFMetadata], file_name: str) -> None:
     """Combine and save the TSDF metadata objects as a json file."""
-    if metadatas.__sizeof__ == 0:
+    if len(metadatas) == 0:
         raise Exception(
             "Metadata cannot be saved, as the list of TSDFMetadata objects is empty."
         )
 
-    if metadatas.__sizeof__ == 1:
+    if len(metadatas) == 1:
         meta = metadatas[0]
-        write_to_file(meta.__dict__, meta.file_dir_path, file_name)
+        write_to_file(meta.get_plain_tsdf_dict(), meta.file_dir_path, file_name)
+        return
 
-    confirm_dir_of_metadata(metadatas)
-    print(dir(metadatas[0]))
-    # overlap = get_overlap(metadatas, dict(metadatas[0]))
+    # Ensure that the metadata files can be combined
+    io_metadata.confirm_dir_of_metadata(metadatas)
+
+    plain_meta = [meta.get_plain_tsdf_dict() for meta in metadatas]
+    overlap = extract_dict_overlap(plain_meta)
+
+    overlap["sensors"] = optimise_dict_structure_rec(plain_meta)
+    write_to_file(overlap, metadatas[0].file_dir_path, file_name)
 
 
-def get_overlap(metadatas: List[TSDFMetadata], keys: List[str]) -> List[int]:
-    for meta in metadatas:
-        print("x")
+def extract_dict_overlap(metadatas: List[Dict[str, Any]]) -> Dict[str, Any]:
+    """Extract the fields that are the same for all the metadata files.
+    A new dict is created and the fields are removed from the original dictionaries."""
+    meta_overlap: Dict[str, Any] = {}
 
-    return []
+    init_metadata = metadatas[0]
+    for key, value in init_metadata.items():
+        key_in_all = True
+        for curr_meta in metadatas[1:]:
+            if key not in curr_meta.keys() or curr_meta[key] != value:
+                key_in_all = False
+        if key_in_all:
+            meta_overlap[key] = value
+    for key, _ in meta_overlap.items():
+        for meta_dict in metadatas:
+            meta_dict.pop(key)
+
+    return meta_overlap
 
 
-def write_to_file(dict: dict, dir_path: str, file_name: str) -> None:
+def optimise_dict_structure_rec(
+    metadatas: List[Dict[str, Any]]
+) -> List[Dict[str, Any]]:
+    """TODO: A recursive call that should optimise the structure of the TSDF metadata, by grouping the common values."""
+    return metadatas
+
+
+def write_to_file(dict: Dict[str, Any], dir_path: str, file_name: str) -> None:
     path = os.path.join(dir_path, file_name)
     with open(path, "w") as convert_file:
         convert_file.write(json.dumps(dict))

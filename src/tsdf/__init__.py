@@ -10,7 +10,7 @@ from .io import (
     load_binary_from_metadata,
     load_binary_file,
     get_metadata_from_ndarray,
-    save_binary_file,
-    save_metadata,
+    write_binary_file,
+    write_metadata,
 )
 from .tsdf_metadata import TSDFMetadata

@@ -145,5 +145,4 @@ dmypy.json
 .vscode/
 
 #Test data
-tests/data/test_output*
-tests/data/local_data/*
+tests/data/local_test_out/*
