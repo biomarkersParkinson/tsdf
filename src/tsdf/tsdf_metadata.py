@@ -53,8 +53,8 @@ class TSDFMetadata:
         self.file_dir_path = dir_path
         self.source_file_name = file_name
 
-    def get_plain_tsdf_dict(self) -> Dict[str, Any]:
-        """Method returns the user defined fields needed for the final TSDF file."""
+    def get_plain_tsdf_dict_copy(self) -> Dict[str, Any]:
+        """Method returns the a copy of the dict containing fields needed for the TSDF file."""
         simple_dict = copy.deepcopy(self.__dict__)
         if simple_dict.get("file_dir_path") != None:
             simple_dict.pop("file_dir_path")

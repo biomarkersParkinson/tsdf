@@ -132,14 +132,18 @@ def write_metadata(metadatas: List[TSDFMetadata], file_name: str) -> None:
 
     if len(metadatas) == 1:
         meta = metadatas[0]
-        write_to_file(meta.get_plain_tsdf_dict(), meta.file_dir_path, file_name)
+        write_to_file(meta.get_plain_tsdf_dict_copy(), meta.file_dir_path, file_name)
         return
 
     # Ensure that the metadata files can be combined
     io_metadata.confirm_dir_of_metadata(metadatas)
 
-    plain_meta = [meta.get_plain_tsdf_dict() for meta in metadatas]
+    plain_meta = [meta.get_plain_tsdf_dict_copy() for meta in metadatas]
     overlap = extract_dict_overlap(plain_meta)
+    if not overlap:
+        raise Exception(
+            "Metadata files mist have at least one common field. Otherwise, they should be stored separtely."
+        )
 
     overlap["sensors"] = optimise_dict_structure_rec(plain_meta)
     write_to_file(overlap, metadatas[0].file_dir_path, file_name)

@@ -105,7 +105,7 @@ class TestBinaryFileWriting(unittest.TestCase):
                 TESTOUT_DIR,
                 test_file_name,
                 data,
-                metadatas["audio_voice_089.raw"].get_plain_tsdf_dict(),
+                metadatas["audio_voice_089.raw"].get_plain_tsdf_dict_copy(),
             )
 
         # Read file again to check contents
@@ -137,13 +137,13 @@ class TestMetadataFileWriting(unittest.TestCase):
             TESTOUT_DIR,
             test_name + "_1.bin",
             data_1,
-            loaded_meta.get_plain_tsdf_dict(),
+            loaded_meta.get_plain_tsdf_dict_copy(),
         )
         new_meta_2 = io.write_binary_file(
             TESTOUT_DIR,
             test_name + "_2.bin",
             data_2,
-            loaded_meta.get_plain_tsdf_dict(),
+            loaded_meta.get_plain_tsdf_dict_copy(),
         )
 
         # Combine two TSDF files
@@ -175,7 +175,7 @@ class TestMetadataFileWriting(unittest.TestCase):
             TESTOUT_DIR,
             new_file_name + ".bin",
             new_data,
-            original_metadata.get_plain_tsdf_dict(),
+            original_metadata.get_plain_tsdf_dict_copy(),
         )
 
         # Write the new metadata file
