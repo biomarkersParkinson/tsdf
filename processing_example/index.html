@@ -3,18 +3,18 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://biomarkersparkinson.github.io/tsdf/usage/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://biomarkersparkinson.github.io/tsdf/processing_example/" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Usage - tsdf</title>
+    <title>Examples - tsdf</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Usage";
-        var mkdocs_page_input_path = "usage.ipynb";
-        var mkdocs_page_url = "/tsdf/usage/";
+        var mkdocs_page_name = "Examples";
+        var mkdocs_page_input_path = "processing_example.ipynb";
+        var mkdocs_page_url = "/tsdf/processing_example/";
       </script>
     
     <script src="../js/jquery-3.6.0.min.js" defer></script>
@@ -44,16 +44,38 @@
                 <li class="toctree-l1"><a class="reference internal" href="../installation/">Installation</a>
                 </li>
               </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../processing_example/">Examples</a>
-                </li>
-              </ul>
               <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="./">Usage</a>
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Examples</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#using-json">Using json</a>
+    <li class="toctree-l2"><a class="reference internal" href="#required-import">Required import</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#process-an-existing-binary-file-and-write-the-new-tsdf-metadata">Process an existing binary file and write the new TSDF metadata</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#load-dummy-data-and-see-its-format">Load dummy data and see its format</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#perform-light-data-processing">Perform light data processing</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#metadata-available-from-the-data-numpy-array">Metadata available from the data (NumPy array)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#write-the-processed-data">Write the processed data</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#write-the-tsdf-metadata-file-that-describes-the-processed-binary-data-format">Write the TSDF metadata file that describes the processed binary data format</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1-write-the-metadata-file-for-a-single-binary-file">1) Write the metadata file for a single binary file</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#2-write-a-metadata-file-that-combines-multiple-binary-files">2) Write a metadata file that combines multiple binary files</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#genarate-a-new-binary-file-and-the-corresponding-tsdf-metadata">Genarate a new binary file and the corresponding TSDF metadata</a>
     </li>
     </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../usage/">Usage</a>
                 </li>
               </ul>
               <ul>
@@ -74,9 +96,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-      <li>Usage</li>
+      <li>Examples</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/biomarkersParkinson/tsdf/blob/main/docs/usage.ipynb" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/biomarkersParkinson/tsdf/blob/main/docs/processing_example.ipynb" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -1121,19 +1143,8 @@ Licensed under the Apache License, Version 2.0.
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="usage">Usage<a class="anchor-link" href="#usage">&#182;</a></h1><p>Input/Output of <code>tsdf</code> files (work in progress)</p>
+<h1 id="examples">Examples<a class="anchor-link" href="#examples">&#182;</a></h1><p>These are some examples on how to read and write TSDF data into and from a numpy array.</p>
 
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="using-json">Using <code>json</code><a class="anchor-link" href="#using-json">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -1158,15 +1169,644 @@ Licensed under the Apache License, Version 2.0.
                 </div>
             </clipboard-copy>
         </div>
-            <div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">from</span> <span class="nn">tsdf.io</span> <span class="kn">import</span> <span class="n">load</span><span class="p">,</span> <span class="n">loads</span>
-
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;../tests/data/flat.json&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">read_file</span><span class="p">:</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">load</span><span class="p">(</span><span class="n">read_file</span><span class="p">)</span>
+            <div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Reload modules automatically on changes; useful for developing</span>
+<span class="o">%</span><span class="n">load_ext</span> <span class="n">autoreload</span>
+<span class="o">%</span><span class="n">autoreload</span> <span class="mi">2</span>
 </pre></div>
-<div id="cell-1" class="clipboard-copy-txt">from tsdf.io import load, loads
+<div id="cell-1" class="clipboard-copy-txt"># Reload modules automatically on changes; useful for developing
+%load_ext autoreload
+%autoreload 2</div>
+    
+        </div>
+    </div>
 
-with open("../tests/data/flat.json", "r") as read_file:
-    data = load(read_file)</div>
+</div>
+</div>
+
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="required-import">Required import<a class="anchor-link" href="#required-import">&#182;</a></h3>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+        
+        
+        <div class="CodeMirror cm-s-jupyter">
+        <div class="zeroclipboard-container">
+            <clipboard-copy for="cell-2">
+            <div>
+                <span class="notice" hidden>Copied!</span>
+                <svg aria-hidden="true" width="20" height="20" viewBox="0 0 16 16" version="1.1"  data-view-component="true" class="clipboard-copy-icon">
+                    <path fill="currentColor" fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path>
+                    <path fill="currentColor" fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path>
+                </svg>
+                </div>
+            </clipboard-copy>
+        </div>
+            <div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">import</span> <span class="nn">tsdf</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+<div id="cell-2" class="clipboard-copy-txt">import tsdf
+import os
+import sys
+import numpy as np</div>
+    
+        </div>
+    </div>
+
+</div>
+</div>
+
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="process-an-existing-binary-file-and-write-the-new-tsdf-metadata">Process an existing binary file and write the new TSDF metadata<a class="anchor-link" href="#process-an-existing-binary-file-and-write-the-new-tsdf-metadata">&#182;</a></h2><p>Read and process an existing binary data (accompanied by the TSDF metadata), process the data and save it in the new format, with the corresponding TSDF metadata file.</p>
+<h3 id="load-dummy-data-and-see-its-format">Load dummy data and see its format<a class="anchor-link" href="#load-dummy-data-and-see-its-format">&#182;</a></h3>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+        
+        
+        <div class="CodeMirror cm-s-jupyter">
+        <div class="zeroclipboard-container">
+            <clipboard-copy for="cell-3">
+            <div>
+                <span class="notice" hidden>Copied!</span>
+                <svg aria-hidden="true" width="20" height="20" viewBox="0 0 16 16" version="1.1"  data-view-component="true" class="clipboard-copy-icon">
+                    <path fill="currentColor" fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path>
+                    <path fill="currentColor" fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path>
+                </svg>
+                </div>
+            </clipboard-copy>
+        </div>
+            <div class="highlight-ipynb hl-python"><pre><span></span><span class="n">TESTDATA_DIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;..&quot;</span><span class="p">,</span><span class="s2">&quot;tests&quot;</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">)</span>
+<span class="n">dummy_data_name</span> <span class="o">=</span> <span class="s2">&quot;dummy_10_3_int16&quot;</span>
+
+<span class="n">dummy_metadata</span> <span class="o">=</span> <span class="n">tsdf</span><span class="o">.</span><span class="n">load_metadata_from_path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">TESTDATA_DIR</span><span class="p">,</span> <span class="n">dummy_data_name</span> <span class="o">+</span> <span class="s2">&quot;.json&quot;</span><span class="p">))[</span><span class="n">dummy_data_name</span> <span class="o">+</span> <span class="s2">&quot;.bin&quot;</span><span class="p">]</span>
+<span class="n">dummy_data</span> <span class="o">=</span> <span class="n">dummy_metadata</span><span class="o">.</span><span class="n">load_binary</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data type used for storing:</span><span class="se">\t</span><span class="s2"> </span><span class="si">{</span><span class="n">dummy_data</span><span class="o">.</span><span class="n">dtype</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data dimensions:</span><span class="se">\t\t</span><span class="s2"> </span><span class="si">{</span><span class="n">dummy_data</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of rows:</span><span class="se">\t\t\t</span><span class="s2"> </span><span class="si">{</span><span class="n">dummy_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+<div id="cell-3" class="clipboard-copy-txt">TESTDATA_DIR = os.path.join("..","tests", "data")
+dummy_data_name = "dummy_10_3_int16"
+
+dummy_metadata = tsdf.load_metadata_from_path(os.path.join(TESTDATA_DIR, dummy_data_name + ".json"))[dummy_data_name + ".bin"]
+dummy_data = dummy_metadata.load_binary()
+print(f"Data type used for storing:\t {dummy_data.dtype}")
+print(f"Data dimensions:\t\t {dummy_data.shape}")
+print(f"Number of rows:\t\t\t {dummy_data.shape[0]}")</div>
+    
+        </div>
+    </div>
+
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>Data type used for storing:	 int16
+Data dimensions:		 (10, 3)
+Number of rows:			 10
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="perform-light-data-processing">Perform light data processing<a class="anchor-link" href="#perform-light-data-processing">&#182;</a></h3>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+        
+        
+        <div class="CodeMirror cm-s-jupyter">
+        <div class="zeroclipboard-container">
+            <clipboard-copy for="cell-4">
+            <div>
+                <span class="notice" hidden>Copied!</span>
+                <svg aria-hidden="true" width="20" height="20" viewBox="0 0 16 16" version="1.1"  data-view-component="true" class="clipboard-copy-icon">
+                    <path fill="currentColor" fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path>
+                    <path fill="currentColor" fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path>
+                </svg>
+                </div>
+            </clipboard-copy>
+        </div>
+            <div class="highlight-ipynb hl-python"><pre><span></span><span class="n">processed_dummy_data_1</span> <span class="o">=</span> <span class="p">(</span><span class="n">dummy_data</span> <span class="o">/</span> <span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data type used for storing:</span><span class="se">\t</span><span class="s2"> </span><span class="si">{</span><span class="n">processed_dummy_data_1</span><span class="o">.</span><span class="n">dtype</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data dimensions:</span><span class="se">\t\t</span><span class="s2"> </span><span class="si">{</span><span class="n">processed_dummy_data_1</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of rows:</span><span class="se">\t\t\t</span><span class="s2"> </span><span class="si">{</span><span class="n">processed_dummy_data_1</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+<div id="cell-4" class="clipboard-copy-txt">processed_dummy_data_1 = (dummy_data / 10).astype('float32')
+print(f"Data type used for storing:\t {processed_dummy_data_1.dtype}")
+print(f"Data dimensions:\t\t {processed_dummy_data_1.shape}")
+print(f"Number of rows:\t\t\t {processed_dummy_data_1.shape[0]}")</div>
+    
+        </div>
+    </div>
+
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>Data type used for storing:	 float32
+Data dimensions:		 (10, 3)
+Number of rows:			 10
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="metadata-available-from-the-data-numpy-array">Metadata available from the data (NumPy array)<a class="anchor-link" href="#metadata-available-from-the-data-numpy-array">&#182;</a></h3><p>The metadata will be used indirectly to generate the new TSDF metadata file.</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+        
+        
+        <div class="CodeMirror cm-s-jupyter">
+        <div class="zeroclipboard-container">
+            <clipboard-copy for="cell-5">
+            <div>
+                <span class="notice" hidden>Copied!</span>
+                <svg aria-hidden="true" width="20" height="20" viewBox="0 0 16 16" version="1.1"  data-view-component="true" class="clipboard-copy-icon">
+                    <path fill="currentColor" fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path>
+                    <path fill="currentColor" fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path>
+                </svg>
+                </div>
+            </clipboard-copy>
+        </div>
+            <div class="highlight-ipynb hl-python"><pre><span></span><span class="n">bin_meta</span> <span class="o">=</span> <span class="n">tsdf</span><span class="o">.</span><span class="n">get_metadata_from_ndarray</span><span class="p">(</span><span class="n">processed_dummy_data_1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Binary formatting that can be inferred from the NumPy array:</span><span class="se">\n</span><span class="si">{</span><span class="n">bin_meta</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+<div id="cell-5" class="clipboard-copy-txt">bin_meta = tsdf.get_metadata_from_ndarray(processed_dummy_data_1)
+print(f"Binary formatting that can be inferred from the NumPy array:\n{bin_meta}")</div>
+    
+        </div>
+    </div>
+
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>Binary formatting that can be inferred from the NumPy array:
+{&#39;data_type&#39;: &#39;float&#39;, &#39;bits&#39;: 32, &#39;endianness&#39;: &#39;little&#39;, &#39;rows&#39;: 10}
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="write-the-processed-data">Write the processed data<a class="anchor-link" href="#write-the-processed-data">&#182;</a></h3><p>Write the processed data in binary format. The call returns the corresponding metadata object.</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+        
+        
+        <div class="CodeMirror cm-s-jupyter">
+        <div class="zeroclipboard-container">
+            <clipboard-copy for="cell-6">
+            <div>
+                <span class="notice" hidden>Copied!</span>
+                <svg aria-hidden="true" width="20" height="20" viewBox="0 0 16 16" version="1.1"  data-view-component="true" class="clipboard-copy-icon">
+                    <path fill="currentColor" fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path>
+                    <path fill="currentColor" fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path>
+                </svg>
+                </div>
+            </clipboard-copy>
+        </div>
+            <div class="highlight-ipynb hl-python"><pre><span></span><span class="n">processed_dummy_data_name_1</span> <span class="o">=</span> <span class="s2">&quot;tmp_test_dummy_10_3_int16_to_float32&quot;</span>
+<span class="n">processed_dummy_metadata_1</span> <span class="o">=</span> <span class="n">tsdf</span><span class="o">.</span><span class="n">write_binary_file</span><span class="p">(</span>
+            <span class="n">TESTDATA_DIR</span><span class="p">,</span>
+            <span class="n">processed_dummy_data_name_1</span> <span class="o">+</span> <span class="s2">&quot;.bin&quot;</span><span class="p">,</span>
+            <span class="n">processed_dummy_data_1</span><span class="p">,</span>
+            <span class="n">dummy_metadata</span><span class="o">.</span><span class="n">get_plain_tsdf_dict_copy</span><span class="p">(),</span>
+        <span class="p">)</span>
+</pre></div>
+<div id="cell-6" class="clipboard-copy-txt">processed_dummy_data_name_1 = "tmp_test_dummy_10_3_int16_to_float32"
+processed_dummy_metadata_1 = tsdf.write_binary_file(
+            TESTDATA_DIR,
+            processed_dummy_data_name_1 + ".bin",
+            processed_dummy_data_1,
+            dummy_metadata.get_plain_tsdf_dict_copy(),
+        )</div>
+    
+        </div>
+    </div>
+
+</div>
+</div>
+
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="write-the-tsdf-metadata-file-that-describes-the-processed-binary-data-format">Write the TSDF metadata file that describes the processed binary data format<a class="anchor-link" href="#write-the-tsdf-metadata-file-that-describes-the-processed-binary-data-format">&#182;</a></h3><h4 id="1-write-the-metadata-file-for-a-single-binary-file">1) Write the metadata file for a single binary file<a class="anchor-link" href="#1-write-the-metadata-file-for-a-single-binary-file">&#182;</a></h4>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+        
+        
+        <div class="CodeMirror cm-s-jupyter">
+        <div class="zeroclipboard-container">
+            <clipboard-copy for="cell-7">
+            <div>
+                <span class="notice" hidden>Copied!</span>
+                <svg aria-hidden="true" width="20" height="20" viewBox="0 0 16 16" version="1.1"  data-view-component="true" class="clipboard-copy-icon">
+                    <path fill="currentColor" fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path>
+                    <path fill="currentColor" fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path>
+                </svg>
+                </div>
+            </clipboard-copy>
+        </div>
+            <div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Write new metadata file</span>
+<span class="n">tsdf</span><span class="o">.</span><span class="n">write_metadata</span><span class="p">([</span><span class="n">processed_dummy_metadata_1</span><span class="p">],</span> <span class="n">processed_dummy_data_name_1</span> <span class="o">+</span> <span class="s2">&quot;.json&quot;</span><span class="p">)</span>
+</pre></div>
+<div id="cell-7" class="clipboard-copy-txt"># Write new metadata file
+tsdf.write_metadata([processed_dummy_metadata_1], processed_dummy_data_name_1 + ".json")
+</div>
+    
+        </div>
+    </div>
+
+</div>
+</div>
+
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h4 id="2-write-a-metadata-file-that-combines-multiple-binary-files">2) Write a metadata file that combines multiple binary files<a class="anchor-link" href="#2-write-a-metadata-file-that-combines-multiple-binary-files">&#182;</a></h4>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+        
+        
+        <div class="CodeMirror cm-s-jupyter">
+        <div class="zeroclipboard-container">
+            <clipboard-copy for="cell-8">
+            <div>
+                <span class="notice" hidden>Copied!</span>
+                <svg aria-hidden="true" width="20" height="20" viewBox="0 0 16 16" version="1.1"  data-view-component="true" class="clipboard-copy-icon">
+                    <path fill="currentColor" fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path>
+                    <path fill="currentColor" fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path>
+                </svg>
+                </div>
+            </clipboard-copy>
+        </div>
+            <div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Preprocess the original data to generate another data source</span>
+<span class="n">processed_dummy_data_2</span> <span class="o">=</span> <span class="p">(</span><span class="n">dummy_data</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;int32&#39;</span><span class="p">)</span>
+
+<span class="c1"># Adjust the metadata slightly</span>
+<span class="n">updated_dummy_metadata</span> <span class="o">=</span> <span class="n">dummy_metadata</span><span class="o">.</span><span class="n">get_plain_tsdf_dict_copy</span><span class="p">()</span>
+<span class="n">updated_dummy_metadata</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;scale_factors&quot;</span><span class="p">)</span> <span class="c1">#remove the &#39;scale_factors&#39;</span>
+
+
+<span class="c1"># Save the new binary file</span>
+<span class="n">processed_dummy_data_name_2</span> <span class="o">=</span> <span class="s2">&quot;tmp_test_dummy_10_3_int16_to_int32&quot;</span>
+<span class="n">processed_dummy_metadata_2</span> <span class="o">=</span> <span class="n">tsdf</span><span class="o">.</span><span class="n">write_binary_file</span><span class="p">(</span>
+            <span class="n">TESTDATA_DIR</span><span class="p">,</span>
+            <span class="n">processed_dummy_data_name_2</span> <span class="o">+</span> <span class="s2">&quot;.bin&quot;</span><span class="p">,</span>
+            <span class="n">processed_dummy_data_2</span><span class="p">,</span>
+            <span class="n">updated_dummy_metadata</span><span class="p">,</span>
+        <span class="p">)</span>
+
+<span class="c1"># Write a metadata file that combines the two binary files</span>
+<span class="n">tsdf</span><span class="o">.</span><span class="n">write_metadata</span><span class="p">([</span><span class="n">processed_dummy_metadata_1</span><span class="p">,</span> <span class="n">processed_dummy_metadata_2</span><span class="p">],</span> <span class="s2">&quot;tmp_test_dummy_10_3_int16_to_int_n_float.json&quot;</span><span class="p">)</span>
+</pre></div>
+<div id="cell-8" class="clipboard-copy-txt"># Preprocess the original data to generate another data source
+processed_dummy_data_2 = (dummy_data * 1000).astype('int32')
+
+# Adjust the metadata slightly
+updated_dummy_metadata = dummy_metadata.get_plain_tsdf_dict_copy()
+updated_dummy_metadata.pop("scale_factors") #remove the 'scale_factors'
+
+
+# Save the new binary file
+processed_dummy_data_name_2 = "tmp_test_dummy_10_3_int16_to_int32"
+processed_dummy_metadata_2 = tsdf.write_binary_file(
+            TESTDATA_DIR,
+            processed_dummy_data_name_2 + ".bin",
+            processed_dummy_data_2,
+            updated_dummy_metadata,
+        )
+
+# Write a metadata file that combines the two binary files
+tsdf.write_metadata([processed_dummy_metadata_1, processed_dummy_metadata_2], "tmp_test_dummy_10_3_int16_to_int_n_float.json")
+</div>
+    
+        </div>
+    </div>
+
+</div>
+</div>
+
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="genarate-a-new-binary-file-and-the-corresponding-tsdf-metadata">Genarate a new binary file and the corresponding TSDF metadata<a class="anchor-link" href="#genarate-a-new-binary-file-and-the-corresponding-tsdf-metadata">&#182;</a></h2><p>Generate binary data and save it and the corresponding TSDF metadata file.</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+        
+        
+        <div class="CodeMirror cm-s-jupyter">
+        <div class="zeroclipboard-container">
+            <clipboard-copy for="cell-9">
+            <div>
+                <span class="notice" hidden>Copied!</span>
+                <svg aria-hidden="true" width="20" height="20" viewBox="0 0 16 16" version="1.1"  data-view-component="true" class="clipboard-copy-icon">
+                    <path fill="currentColor" fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path>
+                    <path fill="currentColor" fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path>
+                </svg>
+                </div>
+            </clipboard-copy>
+        </div>
+            <div class="highlight-ipynb hl-python"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">TESTDATA_DIR</span><span class="p">,</span> <span class="s2">&quot;test_output_1.bin&quot;</span><span class="p">)</span>
+<span class="n">rs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">data_1</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">17</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">data_2</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">)</span>
+
+
+<span class="c1"># An example where the metadata is defined from scratch</span>
+<span class="n">new_metadata</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">new_metadata</span><span class="p">[</span><span class="s2">&quot;subject_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;example&quot;</span>
+<span class="n">new_metadata</span><span class="p">[</span><span class="s2">&quot;study_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;example&quot;</span>
+<span class="n">new_metadata</span><span class="p">[</span><span class="s2">&quot;device_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;example&quot;</span>
+<span class="n">new_metadata</span><span class="p">[</span><span class="s2">&quot;endianness&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;little&quot;</span>
+<span class="n">new_metadata</span><span class="p">[</span><span class="s2">&quot;metadata_version&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;0.1&quot;</span>
+<span class="n">new_metadata</span><span class="p">[</span><span class="s2">&quot;start_datetime_unix_ms&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1571135957025</span><span class="p">,</span>
+<span class="n">new_metadata</span><span class="p">[</span><span class="s2">&quot;start_iso8601&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;2019-10-15T10:39:17.025000+00:00&quot;</span>
+<span class="n">new_metadata</span><span class="p">[</span><span class="s2">&quot;end_datetime_unix_ms&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1571168851826</span>
+<span class="n">new_metadata</span><span class="p">[</span><span class="s2">&quot;end_iso8601&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;2019-10-15T19:47:31.826000+00:00&quot;</span>
+<span class="n">new_metadata</span><span class="p">[</span><span class="s2">&quot;channels&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">,</span><span class="s2">&quot;y&quot;</span><span class="p">,</span><span class="s2">&quot;z&quot;</span><span class="p">]</span>
+<span class="n">new_metadata</span><span class="p">[</span><span class="s2">&quot;units&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;m/s/s&quot;</span><span class="p">,</span><span class="s2">&quot;m/s/s&quot;</span><span class="p">,</span><span class="s2">&quot;m/s/s&quot;</span><span class="p">]</span>
+
+<span class="c1"># Write the two binary files based on the provided metadata</span>
+
+<span class="n">file_prefix</span> <span class="o">=</span> <span class="s2">&quot;tmp_test&quot;</span>
+<span class="n">new_meta_1</span> <span class="o">=</span>  <span class="n">tsdf</span><span class="o">.</span><span class="n">write_binary_file</span><span class="p">(</span><span class="n">TESTDATA_DIR</span><span class="p">,</span> <span class="n">file_prefix</span> <span class="o">+</span> <span class="s2">&quot;_1.bin&quot;</span><span class="p">,</span> <span class="n">data_1</span><span class="p">,</span> <span class="n">new_metadata</span><span class="p">)</span>
+<span class="n">new_meta_2</span> <span class="o">=</span>  <span class="n">tsdf</span><span class="o">.</span><span class="n">write_binary_file</span><span class="p">(</span><span class="n">TESTDATA_DIR</span><span class="p">,</span> <span class="n">file_prefix</span><span class="o">+</span><span class="s2">&quot;_2.bin&quot;</span><span class="p">,</span> <span class="n">data_2</span><span class="p">,</span> <span class="n">new_metadata</span><span class="p">)</span>
+</pre></div>
+<div id="cell-9" class="clipboard-copy-txt">path = os.path.join(TESTDATA_DIR, "test_output_1.bin")
+rs = np.random.RandomState(seed=42)
+data_1 = rs.rand(17, 1).astype(np.float32)
+data_2 = rs.rand(15, 2).astype(np.int16)
+
+
+# An example where the metadata is defined from scratch
+new_metadata = {}
+new_metadata["subject_id"] = "example"
+new_metadata["study_id"] = "example"
+new_metadata["device_id"] = "example"
+new_metadata["endianness"] = "little"
+new_metadata["metadata_version"] = "0.1"
+new_metadata["start_datetime_unix_ms"] = 1571135957025,
+new_metadata["start_iso8601"] = "2019-10-15T10:39:17.025000+00:00"
+new_metadata["end_datetime_unix_ms"] = 1571168851826
+new_metadata["end_iso8601"] = "2019-10-15T19:47:31.826000+00:00"
+new_metadata["channels"] = ["x","y","z"]
+new_metadata["units"] = ["m/s/s","m/s/s","m/s/s"]
+
+# Write the two binary files based on the provided metadata
+
+file_prefix = "tmp_test"
+new_meta_1 =  tsdf.write_binary_file(TESTDATA_DIR, file_prefix + "_1.bin", data_1, new_metadata)
+new_meta_2 =  tsdf.write_binary_file(TESTDATA_DIR, file_prefix+"_2.bin", data_2, new_metadata)
+</div>
+    
+        </div>
+    </div>
+
+</div>
+</div>
+
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Save the metadata that corresponds to the binary data. In case of multiple binary files, the corresponding metadata files have to be combined.</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+        
+        
+        <div class="CodeMirror cm-s-jupyter">
+        <div class="zeroclipboard-container">
+            <clipboard-copy for="cell-10">
+            <div>
+                <span class="notice" hidden>Copied!</span>
+                <svg aria-hidden="true" width="20" height="20" viewBox="0 0 16 16" version="1.1"  data-view-component="true" class="clipboard-copy-icon">
+                    <path fill="currentColor" fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path>
+                    <path fill="currentColor" fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path>
+                </svg>
+                </div>
+            </clipboard-copy>
+        </div>
+            <div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Write the first metadata file</span>
+<span class="n">tsdf</span><span class="o">.</span><span class="n">write_metadata</span><span class="p">([</span><span class="n">new_meta_1</span><span class="p">],</span> <span class="n">file_prefix</span> <span class="o">+</span><span class="s2">&quot;_1.json&quot;</span><span class="p">)</span>
+</pre></div>
+<div id="cell-10" class="clipboard-copy-txt"># Write the first metadata file
+tsdf.write_metadata([new_meta_1], file_prefix +"_1.json")</div>
+    
+        </div>
+    </div>
+
+</div>
+</div>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+        
+        
+        <div class="CodeMirror cm-s-jupyter">
+        <div class="zeroclipboard-container">
+            <clipboard-copy for="cell-11">
+            <div>
+                <span class="notice" hidden>Copied!</span>
+                <svg aria-hidden="true" width="20" height="20" viewBox="0 0 16 16" version="1.1"  data-view-component="true" class="clipboard-copy-icon">
+                    <path fill="currentColor" fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path>
+                    <path fill="currentColor" fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path>
+                </svg>
+                </div>
+            </clipboard-copy>
+        </div>
+            <div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Combine and write both metadata files</span>
+<span class="n">tsdf</span><span class="o">.</span><span class="n">write_metadata</span><span class="p">([</span><span class="n">new_meta_1</span><span class="p">,</span> <span class="n">new_meta_2</span><span class="p">],</span> <span class="n">file_prefix</span><span class="o">+</span><span class="s2">&quot;_2.json&quot;</span><span class="p">)</span>
+</pre></div>
+<div id="cell-11" class="clipboard-copy-txt"># Combine and write both metadata files
+tsdf.write_metadata([new_meta_1, new_meta_2], file_prefix+"_2.json")</div>
     
         </div>
     </div>
@@ -1183,8 +1823,8 @@ with open("../tests/data/flat.json", "r") as read_file:
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../processing_example/" class="btn btn-neutral float-left" title="Examples"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../contact/" class="btn btn-neutral float-right" title="Contact">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../installation/" class="btn btn-neutral float-left" title="Installation"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../usage/" class="btn btn-neutral float-right" title="Usage">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -1211,10 +1851,10 @@ with open("../tests/data/flat.json", "r") as read_file:
         </span>
     
     
-      <span><a href="../processing_example/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../installation/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../contact/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../usage/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
