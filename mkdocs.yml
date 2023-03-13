@@ -12,5 +12,6 @@ theme: readthedocs
 nav:
   - Introduction: index.md
   - Installation: installation.md
+  - Example: processing_example.ipynb
   - Usage: usage.ipynb
   - Contact: contact.md
