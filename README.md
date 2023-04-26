@@ -1,5 +1,6 @@
 
 ![Python package](https://github.com/biomarkersparkinson/tsdf/workflows/Python%20package/badge.svg)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7867900.svg)](https://doi.org/10.5281/zenodo.7867900)
 
 # tsdf
 
@@ -7,15 +8,9 @@ A package to load [TSDF data](https://arxiv.org/abs/2211.11294) into Python
 
 ## Installation
 
-Download or clone the content of [our repository](https://github.com/biomarkersParkinson/tsdf) and install using `poetry` or `pip`.
-
-### Using `poetry` (recommended)
-
-```bash
-poetry install
-```
-
 ### Using `pip`
+
+The package is available in PyPi. It can be installed using:
 
 ```bash
 $ pip install tsdf
@@ -23,7 +18,7 @@ $ pip install tsdf
 
 ## Usage
 
-- TODO
+See our [extended tutorials](https://biomarkersparkinson.github.io/tsdf/).
 
 ## Development
 
