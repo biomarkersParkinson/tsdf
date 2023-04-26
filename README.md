@@ -1,5 +1,6 @@
 
 ![Python package](https://github.com/biomarkersparkinson/tsdf/workflows/Python%20package/badge.svg)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7867900.svg)](https://doi.org/10.5281/zenodo.7867900)
 
 # tsdf
 
