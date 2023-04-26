@@ -1,0 +1,32 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: tsdf
+abstract: 'A package to load TSDF data into Python'
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Peter
+    family-names: Kok
+    email: p.kok@esciencecenter.nl
+    affiliation: Netherlands eScience Center
+    orcid: 'https://orcid.org/0000-0002-6630-7326'
+  - given-names: Vedran
+    family-names: Kasalica
+    email: v.kasalica@esciencecenter.nl
+    affiliation: Netherlands eScience Center
+    orcid: 'https://orcid.org/0000-0002-0097-1056'
+  - given-names: Pablo
+    family-names: Rodríguez-Sánchez
+    email: p.rodriguez-sanchez@esciencecenter.nl
+    affiliation: Netherlands eScience Center
+    orcid: 'https://orcid.org/0000-0002-2855-940X'
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.7867900
+repository-code: 'https://github.com/biomarkersParkinson/tsdf'
+url: 'https://biomarkersparkinson.github.io/tsdf/'
+license: Apache-2.0
