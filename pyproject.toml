@@ -1,10 +1,19 @@
 [tool.poetry]
 name = "tsdf"
 version = "0.2.0"
-description = "A package to load TSDF data into Python"
-authors = ["Pablo Rodríguez, Peter Kok and Vedran Kasalica"]
-license = "Apache License 2.0"
+description = "A Python library that provides methods for encoding and decoding TSDF (Time Series Data Format) data, which allows you to easily create, manipulate and serialize TSDF files in your Python code."
+authors = ["Pablo Rodríguez <p.rodriguez-sanchez@esciencecenter.nl>",
+            "Peter Kok <p.kok@esciencecenter.nl>",
+            "Vedran Kasalica <v.kaslica@esciencecenter.nl>"]
+license = "Apache-2.0"
+classifiers = [
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+]
 readme = "README.md"
+keywords = ["Time Series Data Format (TSDF)", "binary data", "digital sensors"]
+repository = "https://github.com/biomarkersParkinson/tsdf"
 
 [tool.poetry.dependencies]
 python = "^3.9"
