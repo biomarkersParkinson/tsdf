@@ -14,6 +14,7 @@ class TSDFMetadataFieldValueError(Exception):
     pass
 
 
+
 class TSDFMetadata:
     """Structure that provides metadata needed for reading a data stream."""
 

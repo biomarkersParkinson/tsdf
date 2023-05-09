@@ -13,7 +13,7 @@ from tsdf.numpy_utils import (
     endianness_tsdf_to_numpy,
     rows_numpy_to_tsdf,
 )
-from tsdf.tsdf_metadata import TSDFMetadata
+from tsdf.tsdf_metadata import TSDFMetadata, TSDFMetadataFieldValueError
 
 
 def load_metadata_file(file) -> Dict[str, TSDFMetadata]:
@@ -126,7 +126,7 @@ def write_binary_file(
 def write_metadata(metadatas: List[TSDFMetadata], file_name: str) -> None:
     """Combine and save the TSDF metadata objects as a json file."""
     if len(metadatas) == 0:
-        raise Exception(
+        raise TSDFMetadataFieldValueError(
             "Metadata cannot be saved, as the list of TSDFMetadata objects is empty."
         )
 
@@ -141,8 +141,8 @@ def write_metadata(metadatas: List[TSDFMetadata], file_name: str) -> None:
     plain_meta = [meta.get_plain_tsdf_dict_copy() for meta in metadatas]
     overlap = extract_dict_overlap(plain_meta)
     if not overlap:
-        raise Exception(
-            "Metadata files mist have at least one common field. Otherwise, they should be stored separtely."
+        raise TSDFMetadataFieldValueError(
+            "Metadata files mist have at least one common field. Otherwise, they should be stored separately."
         )
 
     overlap["sensors"] = optimise_dict_structure_rec(plain_meta)
