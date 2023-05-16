@@ -181,11 +181,19 @@ def calculate_ovelaps_rec(
 
     max_key = max_len_key(overlap_per_key)
 
-    final_metadata.append(group_by_key(metadatas, max_key))
+    first_group = overlap_per_key[max_key]
+    second_grop = [meta for meta in metadatas if meta not in first_group]
 
-    # final_metadata.append(calculate_ovelaps_rec()
+    # Handle the first group
+    first_overlap = extract_common_fields(first_group)
+    first_overlap["sensors"] = calculate_ovelaps_rec(first_group)
+    final_metadata.append(first_overlap)
 
-# ...
+    # Handle the rest of the elements
+    second_overlap = calculate_ovelaps_rec(second_grop)
+    final_metadata.extend(second_overlap)
+    
+
     return final_metadata
 
 
@@ -203,14 +211,15 @@ def write_to_file(dict: Dict[str, Any], dir_path: str, file_name: str) -> None:
         convert_file.write(json.dumps(dict))
 
 
-def calculate_max_overlap(meta_files: List[Dict[str, Any]], max_key: str) -> List[Dict[str, Any]]:
-    """Calculate the maximum overlap between the metadata files, for a specific key and return the results as a dictionary."""
-    values : Dict[str, List[Dict[str, Any]]] = {}
+def calculate_max_overlap(meta_files: List[Dict[str, Any]], meta_key: str) -> List[Dict[str, Any]]:
+    """Calculate the maximum overlap between the metadata files, for a specific key. It returns the biggest group of dictionaries that contain the same value for the given meta_key."""
+    values : Dict[str, List[Dict[str, Any]]] = {} # Key: a value for the given meta_key, Value: list of metadata files that have that value
     for meta in meta_files:
-        curr = meta[max_key]
-        if curr not in values.keys():
-            values[curr] = [meta]
-        values[curr].append(meta)
+        curr_value = meta[meta_key]
+        curr_value = str(curr_value)
+        if curr_value not in values.keys():
+            values[curr_value] = [meta]
+        values[curr_value].append(meta)
         
     max_key = max_len_key(values)
     return values[max_key]
@@ -221,8 +230,3 @@ def calculate_max_overlap(meta_files: List[Dict[str, Any]], max_key: str) -> Lis
 def max_len_key(elements: Dict[str, List[Dict[str, Any]]]) -> str:
     """Return the key that has the longest list as a value."""
     return max(elements, key=lambda x: len(elements[x]))
-
-
-def group_by_key(meta_files: List[Dict[str, Any]], key: str) -> Any:
-    """Group the metadata files by a specific key and return the results as a dictionary."""
-    return meta_files
