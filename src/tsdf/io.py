@@ -154,6 +154,11 @@ def extract_common_fields(metadatas: List[Dict[str, Any]]) -> Dict[str, Any]:
     A new dict is created and the fields are removed from the original dictionaries."""
     meta_overlap: Dict[str, Any] = {}
 
+    # Return empty dict if metadatas is empty
+    if len(metadatas) == 0:
+        return meta_overlap
+    if len(metadatas) == 1:
+        return metadatas[0]
     init_metadata = metadatas[0]
     for key, value in init_metadata.items():
         key_in_all = True
@@ -165,7 +170,6 @@ def extract_common_fields(metadatas: List[Dict[str, Any]]) -> Dict[str, Any]:
     for key, _ in meta_overlap.items():
         for meta_dict in metadatas:
             meta_dict.pop(key)
-
     return meta_overlap
 
 
@@ -215,11 +219,12 @@ def calculate_max_overlap(meta_files: List[Dict[str, Any]], meta_key: str) -> Li
     """Calculate the maximum overlap between the metadata files, for a specific key. It returns the biggest group of dictionaries that contain the same value for the given meta_key."""
     values : Dict[str, List[Dict[str, Any]]] = {} # Key: a value for the given meta_key, Value: list of metadata files that have that value
     for meta in meta_files:
-        curr_value = meta[meta_key]
-        curr_value = str(curr_value)
-        if curr_value not in values.keys():
-            values[curr_value] = [meta]
-        values[curr_value].append(meta)
+        if meta_key in meta.keys():
+            curr_value = str(meta[meta_key])
+            if curr_value not in values.keys():
+                values[curr_value] = [meta]
+            else:
+                values[curr_value].append(meta)
         
     max_key = max_len_key(values)
     return values[max_key]
