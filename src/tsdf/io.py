@@ -1,4 +1,5 @@
 import json
+import pprint
 import os
 import sys
 from typing import Any, Dict, List
@@ -145,7 +146,8 @@ def write_metadata(metadatas: List[TSDFMetadata], file_name: str) -> None:
             "Metadata files mist have at least one common field. Otherwise, they should be stored separately."
         )
 
-    overlap["sensors"] = calculate_ovelaps_rec(plain_meta)
+    if(len(plain_meta) > 0):
+        overlap["sensors"] = calculate_ovelaps_rec(plain_meta)
     write_to_file(overlap, metadatas[0].file_dir_path, file_name)
 
 
@@ -158,7 +160,7 @@ def extract_common_fields(metadatas: List[Dict[str, Any]]) -> Dict[str, Any]:
     if len(metadatas) == 0:
         return meta_overlap
     if len(metadatas) == 1:
-        return metadatas[0]
+        return metadatas.pop(0)
     init_metadata = metadatas[0]
     for key, value in init_metadata.items():
         key_in_all = True
@@ -177,6 +179,12 @@ def calculate_ovelaps_rec(
     metadatas: List[Dict[str, Any]]
 ) -> List[Dict[str, Any]]:
     """TODO: A recursive call that should optimise the structure of the TSDF metadata, by grouping common values."""
+
+    if len(metadatas) == 0:
+        return []
+    if len(metadatas) == 1:
+        return metadatas
+
     overlap_per_key: Dict[str, List[Dict[str, Any]]] = {} # Overlap for each key
     final_metadata: List[Dict[str, Any]] = [] # The metadata that is left to be processed
 
@@ -190,7 +198,8 @@ def calculate_ovelaps_rec(
 
     # Handle the first group
     first_overlap = extract_common_fields(first_group)
-    first_overlap["sensors"] = calculate_ovelaps_rec(first_group)
+    if(len(first_group) > 0):
+        first_overlap["sensors"] = calculate_ovelaps_rec(first_group)
     final_metadata.append(first_overlap)
 
     # Handle the rest of the elements
@@ -212,7 +221,7 @@ def write_to_file(dict: Dict[str, Any], dir_path: str, file_name: str) -> None:
     """Write a dictionary to a json file."""
     path = os.path.join(dir_path, file_name)
     with open(path, "w") as convert_file:
-        convert_file.write(json.dumps(dict))
+        convert_file.write(pprint.pformat(dict))
 
 
 def calculate_max_overlap(meta_files: List[Dict[str, Any]], meta_key: str) -> List[Dict[str, Any]]:
