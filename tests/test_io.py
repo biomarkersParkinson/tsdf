@@ -124,12 +124,12 @@ class TestMetadataFileWriting(unittest.TestCase):
         rs = np.random.RandomState(seed=42)
         data_1 = rs.rand(17, 1).astype(np.float32)
         data_2 = rs.rand(15, 2).astype(np.int16)
+        data_3 = rs.rand(10, 3).astype(np.int16)
 
-        meta_file = "dummy_10_3_int16.json"
-        bin_file = "dummy_10_3_int16.bin"
-        path = os.path.join(TESTDATA_DIR, meta_file)
+        use_case_name = "dummy_10_3_int16"
+        path = TESTDATA_FILES[use_case_name]
         loaded_meta: tsdf_metadata.TSDFMetadata = io.load_metadata_from_path(path)[
-            bin_file
+            use_case_name + ".bin"
         ]
 
         new_meta_1 = io.write_binary_file(
@@ -145,17 +145,25 @@ class TestMetadataFileWriting(unittest.TestCase):
             loaded_meta.get_plain_tsdf_dict_copy(),
         )
 
+        new_meta_3 = io.write_binary_file(
+            TESTDATA_DIR,
+            test_name + "_3.bin",
+            data_3,
+            loaded_meta.get_plain_tsdf_dict_copy(),
+        )
+
         # Combine two TSDF files
-        io.write_metadata([new_meta_1, new_meta_2], test_name + ".json")
+        io.write_metadata([new_meta_1, new_meta_2, new_meta_3], test_name + ".json")
 
         # Read the written metadata
 
         meta = io.load_metadata_from_path(
             os.path.join(TESTDATA_DIR, test_name + ".json")
         )
-        self.assertEqual(len(meta), 2)
+        self.assertEqual(len(meta), 3)
         self.assertEqual(meta[test_name + "_1.bin"].rows, 17)
         self.assertEqual(meta[test_name + "_2.bin"].rows, 15)
+        self.assertEqual(meta[test_name + "_3.bin"].rows, 10)
 
     def test_bin_processing_and_writing_metadata(self):
         """Test binary file reading, processing, and writing of the new binary and metadata files."""

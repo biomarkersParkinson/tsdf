@@ -221,7 +221,7 @@ def write_to_file(dict: Dict[str, Any], dir_path: str, file_name: str) -> None:
     """Write a dictionary to a json file."""
     path = os.path.join(dir_path, file_name)
     with open(path, "w") as convert_file:
-        convert_file.write(pprint.pformat(dict))
+        convert_file.write(json.dumps(dict, indent=4))
 
 
 def calculate_max_overlap(meta_files: List[Dict[str, Any]], meta_key: str) -> List[Dict[str, Any]]:
