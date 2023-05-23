@@ -47,7 +47,9 @@
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="./">Examples</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#required-import">Required import</a>
+    <li class="toctree-l2"><a class="reference internal" href="#requirements">Requirements</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#test-files">Test files</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#process-an-existing-binary-file-and-write-the-new-tsdf-metadata">Process an existing binary file and write the new TSDF metadata</a>
         <ul>
@@ -1148,6 +1150,18 @@ Licensed under the Apache License, Version 2.0.
 </div>
 </div>
 </div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="requirements">Requirements<a class="anchor-link" href="#requirements">&#182;</a></h3><p>In order to run these examples, we'll need to use the following Python packages:</p>
+
+</div>
+</div>
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
@@ -1169,13 +1183,15 @@ Licensed under the Apache License, Version 2.0.
                 </div>
             </clipboard-copy>
         </div>
-            <div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Reload modules automatically on changes; useful for developing</span>
-<span class="o">%</span><span class="n">load_ext</span> <span class="n">autoreload</span>
-<span class="o">%</span><span class="n">autoreload</span> <span class="mi">2</span>
+            <div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">import</span> <span class="nn">tsdf</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 </pre></div>
-<div id="cell-1" class="clipboard-copy-txt"># Reload modules automatically on changes; useful for developing
-%load_ext autoreload
-%autoreload 2</div>
+<div id="cell-1" class="clipboard-copy-txt">import tsdf
+import os
+import sys
+import numpy as np</div>
     
         </div>
     </div>
@@ -1191,7 +1207,8 @@ Licensed under the Apache License, Version 2.0.
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="required-import">Required import<a class="anchor-link" href="#required-import">&#182;</a></h3>
+<p>If you are using Jupyter Notebooks, the snippet below may be useful:</p>
+
 </div>
 </div>
 </div>
@@ -1216,15 +1233,13 @@ Licensed under the Apache License, Version 2.0.
                 </div>
             </clipboard-copy>
         </div>
-            <div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">import</span> <span class="nn">tsdf</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+            <div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Reload modules automatically on changes; useful for developing</span>
+<span class="o">%</span><span class="n">load_ext</span> <span class="n">autoreload</span>
+<span class="o">%</span><span class="n">autoreload</span> <span class="mi">2</span>
 </pre></div>
-<div id="cell-2" class="clipboard-copy-txt">import tsdf
-import os
-import sys
-import numpy as np</div>
+<div id="cell-2" class="clipboard-copy-txt"># Reload modules automatically on changes; useful for developing
+%load_ext autoreload
+%autoreload 2</div>
     
         </div>
     </div>
@@ -1232,6 +1247,18 @@ import numpy as np</div>
 </div>
 </div>
 
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="test-files">Test files<a class="anchor-link" href="#test-files">&#182;</a></h3><p>The test files used in these examples can be found <a href="https://github.com/biomarkersParkinson/tsdf/tree/main/tests/data">here</a>.</p>
+
+</div>
+</div>
 </div>
 </div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
