@@ -3,7 +3,7 @@
   "study_id": "dummy",
   "device_id": "dummy",
   "endianness": "little",
-  "metadata_version": "1.0",
+  "metadata_version": "0.1",
   "start_datetime_unix_ms": 1571135957025,
   "start_iso8601": "2019-10-15T10:39:17.025000+00:00",
   "end_datetime_unix_ms": 1571168851826,

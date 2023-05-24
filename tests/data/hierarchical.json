@@ -3,7 +3,7 @@
     "study_id": "homestudy22",
     "device_id": "XBT7456",
     "endianness": "little",
-    "metadata_version": "1.0",
+    "metadata_version": "0.1",
     "data_type": "float",
     "bits": 32,
     "multi-day_session": [

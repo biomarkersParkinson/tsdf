@@ -2,7 +2,7 @@
     "subject_id": "PD0234",
     "study_id": "homestudy22",
     "device_id": "XBT7456",
-    "metadata_version": "1.0",
+    "metadata_version": "0.1",
     "data_type": "float",
     "bits": 32,
     "multi-day_session": [

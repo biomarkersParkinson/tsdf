@@ -12,7 +12,7 @@ def example_flat():
         "subject_id": "recruit089",
         "device_id": "audiotechnica02",
         "endianness": "little",
-        "metadata_version": "1.0",
+        "metadata_version": "0.1",
         "start_iso8601": "2016-08-09T10:31:00.000+00:00",
         "end_iso8601": "2016-08-10T10:31:30.000+00:00",
          "sampling_rate": 44100,
@@ -44,7 +44,7 @@ def example_hierarchical():
     "study_id": "homestudy22",
     "device_id": "XBT7456",
     "endianness": "little",
-    "metadata_version": "1.0",
+    "metadata_version": "0.1",
     "data_type": "float",
     "bits": 32,
     "multi-day_session": [
