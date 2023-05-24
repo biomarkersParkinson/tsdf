@@ -1,10 +1,10 @@
 # Reference: https://arxiv.org/abs/2211.11294
 
-SUPPORTED_TSDF_VERSIONS = ["1.0"]
+SUPPORTED_TSDF_VERSIONS = ["0.1"]
 """ List of currently supported versions. """
 
 MANDATORY_TSDF_KEYS = {
-    "1.0": [
+    "0.1": [
         "subject_id",
         "study_id",
         "device_id",
@@ -23,7 +23,7 @@ MANDATORY_TSDF_KEYS = {
 """ Dictionary linking mandatory keys for different versions """
 
 MANDATORY_TSDF_KEYS_VALUES = {
-    "1.0": [
+    "0.1": [
         "str",
         "str",
         "str",
