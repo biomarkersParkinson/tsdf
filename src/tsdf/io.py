@@ -1,4 +1,5 @@
 import json
+import pprint
 import os
 import sys
 from typing import Any, Dict, List
@@ -139,21 +140,27 @@ def write_metadata(metadatas: List[TSDFMetadata], file_name: str) -> None:
     io_metadata.confirm_dir_of_metadata(metadatas)
 
     plain_meta = [meta.get_plain_tsdf_dict_copy() for meta in metadatas]
-    overlap = extract_dict_overlap(plain_meta)
+    overlap = extract_common_fields(plain_meta)
     if not overlap:
         raise TSDFMetadataFieldValueError(
             "Metadata files mist have at least one common field. Otherwise, they should be stored separately."
         )
 
-    overlap["sensors"] = optimise_dict_structure_rec(plain_meta)
+    if(len(plain_meta) > 0):
+        overlap["sensors"] = calculate_ovelaps_rec(plain_meta)
     write_to_file(overlap, metadatas[0].file_dir_path, file_name)
 
 
-def extract_dict_overlap(metadatas: List[Dict[str, Any]]) -> Dict[str, Any]:
+def extract_common_fields(metadatas: List[Dict[str, Any]]) -> Dict[str, Any]:
     """Extract the fields that are the same for all the metadata files.
     A new dict is created and the fields are removed from the original dictionaries."""
     meta_overlap: Dict[str, Any] = {}
 
+    # Return empty dict if metadatas is empty
+    if len(metadatas) == 0:
+        return meta_overlap
+    if len(metadatas) == 1:
+        return metadatas.pop(0)
     init_metadata = metadatas[0]
     for key, value in init_metadata.items():
         key_in_all = True
@@ -165,18 +172,75 @@ def extract_dict_overlap(metadatas: List[Dict[str, Any]]) -> Dict[str, Any]:
     for key, _ in meta_overlap.items():
         for meta_dict in metadatas:
             meta_dict.pop(key)
-
     return meta_overlap
 
 
-def optimise_dict_structure_rec(
+def calculate_ovelaps_rec(
     metadatas: List[Dict[str, Any]]
 ) -> List[Dict[str, Any]]:
-    """TODO: A recursive call that should optimise the structure of the TSDF metadata, by grouping the common values."""
-    return metadatas
+    """TODO: A recursive call that should optimise the structure of the TSDF metadata, by grouping common values."""
 
+    if len(metadatas) == 0:
+        return []
+    if len(metadatas) == 1:
+        return metadatas
+
+    overlap_per_key: Dict[str, List[Dict[str, Any]]] = {} # Overlap for each key
+    final_metadata: List[Dict[str, Any]] = [] # The metadata that is left to be processed
+
+    for key in get_all_keys(metadatas):
+        overlap_per_key[key] = calculate_max_overlap(metadatas, key)
+
+    max_key = max_len_key(overlap_per_key)
+
+    first_group = overlap_per_key[max_key]
+    second_grop = [meta for meta in metadatas if meta not in first_group]
+
+    # Handle the first group
+    first_overlap = extract_common_fields(first_group)
+    if(len(first_group) > 0):
+        first_overlap["sensors"] = calculate_ovelaps_rec(first_group)
+    final_metadata.append(first_overlap)
+
+    # Handle the rest of the elements
+    second_overlap = calculate_ovelaps_rec(second_grop)
+    final_metadata.extend(second_overlap)
+    
+
+    return final_metadata
+
+
+def get_all_keys(metadatas: List[Dict[str, Any]]) -> List[str]:
+    """Get all the keys from the metadata files."""
+    keys:List[str] = []
+    for meta in metadatas:
+        keys.extend(meta.keys())
+    return list(set(keys))
 
 def write_to_file(dict: Dict[str, Any], dir_path: str, file_name: str) -> None:
+    """Write a dictionary to a json file."""
     path = os.path.join(dir_path, file_name)
     with open(path, "w") as convert_file:
-        convert_file.write(json.dumps(dict))
+        convert_file.write(json.dumps(dict, indent=4))
+
+
+def calculate_max_overlap(meta_files: List[Dict[str, Any]], meta_key: str) -> List[Dict[str, Any]]:
+    """Calculate the maximum overlap between the metadata files, for a specific key. It returns the biggest group of dictionaries that contain the same value for the given meta_key."""
+    values : Dict[str, List[Dict[str, Any]]] = {} # Key: a value for the given meta_key, Value: list of metadata files that have that value
+    for meta in meta_files:
+        if meta_key in meta.keys():
+            curr_value = str(meta[meta_key])
+            if curr_value not in values.keys():
+                values[curr_value] = [meta]
+            else:
+                values[curr_value].append(meta)
+        
+    max_key = max_len_key(values)
+    return values[max_key]
+
+
+
+
+def max_len_key(elements: Dict[str, List[Dict[str, Any]]]) -> str:
+    """Return the key that has the longest list as a value."""
+    return max(elements, key=lambda x: len(elements[x]))

@@ -16,7 +16,15 @@ pip --version
 
 ## Installing tsdf
 
-At the moment tsdf is not part of [PyPI](https://pypi.org/), but the source code is stored and maintained on [GitHub](https://github.com/biomarkersParkinson/tsdf).
+The package is available in [PyPI](https://pypi.org/project/tsdf/). The latest stable release can be installed using:
+
+```bash
+$ pip install tsdf
+```
+
+### Installing the develop version
+
+The source code is stored and maintained on [GitHub](https://github.com/biomarkersParkinson/tsdf).
 
 If you have `git` installed, the latest version of tsdf can be installed by typing:
 
