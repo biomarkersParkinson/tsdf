@@ -5,7 +5,7 @@
     "subject_id": "77",
     "source_file_name": "WatchData.IMU.Week10.raw",
     "endianness": "little",
-    "metadata_version": "0.1",
+    "metadata_version": "1.0",
     "start_datetime_unix_ms": 1571135957025,
     "start_iso8601": "2019-10-15T10:39:17.025000+00:00",
     "end_datetime_unix_ms": 1571168851826,

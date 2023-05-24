@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "tsdf"
-version = "0.2.0"
+version = "0.3.0"
 description = "A Python library that provides methods for encoding and decoding TSDF (Time Series Data Format) data, which allows you to easily create, manipulate and serialize TSDF files in your Python code."
 authors = ["Peter Kok <p.kok@esciencecenter.nl>",
             "Pablo Rodríguez <p.rodriguez-sanchez@esciencecenter.nl>",
