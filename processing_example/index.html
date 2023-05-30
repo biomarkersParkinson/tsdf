@@ -63,7 +63,7 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#perform-light-data-processing">Perform light data processing</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#metadata-available-from-the-data-numpy-array">Metadata available from the data (NumPy array)</a>
+    <li class="toctree-l3"><a class="reference internal" href="#infer-metadata-a-numpy-array">Infer Metadata a NumPy array</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#write-the-processed-data">Write the processed data</a>
     </li>
@@ -77,7 +77,7 @@
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#genarate-a-new-binary-file-and-the-corresponding-tsdf-metadata">Genarate a new binary file and the corresponding TSDF metadata</a>
+    <li class="toctree-l2"><a class="reference internal" href="#generate-a-new-binary-file-and-the-corresponding-tsdf-metadata">Generate a new binary file and the corresponding TSDF metadata</a>
     </li>
     </ul>
                 </li>
@@ -1331,8 +1331,17 @@ import numpy as np</div>
         </div>
             <div class="highlight-ipynb hl-python"><pre><span></span><span class="n">dummy_data_name</span> <span class="o">=</span> <span class="s2">&quot;dummy_10_3_int16&quot;</span>
 
-<span class="n">dummy_metadata</span> <span class="o">=</span> <span class="n">tsdf</span><span class="o">.</span><span class="n">load_metadata_from_path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">TESTDATA_DIR</span><span class="p">,</span> <span class="n">dummy_data_name</span> <span class="o">+</span> <span class="s2">&quot;.json&quot;</span><span class="p">))[</span><span class="n">dummy_data_name</span> <span class="o">+</span> <span class="s2">&quot;.bin&quot;</span><span class="p">]</span>
+<span class="c1"># Full path to the json file</span>
+<span class="n">dummy_data_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">TESTDATA_DIR</span><span class="p">,</span> <span class="n">dummy_data_name</span> <span class="o">+</span> <span class="s2">&quot;.json&quot;</span><span class="p">)</span>
+
+<span class="c1"># Use tsdf to load the data</span>
+<span class="n">dummy_metadata_dict</span> <span class="o">=</span> <span class="n">tsdf</span><span class="o">.</span><span class="n">load_metadata_from_path</span><span class="p">(</span><span class="n">dummy_data_path</span><span class="p">)</span>
+
+<span class="c1"># Extract the desired information</span>
+<span class="n">dummy_metadata</span> <span class="o">=</span> <span class="n">dummy_metadata_dict</span><span class="p">[</span><span class="n">dummy_data_name</span> <span class="o">+</span> <span class="s2">&quot;.bin&quot;</span><span class="p">]</span>
 <span class="n">dummy_data</span> <span class="o">=</span> <span class="n">dummy_metadata</span><span class="o">.</span><span class="n">load_binary</span><span class="p">()</span>
+
+<span class="c1"># Print some results</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data type used for storing:</span><span class="se">\t</span><span class="s2"> </span><span class="si">{</span><span class="n">dummy_data</span><span class="o">.</span><span class="n">dtype</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data dimensions:</span><span class="se">\t\t</span><span class="s2"> </span><span class="si">{</span><span class="n">dummy_data</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of rows:</span><span class="se">\t\t\t</span><span class="s2"> </span><span class="si">{</span><span class="n">dummy_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -1340,8 +1349,17 @@ import numpy as np</div>
 <div id="cell-4" class="clipboard-copy-txt">
 dummy_data_name = "dummy_10_3_int16"
 
-dummy_metadata = tsdf.load_metadata_from_path(os.path.join(TESTDATA_DIR, dummy_data_name + ".json"))[dummy_data_name + ".bin"]
+# Full path to the json file
+dummy_data_path = os.path.join(TESTDATA_DIR, dummy_data_name + ".json")
+
+# Use tsdf to load the data
+dummy_metadata_dict = tsdf.load_metadata_from_path(dummy_data_path)
+
+# Extract the desired information
+dummy_metadata = dummy_metadata_dict[dummy_data_name + ".bin"]
 dummy_data = dummy_metadata.load_binary()
+
+# Print some results
 print(f"Data type used for storing:\t {dummy_data.dtype}")
 print(f"Data dimensions:\t\t {dummy_data.shape}")
 print(f"Number of rows:\t\t\t {dummy_data.shape[0]}")</div>
@@ -1410,12 +1428,18 @@ Number of rows:			 10
                 </div>
             </clipboard-copy>
         </div>
-            <div class="highlight-ipynb hl-python"><pre><span></span><span class="n">processed_dummy_data_1</span> <span class="o">=</span> <span class="p">(</span><span class="n">dummy_data</span> <span class="o">/</span> <span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
+            <div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Perform some operation on the data</span>
+<span class="n">processed_dummy_data_1</span> <span class="o">=</span> <span class="p">(</span><span class="n">dummy_data</span> <span class="o">/</span> <span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
+
+<span class="c1"># Print some results</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data type used for storing:</span><span class="se">\t</span><span class="s2"> </span><span class="si">{</span><span class="n">processed_dummy_data_1</span><span class="o">.</span><span class="n">dtype</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data dimensions:</span><span class="se">\t\t</span><span class="s2"> </span><span class="si">{</span><span class="n">processed_dummy_data_1</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of rows:</span><span class="se">\t\t\t</span><span class="s2"> </span><span class="si">{</span><span class="n">processed_dummy_data_1</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
-<div id="cell-5" class="clipboard-copy-txt">processed_dummy_data_1 = (dummy_data / 10).astype('float32')
+<div id="cell-5" class="clipboard-copy-txt"># Perform some operation on the data
+processed_dummy_data_1 = (dummy_data / 10).astype('float32')
+
+# Print some results
 print(f"Data type used for storing:\t {processed_dummy_data_1.dtype}")
 print(f"Data dimensions:\t\t {processed_dummy_data_1.shape}")
 print(f"Number of rows:\t\t\t {processed_dummy_data_1.shape[0]}")</div>
@@ -1459,7 +1483,8 @@ Number of rows:			 10
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="metadata-available-from-the-data-numpy-array">Metadata available from the data (NumPy array)<a class="anchor-link" href="#metadata-available-from-the-data-numpy-array">&#182;</a></h3><p>The metadata will be used indirectly to generate the new TSDF metadata file.</p>
+<h3 id="infer-metadata-a-numpy-array">Infer Metadata a NumPy array<a class="anchor-link" href="#infer-metadata-a-numpy-array">&#182;</a></h3><p>Metadata can be inferred from a NumPy array. 
+The metadata will be used indirectly to generate the new TSDF metadata file.</p>
 
 </div>
 </div>
@@ -1486,9 +1511,11 @@ Number of rows:			 10
             </clipboard-copy>
         </div>
             <div class="highlight-ipynb hl-python"><pre><span></span><span class="n">bin_meta</span> <span class="o">=</span> <span class="n">tsdf</span><span class="o">.</span><span class="n">get_metadata_from_ndarray</span><span class="p">(</span><span class="n">processed_dummy_data_1</span><span class="p">)</span>
+
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Binary formatting that can be inferred from the NumPy array:</span><span class="se">\n</span><span class="si">{</span><span class="n">bin_meta</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 <div id="cell-6" class="clipboard-copy-txt">bin_meta = tsdf.get_metadata_from_ndarray(processed_dummy_data_1)
+
 print(f"Binary formatting that can be inferred from the NumPy array:\n{bin_meta}")</div>
     
         </div>
@@ -1557,18 +1584,18 @@ print(f"Binary formatting that can be inferred from the NumPy array:\n{bin_meta}
         </div>
             <div class="highlight-ipynb hl-python"><pre><span></span><span class="n">processed_dummy_data_name_1</span> <span class="o">=</span> <span class="s2">&quot;tmp_test_dummy_10_3_int16_to_float32&quot;</span>
 <span class="n">processed_dummy_metadata_1</span> <span class="o">=</span> <span class="n">tsdf</span><span class="o">.</span><span class="n">write_binary_file</span><span class="p">(</span>
-            <span class="n">TESTDATA_DIR</span><span class="p">,</span>
-            <span class="n">processed_dummy_data_name_1</span> <span class="o">+</span> <span class="s2">&quot;.bin&quot;</span><span class="p">,</span>
-            <span class="n">processed_dummy_data_1</span><span class="p">,</span>
-            <span class="n">dummy_metadata</span><span class="o">.</span><span class="n">get_plain_tsdf_dict_copy</span><span class="p">(),</span>
+            <span class="n">TESTDATA_DIR</span><span class="p">,</span>                               <span class="c1"># File dir</span>
+            <span class="n">processed_dummy_data_name_1</span> <span class="o">+</span> <span class="s2">&quot;.bin&quot;</span><span class="p">,</span>       <span class="c1"># File name</span>
+            <span class="n">processed_dummy_data_1</span><span class="p">,</span>                     <span class="c1"># Data</span>
+            <span class="n">dummy_metadata</span><span class="o">.</span><span class="n">get_plain_tsdf_dict_copy</span><span class="p">(),</span>  <span class="c1"># Metadata</span>
         <span class="p">)</span>
 </pre></div>
 <div id="cell-7" class="clipboard-copy-txt">processed_dummy_data_name_1 = "tmp_test_dummy_10_3_int16_to_float32"
 processed_dummy_metadata_1 = tsdf.write_binary_file(
-            TESTDATA_DIR,
-            processed_dummy_data_name_1 + ".bin",
-            processed_dummy_data_1,
-            dummy_metadata.get_plain_tsdf_dict_copy(),
+            TESTDATA_DIR,                               # File dir
+            processed_dummy_data_name_1 + ".bin",       # File name
+            processed_dummy_data_1,                     # Data
+            dummy_metadata.get_plain_tsdf_dict_copy(),  # Metadata
         )</div>
     
         </div>
@@ -1661,16 +1688,15 @@ tsdf.write_metadata([processed_dummy_metadata_1], processed_dummy_data_name_1 + 
 
 <span class="c1"># Adjust the metadata slightly</span>
 <span class="n">updated_dummy_metadata</span> <span class="o">=</span> <span class="n">dummy_metadata</span><span class="o">.</span><span class="n">get_plain_tsdf_dict_copy</span><span class="p">()</span>
-<span class="n">updated_dummy_metadata</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;scale_factors&quot;</span><span class="p">)</span> <span class="c1">#remove the &#39;scale_factors&#39;</span>
-
+<span class="n">updated_dummy_metadata</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;scale_factors&quot;</span><span class="p">)</span> <span class="c1"># Remove the &#39;scale_factors&#39; field</span>
 
 <span class="c1"># Save the new binary file</span>
 <span class="n">processed_dummy_data_name_2</span> <span class="o">=</span> <span class="s2">&quot;tmp_test_dummy_10_3_int16_to_int32&quot;</span>
 <span class="n">processed_dummy_metadata_2</span> <span class="o">=</span> <span class="n">tsdf</span><span class="o">.</span><span class="n">write_binary_file</span><span class="p">(</span>
-            <span class="n">TESTDATA_DIR</span><span class="p">,</span>
-            <span class="n">processed_dummy_data_name_2</span> <span class="o">+</span> <span class="s2">&quot;.bin&quot;</span><span class="p">,</span>
-            <span class="n">processed_dummy_data_2</span><span class="p">,</span>
-            <span class="n">updated_dummy_metadata</span><span class="p">,</span>
+            <span class="n">TESTDATA_DIR</span><span class="p">,</span>                           <span class="c1"># File dir</span>
+            <span class="n">processed_dummy_data_name_2</span> <span class="o">+</span> <span class="s2">&quot;.bin&quot;</span><span class="p">,</span>   <span class="c1"># File name</span>
+            <span class="n">processed_dummy_data_2</span><span class="p">,</span>                 <span class="c1"># Data</span>
+            <span class="n">updated_dummy_metadata</span><span class="p">,</span>                 <span class="c1"># Metadata</span>
         <span class="p">)</span>
 
 <span class="c1"># Write a metadata file that combines the two binary files</span>
@@ -1681,16 +1707,15 @@ processed_dummy_data_2 = (dummy_data * 1000).astype('int32')
 
 # Adjust the metadata slightly
 updated_dummy_metadata = dummy_metadata.get_plain_tsdf_dict_copy()
-updated_dummy_metadata.pop("scale_factors") #remove the 'scale_factors'
-
+updated_dummy_metadata.pop("scale_factors") # Remove the 'scale_factors' field
 
 # Save the new binary file
 processed_dummy_data_name_2 = "tmp_test_dummy_10_3_int16_to_int32"
 processed_dummy_metadata_2 = tsdf.write_binary_file(
-            TESTDATA_DIR,
-            processed_dummy_data_name_2 + ".bin",
-            processed_dummy_data_2,
-            updated_dummy_metadata,
+            TESTDATA_DIR,                           # File dir
+            processed_dummy_data_name_2 + ".bin",   # File name
+            processed_dummy_data_2,                 # Data
+            updated_dummy_metadata,                 # Metadata
         )
 
 # Write a metadata file that combines the two binary files
@@ -1711,7 +1736,8 @@ tsdf.write_metadata([processed_dummy_metadata_1, processed_dummy_metadata_2], "t
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="genarate-a-new-binary-file-and-the-corresponding-tsdf-metadata">Genarate a new binary file and the corresponding TSDF metadata<a class="anchor-link" href="#genarate-a-new-binary-file-and-the-corresponding-tsdf-metadata">&#182;</a></h2><p>Generate binary data and save it and the corresponding TSDF metadata file.</p>
+<h2 id="generate-a-new-binary-file-and-the-corresponding-tsdf-metadata">Generate a new binary file and the corresponding TSDF metadata<a class="anchor-link" href="#generate-a-new-binary-file-and-the-corresponding-tsdf-metadata">&#182;</a></h2><p>In the example below we'll generate some random data and some metadata.
+We'll save everything together in the corresponding TSDF metadata file.</p>
 
 </div>
 </div>
@@ -1737,14 +1763,14 @@ tsdf.write_metadata([processed_dummy_metadata_1, processed_dummy_metadata_2], "t
                 </div>
             </clipboard-copy>
         </div>
-            <div class="highlight-ipynb hl-python"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">TESTDATA_DIR</span><span class="p">,</span> <span class="s2">&quot;test_output_1.bin&quot;</span><span class="p">)</span>
+            <div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Generate some data</span>
 <span class="n">rs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
 <span class="n">data_1</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">17</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
 <span class="n">data_2</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">)</span>
 <span class="n">data_3</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">)</span>
 
 
-<span class="c1"># An example where the metadata is defined from scratch</span>
+<span class="c1"># Define metadata from scratch</span>
 <span class="n">new_metadata</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="n">new_metadata</span><span class="p">[</span><span class="s2">&quot;subject_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;example&quot;</span>
 <span class="n">new_metadata</span><span class="p">[</span><span class="s2">&quot;study_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;example&quot;</span>
@@ -1759,20 +1785,19 @@ tsdf.write_metadata([processed_dummy_metadata_1, processed_dummy_metadata_2], "t
 <span class="n">new_metadata</span><span class="p">[</span><span class="s2">&quot;units&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;m/s/s&quot;</span><span class="p">,</span><span class="s2">&quot;m/s/s&quot;</span><span class="p">,</span><span class="s2">&quot;m/s/s&quot;</span><span class="p">]</span>
 
 <span class="c1"># Write the three binary files based on the provided metadata</span>
-
 <span class="n">file_prefix</span> <span class="o">=</span> <span class="s2">&quot;tmp_test&quot;</span>
 <span class="n">new_meta_1</span> <span class="o">=</span>  <span class="n">tsdf</span><span class="o">.</span><span class="n">write_binary_file</span><span class="p">(</span><span class="n">TESTDATA_DIR</span><span class="p">,</span> <span class="n">file_prefix</span> <span class="o">+</span> <span class="s2">&quot;_1.bin&quot;</span><span class="p">,</span> <span class="n">data_1</span><span class="p">,</span> <span class="n">new_metadata</span><span class="p">)</span>
-<span class="n">new_meta_2</span> <span class="o">=</span>  <span class="n">tsdf</span><span class="o">.</span><span class="n">write_binary_file</span><span class="p">(</span><span class="n">TESTDATA_DIR</span><span class="p">,</span> <span class="n">file_prefix</span><span class="o">+</span><span class="s2">&quot;_2.bin&quot;</span><span class="p">,</span> <span class="n">data_2</span><span class="p">,</span> <span class="n">new_metadata</span><span class="p">)</span>
-<span class="n">new_meta_3</span> <span class="o">=</span>  <span class="n">tsdf</span><span class="o">.</span><span class="n">write_binary_file</span><span class="p">(</span><span class="n">TESTDATA_DIR</span><span class="p">,</span> <span class="n">file_prefix</span><span class="o">+</span><span class="s2">&quot;_3.bin&quot;</span><span class="p">,</span> <span class="n">data_3</span><span class="p">,</span> <span class="n">new_metadata</span><span class="p">)</span>
+<span class="n">new_meta_2</span> <span class="o">=</span>  <span class="n">tsdf</span><span class="o">.</span><span class="n">write_binary_file</span><span class="p">(</span><span class="n">TESTDATA_DIR</span><span class="p">,</span> <span class="n">file_prefix</span> <span class="o">+</span> <span class="s2">&quot;_2.bin&quot;</span><span class="p">,</span> <span class="n">data_2</span><span class="p">,</span> <span class="n">new_metadata</span><span class="p">)</span>
+<span class="n">new_meta_3</span> <span class="o">=</span>  <span class="n">tsdf</span><span class="o">.</span><span class="n">write_binary_file</span><span class="p">(</span><span class="n">TESTDATA_DIR</span><span class="p">,</span> <span class="n">file_prefix</span> <span class="o">+</span> <span class="s2">&quot;_3.bin&quot;</span><span class="p">,</span> <span class="n">data_3</span><span class="p">,</span> <span class="n">new_metadata</span><span class="p">)</span>
 </pre></div>
-<div id="cell-10" class="clipboard-copy-txt">path = os.path.join(TESTDATA_DIR, "test_output_1.bin")
+<div id="cell-10" class="clipboard-copy-txt"># Generate some data
 rs = np.random.RandomState(seed=42)
 data_1 = rs.rand(17, 1).astype(np.float32)
 data_2 = rs.rand(15, 2).astype(np.int16)
 data_3 = rs.rand(10, 3).astype(np.int16)
 
 
-# An example where the metadata is defined from scratch
+# Define metadata from scratch
 new_metadata = {}
 new_metadata["subject_id"] = "example"
 new_metadata["study_id"] = "example"
@@ -1787,11 +1812,10 @@ new_metadata["channels"] = ["x","y","z"]
 new_metadata["units"] = ["m/s/s","m/s/s","m/s/s"]
 
 # Write the three binary files based on the provided metadata
-
 file_prefix = "tmp_test"
 new_meta_1 =  tsdf.write_binary_file(TESTDATA_DIR, file_prefix + "_1.bin", data_1, new_metadata)
-new_meta_2 =  tsdf.write_binary_file(TESTDATA_DIR, file_prefix+"_2.bin", data_2, new_metadata)
-new_meta_3 =  tsdf.write_binary_file(TESTDATA_DIR, file_prefix+"_3.bin", data_3, new_metadata)
+new_meta_2 =  tsdf.write_binary_file(TESTDATA_DIR, file_prefix + "_2.bin", data_2, new_metadata)
+new_meta_3 =  tsdf.write_binary_file(TESTDATA_DIR, file_prefix + "_3.bin", data_3, new_metadata)
 </div>
     
         </div>
@@ -1835,10 +1859,10 @@ new_meta_3 =  tsdf.write_binary_file(TESTDATA_DIR, file_prefix+"_3.bin", data_3,
             </clipboard-copy>
         </div>
             <div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Write the first metadata file</span>
-<span class="n">tsdf</span><span class="o">.</span><span class="n">write_metadata</span><span class="p">([</span><span class="n">new_meta_1</span><span class="p">],</span> <span class="n">file_prefix</span> <span class="o">+</span><span class="s2">&quot;_1.json&quot;</span><span class="p">)</span>
+<span class="n">tsdf</span><span class="o">.</span><span class="n">write_metadata</span><span class="p">([</span><span class="n">new_meta_1</span><span class="p">],</span> <span class="n">file_prefix</span> <span class="o">+</span> <span class="s2">&quot;_1.json&quot;</span><span class="p">)</span>
 </pre></div>
 <div id="cell-11" class="clipboard-copy-txt"># Write the first metadata file
-tsdf.write_metadata([new_meta_1], file_prefix +"_1.json")</div>
+tsdf.write_metadata([new_meta_1], file_prefix + "_1.json")</div>
     
         </div>
     </div>
@@ -1869,10 +1893,10 @@ tsdf.write_metadata([new_meta_1], file_prefix +"_1.json")</div>
             </clipboard-copy>
         </div>
             <div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Combine and write all metadata files</span>
-<span class="n">tsdf</span><span class="o">.</span><span class="n">write_metadata</span><span class="p">([</span><span class="n">new_meta_1</span><span class="p">,</span> <span class="n">new_meta_2</span><span class="p">,</span> <span class="n">new_meta_3</span><span class="p">],</span> <span class="n">file_prefix</span><span class="o">+</span><span class="s2">&quot;_3.json&quot;</span><span class="p">)</span>
+<span class="n">tsdf</span><span class="o">.</span><span class="n">write_metadata</span><span class="p">([</span><span class="n">new_meta_1</span><span class="p">,</span> <span class="n">new_meta_2</span><span class="p">,</span> <span class="n">new_meta_3</span><span class="p">],</span> <span class="n">file_prefix</span> <span class="o">+</span> <span class="s2">&quot;_all.json&quot;</span><span class="p">)</span>
 </pre></div>
 <div id="cell-12" class="clipboard-copy-txt"># Combine and write all metadata files
-tsdf.write_metadata([new_meta_1, new_meta_2, new_meta_3], file_prefix+"_3.json")</div>
+tsdf.write_metadata([new_meta_1, new_meta_2, new_meta_3], file_prefix + "_all.json")</div>
     
         </div>
     </div>
