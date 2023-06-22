@@ -1,8 +1,10 @@
+import glob
 import json
 import os
-from typing import Any, Dict, List
+from typing import Any, AnyStr, Dict, List
 import numpy as np
 from tsdf import io_metadata
+from tsdf.constants import METADATA_NAMING_PATTERN
 from tsdf.numpy_utils import (
     data_type_numpy_to_tsdf,
     data_type_tsdf_to_numpy,
@@ -28,6 +30,28 @@ def load_metadata_file(file) -> Dict[str, TSDFMetadata]:
 
     # Parse the data and verify that it complies with TSDF requirements
     return io_metadata.read_data(data, abs_path)
+
+
+def get_files_matching(directory: str, criteria) -> list:
+    """Get all files matching the criteria in the directory and its subdirectories."""
+    return glob.glob(os.path.join(directory, criteria), recursive=True)
+
+
+def load_metadatas_from_dir(dir_path: str) -> Dict[str, TSDFMetadata]:
+    """Loads all TSDF metadata files in a directory, returns a dictionary
+
+    Reference: https://arxiv.org/abs/2211.11294
+    """
+    # Get all files in the directory
+    file_paths = get_files_matching(dir_path, METADATA_NAMING_PATTERN)
+
+    # Load all files
+    metadatas = []
+    for file_path in file_paths:
+        metadata = load_metadata_from_path(file_path)
+        metadatas.append(metadata)
+
+    return metadatas
 
 
 def load_metadata_from_path(path: str) -> Dict[str, TSDFMetadata]:
@@ -57,7 +81,9 @@ def load_metadata_string(json_str) -> Dict[str, TSDFMetadata]:
     return io_metadata.read_data(data, "")
 
 
-def load_binary_from_metadata(metadata_dir: str, metadata: TSDFMetadata, start_row: int = 0, end_row: int = -1) -> np.ndarray:
+def load_binary_from_metadata(
+    metadata_dir: str, metadata: TSDFMetadata, start_row: int = 0, end_row: int = -1
+) -> np.ndarray:
     """Use metadata properties to load and return numpy array from a binary file"""
     bin_path = os.path.join(metadata_dir, metadata.file_name)
     return load_binary_file(
@@ -68,7 +94,7 @@ def load_binary_from_metadata(metadata_dir: str, metadata: TSDFMetadata, start_r
         metadata.rows,
         len(metadata.channels),
         start_row,
-        end_row
+        end_row,
     )
 
 
@@ -80,7 +106,7 @@ def load_binary_file(
     n_rows: int,
     n_columns: int,
     start_row: int = 0,
-    end_row: int = -1
+    end_row: int = -1,
 ) -> np.ndarray:
     """Use provided parameters to load and return a numpy array from a binary file"""
 
@@ -152,7 +178,7 @@ def write_metadata(metadatas: List[TSDFMetadata], file_name: str) -> None:
             "Metadata files mist have at least one common field. Otherwise, they should be stored separately."
         )
 
-    if(len(plain_meta) > 0):
+    if len(plain_meta) > 0:
         overlap["sensors"] = calculate_ovelaps_rec(plain_meta)
     write_to_file(overlap, metadatas[0].file_dir_path, file_name)
 
@@ -181,9 +207,7 @@ def extract_common_fields(metadatas: List[Dict[str, Any]]) -> Dict[str, Any]:
     return meta_overlap
 
 
-def calculate_ovelaps_rec(
-    metadatas: List[Dict[str, Any]]
-) -> List[Dict[str, Any]]:
+def calculate_ovelaps_rec(metadatas: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     """TODO: A recursive call that should optimise the structure of the TSDF metadata, by grouping common values."""
 
     if len(metadatas) == 0:
@@ -191,8 +215,10 @@ def calculate_ovelaps_rec(
     if len(metadatas) == 1:
         return metadatas
 
-    overlap_per_key: Dict[str, List[Dict[str, Any]]] = {} # Overlap for each key
-    final_metadata: List[Dict[str, Any]] = [] # The metadata that is left to be processed
+    overlap_per_key: Dict[str, List[Dict[str, Any]]] = {}  # Overlap for each key
+    final_metadata: List[
+        Dict[str, Any]
+    ] = []  # The metadata that is left to be processed
 
     for key in get_all_keys(metadatas):
         overlap_per_key[key] = calculate_max_overlap(metadatas, key)
@@ -204,24 +230,24 @@ def calculate_ovelaps_rec(
 
     # Handle the first group
     first_overlap = extract_common_fields(first_group)
-    if(len(first_group) > 0):
+    if len(first_group) > 0:
         first_overlap["sensors"] = calculate_ovelaps_rec(first_group)
     final_metadata.append(first_overlap)
 
     # Handle the rest of the elements
     second_overlap = calculate_ovelaps_rec(second_grop)
     final_metadata.extend(second_overlap)
-    
 
     return final_metadata
 
 
 def get_all_keys(metadatas: List[Dict[str, Any]]) -> List[str]:
     """Get all the keys from the metadata files."""
-    keys:List[str] = []
+    keys: List[str] = []
     for meta in metadatas:
         keys.extend(meta.keys())
     return list(set(keys))
+
 
 def write_to_file(dict: Dict[str, Any], dir_path: str, file_name: str) -> None:
     """Write a dictionary to a json file."""
@@ -230,9 +256,15 @@ def write_to_file(dict: Dict[str, Any], dir_path: str, file_name: str) -> None:
         convert_file.write(json.dumps(dict, indent=4))
 
 
-def calculate_max_overlap(meta_files: List[Dict[str, Any]], meta_key: str) -> List[Dict[str, Any]]:
+def calculate_max_overlap(
+    meta_files: List[Dict[str, Any]], meta_key: str
+) -> List[Dict[str, Any]]:
     """Calculate the maximum overlap between the metadata files, for a specific key. It returns the biggest group of dictionaries that contain the same value for the given meta_key."""
-    values : Dict[str, List[Dict[str, Any]]] = {} # Key: a value for the given meta_key, Value: list of metadata files that have that value
+    values: Dict[
+        str, List[Dict[str, Any]]
+    ] = (
+        {}
+    )  # Key: a value for the given meta_key, Value: list of metadata files that have that value
     for meta in meta_files:
         if meta_key in meta.keys():
             curr_value = str(meta[meta_key])
@@ -240,11 +272,9 @@ def calculate_max_overlap(meta_files: List[Dict[str, Any]], meta_key: str) -> Li
                 values[curr_value] = [meta]
             else:
                 values[curr_value].append(meta)
-        
+
     max_key = max_len_key(values)
     return values[max_key]
-
-
 
 
 def max_len_key(elements: Dict[str, List[Dict[str, Any]]]) -> str:

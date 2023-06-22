@@ -49,3 +49,6 @@ KEY_VALUE_TYPES = {
     # etc
 }
 """ List of data types that are supported within the TSDF metadata file. """
+
+METADATA_NAMING_PATTERN = "**meta.json"
+""" Naming convention for the metadata files. ** allows for any prefix, including additional directories. """
