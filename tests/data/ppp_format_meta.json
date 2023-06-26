@@ -1,6 +1,5 @@
 {
-    "project_id": "PPP",
-    "study_id": "123",
+    "study_id": "PPP",
     "device_id": "Verily Study Watch",
     "subject_id": "77",
     "source_file_name": "WatchData.IMU.Week10.raw",
@@ -12,10 +11,14 @@
     "end_iso8601": "2019-10-15T19:47:31.826000+00:00",
     "datasets": [
         {
-            "file_name": "like_ppp_time.bin",
-            "channels": ["time"],
+            "file_name": "ppp_format_time.bin",
+            "channels": [
+                "time"
+            ],
             "time_encode": "difference",
-            "units": ["ms"],
+            "units": [
+                "ms"
+            ],
             "scale_factors": [
                 1
             ],
@@ -25,7 +28,7 @@
             "rows": 17
         },
         {
-            "file_name": "like_ppp_samples.bin",
+            "file_name": "ppp_format_samples.bin",
             "channels": [
                 "acceleration_x",
                 "acceleration_y",

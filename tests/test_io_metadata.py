@@ -6,10 +6,10 @@ from tsdf.tsdf_metadata import TSDFMetadataFieldError, TSDFMetadataFieldValueErr
 
 TESTDATA_DIR = os.path.join(os.path.dirname(__file__), "data")
 TESTDATA = {
-    "flat": os.path.join(TESTDATA_DIR, "flat.json"),
-    "hierarchical": os.path.join(TESTDATA_DIR, "hierarchical.json"),
-    "wrongversion": os.path.join(TESTDATA_DIR, "wrongversion.json"),
-    "missingkey": os.path.join(TESTDATA_DIR, "missingkey.json"),
+    "flat": os.path.join(TESTDATA_DIR, "flat_meta.json"),
+    "hierarchical": os.path.join(TESTDATA_DIR, "hierarchical_meta.json"),
+    "wrongversion": os.path.join(TESTDATA_DIR, "wrongversion_meta_fail.json"),
+    "missingkey": os.path.join(TESTDATA_DIR, "missingkey_meta_fail.json"),
 }
 
 

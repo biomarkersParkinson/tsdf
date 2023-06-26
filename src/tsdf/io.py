@@ -37,13 +37,15 @@ def get_files_matching(directory: str, criteria) -> list:
     return glob.glob(os.path.join(directory, criteria), recursive=True)
 
 
-def load_metadatas_from_dir(dir_path: str) -> Dict[str, TSDFMetadata]:
+def load_metadatas_from_dir(
+    dir_path: str, naming_pattern=METADATA_NAMING_PATTERN
+) -> List[Dict[str, TSDFMetadata]]:
     """Loads all TSDF metadata files in a directory, returns a dictionary
 
     Reference: https://arxiv.org/abs/2211.11294
     """
     # Get all files in the directory
-    file_paths = get_files_matching(dir_path, METADATA_NAMING_PATTERN)
+    file_paths = get_files_matching(dir_path, naming_pattern)
 
     # Load all files
     metadatas = []

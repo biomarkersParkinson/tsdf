@@ -5,40 +5,49 @@ from tsdf import io, io_metadata, tsdf_metadata
 
 TESTDATA_DIR = os.path.join(os.path.dirname(__file__), "data")
 TESTDATA_FILES = {
-    "flat": os.path.join(TESTDATA_DIR, "flat.json"),
-    "hierarchical": os.path.join(TESTDATA_DIR, "hierarchical.json"),
-    "wrongversion": os.path.join(TESTDATA_DIR, "wrongversion.json"),
-    "missingkey": os.path.join(TESTDATA_DIR, "missingkey.json"),
-    "dummy_10_3_int16": os.path.join(TESTDATA_DIR, "dummy_10_3_int16.json"),
+    "flat": os.path.join(TESTDATA_DIR, "flat_meta.json"),
+    "hierarchical": os.path.join(TESTDATA_DIR, "hierarchical_meta.json"),
+    "wrongversion": os.path.join(TESTDATA_DIR, "wrongversion_meta_fail.json"),
+    "missingkey": os.path.join(TESTDATA_DIR, "missingkey_meta_fail.json"),
+    "dummy_10_3_int16": os.path.join(TESTDATA_DIR, "dummy_10_3_int16_meta.json"),
+    "ppp": os.path.join(TESTDATA_DIR, "ppp_format_meta.json"),
 }
+METADATA_EXTENSION = "_meta.json"
+""" Suffix and extension used to denote metadata files. """
+BINARY_EXTENSION = ".bin"
 
 
 class TestMetadataFileReading(unittest.TestCase):
     """Test loading of the metadata file."""
 
     def test_load_json_file(self):
-        """Test that a json file gets loaded"""
+        """Test that a json file gets loaded."""
         with open(TESTDATA_FILES["hierarchical"], "r") as file:
             data = io.load_metadata_file(file)
             self.assertEqual(len(data), 4)
 
     def test_load_json_path(self):
-        """Test that a json file from a path gets loaded"""
+        """Test that a json file from a path gets loaded."""
         data = io.load_metadata_from_path(TESTDATA_FILES["hierarchical"])
         self.assertEqual(len(data), 4)
 
     def test_load_json_string(self):
-        """Test that a json object gets loaded"""
+        """Test that a json object gets loaded from a string."""
         with open(TESTDATA_FILES["hierarchical"], "r") as file:
             json_string = file.read()
             data = io.load_metadata_string(json_string)
             self.assertEqual(len(data), 4)
 
+    def test_load_metadatas_from_dir(self):
+        """Test that a json files gets loaded from a directory."""
+        data = io.load_metadatas_from_dir(TESTDATA_DIR)
+        self.assertEqual(len(data), 6)
+
 
 def load_single_bin_file(dir: str, file_name: str) -> np.ndarray:
-    path = os.path.join(dir, file_name + ".json")
+    path = os.path.join(dir, file_name + METADATA_EXTENSION)
     metadata = io.load_metadata_from_path(path)
-    data = io.load_binary_from_metadata(dir, metadata[file_name + ".bin"])
+    data = io.load_binary_from_metadata(dir, metadata[file_name + BINARY_EXTENSION])
     return data
 
 
@@ -59,7 +68,7 @@ class TestBinaryFileReading(unittest.TestCase):
 
     # def test_load_binary_float64_fail(self):
     #     """Should raise an exception on reading binary data"""
-    #     path = os.path.join(TESTDATA_DIR, "dummy_10_3_float64_fail.json")
+    #     path = os.path.join(TESTDATA_DIR, "dummy_10_3_float64_meta_fail.json")
     #     metadata = io.load_metadata_from_path(path)
     #     with self.assertRaises(Exception) as exc_context:
     #         io.load_binary_from_metadata(
@@ -76,26 +85,33 @@ class TestBinaryFileReading(unittest.TestCase):
         self.assertEqual(data.dtype, "int16")
 
     def test_load_like_ppp(self):
-        path = os.path.join(TESTDATA_DIR, "like_ppp.json")
+        path = TESTDATA_FILES["ppp"]
         metadata = io.load_metadata_from_path(path)
         time_data = io.load_binary_from_metadata(
             TESTDATA_DIR, io_metadata.get_file_metadata_at_index(metadata, 0)
         )
         self.assertEqual(time_data.shape, (17,))
+        # time data should be loaded as float64
         self.assertEqual(time_data.dtype, "float32")
+
         sample_data = io.load_binary_from_metadata(
             TESTDATA_DIR, io_metadata.get_file_metadata_at_index(metadata, 1)
         )
         self.assertEqual(sample_data.shape, (17, 6))
+        # sample data should be loaded as int16
         self.assertEqual(sample_data.dtype, "int16")
 
     def test_random_access(self):
+        # TODO: test the new random access functionality
         file_name = "dummy_10_3_int16"
-        path = os.path.join(TESTDATA_DIR, file_name + ".json")
+        path = os.path.join(TESTDATA_DIR, file_name + METADATA_EXTENSION)
         metadata = io.load_metadata_from_path(path)
-        data = io.load_binary_from_metadata(TESTDATA_DIR, metadata[file_name + ".bin"], 2, 6)
+        data = io.load_binary_from_metadata(
+            TESTDATA_DIR, metadata[file_name + BINARY_EXTENSION], 2, 6
+        )
         self.assertEqual(data.shape, (4, 3))
         self.assertEqual(data.dtype, "int16")
+
 
 class TestBinaryFileWriting(unittest.TestCase):
     """Test writing of binary files from loaded data (e.g., NumPy array)."""
@@ -136,7 +152,7 @@ class TestMetadataFileWriting(unittest.TestCase):
         use_case_name = "dummy_10_3_int16"
         path = TESTDATA_FILES[use_case_name]
         loaded_meta: tsdf_metadata.TSDFMetadata = io.load_metadata_from_path(path)[
-            use_case_name + ".bin"
+            use_case_name + BINARY_EXTENSION
         ]
 
         new_meta_1 = io.write_binary_file(
@@ -160,12 +176,14 @@ class TestMetadataFileWriting(unittest.TestCase):
         )
 
         # Combine two TSDF files
-        io.write_metadata([new_meta_1, new_meta_2, new_meta_3], test_name + ".json")
+        io.write_metadata(
+            [new_meta_1, new_meta_2, new_meta_3], test_name + METADATA_EXTENSION
+        )
 
         # Read the written metadata
 
         meta = io.load_metadata_from_path(
-            os.path.join(TESTDATA_DIR, test_name + ".json")
+            os.path.join(TESTDATA_DIR, test_name + METADATA_EXTENSION)
         )
         self.assertEqual(len(meta), 3)
         self.assertEqual(meta[test_name + "_1.bin"].rows, 17)
@@ -176,8 +194,10 @@ class TestMetadataFileWriting(unittest.TestCase):
         """Test binary file reading, processing, and writing of the new binary and metadata files."""
         # Load existing TSDF metadata and the corresponding binary data
         file_name = "dummy_10_3_int16"
-        path = os.path.join(TESTDATA_DIR, file_name + ".json")
-        original_metadata = io.load_metadata_from_path(path)[file_name + ".bin"]
+        path = os.path.join(TESTDATA_DIR, file_name + METADATA_EXTENSION)
+        original_metadata = io.load_metadata_from_path(path)[
+            file_name + BINARY_EXTENSION
+        ]
         original_data = io.load_binary_from_metadata(TESTDATA_DIR, original_metadata)
 
         # Perform light data processing
@@ -187,13 +207,13 @@ class TestMetadataFileWriting(unittest.TestCase):
         new_file_name = "tmp_test_dummy_10_3_int16_to_float32"
         new_metadata = io.write_binary_file(
             TESTDATA_DIR,
-            new_file_name + ".bin",
+            new_file_name + BINARY_EXTENSION,
             new_data,
             original_metadata.get_plain_tsdf_dict_copy(),
         )
 
         # Write the new metadata file
-        io.write_metadata([new_metadata], new_file_name + ".json")
+        io.write_metadata([new_metadata], new_file_name + METADATA_EXTENSION)
 
         # Read file again to check contents
         final_data = load_single_bin_file(TESTDATA_DIR, new_file_name)
