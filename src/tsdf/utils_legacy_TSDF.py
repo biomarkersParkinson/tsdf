@@ -62,9 +62,9 @@ def _convert_to_array(data: Dict[str, Any], key: str) -> Dict[str, Any]:
     return data
 
 
-def _transform_tsdb_to_tsdf(filepath: str) -> None:
+def convert_metadata_tsdb_to_tsdf(filepath: str) -> None:
     """
-    This function reads a JSON file, renames keys and converts a value in the loaded dictionary, then saves it back to the file.
+    This function converts a metadata file (JSON) from TSDB (legacy) to TSDF (0.1) format.
 
     :param filepath: The path to the JSON file to process
     """
@@ -79,7 +79,25 @@ def _transform_tsdb_to_tsdf(filepath: str) -> None:
         json.dump(data, f)
 
 
-def update_metadatas_tsdb_to_tsdf(directory: str) -> None:
+def generate_tsdf_metadata_from_tsdb(filepath_existing: str, filepath_new: str) -> None:
+    """
+    This function creates a metadata file (JSON) file in TSDF (0.1) format from a TSDB (legacy) file.
+
+    :param filepath_existing: The path to the JSON file to process
+    :param filepath_new: The path to the new JSON file
+    """
+    with open(filepath_existing, "r") as f:
+        data = json.load(f)
+    # rename the keys in the dictionary
+    data = _rename_keys_in_metadata(data)
+    # convert the values of the specified keys to arrays
+    for key in TSDB_ARRAY_KEYS:
+        data = _convert_to_array(data, key)
+    with open(filepath_new, "w") as f:
+        json.dump(data, f)
+
+
+def convert_metadatas_tsdb_to_tsdf(directory: str) -> None:
     """
     This function converts all metadata files in a directory (and its subdirectories) from TSDB (legacy) to TSDF (0.1) format.
     It walks through all files in a directory (and its subdirectories),
@@ -88,13 +106,4 @@ def update_metadatas_tsdb_to_tsdf(directory: str) -> None:
     :param directory: The directory to process files in
     """
     for filepath in get_files_matching(directory, METADATA_NAMING_PATTERN):
-        _transform_tsdb_to_tsdf(filepath)
-
-
-# Path to the directory containing the metadata files
-DIR = "/Users/vedran/Desktop/1_patient_week"
-
-# Convert all metadata files in the directory from TSDB to TSDF format
-# update_metadatas_tsdb_to_tsdf(DIR)
-
-load_metadatas_from_dir(DIR)
+        convert_metadata_tsdb_to_tsdf(filepath)
