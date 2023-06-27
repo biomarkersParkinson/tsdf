@@ -1,9 +1,7 @@
-import os
 import json
-import glob
 from tsdf.constants import METADATA_NAMING_PATTERN
-from tsdf.io import get_files_matching, load_metadata_file, load_metadatas_from_dir
-from typing import AnyStr, Dict, Any
+from tsdf.io import get_files_matching
+from typing import Dict, Any
 
 # the old (TSDB) and new field (TSDF) names
 TSDB_TSDF_KEY_MAP = {
