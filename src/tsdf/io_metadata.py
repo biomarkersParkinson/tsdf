@@ -14,6 +14,11 @@ def read_data(data: Any, source_path: str) -> Dict[str, TSDFMetadata]:
     """
     Function used to parse the JSON object containing TSDF metadata. It returns a
     list of TSDFMetadata objects, where each object describes formatting of a binary file.
+
+    :param data: JSON object containing TSDF metadata.
+    :param source_path: path to the metadata file.
+
+    :return: list of TSDFMetadata objects.
     """
 
     # Check if the version is supported
@@ -31,6 +36,15 @@ def _read_struct(
     """
     Recursive method used to parse the TSDF metadata in a hierarchical
     order (from the root towards the leaves).
+
+    :param data: JSON object containing TSDF metadata.
+    :param defined_properties: dictionary containing all the properties defined at the current level of the TSDF structure.
+    :param source_path: path to the metadata file.
+    :param version: version of the TSDF used within the file.
+
+    :return: list of TSDFMetadata objects.
+
+    :raises TSDFMetadataFieldError: if the TSDF metadata file is missing a mandatory field.
     """
     all_streams: Dict[str, TSDFMetadata] = {}
     remaining_data = {}
@@ -82,6 +96,11 @@ def is_mandatory_type(key: str, version: str) -> bool:
     """
     Function returns True if the field that corresponds to the
     key is mandatory for the given TSDF version, otherwise it returns False.
+
+    :param key: key of the TSDF metadata field.
+    :param version: version of the TSDF used within the file.
+
+    :return: True if the field is mandatory, otherwise False.
     """
     return True if key in constants.MANDATORY_TSDF_KEYS[version] else False
 
@@ -91,6 +110,10 @@ def _contains_file_name(data: Any) -> bool:
     Function return True if the data contains the "file_name" key,
     and thus, represents nested data elements.
     Otherwise it returns False.
+
+    :param data: data to be checked.
+
+    :return: True if the data contains the "file_name" key, otherwise False.
     """
 
     if isinstance(data, list):
@@ -110,7 +133,13 @@ def _contains_file_name(data: Any) -> bool:
 
 
 def _is_a_list(value) -> bool:
-    """Function returns True if the value is a list, otherwise it returns False."""
+    """
+    Function returns True if the value is a list, otherwise it returns False.
+
+    :param value: value to be checked.
+
+    :return: True if the value is a list, otherwise False.
+    """
     return isinstance(value, list)
 
 
@@ -118,6 +147,11 @@ def check_tsdf_mandatory_fields(dictionary: Dict[str, Any]) -> None:
     """
     Verifies that all the mandatory properties for TSDF metadata are provided,
     and are in the right format.
+
+    :param dictionary: dictionary containing TSDF metadata.
+
+    :raises TSDFMetadataFieldError: if the TSDF metadata file is missing a mandatory field.
+    :raises TSDFMetadataFieldValueError: if the TSDF metadata file contains an invalid value.
     """
     version_key = "metadata_version"
     if not version_key in dictionary.keys():
@@ -143,6 +177,12 @@ def _check_tsdf_property_format(key: str, value, version: str) -> None:
     Function checks whether the value of the mandatory TSDF field specified by the key
     is of the expected data format.\\
     `Note: If the key is not mandatory the function does not perform any checks.`
+
+    :param key: key of the TSDF metadata field.
+    :param value: value of the TSDF metadata field.
+    :param version: version of the TSDF used within the file.
+
+    :raises TSDFMetadataFieldValueError: if the TSDF metadata file contains an invalid value.
     """
     if not is_mandatory_type(key, version):
         return
@@ -159,7 +199,16 @@ def _check_tsdf_property_format(key: str, value, version: str) -> None:
 def get_file_metadata_at_index(
     metadata: Dict[str, TSDFMetadata], index: int
 ) -> TSDFMetadata:
-    """Returns the metadata object at the position defined by the index."""
+    """
+    Returns the metadata object at the position defined by the index.
+
+    :param metadata: dictionary containing TSDF metadata.
+    :param index: index of the metadata object to be returned.
+
+    :return: metadata object at the position defined by the index.
+
+    :raises IndexError: if the index is out of range.
+    """
     for _key, value in metadata.items():
         if index == 0:
             return value
@@ -168,16 +217,22 @@ def get_file_metadata_at_index(
 
 
 def confirm_dir_of_metadata(metadatas: List[TSDFMetadata]) -> None:
-    """The method is used to confirm whether all the metadata files are expected in the same directory."""
+    """
+    The method is used to confirm whether all the metadata files are expected in the same directory.
+
+    :param metadatas: list of metadata objects.
+
+    :raises TSDFMetadataFieldValueError: if the metadata files are not in the same directory or describe the same binaries.
+    """
     metadata_iter = iter(metadatas)
     init_metadata = next(metadata_iter)
 
     for curr_metadata in metadata_iter:
         if init_metadata.file_dir_path != curr_metadata.file_dir_path:
-            raise Exception(
+            raise TSDFMetadataFieldValueError(
                 "Metadata files have to be in the same folder to be combined."
             )
         if init_metadata.file_name == curr_metadata.file_name:
-            raise Exception(
+            raise TSDFMetadataFieldValueError(
                 "Two metadata objects cannot reference the same binary file (file_name)."
             )

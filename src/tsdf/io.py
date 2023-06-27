@@ -1,7 +1,13 @@
+"""
+Module for reading and writing TSDF files.
+
+Reference: https://arxiv.org/abs/2211.11294
+"""
+
 import glob
 import json
 import os
-from typing import Any, AnyStr, Dict, List
+from typing import Any, Dict, List
 import numpy as np
 from tsdf import io_metadata
 from tsdf.constants import METADATA_NAMING_PATTERN
@@ -20,7 +26,9 @@ from tsdf.tsdf_metadata import TSDFMetadata, TSDFMetadataFieldValueError
 def load_metadata_file(file) -> Dict[str, TSDFMetadata]:
     """Loads a TSDF metadata file, returns a dictionary
 
-    Reference: https://arxiv.org/abs/2211.11294
+    :param file: file object containing the TSDF metadata.
+
+    :return: dictionary of TSDFMetadata objects.
     """
 
     # The data is isomorphic to a JSON
@@ -33,16 +41,27 @@ def load_metadata_file(file) -> Dict[str, TSDFMetadata]:
 
 
 def get_files_matching(directory: str, criteria) -> list:
-    """Get all files matching the criteria in the directory and its subdirectories."""
+    """
+    Get all files matching the criteria in the directory and its subdirectories.
+
+    :param directory: directory to search in.
+    :param criteria: criteria to match.
+
+    :return: list of files matching the criteria.
+    """
     return glob.glob(os.path.join(directory, criteria), recursive=True)
 
 
 def load_metadatas_from_dir(
     dir_path: str, naming_pattern=METADATA_NAMING_PATTERN
 ) -> List[Dict[str, TSDFMetadata]]:
-    """Loads all TSDF metadata files in a directory, returns a dictionary
+    """
+    Loads all TSDF metadata files in a directory, returns a dictionary
 
-    Reference: https://arxiv.org/abs/2211.11294
+    :param dir_path: path to the directory containing the TSDF metadata files.
+    :param naming_pattern: (optional) naming pattern of the TSDF metadata files .
+
+    :return: dictionary of TSDFMetadata objects.
     """
     # Get all files in the directory
     file_paths = get_files_matching(dir_path, naming_pattern)
@@ -57,9 +76,12 @@ def load_metadatas_from_dir(
 
 
 def load_metadata_from_path(path: str) -> Dict[str, TSDFMetadata]:
-    """Loads a TSDF metadata file, returns a dictionary
+    """
+    Loads a TSDF metadata file, returns a dictionary
 
-    Reference: https://arxiv.org/abs/2211.11294
+    :param path: path to the TSDF metadata file.
+
+    :return: dictionary of TSDFMetadata objects.
     """
     # The data is isomorphic to a JSON
     with open(path, "r") as file:
@@ -71,9 +93,12 @@ def load_metadata_from_path(path: str) -> Dict[str, TSDFMetadata]:
 
 
 def load_metadata_string(json_str) -> Dict[str, TSDFMetadata]:
-    """Loads a TSDF metadata string, returns a dictionary
+    """
+    Loads a TSDF metadata string, returns a dictionary.
 
-    Reference: https://arxiv.org/abs/2211.11294
+    :param json_str: string containing the TSDF metadata.
+
+    :return: dictionary of TSDFMetadata objects.
     """
 
     # The data is isomorphic to a JSON
@@ -86,7 +111,15 @@ def load_metadata_string(json_str) -> Dict[str, TSDFMetadata]:
 def load_binary_from_metadata(
     metadata_dir: str, metadata: TSDFMetadata, start_row: int = 0, end_row: int = -1
 ) -> np.ndarray:
-    """Use metadata properties to load and return numpy array from a binary file"""
+    """
+    Use metadata properties to load and return numpy array from a binary file.
+
+    :param metadata_dir: path to the directory containing the TSDF metadata files.
+    :param metadata: TSDFMetadata object.
+    :param start_row: (optional) first row to load.
+    :param end_row: (optional) last row to load. If -1, load all rows.
+
+    :return: numpy array containing the data."""
     bin_path = os.path.join(metadata_dir, metadata.file_name)
     return load_binary_file(
         bin_path,
@@ -110,7 +143,20 @@ def load_binary_file(
     start_row: int = 0,
     end_row: int = -1,
 ) -> np.ndarray:
-    """Use provided parameters to load and return a numpy array from a binary file"""
+    """
+    Use provided parameters to load and return a numpy array from a binary file
+
+    :param bin_file_path: path to the binary file.
+    :param data_type: data type of the binary file.
+    :param n_bits: number of bits per value.
+    :param endianness: endianness of the binary file.
+    :param n_rows: number of rows in the binary file.
+    :param n_columns: number of columns in the binary file.
+    :param start_row: (optional) first row to load.
+    :param end_row: (optional) last row to load. If -1, load all rows.
+
+    :return: numpy array containing the data.
+    """
 
     s_endianness = endianness_tsdf_to_numpy(endianness)
     s_type = data_type_tsdf_to_numpy(data_type)
@@ -135,7 +181,13 @@ def load_binary_file(
 
 
 def get_metadata_from_ndarray(data: np.ndarray) -> Dict[str, Any]:
-    """Retrieve metadata information encoded in the NumPy array."""
+    """
+    Retrieve metadata information encoded in the NumPy array.
+
+    :param data: NumPy array containing the data.
+
+    :return: dictionary containing the metadata.
+    """
 
     metadata = {
         "data_type": data_type_numpy_to_tsdf(data),
@@ -149,7 +201,16 @@ def get_metadata_from_ndarray(data: np.ndarray) -> Dict[str, Any]:
 def write_binary_file(
     file_dir: str, file_name: str, data: np.ndarray, metadata: dict
 ) -> TSDFMetadata:
-    """Save binary file based on the provided NumPy array."""
+    """
+    Save binary file based on the provided NumPy array.
+
+    :param file_dir: path to the directory where the file will be saved.
+    :param file_name: name of the file to be saved.
+    :param data: NumPy array containing the data.
+    :param metadata: dictionary containing the metadata.
+
+    :return: TSDFMetadata object.
+    """
     path = os.path.join(file_dir, file_name)
     data.tofile(path)
     metadata.update(get_metadata_from_ndarray(data))
@@ -159,10 +220,13 @@ def write_binary_file(
 
 
 def write_metadata(metadatas: List[TSDFMetadata], file_name: str) -> None:
-    """Combine and save the TSDF metadata objects as a json file.
+    """
+    Combine and save the TSDF metadata objects as a json file.
 
     :param metadatas: List of TSDFMetadata objects to be saved.
     :param file_name: Name of the file to be saved. The file will be saved in the directory of the first TSDFMetadata object in the list.
+
+    :raises TSDFMetadataFieldValueError: if the metadata files cannot be combined (e.g. they have no common fields) or if the list of TSDFMetadata objects is empty.
     """
     if len(metadatas) == 0:
         raise TSDFMetadataFieldValueError(
@@ -190,9 +254,15 @@ def write_metadata(metadatas: List[TSDFMetadata], file_name: str) -> None:
 
 
 def extract_common_fields(metadatas: List[Dict[str, Any]]) -> Dict[str, Any]:
-    """Extract the fields that are the same for all the metadata files.
-    A new dict is created and the fields are removed from the original dictionaries."""
-    meta_overlap: Dict[str, Any] = {}
+    """
+    Extract the fields that are the same for all the metadata files.
+    A new dict is created and the fields are removed from the original dictionaries.
+
+    :param metadatas: List of dictionaries containing the metadata.
+
+    :return: Dictionary containing the common fields.
+    """
+    meta_overlap: dict = {}
 
     # Return empty dict if metadatas is empty
     if len(metadatas) == 0:
@@ -214,17 +284,24 @@ def extract_common_fields(metadatas: List[Dict[str, Any]]) -> Dict[str, Any]:
 
 
 def calculate_ovelaps_rec(metadatas: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-    """TODO: A recursive call that should optimise the structure of the TSDF metadata, by grouping common values."""
+    """
+    A recursive call that optimises the structure of the TSDF metadata, by grouping common values. For the input the list of dictionaries
+    corresponds to a list of "flat" metadata dictionaries. The output is a list of dictionaries (potentially of length 1) that contain
+    the metadata in a tree structure. The tree structure is created by grouping the common values in the metadata.
+    The grouping is done recursively, until no more grouping is possible.
+
+    :param metadatas: List of dictionaries containing the metadata.
+
+    :return: List of dictionaries containing the metadata in a tree structure.
+    """
 
     if len(metadatas) == 0:
         return []
     if len(metadatas) == 1:
         return metadatas
 
-    overlap_per_key: Dict[str, List[Dict[str, Any]]] = {}  # Overlap for each key
-    final_metadata: List[
-        Dict[str, Any]
-    ] = []  # The metadata that is left to be processed
+    overlap_per_key: Dict[str, List[dict]] = {}  # Overlap for each key
+    final_metadata: List[dict] = []  # The metadata that is left to be processed
 
     for key in get_all_keys(metadatas):
         overlap_per_key[key] = calculate_max_overlap(metadatas, key)
@@ -248,7 +325,13 @@ def calculate_ovelaps_rec(metadatas: List[Dict[str, Any]]) -> List[Dict[str, Any
 
 
 def get_all_keys(metadatas: List[Dict[str, Any]]) -> List[str]:
-    """Get all the keys from the metadata files."""
+    """
+    Get all the keys from the metadata files.
+
+    :param metadatas: List of dictionaries containing the metadata.
+
+    :return: List of keys.
+    """
     keys: List[str] = []
     for meta in metadatas:
         keys.extend(meta.keys())
@@ -256,7 +339,13 @@ def get_all_keys(metadatas: List[Dict[str, Any]]) -> List[str]:
 
 
 def write_to_file(dict: Dict[str, Any], dir_path: str, file_name: str) -> None:
-    """Write a dictionary to a json file."""
+    """
+    Write a dictionary to a json file.
+
+    :param dict: Dictionary to be written.
+    :param dir_path: Path to the directory where the file will be saved.
+    :param file_name: Name of the file to be saved.
+    """
     path = os.path.join(dir_path, file_name)
     with open(path, "w") as convert_file:
         convert_file.write(json.dumps(dict, indent=4))
@@ -265,7 +354,15 @@ def write_to_file(dict: Dict[str, Any], dir_path: str, file_name: str) -> None:
 def calculate_max_overlap(
     meta_files: List[Dict[str, Any]], meta_key: str
 ) -> List[Dict[str, Any]]:
-    """Calculate the maximum overlap between the metadata files, for a specific key. It returns the biggest group of dictionaries that contain the same value for the given meta_key."""
+    """
+    Calculate the maximum overlap between the metadata files, for a specific key.
+    It returns the biggest group of dictionaries that contain the same value for the given meta_key.
+
+    :param meta_files: List of dictionaries containing the metadata.
+    :param meta_key: The key for which the overlap is calculated.
+
+    :return: List of dictionaries containing the metadata.
+    """
     values: Dict[
         str, List[Dict[str, Any]]
     ] = (
@@ -284,5 +381,11 @@ def calculate_max_overlap(
 
 
 def max_len_key(elements: Dict[str, List[Dict[str, Any]]]) -> str:
-    """Return the key that has the longest list as a value."""
+    """
+    Return the key in a dictionary that has the longest list as a value.
+
+    :param elements: Dictionary containing the elements.
+
+    :return: The key that has the longest list as a value.
+    """
     return max(elements, key=lambda x: len(elements[x]))

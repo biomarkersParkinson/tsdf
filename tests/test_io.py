@@ -9,34 +9,42 @@ class TestMetadataFileReading(unittest.TestCase):
     """Test loading of the metadata file."""
 
     def test_load_json_file(self):
-        """Test that a json file gets loaded."""
+        """Test that a json file gets loaded correctly."""
         with open(CONST.TEST_DATA_FILES["hierarchical"], "r") as file:
             data = io.load_metadata_file(file)
             self.assertEqual(len(data), 4)
 
     def test_load_json_path(self):
-        """Test that a json file from a path gets loaded."""
+        """Test that a json file from a path gets loaded correctly."""
         data = io.load_metadata_from_path(CONST.TEST_DATA_FILES["hierarchical"])
         self.assertEqual(len(data), 4)
 
     def test_load_json_string(self):
-        """Test that a json object gets loaded from a string."""
+        """Test that a json object gets loaded from a string correctly."""
         with open(CONST.TEST_DATA_FILES["hierarchical"], "r") as file:
             json_string = file.read()
             data = io.load_metadata_string(json_string)
             self.assertEqual(len(data), 4)
 
     def test_load_metadatas_from_dir(self):
-        """Test that a json files gets loaded from a directory."""
+        """Test that all metadata files gets loaded from a directory correctly."""
         data = io.load_metadatas_from_dir(CONST.TEST_DATA_DIR)
         self.assertEqual(len(data), 6)
 
 
-def load_single_bin_file(dir: str, file_name: str) -> np.ndarray:
-    path = os.path.join(dir, file_name + CONST.METADATA_EXTENSION)
+def load_single_bin_file(dir_path: str, file_name: str) -> np.ndarray:
+    """
+    Load a single binary file from the given directory path and file name.
+
+    :param dir_path: The directory path where the binary file is located.
+    :param file_name: The name of the binary file without the extension.
+
+    :returns: The binary data as a numpy array.
+    """
+    path = os.path.join(dir_path, file_name + CONST.METADATA_EXTENSION)
     metadata = io.load_metadata_from_path(path)
     data = io.load_binary_from_metadata(
-        dir, metadata[file_name + CONST.BINARY_EXTENSION]
+        dir_path, metadata[file_name + CONST.BINARY_EXTENSION]
     )
     return data
 
