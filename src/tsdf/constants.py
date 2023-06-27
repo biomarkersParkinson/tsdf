@@ -1,3 +1,5 @@
+import os
+
 # Reference: https://arxiv.org/abs/2211.11294
 
 SUPPORTED_TSDF_VERSIONS = ["0.1"]
@@ -52,3 +54,30 @@ KEY_VALUE_TYPES = {
 
 METADATA_NAMING_PATTERN = "**meta.json"
 """ Naming convention for the metadata files. ** allows for any prefix, including additional directories. """
+
+
+class TestConstants:
+    """Class containing constants used for testing and demonstration."""
+
+    TEST_DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "..", "tests", "data")
+
+    """ Path to the test data directory. """
+    TEST_OUTPUT_DATA_DIR = os.path.join(TEST_DATA_DIR, "outputs")
+    """ Path to the test output data directory. """
+
+    TEST_DATA_FILES = {
+        "flat": os.path.join(TEST_DATA_DIR, "flat_meta.json"),
+        "hierarchical": os.path.join(TEST_DATA_DIR, "hierarchical_meta.json"),
+        "wrongversion": os.path.join(TEST_DATA_DIR, "wrongversion_meta_fail.json"),
+        "missingkey": os.path.join(TEST_DATA_DIR, "missingkey_meta_fail.json"),
+        "example_10_3_int16": os.path.join(
+            TEST_DATA_DIR, "example_10_3_int16_meta.json"
+        ),
+        "ppp": os.path.join(TEST_DATA_DIR, "ppp_format_meta.json"),
+    }
+    """ Dictionary used for accessing test data files. """
+
+    METADATA_EXTENSION = "_meta.json"
+    """ Suffix and extension used to denote metadata files. """
+
+    BINARY_EXTENSION = ".bin"

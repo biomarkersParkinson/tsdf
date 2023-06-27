@@ -2,22 +2,21 @@ import os
 import unittest
 from tsdf import io
 from tsdf.utils_legacy_TSDF import generate_tsdf_metadata_from_tsdb
-from tests.test_constants import (
-    TESTDATA_DIR,
-    TEST_OUTPUT_DATA_DIR,
-)
+from tsdf.constants import TestConstants as CONST
 
 
 class TestConversion(unittest.TestCase):
     """Test whether the conversion from TSDB (legacy metadata format) to TSDF works."""
 
     def test_conversion(self):
-        path_to_file = os.path.join(TESTDATA_DIR, "ppp_format_meta_legacy.json")
+        path_to_file = os.path.join(CONST.TEST_DATA_DIR, "ppp_format_meta_legacy.json")
         path_to_new_file = os.path.join(
-            TEST_OUTPUT_DATA_DIR, "tmp_test_ppp_format_meta.json"
+            CONST.TEST_OUTPUT_DATA_DIR, "tmp_test_ppp_format_meta.json"
         )
 
-        path_to_existing_tsdf_file = os.path.join(TESTDATA_DIR, "ppp_format_meta.json")
+        path_to_existing_tsdf_file = os.path.join(
+            CONST.TEST_DATA_DIR, "ppp_format_meta.json"
+        )
 
         # Generate a TSDF metadata file from TSDB
         generate_tsdf_metadata_from_tsdb(path_to_file, path_to_new_file)
