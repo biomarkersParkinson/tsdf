@@ -2,19 +2,13 @@ import os
 import unittest
 import numpy as np
 from tsdf import io, io_metadata, tsdf_metadata
-
-TESTDATA_DIR = os.path.join(os.path.dirname(__file__), "data")
-TESTDATA_FILES = {
-    "flat": os.path.join(TESTDATA_DIR, "flat_meta.json"),
-    "hierarchical": os.path.join(TESTDATA_DIR, "hierarchical_meta.json"),
-    "wrongversion": os.path.join(TESTDATA_DIR, "wrongversion_meta_fail.json"),
-    "missingkey": os.path.join(TESTDATA_DIR, "missingkey_meta_fail.json"),
-    "dummy_10_3_int16": os.path.join(TESTDATA_DIR, "dummy_10_3_int16_meta.json"),
-    "ppp": os.path.join(TESTDATA_DIR, "ppp_format_meta.json"),
-}
-METADATA_EXTENSION = "_meta.json"
-""" Suffix and extension used to denote metadata files. """
-BINARY_EXTENSION = ".bin"
+from tests.test_constants import (
+    TESTDATA_DIR,
+    TESTDATA_FILES,
+    TEST_OUTPUT_DATA_DIR,
+    METADATA_EXTENSION,
+    BINARY_EXTENSION,
+)
 
 
 class TestMetadataFileReading(unittest.TestCase):
@@ -107,7 +101,10 @@ class TestBinaryFileReading(unittest.TestCase):
         path = os.path.join(TESTDATA_DIR, file_name + METADATA_EXTENSION)
         metadata = io.load_metadata_from_path(path)
         data = io.load_binary_from_metadata(
-            TESTDATA_DIR, metadata[file_name + BINARY_EXTENSION], 2, 6
+            TESTDATA_DIR,
+            metadata[file_name + BINARY_EXTENSION],
+            2,
+            6,
         )
         self.assertEqual(data.shape, (4, 3))
         self.assertEqual(data.dtype, "int16")
@@ -120,22 +117,22 @@ class TestBinaryFileWriting(unittest.TestCase):
         """Save a NumPy array as a binary file."""
         test_file_name = "tmp_test_output_1.bin"
         rs = np.random.RandomState(seed=42)
-        data = rs.rand(17, 1).astype(np.float32)
+        data_original = rs.rand(17, 1).astype(np.float32)
         with open(TESTDATA_FILES["flat"], "r") as file:
             metadatas = io.load_metadata_file(file)
             io.write_binary_file(
-                TESTDATA_DIR,
+                TEST_OUTPUT_DATA_DIR,
                 test_file_name,
-                data,
+                data_original,
                 metadatas["audio_voice_089.raw"].get_plain_tsdf_dict_copy(),
             )
 
         # Read file again to check contents
-        path = os.path.join(TESTDATA_DIR, test_file_name)
+        path = os.path.join(TEST_OUTPUT_DATA_DIR, test_file_name)
         with open(path, "rb") as fid:
-            data2 = np.fromfile(fid, dtype="<f4")
-            data2 = data2.reshape(17, 1)
-            self.assertTrue(np.array_equal(data, data2))
+            data_written = np.fromfile(fid, dtype="<f4")
+            data_written = data_written.reshape(17, 1)
+            self.assertTrue(np.array_equal(data_original, data_written))
 
 
 class TestMetadataFileWriting(unittest.TestCase):
@@ -156,20 +153,20 @@ class TestMetadataFileWriting(unittest.TestCase):
         ]
 
         new_meta_1 = io.write_binary_file(
-            TESTDATA_DIR,
+            TEST_OUTPUT_DATA_DIR,
             test_name + "_1.bin",
             data_1,
             loaded_meta.get_plain_tsdf_dict_copy(),
         )
         new_meta_2 = io.write_binary_file(
-            TESTDATA_DIR,
+            TEST_OUTPUT_DATA_DIR,
             test_name + "_2.bin",
             data_2,
             loaded_meta.get_plain_tsdf_dict_copy(),
         )
 
         new_meta_3 = io.write_binary_file(
-            TESTDATA_DIR,
+            TEST_OUTPUT_DATA_DIR,
             test_name + "_3.bin",
             data_3,
             loaded_meta.get_plain_tsdf_dict_copy(),
@@ -177,13 +174,14 @@ class TestMetadataFileWriting(unittest.TestCase):
 
         # Combine two TSDF files
         io.write_metadata(
-            [new_meta_1, new_meta_2, new_meta_3], test_name + METADATA_EXTENSION
+            [new_meta_1, new_meta_2, new_meta_3],
+            test_name + METADATA_EXTENSION,
         )
 
         # Read the written metadata
 
         meta = io.load_metadata_from_path(
-            os.path.join(TESTDATA_DIR, test_name + METADATA_EXTENSION)
+            os.path.join(TEST_OUTPUT_DATA_DIR, test_name + METADATA_EXTENSION)
         )
         self.assertEqual(len(meta), 3)
         self.assertEqual(meta[test_name + "_1.bin"].rows, 17)
@@ -206,7 +204,7 @@ class TestMetadataFileWriting(unittest.TestCase):
         # Write new binary file
         new_file_name = "tmp_test_dummy_10_3_int16_to_float32"
         new_metadata = io.write_binary_file(
-            TESTDATA_DIR,
+            TEST_OUTPUT_DATA_DIR,
             new_file_name + BINARY_EXTENSION,
             new_data,
             original_metadata.get_plain_tsdf_dict_copy(),
@@ -216,6 +214,6 @@ class TestMetadataFileWriting(unittest.TestCase):
         io.write_metadata([new_metadata], new_file_name + METADATA_EXTENSION)
 
         # Read file again to check contents
-        final_data = load_single_bin_file(TESTDATA_DIR, new_file_name)
+        final_data = load_single_bin_file(TEST_OUTPUT_DATA_DIR, new_file_name)
         self.assertEqual(final_data.shape, (10, 3))
         self.assertEqual(final_data.dtype, "float32")

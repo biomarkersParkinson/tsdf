@@ -159,7 +159,11 @@ def write_binary_file(
 
 
 def write_metadata(metadatas: List[TSDFMetadata], file_name: str) -> None:
-    """Combine and save the TSDF metadata objects as a json file."""
+    """Combine and save the TSDF metadata objects as a json file.
+
+    :param metadatas: List of TSDFMetadata objects to be saved.
+    :param file_name: Name of the file to be saved. The file will be saved in the directory of the first TSDFMetadata object in the list.
+    """
     if len(metadatas) == 0:
         raise TSDFMetadataFieldValueError(
             "Metadata cannot be saved, as the list of TSDFMetadata objects is empty."

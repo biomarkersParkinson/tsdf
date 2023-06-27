@@ -2,8 +2,10 @@ import os
 import unittest
 from tsdf import io
 from tsdf.utils_legacy_TSDF import generate_tsdf_metadata_from_tsdb
-
-TESTDATA_DIR = os.path.join(os.path.dirname(__file__), "data")
+from tests.test_constants import (
+    TESTDATA_DIR,
+    TEST_OUTPUT_DATA_DIR,
+)
 
 
 class TestConversion(unittest.TestCase):
@@ -11,7 +13,9 @@ class TestConversion(unittest.TestCase):
 
     def test_conversion(self):
         path_to_file = os.path.join(TESTDATA_DIR, "ppp_format_meta_legacy.json")
-        path_to_new_file = os.path.join(TESTDATA_DIR, "tmp_test_ppp_format_meta.json")
+        path_to_new_file = os.path.join(
+            TEST_OUTPUT_DATA_DIR, "tmp_test_ppp_format_meta.json"
+        )
 
         path_to_existing_tsdf_file = os.path.join(TESTDATA_DIR, "ppp_format_meta.json")
 
