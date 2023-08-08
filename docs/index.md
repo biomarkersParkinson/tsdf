@@ -41,4 +41,4 @@ The key element of `TSDF data` is a metadata dictionary with the following:
 
 #### Legacy fields
 
-Work in progress.
+This is work in progress. Sorry for the inconvenience.
