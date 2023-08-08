@@ -1,16 +1,8 @@
 import json
-import os
 import unittest
 from tsdf import io_metadata
 from tsdf.tsdf_metadata import TSDFMetadataFieldError, TSDFMetadataFieldValueError
-
-TESTDATA_DIR = os.path.join(os.path.dirname(__file__), "data")
-TESTDATA = {
-    "flat": os.path.join(TESTDATA_DIR, "flat.json"),
-    "hierarchical": os.path.join(TESTDATA_DIR, "hierarchical.json"),
-    "wrongversion": os.path.join(TESTDATA_DIR, "wrongversion.json"),
-    "missingkey": os.path.join(TESTDATA_DIR, "missingkey.json"),
-}
+from tsdf.constants import TestConstants as CONST
 
 
 class TestWrongFormatting(unittest.TestCase):
@@ -18,7 +10,7 @@ class TestWrongFormatting(unittest.TestCase):
 
     def test_load_wrong_version(self):
         """Test that a file with a wrong version raises an exception."""
-        path = TESTDATA["wrongversion"]
+        path = CONST.TEST_DATA_FILES["wrongversion"]
         with open(path, "r") as file:
             with self.assertRaises(TSDFMetadataFieldValueError) as context:
                 data = json.load(file)
@@ -26,7 +18,7 @@ class TestWrongFormatting(unittest.TestCase):
 
     def test_load_missing_key(self):
         """Test that a file with a missing mandatory key raises an exception."""
-        path = TESTDATA["missingkey"]
+        path = CONST.TEST_DATA_FILES["missingkey"]
         with open(path, "r") as file:
             with self.assertRaises(TSDFMetadataFieldError) as context:
                 data = json.load(file)
@@ -38,7 +30,7 @@ class TestTSDFMetadataParsing(unittest.TestCase):
 
     def test_load_flat_structure(self):
         """Test parsing of a flat TSDF metadata file."""
-        path = TESTDATA["flat"]
+        path = CONST.TEST_DATA_FILES["flat"]
         with open(path, "r") as file:
             data = json.load(file)
             streams = io_metadata.read_data(data, path)
