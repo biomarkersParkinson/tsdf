@@ -9,25 +9,25 @@ It is a unified, standardized format for storing all types of physiological sens
 
 ### `TSDF data` in a nutshell
 
-The key element of `TSDF data` is a dictionary with the following:
+The key element of `TSDF data` is a metadata dictionary with the following:
 
 #### Mandatory fields
 
-| Field              | Description                                                                                                                   | Type       |
-|:-------------------|:------------------------------------------------------------------------------------------------------------------------------|:-----------|
-| `subject_id`       | Unique identifier of the subject                                                                                              | `string`   |
-| `study_id`         | Unique identifier of the project or experiment                                                                                | `string`   |
-| `device_id`        | Unique identifier of the measurement device                                                                                   | `string`   |
-| `endianness`       | Byte order for numerical values in binary data ("big" or "little"). See [endianess](https://en.wikipedia.org/wiki/Endianness) | `string`   |
-| `metadata_version` | Format version (used for backwards compatibility)                                                                             | `string`   |
-| `start_iso8601`    | [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) time stamp for the start of the recording, with ms precision               | `string`   |
-| `end_iso8601`      | Same as `start_iso8601`, but for the end of the recording                                                                     | `string`   |
-| `rows`             | Total amount of samples per channel                                                                                           | `uint`     |
-| `filename`         | Name of the file containing the measured data                                                                                 | `string`   |
-| `channels`         | Labels for each data channel (_e.g.:_ `["time", "X", "Y", "Z"]` for 3D accelerometry)                                         | `string[]` |
-| `units`            | Unit for each channel (_e.g.:_ `["ms"]` for time)                                                                             | `string[]` |
-| `data_type`        | Number format of the measured data (_e.g.:_ `"float"`)                                                                        | `string`   |
-| `bits`             | Bit-length of the number format                                                                                               | `string`   |
+| Field              | Description                                                                                                     | Type       |
+|:-------------------|:----------------------------------------------------------------------------------------------------------------|:-----------|
+| `subject_id`       | Unique identifier of the subject                                                                                | `string`   |
+| `study_id`         | Unique identifier of the project or experiment                                                                  | `string`   |
+| `device_id`        | Unique identifier of the measurement device                                                                     | `string`   |
+| `endianness`       | [Byte order](https://en.wikipedia.org/wiki/Endianness) for numerical values in binary data ("big" or "little")  | `string`   |
+| `metadata_version` | Format version (used for backwards compatibility)                                                               | `string`   |
+| `start_iso8601`    | [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) time stamp for the start of the recording, with ms precision | `string`   |
+| `end_iso8601`      | Same as `start_iso8601`, but for the end of the recording                                                       | `string`   |
+| `rows`             | Total amount of samples per channel                                                                             | `uint`     |
+| `filename`         | Name of the file containing the measured data                                                                   | `string`   |
+| `channels`         | Labels for each data channel (_e.g.:_ `["time", "X", "Y", "Z"]` for 3D accelerometry)                           | `string[]` |
+| `units`            | Unit for each channel (_e.g.:_ `["ms"]` for time)                                                               | `string[]` |
+| `data_type`        | Number format of the measured data (_e.g.:_ `"float"`)                                                          | `string`   |
+| `bits`             | Bit-length of the number format                                                                                 | `string`   |
 
 #### Optional fields
 
