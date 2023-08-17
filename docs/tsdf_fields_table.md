@@ -1,6 +1,31 @@
-# TSDF optional fields
 
-Below are the fields and descriptions for optional TSDF fields.
+# TSDF fields
+
+Below are the fields and descriptions for TSDF fields, obligatory and optional (study specific) fields.
+
+## TSDF obligatory fields
+
+| Field            | Type         | Description                                                                 |
+|------------------|--------------|-----------------------------------------------------------------------------|
+| study_id         | `str`        | Identifier for the particular study.                                         |
+| device_id        | `str`        | Specifies the device used for data collection, e.g., "Galaxy 3 watch".       |
+| subject_id       | `str`        | Unique identifier for the subject or participant in the study.               |
+| source_file_name | `str`        | Name of the original source file containing the data.                        |
+| endianness       | `str`        | Byte order representation. Common values are "little" or "big".              |
+| metadata_version | `str`        | Version information for the metadata.                                        |
+| start_iso8601    | `str`        | Timestamp indicating the start time of data collection in ISO8601 format.    |
+| end_iso8601      | `str`        | Timestamp indicating the end time of data collection in ISO8601 format.      |
+| file_name        | `str`        | The name of the file in consideration, e.g., "eeee.bin".                     |
+| channels         | `list[str]`  | List specifying the channels in the data, e.g., "time".                      |
+| time_encode      | `str`        | Encoding type for time, e.g., "difference".                                  |
+| units            | `list[str]`  | Units for each channel in the data, e.g., "ms" for milliseconds.             |
+| data_type        | `str`        | Type of the data, e.g., "float".                                             |
+| bits             | `int`        | Bit-depth of the data, e.g., 32-bit.                                         |
+| columns          | `int`        | Number of columns in the data matrix.                                        |
+| rows             | `int`        | Number of rows in the data matrix. 
+
+
+## TSDF optional fields
 
 
 | Field                        | Type         | Description                                          |
