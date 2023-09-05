@@ -1,11 +1,10 @@
+# `TSDF` `data` fields
 
 
-## `TSDF data` in a nutshell
-
-The key element of `TSDF data` is a metadata dictionary.
+The key element of `TSDF` `data` is a metadata dictionary.
 In this section, we will comprehensively explore the mandatory and optional fields within the TSDF format, providing insights into its structured data organization.
 
-### TSDF mandatory fields
+## TSDF mandatory fields
 
 | Field            | Type         | Description                                                                 |
 |------------------|--------------|-----------------------------------------------------------------------------|
@@ -28,7 +27,7 @@ In this section, we will comprehensively explore the mandatory and optional fiel
 
 
 
-### TSDF optional fields
+## TSDF optional fields
 
 
 | Field                        | Type         | Description                                          |
@@ -60,7 +59,7 @@ In this section, we will comprehensively explore the mandatory and optional fiel
 
 
 
-### Legacy fields
+## Legacy fields
 
 The following table lists the legacy fields from the time when the format was called TSDB, along with their updated counterparts:
 
@@ -73,5 +72,5 @@ The following table lists the legacy fields from the time when the format was ca
 | `start_datetime_iso8601` | `start_iso8601`             | -        |
 | `end_datetime_iso8601`   | `end_iso8601`               | -        |
 
-#### Revised Field Requirements
+### Revised Field Requirements
 As presented in the table above, the `quantities` and `units` fields are now required to be arrays.

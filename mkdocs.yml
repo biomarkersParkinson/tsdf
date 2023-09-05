@@ -11,6 +11,7 @@ theme: readthedocs
 
 nav:
   - Introduction: index.md
+  - TSDF fields: tsdf_fields_table.md
   - Installation: installation.md
   - Example: processing_example.ipynb
   - Usage: usage.ipynb
