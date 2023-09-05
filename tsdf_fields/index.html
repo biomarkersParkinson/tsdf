@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://biomarkersparkinson.github.io/tsdf/tsdf_fields/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>TSDF optional fields - tsdf</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "TSDF optional fields";
+        var mkdocs_page_input_path = "tsdf_fields.md";
+        var mkdocs_page_url = "/tsdf/tsdf_fields/";
+      </script>
+    
+    <script src="../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> tsdf
+        </a>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Introduction</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../installation/">Installation</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../processing_example/">Examples</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../usage/">Usage</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../contact/">Contact</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">tsdf</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>TSDF optional fields</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/biomarkersParkinson/tsdf/blob/main/docs/tsdf_fields.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="tsdf-optional-fields">TSDF optional fields</h1>
+<p>Below are the fields and descriptions for optional TSDF fields:</p>
+<ul>
+<li>
+<p><strong>week_number</strong>: <code>int</code><br />
+  Denotes the specific week for which the dataset is relevant. Useful for tracking or comparing weekly data.</p>
+</li>
+<li>
+<p><strong>freq_sampling_original</strong>: <code>int</code><br />
+  Represents the frequency in Hertz at which the original data was sampled before any modifications.</p>
+</li>
+<li>
+<p><strong>freq_sampling_adjusted</strong>: <code>int</code><br />
+  The revised or adjusted frequency, also in Hertz, which might be set to optimize data processing or analysis.</p>
+</li>
+<li>
+<p><strong>interpolate</strong>: <code>bool</code><br />
+  If set to true, any missing or irregular data points will be estimated and filled, ensuring a consistent dataset.</p>
+</li>
+<li>
+<p><strong>gravity_removal</strong>: <code>bool</code><br />
+  If true, the gravity component (constant force affecting all gyroscopic measurements) will be removed to isolate user motion.</p>
+</li>
+<li>
+<p><strong>fill_high_pass</strong>: <code>bool</code><br />
+  A flag indicating if the dataset should be subjected to a high-pass filter, which removes low-frequency noise.</p>
+</li>
+<li>
+<p><strong>z_score_accel</strong>: <code>bool</code><br />
+  If true, the accelerometer data will be normalized using z-score normalization, converting values to a standard scale.</p>
+</li>
+<li>
+<p><strong>percent_vect</strong>: <code>list[int]</code><br />
+  List of percentage thresholds. These could be used to categorize or grade the motion intensity based on magnitude.</p>
+</li>
+<li>
+<p><strong>burst_thr_accel</strong>: <code>list[float]</code><br />
+  Set of threshold values specific to the accelerometer. Any value surpassing these indicates a 'burst' or sudden intense motion.</p>
+</li>
+<li>
+<p><strong>burst_thr_gyro</strong>: <code>list[float]</code><br />
+  Similar to <code>burst_thr_accel</code>, but specific to gyroscope measurements.</p>
+</li>
+<li>
+<p><strong>index_percentil_burst_thr</strong>: <code>int</code><br />
+  The chosen index from the percentile list to set the active burst threshold for data classification.</p>
+</li>
+<li>
+<p><strong>inter_week_mean_accel</strong>: <code>float</code><br />
+  Provides the average accelerometer reading when comparing data across multiple weeks.</p>
+</li>
+<li>
+<p><strong>inter_week_std_accel</strong>: <code>float</code><br />
+  Denotes the standard deviation for the accelerometer readings across weeks, providing insights into data variability.</p>
+</li>
+<li>
+<p><strong>inter_week_mean_gyro</strong>: <code>float</code><br />
+  The average gyroscope reading across weeks, giving a central tendency measure for the gyro data.</p>
+</li>
+<li>
+<p><strong>inter_week_std_gyro</strong>: <code>float</code><br />
+  Represents how spread out the gyroscope measurements are from the mean over different weeks.</p>
+</li>
+<li>
+<p><strong>window_size_sec</strong>: <code>int</code><br />
+  Specifies the duration in seconds for each data window. Analysis is often performed on these smaller chunks of continuous data.</p>
+</li>
+<li>
+<p><strong>num_ECDE_coeff</strong>: <code>int</code><br />
+  Dictates the number of ECDE (Empirical Cumulative Distribution Function) coefficients to be considered in the analysis.</p>
+</li>
+<li>
+<p><strong>num_filters</strong>: <code>int</code><br />
+  Denotes how many different filters will be applied to the data for refining or isolating specific frequency bands.</p>
+</li>
+<li>
+<p><strong>num_me1_coeff</strong>: <code>int</code><br />
+  Indicates the number of ME1 (possibly a specific kind of coefficient) to consider during the processing.</p>
+</li>
+<li>
+<p><strong>max_freq_filter</strong>: <code>int</code><br />
+  The highest frequency limit for any applied filter, ensuring data above this frequency is not considered.</p>
+</li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/biomarkersParkinson/tsdf/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
