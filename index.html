@@ -40,18 +40,10 @@
                 <li class="toctree-l1 current"><a class="reference internal current" href=".">Introduction</a>
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#what-is-tsdf-data">What is TSDF data?</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#tsdf-data-in-a-nutshell">TSDF data in a nutshell</a>
-        <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#mandatory-fields">Mandatory fields</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#optional-fields">Optional fields</a>
+    <li class="toctree-l2"><a class="reference internal" href="#example-tsdf-metadata-json">Example: TSDF Metadata JSON</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#legacy-fields">Legacy fields</a>
-    </li>
-        </ul>
-    </li>
-        </ul>
+    <li class="toctree-l2"><a class="reference internal" href="#the-python-library-tsdf">The python library - tsdf</a>
     </li>
     </ul>
                 </li>
@@ -61,7 +53,7 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="processing_example/">Examples</a>
+                <li class="toctree-l1"><a class="reference internal" href="processing_example/">Usage Examples</a>
                 </li>
               </ul>
               <ul>
@@ -99,126 +91,83 @@
                 <h1 id="welcome-to-tsdf">Welcome to tsdf</h1>
 <p>A package to load <a href="https://arxiv.org/abs/2211.11294">TSDF data</a> into Python.</p>
 <h2 id="what-is-tsdf-data">What is <code>TSDF data</code>?</h2>
-<p><code>tsdf</code> stands for <em>time series data format</em>.
+<p><code>tsdf</code> stands for <em><code>time series data format</code></em>.
 It is a unified, standardized format for storing all types of physiological sensor data. It was originally introduced in this <a href="https://arxiv.org/abs/2211.11294">preprint</a>.</p>
-<h3 id="tsdf-data-in-a-nutshell"><code>TSDF data</code> in a nutshell</h3>
-<p>The key element of <code>TSDF data</code> is a metadata dictionary with the following:</p>
-<h4 id="mandatory-fields">Mandatory fields</h4>
-<table>
-<thead>
-<tr>
-<th align="left">Field</th>
-<th align="left">Description</th>
-<th align="left">Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left"><code>subject_id</code></td>
-<td align="left">Unique identifier of the subject</td>
-<td align="left"><code>string</code></td>
-</tr>
-<tr>
-<td align="left"><code>study_id</code></td>
-<td align="left">Unique identifier of the project or experiment</td>
-<td align="left"><code>string</code></td>
-</tr>
-<tr>
-<td align="left"><code>device_id</code></td>
-<td align="left">Unique identifier of the measurement device</td>
-<td align="left"><code>string</code></td>
-</tr>
-<tr>
-<td align="left"><code>endianness</code></td>
-<td align="left"><a href="https://en.wikipedia.org/wiki/Endianness">Byte order</a> for numerical values in binary data ("big" or "little")</td>
-<td align="left"><code>string</code></td>
-</tr>
-<tr>
-<td align="left"><code>metadata_version</code></td>
-<td align="left">Format version (used for backwards compatibility)</td>
-<td align="left"><code>string</code></td>
-</tr>
-<tr>
-<td align="left"><code>start_iso8601</code></td>
-<td align="left"><a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> time stamp for the start of the recording, with ms precision</td>
-<td align="left"><code>string</code></td>
-</tr>
-<tr>
-<td align="left"><code>end_iso8601</code></td>
-<td align="left">Same as <code>start_iso8601</code>, but for the end of the recording</td>
-<td align="left"><code>string</code></td>
-</tr>
-<tr>
-<td align="left"><code>rows</code></td>
-<td align="left">Total amount of samples per channel</td>
-<td align="left"><code>uint</code></td>
-</tr>
-<tr>
-<td align="left"><code>filename</code></td>
-<td align="left">Name of the file containing the measured data</td>
-<td align="left"><code>string</code></td>
-</tr>
-<tr>
-<td align="left"><code>channels</code></td>
-<td align="left">Labels for each data channel (<em>e.g.:</em> <code>["time", "X", "Y", "Z"]</code> for 3D accelerometry)</td>
-<td align="left"><code>string[]</code></td>
-</tr>
-<tr>
-<td align="left"><code>units</code></td>
-<td align="left">Unit for each channel (<em>e.g.:</em> <code>["ms"]</code> for time)</td>
-<td align="left"><code>string[]</code></td>
-</tr>
-<tr>
-<td align="left"><code>data_type</code></td>
-<td align="left">Number format of the measured data (<em>e.g.:</em> <code>"float"</code>)</td>
-<td align="left"><code>string</code></td>
-</tr>
-<tr>
-<td align="left"><code>bits</code></td>
-<td align="left">Bit-length of the number format</td>
-<td align="left"><code>string</code></td>
-</tr>
-</tbody>
-</table>
-<h4 id="optional-fields">Optional fields</h4>
-<table>
-<thead>
-<tr>
-<th align="left">Field</th>
-<th align="left">Description</th>
-<th align="left">Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left"><code>source_file_name</code></td>
-<td align="left">File containing the raw data</td>
-<td align="left"><code>string</code></td>
-</tr>
-<tr>
-<td align="left"><code>start_datetime_unix_ms</code></td>
-<td align="left">Same as <code>start_iso8601</code>, but using UNIX format</td>
-<td align="left"><code>string</code></td>
-</tr>
-<tr>
-<td align="left"><code>end_datetime_unix_ms</code></td>
-<td align="left">Same as <code>end_iso8601</code>, but using UNIX format</td>
-<td align="left"><code>string</code></td>
-</tr>
-<tr>
-<td align="left"><code>scale_factors</code></td>
-<td align="left">Scale factors applied to each channel</td>
-<td align="left"><code>float[]</code></td>
-</tr>
-<tr>
-<td align="left"><code>columns</code></td>
-<td align="left">Total amount of data channels per sample</td>
-<td align="left"><code>uint</code></td>
-</tr>
-</tbody>
-</table>
-<h4 id="legacy-fields">Legacy fields</h4>
-<p>This is work in progress. Sorry for the inconvenience.</p>
+<p>TSDF provides a unified, user-friendly format for both numerical sensor data and metadata, utilizing raw binary data and JSON-format text files for measurements/timestamps and metadata, respectively. It defines essential metadata fields to enhance data interpretability and exchangeability, aiming to bolster scientific reproducibility in studies reliant on digital biosensor data as a critical evidence base across various disease domains.</p>
+<h2 id="example-tsdf-metadata-json">Example: TSDF Metadata JSON</h2>
+<p>This example demonstrates a TSDF metadata file, showcasing the structured format used to easily interpret and read the corresponding binary data. For more intricate examples and detailed specifications, the paper serves as a comprehensive reference.</p>
+<pre><code class="language-json">{
+    &quot;study_id&quot;: &quot;voicedata&quot;,
+    &quot;subject_id&quot;: &quot;recruit089&quot;,
+    &quot;device_id&quot;: &quot;audiotechnica02&quot;,
+    &quot;endianness&quot;: &quot;little&quot;,
+    &quot;metadata_version&quot;: &quot;0.1&quot;,
+    &quot;start_iso8601&quot;: &quot;2016-08-09T10:31:00.000+00:00&quot;,
+    &quot;end_iso8601&quot;: &quot;2016-08-10T10:31:30.000+00:00&quot;,
+    &quot;sampling_rate&quot;: 44100,
+    &quot;rows&quot;: 1323000,
+    &quot;channels&quot;: [
+        &quot;left&quot;,
+        &quot;right&quot;
+    ],
+    &quot;units&quot;: [
+        &quot;unitless&quot;,
+        &quot;unitless&quot;
+    ],
+    &quot;compression&quot;: &quot;none&quot;,
+    &quot;data_type&quot;: &quot;int&quot;,
+    &quot;bits&quot;: 16,
+    &quot;file_name&quot;: &quot;audio_voice_089.raw&quot;
+}
+</code></pre>
+<p><strong>Explanation:</strong></p>
+<ul>
+<li>
+<p><code>study_id</code>: Identifies the study as "voicedata".</p>
+</li>
+<li>
+<p><code>subject_id</code>: Specifies the subject as "recruit089".</p>
+</li>
+<li>
+<p><code>device_id</code>: Indicates the device used as "audiotechnica02".</p>
+</li>
+<li>
+<p><code>endianness</code>: Specifies the byte order as "little".</p>
+</li>
+<li>
+<p><code>metadata_version</code>: Denotes the metadata version as "0.1".</p>
+</li>
+<li>
+<p><code>start_iso8601</code> and <code>end_iso8601</code>: Define the start and end timestamps of data collection in ISO 8601 format.</p>
+</li>
+<li>
+<p><code>sampling_rate</code>: Represents the data sampling rate as 44,100 samples per second.</p>
+</li>
+<li>
+<p><code>rows</code>: Specifies the number of data rows as 1,323,000.</p>
+</li>
+<li>
+<p><code>channels</code>: Lists the data channels as "left" and "right".</p>
+</li>
+<li>
+<p><code>units</code>: Specifies the units for each channel as "unitless".</p>
+</li>
+<li>
+<p><code>compression</code>: Indicates that no compression has been applied to the data.</p>
+</li>
+<li>
+<p><code>data_type</code>: Defines the data type as "int".</p>
+</li>
+<li>
+<p><code>bits</code>: Specifies the bit length as 16.</p>
+</li>
+<li>
+<p><code>file_name</code>: Names the binary file "audio_voice_089.raw" that contains the described data.</p>
+</li>
+</ul>
+<h2 id="the-python-library-tsdf">The python library - <code>tsdf</code></h2>
+<p>This Python library facilitates the manipulation of Time Series Data Format (TSDF) metadata and binary files, providing users with a familiar and structured interface. Leveraging the power of numpy arrays, it simplifies the process of working with TSDF data, allowing users to efficiently read, write, and manipulate both metadata and binary data. This approach enhances data management and analysis, making it a valuable tool for researchers and data scientists dealing with extensive physiological sensor data.</p>
+<p>The package is available in <a href="https://pypi.org/project/tsdf/">PyPI</a>.</p>
               
             </div>
           </div><footer>
@@ -269,5 +218,5 @@ It is a unified, standardized format for storing all types of physiological sens
 
 <!--
 MkDocs version : 1.4.2
-Build Date UTC : 2023-09-05 14:25:21.205464+00:00
+Build Date UTC : 2023-09-05 16:18:46.823527+00:00
 -->

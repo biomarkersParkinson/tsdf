@@ -21,11 +21,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://biomarkersparkinson.github.io/tsdf/tsdf_fields/</loc>
-         <lastmod>2023-09-05</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://biomarkersparkinson.github.io/tsdf/tsdf_fields_table/</loc>
          <lastmod>2023-09-05</lastmod>
          <changefreq>daily</changefreq>
