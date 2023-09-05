@@ -4,41 +4,75 @@ A package to load [TSDF data](https://arxiv.org/abs/2211.11294) into Python.
 
 ## What is `TSDF data`?
 
-`tsdf` stands for _time series data format_.
+`tsdf` stands for _`time series data format`_.
 It is a unified, standardized format for storing all types of physiological sensor data. It was originally introduced in this [preprint](https://arxiv.org/abs/2211.11294).
 
-### `TSDF data` in a nutshell
+TSDF provides a unified, user-friendly format for both numerical sensor data and metadata, utilizing raw binary data and JSON-format text files for measurements/timestamps and metadata, respectively. It defines essential metadata fields to enhance data interpretability and exchangeability, aiming to bolster scientific reproducibility in studies reliant on digital biosensor data as a critical evidence base across various disease domains.
 
-The key element of `TSDF data` is a metadata dictionary with the following:
 
-#### Mandatory fields
+## Example: TSDF Metadata JSON
 
-| Field              | Description                                                                                                     | Type       |
-|:-------------------|:----------------------------------------------------------------------------------------------------------------|:-----------|
-| `subject_id`       | Unique identifier of the subject                                                                                | `string`   |
-| `study_id`         | Unique identifier of the project or experiment                                                                  | `string`   |
-| `device_id`        | Unique identifier of the measurement device                                                                     | `string`   |
-| `endianness`       | [Byte order](https://en.wikipedia.org/wiki/Endianness) for numerical values in binary data ("big" or "little")  | `string`   |
-| `metadata_version` | Format version (used for backwards compatibility)                                                               | `string`   |
-| `start_iso8601`    | [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) time stamp for the start of the recording, with ms precision | `string`   |
-| `end_iso8601`      | Same as `start_iso8601`, but for the end of the recording                                                       | `string`   |
-| `rows`             | Total amount of samples per channel                                                                             | `uint`     |
-| `filename`         | Name of the file containing the measured data                                                                   | `string`   |
-| `channels`         | Labels for each data channel (_e.g.:_ `["time", "X", "Y", "Z"]` for 3D accelerometry)                           | `string[]` |
-| `units`            | Unit for each channel (_e.g.:_ `["ms"]` for time)                                                               | `string[]` |
-| `data_type`        | Number format of the measured data (_e.g.:_ `"float"`)                                                          | `string`   |
-| `bits`             | Bit-length of the number format                                                                                 | `string`   |
+This example demonstrates a TSDF metadata file, showcasing the structured format used to easily interpret and read the corresponding binary data. For more intricate examples and detailed specifications, the paper serves as a comprehensive reference.
 
-#### Optional fields
+```json
+{
+    "study_id": "voicedata",
+    "subject_id": "recruit089",
+    "device_id": "audiotechnica02",
+    "endianness": "little",
+    "metadata_version": "0.1",
+    "start_iso8601": "2016-08-09T10:31:00.000+00:00",
+    "end_iso8601": "2016-08-10T10:31:30.000+00:00",
+    "sampling_rate": 44100,
+    "rows": 1323000,
+    "channels": [
+        "left",
+        "right"
+    ],
+    "units": [
+        "unitless",
+        "unitless"
+    ],
+    "compression": "none",
+    "data_type": "int",
+    "bits": 16,
+    "file_name": "audio_voice_089.raw"
+}
+```
+**Explanation:**
 
-| Field                    | Description                                    | Type      |
-|:-------------------------|:-----------------------------------------------|:----------|
-| `source_file_name`       | File containing the raw data                   | `string`  |
-| `start_datetime_unix_ms` | Same as `start_iso8601`, but using UNIX format | `string`  |
-| `end_datetime_unix_ms`   | Same as `end_iso8601`, but using UNIX format   | `string`  |
-| `scale_factors`          | Scale factors applied to each channel          | `float[]` |
-| `columns`                | Total amount of data channels per sample       | `uint`    |
+- `study_id`: Identifies the study as "voicedata".
 
-#### Legacy fields
+- `subject_id`: Specifies the subject as "recruit089".
 
-This is work in progress. Sorry for the inconvenience.
+- `device_id`: Indicates the device used as "audiotechnica02".
+
+- `endianness`: Specifies the byte order as "little".
+
+- `metadata_version`: Denotes the metadata version as "0.1".
+
+- `start_iso8601` and `end_iso8601`: Define the start and end timestamps of data collection in ISO 8601 format.
+
+- `sampling_rate`: Represents the data sampling rate as 44,100 samples per second.
+
+- `rows`: Specifies the number of data rows as 1,323,000.
+
+- `channels`: Lists the data channels as "left" and "right".
+
+- `units`: Specifies the units for each channel as "unitless".
+
+- `compression`: Indicates that no compression has been applied to the data.
+
+- `data_type`: Defines the data type as "int".
+
+- `bits`: Specifies the bit length as 16.
+
+- `file_name`: Names the binary file "audio_voice_089.raw" that contains the described data.
+
+
+
+## The python library - `tsdf`
+This Python library facilitates the manipulation of Time Series Data Format (TSDF) metadata and binary files, providing users with a familiar and structured interface. Leveraging the power of numpy arrays, it simplifies the process of working with TSDF data, allowing users to efficiently read, write, and manipulate both metadata and binary data. This approach enhances data management and analysis, making it a valuable tool for researchers and data scientists dealing with extensive physiological sensor data.
+
+
+The package is available in [PyPI](https://pypi.org/project/tsdf/).

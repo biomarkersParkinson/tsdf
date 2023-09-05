@@ -143,4 +143,4 @@ dmypy.json
 
 #VS Code
 .vscode/
-
+.gitignore
