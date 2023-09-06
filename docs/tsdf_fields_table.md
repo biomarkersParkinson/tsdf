@@ -72,5 +72,6 @@ The following table lists the legacy fields from the time when the format was ca
 | `start_datetime_iso8601` | `start_iso8601`             | -        |
 | `end_datetime_iso8601`   | `end_iso8601`               | -        |
 
-### Revised Field Requirements
-As presented in the table above, the `quantities` and `units` fields are now required to be arrays.
+**Note**
+
+As presented in the table above, the `quantities` and `units` fields are required to be arrays within the TSDF standard.
