@@ -5,7 +5,7 @@ name: Python package
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, improve-docs ]
   pull_request:
     branches: [ main ]
 
@@ -19,6 +19,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
       with:
@@ -30,6 +32,16 @@ jobs:
     - name: Test with pytest
       run: |
         poetry run pytest
+    - name: Build the docs
+      run: |
+        poetry run mkdocs build
+    - name: Prepare for deploying
+      run: |
+        git config user.name 'github-actions[bot]' && git config user.email 'github-actions[bot]@users.noreply.github.com'
+    - name: Deploy the docs
+      run: |
+        poetry run mkdocs gh-deploy
+
     #     poetry run coverage xml
     # - name: Upload coverage
     #   if: matrix.python-version == 3.9
