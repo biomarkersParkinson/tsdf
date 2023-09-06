@@ -59,22 +59,20 @@ def _convert_to_array(data: Dict[str, Any], key: str) -> Dict[str, Any]:
             ]
     return data
 
-
-def convert_metadata_tsdb_to_tsdf(filepath: str) -> None:
+def convert_tsdb_to_tsdf(data: Dict[str, Any]) -> Dict[str, Any]:
     """
-    This function converts a metadata file (JSON) from TSDB (legacy) to TSDF (0.1) format.
+    Converts a data from TSDB (legacy) to TSDF (0.1) format.
 
-    :param filepath: The path to the JSON file to process
+    :param data: The data in legacy (tsdb) format.
+    :return: The data in tsdf format.
     """
-    with open(filepath, "r") as f:
-        data = json.load(f)
-    # rename the keys in the dictionary
-    data = _rename_keys_in_metadata(data)
+     # rename the keys in the dictionary
+    new_data = _rename_keys_in_metadata(data)
     # convert the values of the specified keys to arrays
     for key in TSDB_ARRAY_KEYS:
-        data = _convert_to_array(data, key)
-    with open(filepath, "w") as f:
-        json.dump(data, f)
+        new_data = _convert_to_array(new_data, key)
+
+    return new_data
 
 
 def generate_tsdf_metadata_from_tsdb(filepath_existing: str, filepath_new: str) -> None:
@@ -86,16 +84,24 @@ def generate_tsdf_metadata_from_tsdb(filepath_existing: str, filepath_new: str) 
     """
     with open(filepath_existing, "r") as f:
         data = json.load(f)
-    # rename the keys in the dictionary
-    data = _rename_keys_in_metadata(data)
-    # convert the values of the specified keys to arrays
-    for key in TSDB_ARRAY_KEYS:
-        data = _convert_to_array(data, key)
+    new_data = convert_tsdb_to_tsdf(data)
     with open(filepath_new, "w") as f:
-        json.dump(data, f)
+        json.dump(new_data, f)
+
+def convert_file_tsdb_to_tsdf(filepath: str) -> None:
+    """
+    This function converts a metadata file (JSON) from TSDB (legacy) to TSDF (0.1) format. It overwrites the original file.
+
+    :param filepath: The path to the JSON file to process
+    """
+    with open(filepath, "r") as f:
+        data = json.load(f)
+    new_data = convert_tsdb_to_tsdf(data)
+    with open(filepath, "w") as f:
+        json.dump(new_data, f)
 
 
-def convert_metadatas_tsdb_to_tsdf(directory: str) -> None:
+def convert_files_tsdb_to_tsdf(directory: str) -> None:
     """
     This function converts all metadata files in a directory (and its subdirectories) from TSDB (legacy) to TSDF (0.1) format.
     It walks through all files in a directory (and its subdirectories),
@@ -104,4 +110,4 @@ def convert_metadatas_tsdb_to_tsdf(directory: str) -> None:
     :param directory: The directory to process files in
     """
     for filepath in get_files_matching(directory, METADATA_NAMING_PATTERN):
-        convert_metadata_tsdb_to_tsdf(filepath)
+        convert_file_tsdb_to_tsdf(filepath)

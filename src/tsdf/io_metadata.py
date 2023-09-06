@@ -8,7 +8,6 @@ from tsdf.tsdf_metadata import (
     TSDFMetadataFieldValueError,
 )
 
-
 def read_data(data: Any, source_path: str) -> Dict[str, TSDFMetadata]:
     """
     Function used to parse the JSON object containing TSDF metadata. It returns a
@@ -142,12 +141,14 @@ def _is_a_list(value) -> bool:
     return isinstance(value, list)
 
 
-def check_tsdf_mandatory_fields(dictionary: Dict[str, Any]) -> None:
+def contains_tsdf_mandatory_fields(dictionary: Dict[str, Any]) -> bool:
     """
     Verifies that all the mandatory properties for TSDF metadata are provided,
     and are in the right format.
 
     :param dictionary: dictionary containing TSDF metadata.
+
+    :return: True if the metadata is well formatted.
 
     :raises TSDFMetadataFieldError: if the TSDF metadata file is missing a mandatory field.
     :raises TSDFMetadataFieldValueError: if the TSDF metadata file contains an invalid value.
@@ -169,6 +170,8 @@ def check_tsdf_mandatory_fields(dictionary: Dict[str, Any]) -> None:
 
     for key, value in dictionary.items():
         _check_tsdf_property_format(key, value, version)
+
+    return True
 
 
 def _check_tsdf_property_format(key: str, value, version: str) -> None:

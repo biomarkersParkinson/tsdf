@@ -61,7 +61,7 @@ class TSDFMetadata:
         :param dir_path: path to the directory where the metadata file is stored.
         :param file_name: (optional) name of the metadata file.
         """
-        io_metadata.check_tsdf_mandatory_fields(dictionary)
+        io_metadata.contains_tsdf_mandatory_fields(dictionary)
         for key, value in dictionary.items():
             setattr(self, key, value)
         self.file_dir_path = dir_path

@@ -11,6 +11,7 @@ from typing import Any, Dict, List
 import numpy as np
 from tsdf import io_metadata
 from tsdf.constants import METADATA_NAMING_PATTERN
+from tsdf.utils_legacy_TSDF import convert_tsdb_to_tsdf
 from tsdf.numpy_utils import (
     data_type_numpy_to_tsdf,
     data_type_tsdf_to_numpy,
@@ -39,13 +40,31 @@ def load_metadata_file(file) -> Dict[str, TSDFMetadata]:
     # Parse the data and verify that it complies with TSDF requirements
     return io_metadata.read_data(data, abs_path)
 
+def load_metadata_legacy_file(file) -> Dict[str, TSDFMetadata]:
+    """Loads a TSDB metadata file, i.e., legacy format of the TSDF. It returns a dictionary representing the metadata.
 
-def get_files_matching(directory: str, criteria) -> list:
+    :param file: file object containing the TSDF metadata.
+
+    :return: dictionary of TSDFMetadata objects.
+    """
+
+    # The data is isomorphic to a JSON
+    legacy_data = json.load(file)
+
+    abs_path = os.path.realpath(file.name)
+
+    tsdf_data = convert_tsdb_to_tsdf(legacy_data)
+
+    # Parse the data and verify that it complies with TSDF requirements
+    return io_metadata.read_data(tsdf_data, abs_path)
+
+
+def get_files_matching(directory: str,  criteria: str) -> list:
     """
     Get all files matching the criteria in the directory and its subdirectories.
 
     :param directory: directory to search in.
-    :param criteria: criteria to match.
+    :param criteria: criteria to match (e.g., `**meta.json`).
 
     :return: list of files matching the criteria.
     """
