@@ -6,7 +6,7 @@ from tsdf.constants import TestConstants as CONST
 
 
 class TestConversion(unittest.TestCase):
-    """Test whether the conversion from TSDB (legacy metadata format) to TSDF works."""
+    """Test whether the conversion from TSDB (legacy metadata format) to TSDF works. """
 
     def test_conversion(self):
         path_to_file = os.path.join(CONST.TEST_DATA_DIR, "ppp_format_meta_legacy.json")
