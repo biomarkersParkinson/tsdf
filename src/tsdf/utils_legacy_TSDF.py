@@ -1,7 +1,7 @@
 import json
-from tsdf.constants import METADATA_NAMING_PATTERN
-from tsdf.io import get_files_matching
 from typing import Dict, Any
+from tsdf.constants import METADATA_NAMING_PATTERN
+
 
 # the old (TSDB) and new field (TSDF) names
 TSDB_TSDF_KEY_MAP = {
@@ -96,7 +96,7 @@ def convert_file_tsdb_to_tsdf(filepath: str) -> None:
     """
     with open(filepath, "r") as f:
         data = json.load(f)
-    new_data = convert_tsdb_to_tsdf(data)
+        new_data = convert_tsdb_to_tsdf(data)
     with open(filepath, "w") as f:
         json.dump(new_data, f)
 
@@ -109,5 +109,7 @@ def convert_files_tsdb_to_tsdf(directory: str) -> None:
 
     :param directory: The directory to process files in
     """
+    from tsdf.io import get_files_matching
+    
     for filepath in get_files_matching(directory, METADATA_NAMING_PATTERN):
         convert_file_tsdb_to_tsdf(filepath)

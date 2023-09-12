@@ -11,7 +11,6 @@ from typing import Any, Dict, List
 import numpy as np
 from tsdf import io_metadata
 from tsdf.constants import METADATA_NAMING_PATTERN
-from tsdf.utils_legacy_TSDF import convert_tsdb_to_tsdf
 from tsdf.numpy_utils import (
     data_type_numpy_to_tsdf,
     data_type_tsdf_to_numpy,
@@ -47,7 +46,8 @@ def load_metadata_legacy_file(file) -> Dict[str, TSDFMetadata]:
 
     :return: dictionary of TSDFMetadata objects.
     """
-
+    from tsdf.utils_legacy_tsdf import convert_tsdb_to_tsdf
+    
     # The data is isomorphic to a JSON
     legacy_data = json.load(file)
 

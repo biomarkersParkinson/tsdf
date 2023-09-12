@@ -1,7 +1,7 @@
 import os
 import unittest
 from tsdf import io
-from tsdf.utils_legacy_TSDF import generate_tsdf_metadata_from_tsdb
+from tsdf.utils_legacy_tsdf import generate_tsdf_metadata_from_tsdb
 from tsdf.constants import TestConstants as CONST
 
 

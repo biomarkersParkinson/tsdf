@@ -8,18 +8,24 @@ from tsdf.constants import TestConstants as CONST
 class TestMetadataFileReading(unittest.TestCase):
     """Test loading of the metadata file."""
 
-    def test_load_json_file(self):
+    def test_load_metadata_file(self):
         """Test that a json file gets loaded correctly."""
         with open(CONST.TEST_DATA_FILES["hierarchical"], "r") as file:
             data = io.load_metadata_file(file)
             self.assertEqual(len(data), 4)
 
-    def test_load_json_path(self):
+    def test_load_metadata_legacy_file(self):
+        """Test that a json file gets loaded correctly."""
+        with open(CONST.TEST_DATA_FILES["legacy"], "r") as file:
+            data = io.load_metadata_legacy_file(file)
+            self.assertEqual(len(data), 4)
+
+    def test_load_metadata_from_path(self):
         """Test that a json file from a path gets loaded correctly."""
         data = io.load_metadata_from_path(CONST.TEST_DATA_FILES["hierarchical"])
         self.assertEqual(len(data), 4)
 
-    def test_load_json_string(self):
+    def test_load_metadata_string(self):
         """Test that a json object gets loaded from a string correctly."""
         with open(CONST.TEST_DATA_FILES["hierarchical"], "r") as file:
             json_string = file.read()
