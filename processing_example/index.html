@@ -8,7 +8,7 @@
     <title>Usage Examples - tsdf</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
@@ -17,12 +17,11 @@
         var mkdocs_page_url = "/tsdf/processing_example/";
       </script>
     
-    <script src="../js/jquery-3.6.0.min.js" defer></script>
     <!--[if lt IE 9]>
       <script src="../js/html5shiv.min.js"></script>
     <![endif]-->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
-      <script>hljs.initHighlightingOnLoad();</script> 
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
 </head>
 
 <body class="wy-body-for-nav" role="document">
@@ -85,6 +84,10 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#transform-legacy-tsdb-format-to-the-current-tsdf-v01">Transform legacy (TSDB) format to the current TSDF v0.1</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#verify-tsdf-format">Verify TSDF format</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#random-data-access">Random Data Access</a>
+    </li>
     </ul>
                 </li>
               </ul>
@@ -109,8 +112,8 @@
       <div class="wy-nav-content">
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-      <li>Usage Examples</li>
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a> &raquo;</li>
+      <li class="breadcrumb-item active">Usage Examples</li>
     <li class="wy-breadcrumbs-aside">
           <a href="https://github.com/biomarkersParkinson/tsdf/blob/main/docs/processing_example.ipynb" class="icon icon-github"> Edit on GitHub</a>
     </li>
@@ -1180,7 +1183,7 @@ Licensed under the Apache License, Version 2.0.
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
@@ -1195,14 +1198,14 @@ Licensed under the Apache License, Version 2.0.
                 </div>
             </clipboard-copy>
         </div>
-            <div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">import</span> <span class="nn">tsdf</span>
-<span class="kn">import</span> <span class="nn">os</span>
+            <div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">tsdf</span>
 <span class="kn">from</span> <span class="nn">tsdf.constants</span> <span class="kn">import</span> <span class="n">TestConstants</span> <span class="k">as</span> <span class="n">TEST_CONST</span>
 </pre></div>
-<div id="cell-1" class="clipboard-copy-txt">import tsdf
-import os
+<div id="cell-1" class="clipboard-copy-txt">import os
 import numpy as np
+import tsdf
 from tsdf.constants import TestConstants as TEST_CONST</div>
     
         </div>
@@ -1224,13 +1227,13 @@ from tsdf.constants import TestConstants as TEST_CONST</div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
@@ -1257,30 +1260,6 @@ from tsdf.constants import TestConstants as TEST_CONST</div>
     </div>
 
 </div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>The autoreload extension is already loaded. To reload it, use:
-  %reload_ext autoreload
-</pre>
-</div>
-</div>
-
-</div>
-
 </div>
 
 </div>
@@ -1313,7 +1292,7 @@ from tsdf.constants import TestConstants as TEST_CONST</div>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[15]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
@@ -1363,11 +1342,27 @@ print(f"Number of rows:\t\t\t {dummy_data.shape[0]}")</div>
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
 
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>Data type used for storing:	 int16
-Data dimensions:		 (10, 3)
-Number of rows:			 10
-</pre>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">AttributeError</span>                            Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[5], line 4</span>
+<span class="ansi-green-intense-fg ansi-bold">      1</span> dummy_data_name = &#34;example_10_3_int16&#34;
+<span class="ansi-green-intense-fg ansi-bold">      3</span> dummy_metadata = tsdf.load_metadata_from_path(os.path.join(TEST_CONST.TEST_DATA_DIR, dummy_data_name + TEST_CONST.METADATA_EXTENSION))[dummy_data_name + TEST_CONST.BINARY_EXTENSION]
+<span class="ansi-green-fg">----&gt; 4</span> dummy_data = dummy_metadata.load_binary()
+<span class="ansi-green-intense-fg ansi-bold">      5</span> print(f&#34;Data type used for storing:\t {dummy_data.dtype}&#34;)
+<span class="ansi-green-intense-fg ansi-bold">      6</span> print(f&#34;Data dimensions:\t\t {dummy_data.shape}&#34;)
+
+File <span class="ansi-green-fg">~/git/biomarkers_repo/tsdf/src/tsdf/tsdf_metadata.py:89</span>, in <span class="ansi-cyan-fg">TSDFMetadata.load_binary</span><span class="ansi-blue-fg">(self)</span>
+<span class="ansi-green-intense-fg ansi-bold">     83</span> def load_binary(self) -&gt; ndarray:
+<span class="ansi-green-intense-fg ansi-bold">     84</span>     &#34;&#34;&#34;
+<span class="ansi-green-intense-fg ansi-bold">     85</span>     Load the binary file from the same directory where the metadata is saved.
+<span class="ansi-green-intense-fg ansi-bold">     86</span> 
+<span class="ansi-green-intense-fg ansi-bold">     87</span>     :return: binary file as a numpy array.
+<span class="ansi-green-intense-fg ansi-bold">     88</span>     &#34;&#34;&#34;
+<span class="ansi-green-fg">---&gt; 89</span>     return io.load_binary_from_metadata(self.file_dir_path, self)
+
+<span class="ansi-red-fg">AttributeError</span>: module &#39;tsdf.io&#39; has no attribute &#39;load_binary_from_metadata&#39;</pre>
 </div>
 </div>
 
@@ -1393,7 +1388,7 @@ Number of rows:			 10
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[16]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
@@ -1468,7 +1463,7 @@ Number of rows:			 10
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[17]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
@@ -1538,7 +1533,7 @@ print(f"Binary formatting that can be inferred from the NumPy array:\n{bin_meta}
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[18]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
@@ -1593,7 +1588,7 @@ processed_dummy_metadata_1 = tsdf.write_binary_file(
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[19]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
@@ -1639,7 +1634,7 @@ tsdf.write_metadata([processed_dummy_metadata_1], processed_dummy_data_name_1 + 
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[20]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
@@ -1720,7 +1715,7 @@ tsdf.write_metadata([processed_dummy_metadata_1, processed_dummy_metadata_2], "t
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[21]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
@@ -1815,7 +1810,7 @@ new_meta_3 =  tsdf.write_binary_file(TEST_CONST.TEST_OUTPUT_DATA_DIR, file_prefi
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[22]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
@@ -1849,7 +1844,7 @@ tsdf.write_metadata([new_meta_1], file_prefix + "_1" + TEST_CONST.METADATA_EXTEN
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[23]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
@@ -1895,7 +1890,7 @@ tsdf.write_metadata([new_meta_1, new_meta_2, new_meta_3], file_prefix + "_3" + T
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[24]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
@@ -1910,7 +1905,7 @@ tsdf.write_metadata([new_meta_1, new_meta_2, new_meta_3], file_prefix + "_3" + T
                 </div>
             </clipboard-copy>
         </div>
-            <div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">from</span> <span class="nn">tsdf.utils_legacy_TSDF</span> <span class="kn">import</span> <span class="n">generate_tsdf_metadata_from_tsdb</span><span class="p">,</span> <span class="n">convert_metadata_tsdb_to_tsdf</span><span class="p">,</span> <span class="n">convert_metadatas_tsdb_to_tsdf</span>
+            <div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">from</span> <span class="nn">tsdf.utils_legacy_tsdf</span> <span class="kn">import</span> <span class="n">generate_tsdf_metadata_from_tsdb</span><span class="p">,</span> <span class="n">convert_metadata_tsdb_to_tsdf</span><span class="p">,</span> <span class="n">convert_metadatas_tsdb_to_tsdf</span>
 
 <span class="c1"># Path to the metadata file</span>
 <span class="n">path_to_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">TEST_CONST</span><span class="o">.</span><span class="n">TEST_DATA_DIR</span><span class="p">,</span> <span class="s2">&quot;ppp_format_meta_legacy.json&quot;</span><span class="p">)</span>
@@ -1925,7 +1920,7 @@ tsdf.write_metadata([new_meta_1, new_meta_2, new_meta_3], file_prefix + "_3" + T
 <span class="c1"># Convert all metadata files in the directory from TSDB to TSDF format</span>
 <span class="c1"># convert_metadatas_tsdb_to_tsdf(path_to_dir)</span>
 </pre></div>
-<div id="cell-12" class="clipboard-copy-txt">from tsdf.utils_legacy_TSDF import generate_tsdf_metadata_from_tsdb, convert_metadata_tsdb_to_tsdf, convert_metadatas_tsdb_to_tsdf
+<div id="cell-12" class="clipboard-copy-txt">from tsdf.utils_legacy_tsdf import generate_tsdf_metadata_from_tsdb, convert_metadata_tsdb_to_tsdf, convert_metadatas_tsdb_to_tsdf
 
 # Path to the metadata file
 path_to_file = os.path.join(TEST_CONST.TEST_DATA_DIR, "ppp_format_meta_legacy.json")
@@ -1939,6 +1934,140 @@ generate_tsdf_metadata_from_tsdb(path_to_file, path_to_new_file)
 
 # Convert all metadata files in the directory from TSDB to TSDF format
 # convert_metadatas_tsdb_to_tsdf(path_to_dir)</div>
+    
+        </div>
+    </div>
+
+</div>
+</div>
+
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="verify-tsdf-format">Verify TSDF format<a class="anchor-link" href="#verify-tsdf-format">&#182;</a></h2><p>Method used to verify formatting of existing files.</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+        
+        
+        <div class="CodeMirror cm-s-jupyter">
+        <div class="zeroclipboard-container">
+            <clipboard-copy for="cell-13">
+            <div>
+                <span class="notice" hidden>Copied!</span>
+                <svg aria-hidden="true" width="20" height="20" viewBox="0 0 16 16" version="1.1"  data-view-component="true" class="clipboard-copy-icon">
+                    <path fill="currentColor" fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path>
+                    <path fill="currentColor" fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path>
+                </svg>
+                </div>
+            </clipboard-copy>
+        </div>
+            <div class="highlight-ipynb hl-python"><pre><span></span><span class="n">path_to_metadata_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">TEST_CONST</span><span class="o">.</span><span class="n">TEST_DATA_DIR</span><span class="p">,</span> <span class="s2">&quot;ppp_format_meta.json&quot;</span><span class="p">)</span>
+<span class="c1"># Verify the metadata file</span>
+<span class="c1">#verify_tsdf_metadata(path_to_metadata_file)</span>
+<span class="c1"># Verify the data files</span>
+<span class="c1">#verify_tsdf_data(path_to_metadata_file)</span>
+<span class="c1"># Verify the metadata and data files</span>
+<span class="c1">#verify_tsdf(path_to_metadata_file)</span>
+</pre></div>
+<div id="cell-13" class="clipboard-copy-txt">path_to_metadata_file = os.path.join(TEST_CONST.TEST_DATA_DIR, "ppp_format_meta.json")
+# Verify the metadata file
+#verify_tsdf_metadata(path_to_metadata_file)
+# Verify the data files
+#verify_tsdf_data(path_to_metadata_file)
+# Verify the metadata and data files
+#verify_tsdf(path_to_metadata_file)</div>
+    
+        </div>
+    </div>
+
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[1], line 1</span>
+<span class="ansi-green-fg">----&gt; 1</span> path_to_metadata_file = os.path.join(TEST_CONST.TEST_DATA_DIR, &#34;ppp_format_meta.json&#34;)
+<span class="ansi-green-intense-fg ansi-bold">      2</span> # Verify the metadata file
+<span class="ansi-green-intense-fg ansi-bold">      3</span> #verify_tsdf_metadata(path_to_metadata_file)
+<span class="ansi-green-intense-fg ansi-bold">      4</span> # Verify the data files
+<span class="ansi-green-intense-fg ansi-bold">      5</span> #verify_tsdf_data(path_to_metadata_file)
+<span class="ansi-green-intense-fg ansi-bold">      6</span> # Verify the metadata and data files
+<span class="ansi-green-intense-fg ansi-bold">      7</span> #verify_tsdf(path_to_metadata_file)
+
+<span class="ansi-red-fg">NameError</span>: name &#39;os&#39; is not defined</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="random-data-access">Random Data Access<a class="anchor-link" href="#random-data-access">&#182;</a></h2><p>Allow random data access from time-series.</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+        
+        
+        <div class="CodeMirror cm-s-jupyter">
+        <div class="zeroclipboard-container">
+            <clipboard-copy for="cell-14">
+            <div>
+                <span class="notice" hidden>Copied!</span>
+                <svg aria-hidden="true" width="20" height="20" viewBox="0 0 16 16" version="1.1"  data-view-component="true" class="clipboard-copy-icon">
+                    <path fill="currentColor" fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path>
+                    <path fill="currentColor" fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path>
+                </svg>
+                </div>
+            </clipboard-copy>
+        </div>
+            <div class="highlight-ipynb hl-python"><pre><span></span>
+</pre></div>
+<div id="cell-14" class="clipboard-copy-txt"></div>
     
         </div>
     </div>
@@ -1990,13 +2119,14 @@ generate_tsdf_metadata_from_tsdb(path_to_file, path_to_new_file)
     
   </span>
 </div>
-    <script>var base_url = '..';</script>
-    <script src="../js/theme_extra.js" defer></script>
-    <script src="../js/theme.js" defer></script>
-    <script defer>
-        window.onload = function () {
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+    <script>
+        jQuery(function () {
             SphinxRtdTheme.Navigation.enable(true);
-        };
+        });
     </script>
 
 </body>
