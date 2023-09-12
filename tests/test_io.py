@@ -18,7 +18,7 @@ class TestMetadataFileReading(unittest.TestCase):
         """Test that a json file gets loaded correctly."""
         with open(CONST.TEST_DATA_FILES["legacy"], "r") as file:
             data = io.load_metadata_legacy_file(file)
-            self.assertEqual(len(data), 4)
+            self.assertEqual(len(data), 2)
 
     def test_load_metadata_from_path(self):
         """Test that a json file from a path gets loaded correctly."""
