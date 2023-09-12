@@ -55,6 +55,7 @@ In this section, we will comprehensively explore the mandatory and optional fiel
 | `num_filters`                | `int`        | Number of filters applied to refine or isolate specific frequency bands. |
 | `num_ME1_coeff`              | `int`        | Number of ME1 coefficients considered during data processing. |
 | `max_frequency_filter`       | `int`        | Highest frequency limit for any applied filter. |
+| `segment_number`             | `int`        | Original segment number in the tsdf format.     |
 
 
 
