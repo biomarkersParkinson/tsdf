@@ -1,7 +1,8 @@
 import copy
 from typing import Any, Dict, List
 from numpy import ndarray
-from tsdf import io, io_metadata
+from tsdf.io import load_binary_from_metadata
+from tsdf.io_metadata import contains_tsdf_mandatory_fields
 
 
 class TSDFMetadataFieldError(Exception):
@@ -61,7 +62,7 @@ class TSDFMetadata:
         :param dir_path: path to the directory where the metadata file is stored.
         :param file_name: (optional) name of the metadata file.
         """
-        io_metadata.contains_tsdf_mandatory_fields(dictionary)
+        contains_tsdf_mandatory_fields(dictionary)
         for key, value in dictionary.items():
             setattr(self, key, value)
         self.file_dir_path = dir_path
@@ -86,4 +87,4 @@ class TSDFMetadata:
 
         :return: binary file as a numpy array.
         """
-        return io.load_binary_from_metadata(self.file_dir_path, self)
+        return load_binary_from_metadata(self.file_dir_path, self)

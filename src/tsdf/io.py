@@ -47,7 +47,7 @@ def load_metadata_legacy_file(file) -> Dict[str, TSDFMetadata]:
     :return: dictionary of TSDFMetadata objects.
     """
     from tsdf.utils_legacy_tsdf import convert_tsdb_to_tsdf
-    
+
     # The data is isomorphic to a JSON
     legacy_data = json.load(file)
 
