@@ -1,16 +1,16 @@
 import os
 import unittest
 import numpy as np
-from tests.test_io import load_single_bin_file
+from tests.test_read_binary import load_single_bin_file
 from tsdf.constants import TestConstants as CONST
-from tsdf.load_tsdf import (
+from tsdf.read_tsdf import (
     load_metadata_from_path
 )
-from tsdf.io_binary import (
-    load_binary_from_metadata,
+from tsdf.read_binary import load_binary_from_metadata
+from tsdf.write_binary import (
     write_binary_file
 )
-from tsdf.tsdf_metadata import TSDFMetadata
+from tsdf.tsdfmetadata import TSDFMetadata
 from tsdf.write_tsdf import write_metadata
 
 

@@ -9,9 +9,9 @@ import os
 from typing import Dict, List
 from tsdf.file_utils import get_files_matching
 from tsdf.constants import METADATA_NAMING_PATTERN
-from tsdf.io_metadata import read_data
+from tsdf.parse_metadata import read_data
 from tsdf.legacy_tsdf_utils import convert_tsdb_to_tsdf
-from tsdf.tsdf_metadata import TSDFMetadata
+from tsdf.tsdfmetadata import TSDFMetadata
 
 
 def load_metadata_file(file) -> Dict[str, TSDFMetadata]:

@@ -1,6 +1,6 @@
 import unittest
 from tsdf.constants import TestConstants as CONST
-from tsdf.load_tsdf import (
+from tsdf.read_tsdf import (
     load_metadata_file,
     load_metadata_from_path,
     load_metadata_string,

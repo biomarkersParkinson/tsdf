@@ -3,7 +3,7 @@ from importlib.metadata import version
 
 __version__ = version("tsdf")
 
-from .load_tsdf import (
+from .read_tsdf import (
     load_metadata_file,
     load_metadata_from_path,
     load_metadata_string,
@@ -13,13 +13,11 @@ from .write_tsdf import (
     write_metadata,
 )
     
-from .io_binary import (
-    load_binary_from_metadata,
-    load_binary_file,
-    get_metadata_from_ndarray,
+from .write_binary import (
     write_binary_file,
 )
+from .read_binary import (
+    load_binary_from_metadata,
+)
 
-
-    
-from .tsdf_metadata import TSDFMetadata
+from .tsdfmetadata import TSDFMetadata

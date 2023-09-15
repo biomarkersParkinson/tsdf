@@ -6,8 +6,8 @@ Reference: https://arxiv.org/abs/2211.11294
 
 from typing import Any, Dict, List
 from tsdf.file_utils import write_to_file
-from tsdf.io_metadata import confirm_dir_of_metadata
-from tsdf.tsdf_metadata import TSDFMetadata, TSDFMetadataFieldValueError
+from tsdf.parse_metadata import confirm_dir_of_metadata
+from tsdf.tsdfmetadata import TSDFMetadata, TSDFMetadataFieldValueError
 
 
 def write_metadata(metadatas: List[TSDFMetadata], file_name: str) -> None:

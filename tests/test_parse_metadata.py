@@ -1,7 +1,7 @@
 import json
 import unittest
-from tsdf import io_metadata
-from tsdf.tsdf_metadata import TSDFMetadataFieldError, TSDFMetadataFieldValueError
+from tsdf import parse_metadata
+from tsdf.tsdfmetadata import TSDFMetadataFieldError, TSDFMetadataFieldValueError
 from tsdf.constants import TestConstants as CONST
 
 
@@ -14,7 +14,7 @@ class TestWrongFormatting(unittest.TestCase):
         with open(path, "r") as file:
             with self.assertRaises(TSDFMetadataFieldValueError) as context:
                 data = json.load(file)
-                io_metadata.read_data(data, path)  # This should trigger an exception
+                parse_metadata.read_data(data, path)  # This should trigger an exception
 
     def test_load_missing_key(self):
         """Test that a file with a missing mandatory key raises an exception."""
@@ -22,7 +22,7 @@ class TestWrongFormatting(unittest.TestCase):
         with open(path, "r") as file:
             with self.assertRaises(TSDFMetadataFieldError) as context:
                 data = json.load(file)
-                io_metadata.read_data(data, path)  # This should trigger an exception
+                parse_metadata.read_data(data, path)  # This should trigger an exception
 
 
 class TestTSDFMetadataParsing(unittest.TestCase):
@@ -33,9 +33,9 @@ class TestTSDFMetadataParsing(unittest.TestCase):
         path = CONST.TEST_DATA_FILES["flat"]
         with open(path, "r") as file:
             data = json.load(file)
-            streams = io_metadata.read_data(data, path)
-            first_stream = io_metadata.get_file_metadata_at_index(streams, 0)
+            streams = parse_metadata.read_data(data, path)
+            first_stream = parse_metadata.get_file_metadata_at_index(streams, 0)
             version: str = first_stream.metadata_version
         for key, value in data.items():
-            if io_metadata.is_mandatory_type(key, version):
+            if parse_metadata.is_mandatory_type(key, version):
                 self.assertTrue(value == first_stream.__getattribute__(key))
