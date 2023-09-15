@@ -1,18 +1,30 @@
 import os
 import unittest
 import numpy as np
-from tests.test_read_binary import load_single_bin_file
+from tsdf import read_tsdf
 from tsdf.constants import TestConstants as CONST
 from tsdf.read_tsdf import (
     load_metadata_from_path
 )
-from tsdf.read_binary import load_binary_from_metadata
-from tsdf.write_binary import (
-    write_binary_file
-)
+from tsdf import read_binary, read_tsdf
+from tsdf import write_binary, write_tsdf
 from tsdf.tsdfmetadata import TSDFMetadata
-from tsdf.write_tsdf import write_metadata
 
+def load_single_bin_file(dir_path: str, file_name: str) -> np.ndarray:
+    """
+    Load a single binary file from the given directory path and file name.
+
+    :param dir_path: The directory path where the binary file is located.
+    :param file_name: The name of the binary file without the extension.
+
+    :returns: The binary data as a numpy array.
+    """
+    path = os.path.join(dir_path, file_name + CONST.METADATA_EXTENSION)
+    metadata = read_tsdf.load_metadata_from_path(path)
+    data = read_binary.load_binary_from_metadata(
+        dir_path, metadata[file_name + CONST.BINARY_EXTENSION]
+    )
+    return data
 
 class TestMetadataFileWriting(unittest.TestCase):
     """Test writing of metadata files based on loaded data."""
@@ -31,20 +43,20 @@ class TestMetadataFileWriting(unittest.TestCase):
             use_case_name + CONST.BINARY_EXTENSION
         ]
 
-        new_meta_1 = write_binary_file(
+        new_meta_1 = write_binary.write_binary_file(
             CONST.TEST_OUTPUT_DATA_DIR,
             test_name + "_1.bin",
             data_1,
             loaded_meta.get_plain_tsdf_dict_copy(),
         )
-        new_meta_2 = write_binary_file(
+        new_meta_2 = write_binary.write_binary_file(
             CONST.TEST_OUTPUT_DATA_DIR,
             test_name + "_2.bin",
             data_2,
             loaded_meta.get_plain_tsdf_dict_copy(),
         )
 
-        new_meta_3 = write_binary_file(
+        new_meta_3 = write_binary.write_binary_file(
             CONST.TEST_OUTPUT_DATA_DIR,
             test_name + "_3.bin",
             data_3,
@@ -52,7 +64,7 @@ class TestMetadataFileWriting(unittest.TestCase):
         )
 
         # Combine two TSDF files
-        write_metadata(
+        write_tsdf.write_metadata(
             [new_meta_1, new_meta_2, new_meta_3],
             test_name + CONST.METADATA_EXTENSION,
         )
@@ -77,7 +89,7 @@ class TestMetadataFileWriting(unittest.TestCase):
         original_metadata = load_metadata_from_path(path)[
             file_name + CONST.BINARY_EXTENSION
         ]
-        original_data = load_binary_from_metadata(
+        original_data = read_binary.load_binary_from_metadata(
             CONST.TEST_DATA_DIR, original_metadata
         )
 
@@ -86,7 +98,7 @@ class TestMetadataFileWriting(unittest.TestCase):
 
         # Write new binary file
         new_file_name = "tmp_test_example_10_3_int16_to_float32"
-        new_metadata = write_binary_file(
+        new_metadata = write_binary.write_binary_file(
             CONST.TEST_OUTPUT_DATA_DIR,
             new_file_name + CONST.BINARY_EXTENSION,
             new_data,
@@ -94,7 +106,7 @@ class TestMetadataFileWriting(unittest.TestCase):
         )
 
         # Write the new metadata file
-        write_metadata([new_metadata], new_file_name + CONST.METADATA_EXTENSION)
+        write_tsdf.write_metadata([new_metadata], new_file_name + CONST.METADATA_EXTENSION)
 
         # Read file again to check contents
         final_data = load_single_bin_file(CONST.TEST_OUTPUT_DATA_DIR, new_file_name)
