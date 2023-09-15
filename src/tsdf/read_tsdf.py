@@ -7,10 +7,10 @@ Reference: https://arxiv.org/abs/2211.11294
 import json
 import os
 from typing import Dict, List
-from tsdf.file_utils import get_files_matching
+from tsdf import file_utils 
 from tsdf.constants import METADATA_NAMING_PATTERN
-from tsdf.parse_metadata import read_data
-from tsdf.legacy_tsdf_utils import convert_tsdb_to_tsdf
+from tsdf import parse_metadata 
+from tsdf import legacy_tsdf_utils 
 from tsdf.tsdfmetadata import TSDFMetadata
 
 
@@ -28,7 +28,7 @@ def load_metadata_file(file) -> Dict[str, TSDFMetadata]:
     abs_path = os.path.realpath(file.name)
 
     # Parse the data and verify that it complies with TSDF requirements
-    return read_data(data, abs_path)
+    return parse_metadata.read_data(data, abs_path)
 
 def load_metadata_legacy_file(file) -> Dict[str, TSDFMetadata]:
     """Loads a TSDB metadata file, i.e., legacy format of the TSDF. It returns a dictionary representing the metadata.
@@ -43,10 +43,10 @@ def load_metadata_legacy_file(file) -> Dict[str, TSDFMetadata]:
 
     abs_path = os.path.realpath(file.name)
 
-    tsdf_data = convert_tsdb_to_tsdf(legacy_data)
+    tsdf_data = legacy_tsdf_utils.convert_tsdb_to_tsdf(legacy_data)
 
     # Parse the data and verify that it complies with TSDF requirements
-    return read_data(tsdf_data, abs_path)
+    return parse_metadata.read_data(tsdf_data, abs_path)
 
 def load_metadatas_from_dir(
     dir_path: str, naming_pattern=METADATA_NAMING_PATTERN
@@ -60,7 +60,7 @@ def load_metadatas_from_dir(
     :return: dictionary of TSDFMetadata objects.
     """
     # Get all files in the directory
-    file_paths = get_files_matching(dir_path, naming_pattern)
+    file_paths = file_utils.get_files_matching(dir_path, naming_pattern)
 
     # Load all files
     metadatas = []
@@ -85,7 +85,7 @@ def load_metadata_from_path(path: str) -> Dict[str, TSDFMetadata]:
 
     abs_path = os.path.realpath(path)
     # Parse the data and verify that it complies with TSDF requirements
-    return read_data(data, abs_path)
+    return parse_metadata.read_data(data, abs_path)
 
 
 def load_metadata_string(json_str) -> Dict[str, TSDFMetadata]:
@@ -101,4 +101,4 @@ def load_metadata_string(json_str) -> Dict[str, TSDFMetadata]:
     data = json.loads(json_str)
 
     # Parse the data and verify that it complies with TSDF requirements
-    return read_data(data, "")
+    return parse_metadata.read_data(data, "")

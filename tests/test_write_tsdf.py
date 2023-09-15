@@ -1,13 +1,9 @@
 import os
 import unittest
 import numpy as np
-from tsdf import read_tsdf
 from tsdf.constants import TestConstants as CONST
-from tsdf.read_tsdf import (
-    load_metadata_from_path
-)
-from tsdf import read_binary, read_tsdf
-from tsdf import write_binary, write_tsdf
+from tsdf import read_tsdf, write_tsdf
+from tsdf import read_binary, write_binary 
 from tsdf.tsdfmetadata import TSDFMetadata
 
 def load_single_bin_file(dir_path: str, file_name: str) -> np.ndarray:
@@ -39,7 +35,7 @@ class TestMetadataFileWriting(unittest.TestCase):
 
         use_case_name = "example_10_3_int16"
         path = CONST.TEST_DATA_FILES[use_case_name]
-        loaded_meta: TSDFMetadata = load_metadata_from_path(path)[
+        loaded_meta: TSDFMetadata = read_tsdf.load_metadata_from_path(path)[
             use_case_name + CONST.BINARY_EXTENSION
         ]
 
@@ -71,7 +67,7 @@ class TestMetadataFileWriting(unittest.TestCase):
 
         # Read the written metadata
 
-        meta = load_metadata_from_path(
+        meta = read_tsdf.load_metadata_from_path(
             os.path.join(
                 CONST.TEST_OUTPUT_DATA_DIR, test_name + CONST.METADATA_EXTENSION
             )
@@ -86,7 +82,7 @@ class TestMetadataFileWriting(unittest.TestCase):
         # Load existing TSDF metadata and the corresponding binary data
         file_name = "example_10_3_int16"
         path = os.path.join(CONST.TEST_DATA_DIR, file_name + CONST.METADATA_EXTENSION)
-        original_metadata = load_metadata_from_path(path)[
+        original_metadata = read_tsdf.load_metadata_from_path(path)[
             file_name + CONST.BINARY_EXTENSION
         ]
         original_data = read_binary.load_binary_from_metadata(

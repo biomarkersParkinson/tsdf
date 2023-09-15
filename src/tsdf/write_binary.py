@@ -7,12 +7,8 @@ Reference: https://arxiv.org/abs/2211.11294
 import os
 from typing import Any, Dict
 import numpy as np
-from tsdf.numpy_utils import (
-    data_type_numpy_to_tsdf,
-    bits_numpy_to_tsdf,
-    endianness_numpy_to_tsdf,
-    rows_numpy_to_tsdf,
-)
+from tsdf import numpy_utils 
+
 from tsdf.tsdfmetadata import TSDFMetadata
 
 
@@ -27,10 +23,10 @@ def _get_metadata_from_ndarray(data: np.ndarray) -> Dict[str, Any]:
     """
 
     metadata = {
-        "data_type": data_type_numpy_to_tsdf(data),
-        "bits": bits_numpy_to_tsdf(data),
-        "endianness": endianness_numpy_to_tsdf(data),
-        "rows": rows_numpy_to_tsdf(data),
+        "data_type": numpy_utils.data_type_numpy_to_tsdf(data),
+        "bits": numpy_utils.bits_numpy_to_tsdf(data),
+        "endianness": numpy_utils.endianness_numpy_to_tsdf(data),
+        "rows": numpy_utils.rows_numpy_to_tsdf(data),
     }
     return metadata
 

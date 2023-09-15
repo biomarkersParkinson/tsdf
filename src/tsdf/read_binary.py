@@ -5,13 +5,8 @@ Reference: https://arxiv.org/abs/2211.11294
 """
 
 import os
-from typing import Any, Dict
 import numpy as np
-from tsdf.numpy_utils import (
-    data_type_tsdf_to_numpy,
-    bytes_tsdf_to_numpy,
-    endianness_tsdf_to_numpy,
-)
+from tsdf import numpy_utils 
 from tsdf import tsdfmetadata
 
 
@@ -65,9 +60,9 @@ def _load_binary_file(
     :return: numpy array containing the data.
     """
 
-    s_endianness = endianness_tsdf_to_numpy(endianness)
-    s_type = data_type_tsdf_to_numpy(data_type)
-    s_n_bytes = bytes_tsdf_to_numpy(n_bits)
+    s_endianness = numpy_utils.endianness_tsdf_to_numpy(endianness)
+    s_type = numpy_utils.data_type_tsdf_to_numpy(data_type)
+    s_n_bytes = numpy_utils.bytes_tsdf_to_numpy(n_bits)
     format_string = "".join([s_endianness, s_type, s_n_bytes])
 
     # Load the data and reshape

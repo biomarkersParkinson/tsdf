@@ -5,8 +5,8 @@ Reference: https://arxiv.org/abs/2211.11294
 """
 
 from typing import Any, Dict, List
-from tsdf.file_utils import write_to_file
-from tsdf.parse_metadata import confirm_dir_of_metadata
+from tsdf import file_utils
+from tsdf import parse_metadata
 from tsdf.tsdfmetadata import TSDFMetadata, TSDFMetadataFieldValueError
 
 
@@ -26,11 +26,13 @@ def write_metadata(metadatas: List[TSDFMetadata], file_name: str) -> None:
 
     if len(metadatas) == 1:
         meta = metadatas[0]
-        write_to_file(meta.get_plain_tsdf_dict_copy(), meta.file_dir_path, file_name)
+        file_utils.write_to_file(
+            meta.get_plain_tsdf_dict_copy(), meta.file_dir_path, file_name
+        )
         return
 
     # Ensure that the metadata files can be combined
-    confirm_dir_of_metadata(metadatas)
+    parse_metadata.confirm_dir_of_metadata(metadatas)
 
     plain_meta = [meta.get_plain_tsdf_dict_copy() for meta in metadatas]
     overlap = _extract_common_fields(plain_meta)
@@ -41,7 +43,7 @@ def write_metadata(metadatas: List[TSDFMetadata], file_name: str) -> None:
 
     if len(plain_meta) > 0:
         overlap["sensors"] = _calculate_ovelaps_rec(plain_meta)
-    write_to_file(overlap, metadatas[0].file_dir_path, file_name)
+    file_utils.write_to_file(overlap, metadatas[0].file_dir_path, file_name)
 
 
 def _extract_common_fields(metadatas: List[Dict[str, Any]]) -> Dict[str, Any]:
