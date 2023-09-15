@@ -1,6 +1,7 @@
 import json
 from typing import Dict, Any
 from tsdf.constants import METADATA_NAMING_PATTERN
+from tsdf.file_utils import get_files_matching
 
 
 # the old (TSDB) and new field (TSDF) names
@@ -109,7 +110,6 @@ def convert_files_tsdb_to_tsdf(directory: str) -> None:
 
     :param directory: The directory to process files in
     """
-    from tsdf.io import get_files_matching
     
     for filepath in get_files_matching(directory, METADATA_NAMING_PATTERN):
         convert_file_tsdb_to_tsdf(filepath)

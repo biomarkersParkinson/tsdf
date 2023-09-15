@@ -1,7 +1,7 @@
 import os
 import unittest
-from tsdf import io
-from tsdf.utils_legacy_tsdf import generate_tsdf_metadata_from_tsdb
+from tsdf.load_tsdf import load_metadata_from_path
+from tsdf.legacy_tsdf_utils import generate_tsdf_metadata_from_tsdb
 from tsdf.constants import TestConstants as CONST
 
 
@@ -22,10 +22,10 @@ class TestConversion(unittest.TestCase):
         generate_tsdf_metadata_from_tsdb(path_to_file, path_to_new_file)
 
         # Load the generated metadata file
-        new_meta = io.load_metadata_from_path(path_to_new_file)
+        new_meta = load_metadata_from_path(path_to_new_file)
 
         # Load the existing metadata file
-        existing_meta = io.load_metadata_from_path(path_to_existing_tsdf_file)
+        existing_meta = load_metadata_from_path(path_to_existing_tsdf_file)
 
         # Compare the two metadata files (whether the mapped TSDFs fields are the same)
         self.assertEqual(

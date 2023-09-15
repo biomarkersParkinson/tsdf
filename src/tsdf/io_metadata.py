@@ -1,3 +1,9 @@
+"""
+Module for parsing TSDF metadata files.
+
+Reference: https://arxiv.org/abs/2211.11294
+"""
+
 import os
 from typing import Any, Dict, List
 
