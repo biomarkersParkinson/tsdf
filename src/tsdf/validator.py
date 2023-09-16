@@ -2,12 +2,12 @@ import os
 import argparse
 import traceback
 import json
-from tsdf import io
+from tsdf import read_tsdf, read_binary
 
 def validate_tsdf_format(file_path):
     try:
         # Read the meta data (this will check for compulsory fields and such)
-        metadata = io.load_metadata_from_path(file_path)
+        metadata = read_tsdf.load_metadata_from_path(file_path)
 
         # Get the absolute path of the file and cut off the file name
         abs_path = os.path.abspath(file_path)
@@ -20,7 +20,7 @@ def validate_tsdf_format(file_path):
             # print(json.dumps(file_metadata.get_plain_tsdf_dict_copy(), indent=4))
 
             # Load the binary data
-            binary_data = io.load_binary_from_metadata(abs_dir, file_metadata)
+            binary_data = read_binary.load_binary_from_metadata(abs_dir, file_metadata)
 
             # Success message
             print(f"Successfully loaded binary file {file_name}, resulting shape: {binary_data.shape}")
