@@ -66,8 +66,6 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#perform-light-data-processing">Perform light data processing</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#metadata-available-from-the-data-numpy-array">Metadata available from the data (NumPy array)</a>
-    </li>
     <li class="toctree-l3"><a class="reference internal" href="#write-the-processed-data">Write the processed data</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#write-the-tsdf-metadata-file-that-describes-the-processed-binary-data-format">Write the TSDF metadata file that describes the processed binary data format</a>
@@ -1181,7 +1179,7 @@ Licensed under the Apache License, Version 2.0.
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[26]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
@@ -1225,13 +1223,13 @@ from tsdf.constants import TestConstants as TEST_CONST</div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[27]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
@@ -1258,30 +1256,6 @@ from tsdf.constants import TestConstants as TEST_CONST</div>
     </div>
 
 </div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>The autoreload extension is already loaded. To reload it, use:
-  %reload_ext autoreload
-</pre>
-</div>
-</div>
-
-</div>
-
 </div>
 
 </div>
@@ -1314,7 +1288,7 @@ from tsdf.constants import TestConstants as TEST_CONST</div>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[28]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
@@ -1398,7 +1372,7 @@ Number of rows:			 10
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[29]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
@@ -1462,76 +1436,6 @@ Number of rows:			 10
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="metadata-available-from-the-data-numpy-array">Metadata available from the data (NumPy array)<a class="anchor-link" href="#metadata-available-from-the-data-numpy-array">&#182;</a></h3><p>The metadata will be used indirectly to generate the new TSDF metadata file.</p>
-
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[30]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-        
-        
-        <div class="CodeMirror cm-s-jupyter">
-        <div class="zeroclipboard-container">
-            <clipboard-copy for="cell-5">
-            <div>
-                <span class="notice" hidden>Copied!</span>
-                <svg aria-hidden="true" width="20" height="20" viewBox="0 0 16 16" version="1.1"  data-view-component="true" class="clipboard-copy-icon">
-                    <path fill="currentColor" fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path>
-                    <path fill="currentColor" fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path>
-                </svg>
-                </div>
-            </clipboard-copy>
-        </div>
-            <div class="highlight-ipynb hl-python"><pre><span></span><span class="n">bin_meta</span> <span class="o">=</span> <span class="n">tsdf</span><span class="o">.</span><span class="n">get_metadata_from_ndarray</span><span class="p">(</span><span class="n">processed_data_1</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Binary formatting that can be inferred from the NumPy array:</span><span class="se">\n</span><span class="si">{</span><span class="n">bin_meta</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-<div id="cell-5" class="clipboard-copy-txt">bin_meta = tsdf.get_metadata_from_ndarray(processed_data_1)
-print(f"Binary formatting that can be inferred from the NumPy array:\n{bin_meta}")</div>
-    
-        </div>
-    </div>
-
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>Binary formatting that can be inferred from the NumPy array:
-{&#39;data_type&#39;: &#39;float&#39;, &#39;bits&#39;: 32, &#39;endianness&#39;: &#39;little&#39;, &#39;rows&#39;: 10}
-</pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="write-the-processed-data">Write the processed data<a class="anchor-link" href="#write-the-processed-data">&#182;</a></h3><p>Write the processed data in binary format. The call returns the corresponding metadata object.</p>
 
 </div>
@@ -1543,12 +1447,12 @@ print(f"Binary formatting that can be inferred from the NumPy array:\n{bin_meta}
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[31]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
         <div class="zeroclipboard-container">
-            <clipboard-copy for="cell-6">
+            <clipboard-copy for="cell-5">
             <div>
                 <span class="notice" hidden>Copied!</span>
                 <svg aria-hidden="true" width="20" height="20" viewBox="0 0 16 16" version="1.1"  data-view-component="true" class="clipboard-copy-icon">
@@ -1566,7 +1470,7 @@ print(f"Binary formatting that can be inferred from the NumPy array:\n{bin_meta}
             <span class="n">metadata</span><span class="o">.</span><span class="n">get_plain_tsdf_dict_copy</span><span class="p">(),</span>
         <span class="p">)</span>
 </pre></div>
-<div id="cell-6" class="clipboard-copy-txt">processed_data_name_1 = "tmp_test_example_10_3_int16_to_float32"
+<div id="cell-5" class="clipboard-copy-txt">processed_data_name_1 = "tmp_test_example_10_3_int16_to_float32"
 processed_metadata_1 = tsdf.write_binary_file(
             TEST_CONST.TEST_OUTPUT_DATA_DIR,
             processed_data_name_1 + TEST_CONST.BINARY_EXTENSION,
@@ -1598,12 +1502,12 @@ processed_metadata_1 = tsdf.write_binary_file(
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[32]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
         <div class="zeroclipboard-container">
-            <clipboard-copy for="cell-7">
+            <clipboard-copy for="cell-6">
             <div>
                 <span class="notice" hidden>Copied!</span>
                 <svg aria-hidden="true" width="20" height="20" viewBox="0 0 16 16" version="1.1"  data-view-component="true" class="clipboard-copy-icon">
@@ -1616,7 +1520,7 @@ processed_metadata_1 = tsdf.write_binary_file(
             <div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Write new metadata file</span>
 <span class="n">tsdf</span><span class="o">.</span><span class="n">write_metadata</span><span class="p">([</span><span class="n">processed_metadata_1</span><span class="p">],</span> <span class="n">processed_data_name_1</span> <span class="o">+</span> <span class="n">TEST_CONST</span><span class="o">.</span><span class="n">METADATA_EXTENSION</span><span class="p">)</span>
 </pre></div>
-<div id="cell-7" class="clipboard-copy-txt"># Write new metadata file
+<div id="cell-6" class="clipboard-copy-txt"># Write new metadata file
 tsdf.write_metadata([processed_metadata_1], processed_data_name_1 + TEST_CONST.METADATA_EXTENSION)
 </div>
     
@@ -1644,12 +1548,12 @@ tsdf.write_metadata([processed_metadata_1], processed_data_name_1 + TEST_CONST.M
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[33]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
         <div class="zeroclipboard-container">
-            <clipboard-copy for="cell-8">
+            <clipboard-copy for="cell-7">
             <div>
                 <span class="notice" hidden>Copied!</span>
                 <svg aria-hidden="true" width="20" height="20" viewBox="0 0 16 16" version="1.1"  data-view-component="true" class="clipboard-copy-icon">
@@ -1682,7 +1586,7 @@ tsdf.write_metadata([processed_metadata_1], processed_data_name_1 + TEST_CONST.M
     <span class="s2">&quot;tmp_test_example_10_3_int16_to_int_n_float_meta.json&quot;</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
-<div id="cell-8" class="clipboard-copy-txt"># Preprocess the original data to generate another data source
+<div id="cell-7" class="clipboard-copy-txt"># Preprocess the original data to generate another data source
 processed_data_2 = (data * 1000).astype("int32")
 
 # Adjust the metadata slightly
@@ -1730,12 +1634,12 @@ tsdf.write_metadata(
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[34]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
         <div class="zeroclipboard-container">
-            <clipboard-copy for="cell-9">
+            <clipboard-copy for="cell-8">
             <div>
                 <span class="notice" hidden>Copied!</span>
                 <svg aria-hidden="true" width="20" height="20" viewBox="0 0 16 16" version="1.1"  data-view-component="true" class="clipboard-copy-icon">
@@ -1778,7 +1682,7 @@ tsdf.write_metadata(
     <span class="n">TEST_CONST</span><span class="o">.</span><span class="n">TEST_OUTPUT_DATA_DIR</span><span class="p">,</span> <span class="n">file_prefix</span> <span class="o">+</span> <span class="s2">&quot;_3.bin&quot;</span><span class="p">,</span> <span class="n">data_3</span><span class="p">,</span> <span class="n">new_metadata</span>
 <span class="p">)</span>
 </pre></div>
-<div id="cell-9" class="clipboard-copy-txt">rs = np.random.RandomState(seed=42)
+<div id="cell-8" class="clipboard-copy-txt">rs = np.random.RandomState(seed=42)
 data_1 = rs.rand(17, 1).astype(np.float32)
 data_2 = rs.rand(15, 2).astype(np.int16)
 data_3 = rs.rand(10, 3).astype(np.int16)
@@ -1836,12 +1740,12 @@ new_meta_3 = tsdf.write_binary_file(
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[35]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
         <div class="zeroclipboard-container">
-            <clipboard-copy for="cell-10">
+            <clipboard-copy for="cell-9">
             <div>
                 <span class="notice" hidden>Copied!</span>
                 <svg aria-hidden="true" width="20" height="20" viewBox="0 0 16 16" version="1.1"  data-view-component="true" class="clipboard-copy-icon">
@@ -1854,7 +1758,7 @@ new_meta_3 = tsdf.write_binary_file(
             <div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Write the first metadata file</span>
 <span class="n">tsdf</span><span class="o">.</span><span class="n">write_metadata</span><span class="p">([</span><span class="n">new_meta_1</span><span class="p">],</span> <span class="n">file_prefix</span> <span class="o">+</span> <span class="s2">&quot;_1&quot;</span> <span class="o">+</span> <span class="n">TEST_CONST</span><span class="o">.</span><span class="n">METADATA_EXTENSION</span><span class="p">)</span>
 </pre></div>
-<div id="cell-10" class="clipboard-copy-txt"># Write the first metadata file
+<div id="cell-9" class="clipboard-copy-txt"># Write the first metadata file
 tsdf.write_metadata([new_meta_1], file_prefix + "_1" + TEST_CONST.METADATA_EXTENSION)</div>
     
         </div>
@@ -1870,12 +1774,12 @@ tsdf.write_metadata([new_meta_1], file_prefix + "_1" + TEST_CONST.METADATA_EXTEN
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[36]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
         <div class="zeroclipboard-container">
-            <clipboard-copy for="cell-11">
+            <clipboard-copy for="cell-10">
             <div>
                 <span class="notice" hidden>Copied!</span>
                 <svg aria-hidden="true" width="20" height="20" viewBox="0 0 16 16" version="1.1"  data-view-component="true" class="clipboard-copy-icon">
@@ -1891,7 +1795,7 @@ tsdf.write_metadata([new_meta_1], file_prefix + "_1" + TEST_CONST.METADATA_EXTEN
     <span class="n">file_prefix</span> <span class="o">+</span> <span class="s2">&quot;_3&quot;</span> <span class="o">+</span> <span class="n">TEST_CONST</span><span class="o">.</span><span class="n">METADATA_EXTENSION</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
-<div id="cell-11" class="clipboard-copy-txt"># Combine and write all metadata files
+<div id="cell-10" class="clipboard-copy-txt"># Combine and write all metadata files
 tsdf.write_metadata(
     [new_meta_1, new_meta_2, new_meta_3],
     file_prefix + "_3" + TEST_CONST.METADATA_EXTENSION,
@@ -1922,12 +1826,12 @@ tsdf.write_metadata(
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[37]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
         <div class="zeroclipboard-container">
-            <clipboard-copy for="cell-12">
+            <clipboard-copy for="cell-11">
             <div>
                 <span class="notice" hidden>Copied!</span>
                 <svg aria-hidden="true" width="20" height="20" viewBox="0 0 16 16" version="1.1"  data-view-component="true" class="clipboard-copy-icon">
@@ -1958,7 +1862,7 @@ tsdf.write_metadata(
 <span class="c1"># Convert all metadata files in the directory from TSDB to TSDF format</span>
 <span class="c1"># convert_metadatas_tsdb_to_tsdf(path_to_dir)</span>
 </pre></div>
-<div id="cell-12" class="clipboard-copy-txt">from tsdf.legacy_tsdf_utils import (
+<div id="cell-11" class="clipboard-copy-txt">from tsdf.legacy_tsdf_utils import (
     generate_tsdf_metadata_from_tsdb,
     convert_file_tsdb_to_tsdf,
     convert_files_tsdb_to_tsdf,
@@ -2004,12 +1908,12 @@ generate_tsdf_metadata_from_tsdb(path_to_file, path_to_new_file)
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[38]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
         <div class="zeroclipboard-container">
-            <clipboard-copy for="cell-13">
+            <clipboard-copy for="cell-12">
             <div>
                 <span class="notice" hidden>Copied!</span>
                 <svg aria-hidden="true" width="20" height="20" viewBox="0 0 16 16" version="1.1"  data-view-component="true" class="clipboard-copy-icon">
@@ -2022,12 +1926,12 @@ generate_tsdf_metadata_from_tsdb(path_to_file, path_to_new_file)
             <div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># from tsdf import validator</span>
 <span class="n">path_to_metadata_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">TEST_CONST</span><span class="o">.</span><span class="n">TEST_DATA_DIR</span><span class="p">,</span> <span class="s2">&quot;ppp_format_meta.json&quot;</span><span class="p">)</span>
 <span class="c1"># Verify the metadata file</span>
-<span class="c1"># validator.validate_tsdf_format(path_to_metadata_file)</span>
+<span class="c1">#validator.validate_tsdf_format(path_to_metadata_file)</span>
 </pre></div>
-<div id="cell-13" class="clipboard-copy-txt"># from tsdf import validator
+<div id="cell-12" class="clipboard-copy-txt"># from tsdf import validator
 path_to_metadata_file = os.path.join(TEST_CONST.TEST_DATA_DIR, "ppp_format_meta.json")
 # Verify the metadata file
-# validator.validate_tsdf_format(path_to_metadata_file)</div>
+#validator.validate_tsdf_format(path_to_metadata_file)</div>
     
         </div>
     </div>
