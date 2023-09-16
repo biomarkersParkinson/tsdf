@@ -70,10 +70,9 @@ class TestConstants:
         "hierarchical": os.path.join(TEST_DATA_DIR, "hierarchical_meta.json"),
         "wrongversion": os.path.join(TEST_DATA_DIR, "wrongversion_meta_fail.json"),
         "missingkey": os.path.join(TEST_DATA_DIR, "missingkey_meta_fail.json"),
-        "example_10_3_int16": os.path.join(
-            TEST_DATA_DIR, "example_10_3_int16_meta.json"
-        ),
+        "example_10_3_int16": os.path.join(TEST_DATA_DIR, "example_10_3_int16_meta.json"),
         "ppp": os.path.join(TEST_DATA_DIR, "ppp_format_meta.json"),
+        "legacy": os.path.join(TEST_DATA_DIR, "ppp_format_meta_legacy.json"),
     }
     """ Dictionary used for accessing test data files. """
 

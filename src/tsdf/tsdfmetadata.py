@@ -1,8 +1,7 @@
 import copy
 from typing import Any, Dict, List
 from numpy import ndarray
-from tsdf import io, io_metadata
-
+from tsdf import parse_metadata, read_binary
 
 class TSDFMetadataFieldError(Exception):
     "Raised when the TSDFMetadata is missing an obligatory field."
@@ -61,7 +60,7 @@ class TSDFMetadata:
         :param dir_path: path to the directory where the metadata file is stored.
         :param file_name: (optional) name of the metadata file.
         """
-        io_metadata.check_tsdf_mandatory_fields(dictionary)
+        parse_metadata.contains_tsdf_mandatory_fields(dictionary)
         for key, value in dictionary.items():
             setattr(self, key, value)
         self.file_dir_path = dir_path
@@ -86,4 +85,4 @@ class TSDFMetadata:
 
         :return: binary file as a numpy array.
         """
-        return io.load_binary_from_metadata(self.file_dir_path, self)
+        return read_binary.load_binary_from_metadata(self.file_dir_path, self)

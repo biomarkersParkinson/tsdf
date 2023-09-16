@@ -1,15 +1,16 @@
+"""
+Module for parsing TSDF metadata files.
+
+Reference: https://arxiv.org/abs/2211.11294
+"""
+
 import os
 from typing import Any, Dict, List
 
 from tsdf import constants
-from tsdf.tsdf_metadata import (
-    TSDFMetadataFieldError,
-    TSDFMetadata,
-    TSDFMetadataFieldValueError,
-)
+from tsdf import tsdfmetadata 
 
-
-def read_data(data: Any, source_path: str) -> Dict[str, TSDFMetadata]:
+def read_data(data: Any, source_path: str) -> Dict[str, 'tsdfmetadata.TSDFMetadata']:
     """
     Function used to parse the JSON object containing TSDF metadata. It returns a
     list of TSDFMetadata objects, where each object describes formatting of a binary file.
@@ -23,7 +24,7 @@ def read_data(data: Any, source_path: str) -> Dict[str, TSDFMetadata]:
     # Check if the version is supported
     version = data["metadata_version"]
     if not version in constants.SUPPORTED_TSDF_VERSIONS:
-        raise TSDFMetadataFieldValueError(f"TSDF file version {version} not supported.")
+        raise tsdfmetadata.TSDFMetadataFieldValueError(f"TSDF file version {version} not supported.")
 
     defined_properties: Dict[str, Any] = {}
     return _read_struct(data, defined_properties.copy(), source_path, version)
@@ -31,7 +32,7 @@ def read_data(data: Any, source_path: str) -> Dict[str, TSDFMetadata]:
 
 def _read_struct(
     data: Any, defined_properties: Dict[str, Any], source_path, version: str
-) -> Dict[str, TSDFMetadata]:
+) -> Dict[str, 'tsdfmetadata.TSDFMetadata']:
     """
     Recursive method used to parse the TSDF metadata in a hierarchical
     order (from the root towards the leaves).
@@ -43,9 +44,9 @@ def _read_struct(
 
     :return: list of TSDFMetadata objects.
 
-    :raises TSDFMetadataFieldError: if the TSDF metadata file is missing a mandatory field.
+    :raises tsdf_metadata.TSDFMetadataFieldError: if the TSDF metadata file is missing a mandatory field.
     """
-    all_streams: Dict[str, TSDFMetadata] = {}
+    all_streams: Dict[str, 'tsdfmetadata.TSDFMetadata'] = {}
     remaining_data = {}
     leaf: bool = True
 
@@ -66,11 +67,11 @@ def _read_struct(
             path = os.path.split(source_path)
             file_dir = os.path.join(path[0])
             meta_file_name = path[1]
-            all_streams[bin_file_name] = TSDFMetadata(
+            all_streams[bin_file_name] = tsdfmetadata.TSDFMetadata(
                 defined_properties, file_dir, meta_file_name
             )
-        except TSDFMetadataFieldError as exc:
-            raise TSDFMetadataFieldError(
+        except tsdfmetadata.TSDFMetadataFieldError as exc:
+            raise tsdfmetadata.TSDFMetadataFieldError(
                 "A property 'file_name' is missing in the TSDF metadata file."
             ) from exc
 
@@ -142,33 +143,37 @@ def _is_a_list(value) -> bool:
     return isinstance(value, list)
 
 
-def check_tsdf_mandatory_fields(dictionary: Dict[str, Any]) -> None:
+def contains_tsdf_mandatory_fields(dictionary: Dict[str, Any]) -> bool:
     """
     Verifies that all the mandatory properties for TSDF metadata are provided,
     and are in the right format.
 
     :param dictionary: dictionary containing TSDF metadata.
 
-    :raises TSDFMetadataFieldError: if the TSDF metadata file is missing a mandatory field.
-    :raises TSDFMetadataFieldValueError: if the TSDF metadata file contains an invalid value.
+    :return: True if the metadata is well formatted.
+
+    :raises tsdf_metadata.TSDFMetadataFieldError: if the TSDF metadata file is missing a mandatory field.
+    :raises tsdf_metadata.TSDFMetadataFieldValueError: if the TSDF metadata file contains an invalid value.
     """
     version_key = "metadata_version"
     if not version_key in dictionary.keys():
-        raise TSDFMetadataFieldError(f"TSDF structure is missing key '{version_key}'")
+        raise tsdfmetadata.TSDFMetadataFieldError(f"TSDF structure is missing key '{version_key}'")
 
     version = dictionary[version_key]
     for key in constants.MANDATORY_TSDF_KEYS[version]:
         if not key in dictionary.keys():
-            raise TSDFMetadataFieldError(f"TSDF structure is missing key '{key}'")
+            raise tsdfmetadata.TSDFMetadataFieldError(f"TSDF structure is missing key '{key}'")
     units = "units"
     channels = "channels"
     if len(dictionary[units]) != len(dictionary[channels]):
-        raise TSDFMetadataFieldValueError(
+        raise tsdfmetadata.TSDFMetadataFieldValueError(
             f"TSDF structure requires equal number of {units} and {channels}"
         )
 
     for key, value in dictionary.items():
         _check_tsdf_property_format(key, value, version)
+
+    return True
 
 
 def _check_tsdf_property_format(key: str, value, version: str) -> None:
@@ -181,7 +186,7 @@ def _check_tsdf_property_format(key: str, value, version: str) -> None:
     :param value: value of the TSDF metadata field.
     :param version: version of the TSDF used within the file.
 
-    :raises TSDFMetadataFieldValueError: if the TSDF metadata file contains an invalid value.
+    :raises tsdf_metadata.TSDFMetadataFieldValueError: if the TSDF metadata file contains an invalid value.
     """
     if not is_mandatory_type(key, version):
         return
@@ -190,14 +195,14 @@ def _check_tsdf_property_format(key: str, value, version: str) -> None:
     type_name = constants.MANDATORY_TSDF_KEYS_VALUES[version][index]
 
     if not isinstance(value, constants.KEY_VALUE_TYPES[type_name]):
-        raise TSDFMetadataFieldValueError(
+        raise tsdfmetadata.TSDFMetadataFieldValueError(
             f"The given value for {key} is not in the expected ({type_name}) format."
         )
 
 
 def get_file_metadata_at_index(
-    metadata: Dict[str, TSDFMetadata], index: int
-) -> TSDFMetadata:
+    metadata: Dict[str, 'tsdfmetadata.TSDFMetadata'], index: int
+) -> 'tsdfmetadata.TSDFMetadata':
     """
     Returns the metadata object at the position defined by the index.
 
@@ -215,23 +220,23 @@ def get_file_metadata_at_index(
     raise IndexError("The index is out of range.")
 
 
-def confirm_dir_of_metadata(metadatas: List[TSDFMetadata]) -> None:
+def confirm_dir_of_metadata(metadatas: List['tsdfmetadata.TSDFMetadata']) -> None:
     """
     The method is used to confirm whether all the metadata files are expected in the same directory.
 
     :param metadatas: list of metadata objects.
 
-    :raises TSDFMetadataFieldValueError: if the metadata files are not in the same directory or describe the same binaries.
+    :raises tsdf_metadata.TSDFMetadataFieldValueError: if the metadata files are not in the same directory or describe the same binaries.
     """
     metadata_iter = iter(metadatas)
     init_metadata = next(metadata_iter)
 
     for curr_metadata in metadata_iter:
         if init_metadata.file_dir_path != curr_metadata.file_dir_path:
-            raise TSDFMetadataFieldValueError(
+            raise tsdfmetadata.TSDFMetadataFieldValueError(
                 "Metadata files have to be in the same folder to be combined."
             )
         if init_metadata.file_name == curr_metadata.file_name:
-            raise TSDFMetadataFieldValueError(
+            raise tsdfmetadata.TSDFMetadataFieldValueError(
                 "Two metadata objects cannot reference the same binary file (file_name)."
             )
