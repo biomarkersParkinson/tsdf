@@ -1,12 +1,12 @@
 import os
 import unittest
-from tsdf import io
-from tsdf.utils_legacy_TSDF import generate_tsdf_metadata_from_tsdb
+from tsdf import read_tsdf
+from tsdf import legacy_tsdf_utils
 from tsdf.constants import TestConstants as CONST
 
 
 class TestConversion(unittest.TestCase):
-    """Test whether the conversion from TSDB (legacy metadata format) to TSDF works."""
+    """Test whether the conversion from TSDB (legacy metadata format) to TSDF works. """
 
     def test_conversion(self):
         path_to_file = os.path.join(CONST.TEST_DATA_DIR, "ppp_format_meta_legacy.json")
@@ -19,13 +19,13 @@ class TestConversion(unittest.TestCase):
         )
 
         # Generate a TSDF metadata file from TSDB
-        generate_tsdf_metadata_from_tsdb(path_to_file, path_to_new_file)
+        legacy_tsdf_utils.generate_tsdf_metadata_from_tsdb(path_to_file, path_to_new_file)
 
         # Load the generated metadata file
-        new_meta = io.load_metadata_from_path(path_to_new_file)
+        new_meta = read_tsdf.load_metadata_from_path(path_to_new_file)
 
         # Load the existing metadata file
-        existing_meta = io.load_metadata_from_path(path_to_existing_tsdf_file)
+        existing_meta = read_tsdf.load_metadata_from_path(path_to_existing_tsdf_file)
 
         # Compare the two metadata files (whether the mapped TSDFs fields are the same)
         self.assertEqual(
