@@ -25,17 +25,24 @@ def validate_tsdf_format(file_path):
             # Success message
             print(f"Successfully loaded binary file {file_name}, resulting shape: {binary_data.shape}")
 
+        return True
 
     except Exception as e:
         print(f"Error while validating: {e}")
         #traceback.print_exc()
+        return False
 
 def main():
+    # Parse the arguments
     parser = argparse.ArgumentParser(description='Validate a file content against the TSDF format.')
     parser.add_argument('file_path', help='Path to the file to validate')
     args = parser.parse_args()
 
-    validate_tsdf_format(args.file_path)
+    # Perform validation
+    is_valid = validate_tsdf_format(args.file_path)
+
+    # Exit with error code 1 if the validation failed
+    exit(0 if is_valid else 1)
 
 if __name__ == '__main__':
     main()
