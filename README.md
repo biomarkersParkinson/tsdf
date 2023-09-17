@@ -30,6 +30,16 @@ poetry install
 poetry run pytest
 ```
 
+### Building the documentation
+
+We use [mkdocs](https://www.mkdocs.org/) to build the documentation. If you want to build the documentation locally, the following commands will prove useful:
+
+```bash
+mkdocs build       # build the documentation
+mkdocs serve       # serve the documentation on a local server
+mkdocs gh-deploy   # deploy the documentation to GitHub pages
+```
+
 ## Contributing
 
 Interested in contributing? Check out the contributing guidelines. Please note that this project is released with a Code of Conduct. By contributing to this project, you agree to abide by its terms.
