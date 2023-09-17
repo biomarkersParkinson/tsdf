@@ -82,10 +82,6 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../usage/">Usage</a>
-                </li>
-              </ul>
-              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../contact/">Contact</a>
                 </li>
               </ul>
@@ -1305,6 +1301,7 @@ import tsdf</div>
 <span class="n">data_name</span> <span class="o">=</span> <span class="s2">&quot;example_10_3_int16&quot;</span>
 
 <span class="c1"># Multiple metadata files (for each binary) are loaded into a dictionary</span>
+<span class="c1"># mapping the binary file name to the metadata object</span>
 <span class="n">metadata_dict</span> <span class="o">=</span> <span class="n">tsdf</span><span class="o">.</span><span class="n">load_metadata_from_path</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">data_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">data_name</span><span class="si">}</span><span class="s2">_meta.json&quot;</span><span class="p">)</span>
 
 <span class="c1"># Retrieve the metadata object we want, using the name of the binary as key</span>
@@ -1322,6 +1319,7 @@ import tsdf</div>
 data_name = "example_10_3_int16"
 
 # Multiple metadata files (for each binary) are loaded into a dictionary
+# mapping the binary file name to the metadata object
 metadata_dict = tsdf.load_metadata_from_path(f"{data_dir}/{data_name}_meta.json")
 
 # Retrieve the metadata object we want, using the name of the binary as key
@@ -1901,7 +1899,7 @@ Successfully loaded binary file ppp_format_samples.bin, resulting shape: (17, 6)
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
         <a href="../installation/" class="btn btn-neutral float-left" title="Installation"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../usage/" class="btn btn-neutral float-right" title="Usage">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../contact/" class="btn btn-neutral float-right" title="Contact">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -1931,7 +1929,7 @@ Successfully loaded binary file ppp_format_samples.bin, resulting shape: (17, 6)
       <span><a href="../installation/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../usage/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../contact/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
