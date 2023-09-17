@@ -1,8 +1,8 @@
-# Welcome to tsdf
+# Welcome to the TSDF (Time Series Data Format) Python package
 
-A package to load [TSDF data](https://arxiv.org/abs/2211.11294) into Python.
+A package to work with TSDF data in Python. This implementation is based on the the TSDF format specification, which can be found in this [preprint](https://arxiv.org/abs/2211.11294).
 
-## What is `TSDF data`?
+## What is TSDF data?
 
 `tsdf` stands for _`time series data format`_.
 It is a unified, standardized format for storing all types of physiological sensor data. It was originally introduced in this [preprint](https://arxiv.org/abs/2211.11294).
@@ -10,9 +10,9 @@ It is a unified, standardized format for storing all types of physiological sens
 TSDF provides a unified, user-friendly format for both numerical sensor data and metadata, utilizing raw binary data and JSON-format text files for measurements/timestamps and metadata, respectively. It defines essential metadata fields to enhance data interpretability and exchangeability, aiming to bolster scientific reproducibility in studies reliant on digital biosensor data as a critical evidence base across various disease domains.
 
 
-## Example: TSDF Metadata JSON
+## Example: TSDF Metadata
 
-This example demonstrates a TSDF metadata file, showcasing the structured format used to easily interpret and read the corresponding binary data. For more intricate examples and detailed specifications, the paper serves as a comprehensive reference.
+This example demonstrates a TSDF metadata JSON file, showcasing the structured format used to easily interpret and read the corresponding binary data. For more intricate examples and detailed specifications, the paper serves as a comprehensive reference.
 
 ```json
 {

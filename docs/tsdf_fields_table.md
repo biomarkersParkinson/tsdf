@@ -1,8 +1,6 @@
-# `TSDF` `data` fields
+# TSDF fields
 
-
-The key element of `TSDF` `data` is a metadata dictionary.
-In this section, we will comprehensively explore the mandatory and optional fields within the TSDF format, providing insights into its structured data organization.
+TSDF metadata is represented as a dictionary. In this section, we will comprehensively list the mandatory and optional fields within the TSDF format.
 
 ## TSDF mandatory fields
 
