@@ -1,30 +1,16 @@
 # Installation
 
-## Requirements
-
-`tsdf` requires a recent version of [Python](https://www.python.org/) and a Python package manager (such as `pip`).
-Chances are that you have them already installed.
-You can check if that's the case from the command line:
-
-```bash
-python --version
-```
-
-```bash
-pip --version
-```
-
 ## Installing tsdf
 
 The package is available in [PyPI](https://pypi.org/project/tsdf/). The latest stable release can be installed using:
 
 ```bash
-$ pip install tsdf
+pip install tsdf
 ```
 
-### Installing the develop version
+## Installing the development version
 
-The source code is stored and maintained on [GitHub](https://github.com/biomarkersParkinson/tsdf).
+The source code is available on [GitHub](https://github.com/biomarkersParkinson/tsdf).
 
 If you have `git` installed, the latest version of tsdf can be installed by typing:
 

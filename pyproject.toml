@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "tsdf"
-version = "0.3.0"
+version = "0.4.0"
 description = "A Python library that provides methods for encoding and decoding TSDF (Time Series Data Format) data, which allows you to easily create, manipulate and serialize TSDF files in your Python code."
 authors = ["Peter Kok <p.kok@esciencecenter.nl>",
             "Pablo Rodríguez <p.rodriguez-sanchez@esciencecenter.nl>",
@@ -34,6 +34,9 @@ coverage = "^7.0.0"
 pytest-cov = "^4.0.0"
 pandas = "^1.5.2"
 matplotlib = "^3.6.3"
+
+[tool.poetry.scripts]
+validate-tsdf = "tsdf.validator:main"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
