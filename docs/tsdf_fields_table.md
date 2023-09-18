@@ -25,7 +25,7 @@ TSDF metadata is represented as a dictionary. In this section, we will comprehen
 
 
 
-## TSDF optional fields
+## TSDF domain-specific fields
 
 
 | Field                        | Type         | Description                                          |
