@@ -1285,7 +1285,7 @@ import tsdf</div>
 <span class="n">metadata</span> <span class="o">=</span> <span class="n">metadata_dict</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">data_name</span><span class="si">}</span><span class="s2">.bin&quot;</span><span class="p">]</span>
 
 <span class="c1"># Load the data</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">load_binary</span><span class="p">()</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">tsdf</span><span class="o">.</span><span class="n">load_binary_from_metadata</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span>
 
 <span class="c1"># Print some info</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data type used for storing:</span><span class="se">\t</span><span class="s2"> </span><span class="si">{</span><span class="n">data</span><span class="o">.</span><span class="n">dtype</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -1303,7 +1303,7 @@ metadata_dict = tsdf.load_metadata_from_path(f"{data_dir}/{data_name}_meta.json"
 metadata = metadata_dict[f"{data_name}.bin"]
 
 # Load the data
-data = metadata.load_binary()
+data = tsdf.load_binary_from_metadata(metadata)
 
 # Print some info
 print(f"Data type used for storing:\t {data.dtype}")
