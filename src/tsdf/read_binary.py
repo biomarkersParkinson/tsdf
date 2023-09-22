@@ -22,6 +22,7 @@ def load_binary_from_metadata(
 
     :return: numpy array containing the data."""
     metadata_dir = metadata.file_dir_path
+    
     bin_path = os.path.join(metadata_dir, metadata.file_name)
     return _load_binary_file(
         bin_path,

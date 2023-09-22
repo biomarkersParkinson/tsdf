@@ -20,7 +20,7 @@ def validate_tsdf_format(file_path):
             # print(json.dumps(file_metadata.get_plain_tsdf_dict_copy(), indent=4))
 
             # Load the binary data
-            binary_data = read_binary.load_binary_from_metadata(abs_dir, file_metadata)
+            binary_data = read_binary.load_binary_from_metadata(file_metadata)
 
             # Success message
             print(f"Successfully loaded binary file {file_name}, resulting shape: {binary_data.shape}")

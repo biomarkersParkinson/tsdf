@@ -18,7 +18,7 @@ def load_single_bin_file(dir_path: str, file_name: str) -> np.ndarray:
     path = os.path.join(dir_path, file_name + CONST.METADATA_EXTENSION)
     metadata = read_tsdf.load_metadata_from_path(path)
     data = read_binary.load_binary_from_metadata(
-        dir_path, metadata[file_name + CONST.BINARY_EXTENSION]
+        metadata[file_name + CONST.BINARY_EXTENSION]
     )
     return data
 
@@ -86,7 +86,7 @@ class TestMetadataFileWriting(unittest.TestCase):
             file_name + CONST.BINARY_EXTENSION
         ]
         original_data = read_binary.load_binary_from_metadata(
-            CONST.TEST_DATA_DIR, original_metadata
+             original_metadata
         )
 
         # Perform light data processing

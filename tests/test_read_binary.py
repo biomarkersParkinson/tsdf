@@ -59,15 +59,13 @@ class TestBinaryFileReading(unittest.TestCase):
     def test_load_like_ppp(self):
         path = CONST.TEST_DATA_FILES["ppp"]
         metadata = read_tsdf.load_metadata_from_path(path)
-        time_data = read_binary.load_binary_from_metadata(
-            CONST.TEST_DATA_DIR, parse_metadata.get_file_metadata_at_index(metadata, 0)
+        time_data = read_binary.load_binary_from_metadata(parse_metadata.get_file_metadata_at_index(metadata, 0)
         )
         self.assertEqual(time_data.shape, (17,))
         # time data should be loaded as float64
         self.assertEqual(time_data.dtype, "float32")
 
-        sample_data = read_binary.load_binary_from_metadata(
-            CONST.TEST_DATA_DIR, parse_metadata.get_file_metadata_at_index(metadata, 1)
+        sample_data = read_binary.load_binary_from_metadata(parse_metadata.get_file_metadata_at_index(metadata, 1)
         )
         self.assertEqual(sample_data.shape, (17, 6))
         # sample data should be loaded as int16
@@ -79,7 +77,6 @@ class TestBinaryFileReading(unittest.TestCase):
         path = os.path.join(CONST.TEST_DATA_DIR, file_name + CONST.METADATA_EXTENSION)
         metadata = read_tsdf.load_metadata_from_path(path)
         data = read_binary.load_binary_from_metadata(
-            CONST.TEST_DATA_DIR,
             metadata[file_name + CONST.BINARY_EXTENSION],
             2,
             6,
