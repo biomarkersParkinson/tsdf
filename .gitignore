@@ -145,3 +145,4 @@ dmypy.json
 .vscode/
 
 tests/data/tmp_*
+docs/data/tmp_*
