@@ -1,7 +1,5 @@
 # Installation
 
-## Installing tsdf
-
 The package is available in [PyPI](https://pypi.org/project/tsdf/). The latest stable release can be installed using:
 
 ```bash
