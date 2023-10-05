@@ -11,17 +11,18 @@ from tsdf import tsdfmetadata
 
 
 def load_binary_from_metadata(
-    metadata_dir: str, metadata: 'tsdfmetadata.TSDFMetadata', start_row: int = 0, end_row: int = -1
+    metadata: 'tsdfmetadata.TSDFMetadata', start_row: int = 0, end_row: int = -1
 ) -> np.ndarray:
     """
-    Use metadata properties to load and return numpy array from a binary file.
-
-    :param metadata_dir: path to the directory containing the TSDF metadata files.
+    Use metadata properties to load and return numpy array from a binary file (located the same directory where the metadata is saved).
+    
     :param metadata: TSDFMetadata object.
     :param start_row: (optional) first row to load.
     :param end_row: (optional) last row to load. If -1, load all rows.
 
     :return: numpy array containing the data."""
+    metadata_dir = metadata.file_dir_path
+    
     bin_path = os.path.join(metadata_dir, metadata.file_name)
     return _load_binary_file(
         bin_path,

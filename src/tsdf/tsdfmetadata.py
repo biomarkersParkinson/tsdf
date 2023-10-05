@@ -78,11 +78,3 @@ class TSDFMetadata:
         if simple_dict.get("source_file_name") is not None:
             simple_dict.pop("source_file_name")
         return simple_dict
-
-    def load_binary(self) -> ndarray:
-        """
-        Load the binary file from the same directory where the metadata is saved.
-
-        :return: binary file as a numpy array.
-        """
-        return read_binary.load_binary_from_metadata(self.file_dir_path, self)

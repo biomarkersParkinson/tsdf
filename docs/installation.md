@@ -1,7 +1,5 @@
 # Installation
 
-## Installing tsdf
-
 The package is available in [PyPI](https://pypi.org/project/tsdf/). The latest stable release can be installed using:
 
 ```bash
@@ -27,4 +25,4 @@ Otherwise you can install it manually by following these steps:
 ## What now?
 
 Now you can import functions from the `tsdf` Python package.
-See some examples in the next section.
+See some examples in the [usage section](/tsdf/basic_reading_and_writing).
