@@ -2,42 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://biomarkersparkinson.github.io/tsdf/</loc>
-         <lastmod>2023-10-05</lastmod>
+         <lastmod>2023-10-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://biomarkersparkinson.github.io/tsdf/basic_reading_and_writing/</loc>
-         <lastmod>2023-10-05</lastmod>
+         <lastmod>2023-10-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://biomarkersparkinson.github.io/tsdf/contact/</loc>
-         <lastmod>2023-10-05</lastmod>
+         <lastmod>2023-10-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://biomarkersparkinson.github.io/tsdf/converting_legacy_data/</loc>
-         <lastmod>2023-10-05</lastmod>
+         <lastmod>2023-10-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://biomarkersparkinson.github.io/tsdf/installation/</loc>
-         <lastmod>2023-10-05</lastmod>
+         <lastmod>2023-10-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://biomarkersparkinson.github.io/tsdf/tsdf_fields_table/</loc>
-         <lastmod>2023-10-05</lastmod>
+         <lastmod>2023-10-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://biomarkersparkinson.github.io/tsdf/validating_files/</loc>
-         <lastmod>2023-10-05</lastmod>
+         <lastmod>2023-10-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://biomarkersparkinson.github.io/tsdf/writing_data_from_scratch/</loc>
-         <lastmod>2023-10-05</lastmod>
+         <lastmod>2023-10-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
