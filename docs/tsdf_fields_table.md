@@ -2,7 +2,7 @@
 
 TSDF metadata is represented as a dictionary. In this section, we will comprehensively list the mandatory and optional fields within the TSDF format.
 
-## TSDF mandatory fields
+## TSDF v0.1 mandatory fields
 
 | Field            | Type         | Description                                                                 |
 |------------------|--------------|-----------------------------------------------------------------------------|
@@ -25,20 +25,55 @@ TSDF metadata is represented as a dictionary. In this section, we will comprehen
 
 
 
+
 ## TSDF domain-specific fields
+
+### Mandatory fields
+
+| Field                      | Type         | Description                                                                  |
+|----------------------------|--------------|------------------------------------------------------------------------------|
+| `window_size_sec`          | `float`      | Size of the window (in seconds) used in the analysis.                               |
+| `window_overlapped`         | `bool`    | Indicates whether there is overlap between consecutive windows in the analysis.                         |
+| `step_size_sec`            | `float`      | Duration in seconds for each segment in the written data.                        |
+| `freq_sampling`            | `int`        | Sampling frequency of the data.                                              |
+
+### **Tremor** pipeline specific fields
+
+| Field                      | Type         | Description                                                                  |
+|----------------------------|--------------|------------------------------------------------------------------------------|
+| `mfcc_num_filters`         | `float`      | Number of filters used for estimating the mel-frequency cepstral coefficients. |
+| `mfcc_num_mel_coeff`       | `float`      | Number of coefficients used for estimating the mel-frequency cepstral coefficients. |
+| `mfcc_max_freq_filter`     | `float`      | Maximum frequency (in Hz) used for filtering in mel-frequency cepstral coefficients. |
+| `mfcc_window_size`         | `float`      | Size of the sub-window in seconds used to estimate the spectrogram used in the evaluation of the mel-frequency cepstral coefficients. |
+| `features_gyro`            | `float [sample_size x feature_size]` | Features estimated based on the windowed data.  |
+
+### **PPG** pipeline specific fields
+
+| Field                      | Type                 | Description                                                                  |
+|----------------------------|----------------------|------------------------------------------------------------------------------|
+| `post_prob`                | `float [sample_size x 1]`| Posterior probability that a signal is of high quality. |
+| `segment_number`           | `int`                | Order number of the analyzed data segment. |
+| `freq_sampling_original`   | `int`        | Sampling frequency (in Hz) of the original data (before adjustments for the analysis).                                              |
+
+
+## Additional TSDF field descriptions
+
+These fields are optional, and provide standardised vocabulary for describing the data.
 
 
 | Field                        | Type         | Description                                          |
 |------------------------------|--------------|------------------------------------------------------|
+| `week_number`                | `int`        | Denotes the specific week for tracking or comparing weekly data. |
+| `interpolated`               | `bool`       | Indicates whether interpolation was performed on the data. |
+| `high_pass_filter_applied`   | `bool`       | Indicates whether a high-pass filter was applied to remove low-frequency noise. |
+| `high_pass_filter_cutoff`    | `float`      | Cutoff frequency (in Hz) for the high-pass filter, in case it was applied. |
+| `z_score_normalised`         | `bool`       | Indicates whether z-score normalization was applied to the data. |
 | `start_datetime_unix_ms`     | `string`     | UNIX timestamp for the start of the recording (milliseconds). Equivalent to `start_iso8601` in UNIX format.   |
 | `end_datetime_unix_ms`       | `string`     | UNIX timestamp for the end of the recording (milliseconds). Equivalent to `end_iso8601` in UNIX format.   | 
 | `scale_factors`              | `float[]`    | Scale factors applied to each data channel to adjust their values.          | 
-| `week_number`                | `int`        | Denotes the specific week for tracking or comparing weekly data. |
 | `freq_sampling_original`     | `int`        | Represents the original sampling frequency at which the data was recorded. |
 | `freq_sampling_adjusted`     | `int`        | The adjusted sampling frequency optimized for data processing or analysis. |
-| `interpolate`                | `bool`       | If set to true, missing or irregular data points will be estimated and filled. |
 | `gravity_removal`            | `bool`       | When true, the gravity component is removed to isolate user motion. |
-| `apply_high_pass_filter`     | `bool`       | Indicates if a high-pass filter should be applied to remove low-frequency noise. |
 | `normalize_acceleration`     | `bool`       | If true, accelerometer data is normalized using z-score normalization. |
 | `motion_intensity_thresholds` | `int[]`     | List of percentage thresholds for categorizing motion intensity. |
 | `accelerometer_burst_thresholds` | `float[]` | Threshold values for detecting 'burst' or sudden motion in the accelerometer. |
@@ -48,7 +83,6 @@ TSDF metadata is represented as a dictionary. In this section, we will comprehen
 | `acceleration_stddev_across_weeks` | `float` | Standard deviation of accelerometer readings across weeks. |
 | `average_gyroscope_across_weeks` | `float` | Average gyroscope reading across weeks. |
 | `gyroscope_stddev_across_weeks` | `float` | Standard deviation of gyroscope readings across weeks. |
-| `window_size_sec`            | `int`        | Duration in seconds for each data window used in segmented analysis. |
 | `num_ECDE_coeff`             | `int`        | Number of ECDE coefficients considered in the analysis. |
 | `num_filters`                | `int`        | Number of filters applied to refine or isolate specific frequency bands. |
 | `num_ME1_coeff`              | `int`        | Number of ME1 coefficients considered during data processing. |
