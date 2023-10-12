@@ -1,4 +1,4 @@
-# TSDF fields
+# TSDF schema - metadata fields
 
 TSDF metadata is represented as a dictionary. In this section, we will comprehensively list the mandatory and optional fields within the TSDF format.
 
@@ -26,7 +26,7 @@ TSDF metadata is represented as a dictionary. In this section, we will comprehen
 
 
 
-## TSDF domain-specific fields
+## TSDF schema `Digital biomarkers for PD` extension
 
 ### Mandatory fields
 
@@ -34,12 +34,12 @@ TSDF metadata is represented as a dictionary. In this section, we will comprehen
 |----------------------------|--------------|-----------------------------------------------------------------------------------|
 | `bin_data_type`             | `bin_data_type`      | Size of the window (in seconds) used in the analysis.                             |
 | `window_size_sec`          | `float`               | Size of the window (in seconds) used in the analysis.                             |
-| `window_overlapped`        | `bool`                | Indicates whether there is overlap between consecutive windows in the analysis.     |
+| `window_overlapped`        | `bool`                | Indicates whether there is overlap between consecutive windows in the analysis.   |
 | `step_size_sec`            | `float`               | Duration in seconds for each segment in the written data.                         |
 | `freq_sampling`            | `int`                 | Sampling frequency of the data.                                                   |
 
 where `bin_data_type` can be one of the following:
-- `iso8601_time`:           Time in iso8601 format, where each data window is characterised by the starting time ().
+- `iso8601_time`:           Time in iso8601 format, where each data window is characterised by the starting time (DateTime,TimeUnixClass).
 - `gyro-tremor-features`:   Tremor-related features estimated (from gyro data) based on the windowed data (FeaturesGyro).
 - `gyro-tremor-prob`:       Probability values indicating the likelihood (on the scale 0 to 1) of tremor activity for each sample (TremorProb)
 - `gyro-tremor-hat`:        Estimated values representing the presence or absence of tremor activity for each sample (TremorHat).
@@ -88,23 +88,6 @@ These fields are optional, and provide standardised vocabulary for describing th
 | `z_score_normalised`         | `bool`       | Indicates whether z-score normalization was applied to the data. |
 | `start_datetime_unix_ms`     | `string`     | UNIX timestamp for the start of the recording (milliseconds). Equivalent to `start_iso8601` in UNIX format.   |
 | `end_datetime_unix_ms`       | `string`     | UNIX timestamp for the end of the recording (milliseconds). Equivalent to `end_iso8601` in UNIX format.   | 
-| `scale_factors`              | `float[]`    | Scale factors applied to each data channel to adjust their values.          | 
-| `freq_sampling_original`     | `int`        | Represents the original sampling frequency at which the data was recorded. |
-| `freq_sampling_adjusted`     | `int`        | The adjusted sampling frequency optimized for data processing or analysis. |
-| `gravity_removal`            | `bool`       | When true, the gravity component is removed to isolate user motion. |
-| `normalize_acceleration`     | `bool`       | If true, accelerometer data is normalized using z-score normalization. |
-| `motion_intensity_thresholds` | `int[]`     | List of percentage thresholds for categorizing motion intensity. |
-| `accelerometer_burst_thresholds` | `float[]` | Threshold values for detecting 'burst' or sudden motion in the accelerometer. |
-| `gyroscope_burst_thresholds` | `float[]`    | Threshold values for detecting 'burst' or sudden motion in the gyroscope. |
-| `active_burst_threshold_percentile` | `int` | Chosen percentile index for active burst threshold from the list of percentile values. |
-| `average_acceleration_across_weeks` | `float` | Average accelerometer reading across multiple weeks. |
-| `acceleration_stddev_across_weeks` | `float` | Standard deviation of accelerometer readings across weeks. |
-| `average_gyroscope_across_weeks` | `float` | Average gyroscope reading across weeks. |
-| `gyroscope_stddev_across_weeks` | `float` | Standard deviation of gyroscope readings across weeks. |
-| `num_ECDE_coeff`             | `int`        | Number of ECDE coefficients considered in the analysis. |
-| `num_filters`                | `int`        | Number of filters applied to refine or isolate specific frequency bands. |
-| `num_ME1_coeff`              | `int`        | Number of ME1 coefficients considered during data processing. |
-| `max_frequency_filter`       | `int`        | Highest frequency limit for any applied filter. |
 
 
 
