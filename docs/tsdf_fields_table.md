@@ -32,13 +32,13 @@ TSDF metadata is represented as a dictionary. In this section, we will comprehen
 
 | Field                      | Type         | Description                                                                       |
 |----------------------------|--------------|-----------------------------------------------------------------------------------|
-| `bin_data_type`             | `bin_data_type`      | Size of the window (in seconds) used in the analysis.                             |
+| `pd_bin_content`         | `bin_content_type`         | Description of the content of the data written in the binary file. The type is specific to the `Digital biomarkers for PD` extension. |
 | `window_size_sec`          | `float`               | Size of the window (in seconds) used in the analysis.                             |
 | `window_overlapped`        | `bool`                | Indicates whether there is overlap between consecutive windows in the analysis.   |
 | `step_size_sec`            | `float`               | Duration in seconds for each segment in the written data.                         |
 | `freq_sampling`            | `int`                 | Sampling frequency of the data.                                                   |
 
-where `bin_data_type` can be one of the following:
+where `bin_content_type` can be one of the following:
 - `iso8601_time`:           Time in iso8601 format, where each data window is characterised by the starting time (DateTime,TimeUnixClass).
 - `gyro-tremor-features`:   Tremor-related features estimated (from gyro data) based on the windowed data (FeaturesGyro).
 - `gyro-tremor-prob`:       Probability values indicating the likelihood (on the scale 0 to 1) of tremor activity for each sample (TremorProb)
