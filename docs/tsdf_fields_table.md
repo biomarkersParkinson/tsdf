@@ -26,9 +26,9 @@ TSDF metadata is represented as a dictionary. In this section, we will comprehen
 
 
 
-## TSDF schema `Digital biomarkers for PD` extension
+# TSDF schema `Digital biomarkers for PD` extension
 
-### Mandatory fields
+## Mandatory fields
 
 | Field                      | Type         | Description                                                                       |
 |----------------------------|--------------|-----------------------------------------------------------------------------------|
@@ -52,7 +52,7 @@ where `bin_content_type` can be one of the following:
 - `accel_arm_swing_prob`:   Probability values indicating the likelihood (on the scale 0 to 1) of arm swing activity for each sample ().
 
 
-### **Tremor** pipeline specific fields
+## **Tremor** pipeline specific fields
 
 | Field                      | Type         | Description                                                                  |
 |----------------------------|--------------|------------------------------------------------------------------------------|
@@ -66,7 +66,7 @@ where `bin_content_type` can be one of the following:
 | `sum_squared_features_gyro_scale` | `str[]`            | Scaling factors for the sum of squared gyro features.                                 |
 | `n_features_gyro_scale`     | `int`                    | Scaling factor for the number of gyro features.                                        |
 
-### **PPG** pipeline specific fields
+## **PPG** pipeline specific fields
 
 | Field                      | Type                 | Description                                                                  |
 |----------------------------|----------------------|------------------------------------------------------------------------------|
@@ -92,7 +92,7 @@ These fields are optional, and provide standardised vocabulary for describing th
 
 
 
-## Legacy fields
+# Legacy fields
 
 The following table lists the legacy fields from the time when the format was called TSDB, along with their updated counterparts:
 
