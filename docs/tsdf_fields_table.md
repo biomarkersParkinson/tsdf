@@ -30,12 +30,27 @@ TSDF metadata is represented as a dictionary. In this section, we will comprehen
 
 ### Mandatory fields
 
-| Field                      | Type         | Description                                                                  |
-|----------------------------|--------------|------------------------------------------------------------------------------|
-| `window_size_sec`          | `float`      | Size of the window (in seconds) used in the analysis.                               |
-| `window_overlapped`         | `bool`    | Indicates whether there is overlap between consecutive windows in the analysis.                         |
-| `step_size_sec`            | `float`      | Duration in seconds for each segment in the written data.                        |
-| `freq_sampling`            | `int`        | Sampling frequency of the data.                                              |
+| Field                      | Type         | Description                                                                       |
+|----------------------------|--------------|-----------------------------------------------------------------------------------|
+| `bin_data_type`             | `bin_data_type`      | Size of the window (in seconds) used in the analysis.                             |
+| `window_size_sec`          | `float`               | Size of the window (in seconds) used in the analysis.                             |
+| `window_overlapped`        | `bool`                | Indicates whether there is overlap between consecutive windows in the analysis.     |
+| `step_size_sec`            | `float`               | Duration in seconds for each segment in the written data.                         |
+| `freq_sampling`            | `int`                 | Sampling frequency of the data.                                                   |
+
+where `bin_data_type` can be one of the following:
+- `iso8601_time`:           Time in iso8601 format, where each data window is characterised by the starting time ().
+- `gyro-tremor-features`:   Tremor-related features estimated (from gyro data) based on the windowed data (FeaturesGyro).
+- `gyro-tremor-prob`:       Probability values indicating the likelihood (on the scale 0 to 1) of tremor activity for each sample (TremorProb)
+- `gyro-tremor-hat`:        Estimated values representing the presence or absence of tremor activity for each sample (TremorHat).
+- `gyro-arm-actv-prob`:     Probability values indicating the likelihood (on the scale 0 to 1) of arm activity for each sample (ArmActvProb).
+- `gyro-arm-actv-hat`:      Estimated values representing the presence or absence of arm activity for each sample (ArmActvHat).
+- `ppg-quality-post-prob`:  Posterior probability that the corresponding PPG signal is of high quality (PostProb).
+- `accel_gait_features`:    Gait-related features estimated (from accelerometer data) based on the windowed data ().
+- `accel_gait_prob`:        Probability values indicating the likelihood (on the scale 0 to 1) of gait activity for each sample ().
+- `accel_arm_swing_features`: Arm swing-related features estimated (from accelerometer data) based on the windowed data ().
+- `accel_arm_swing_prob`:   Probability values indicating the likelihood (on the scale 0 to 1) of arm swing activity for each sample ().
+
 
 ### **Tremor** pipeline specific fields
 
@@ -45,15 +60,18 @@ TSDF metadata is represented as a dictionary. In this section, we will comprehen
 | `mfcc_num_mel_coeff`       | `float`      | Number of coefficients used for estimating the mel-frequency cepstral coefficients. |
 | `mfcc_max_freq_filter`     | `float`      | Maximum frequency (in Hz) used for filtering in mel-frequency cepstral coefficients. |
 | `mfcc_window_size`         | `float`      | Size of the sub-window in seconds used to estimate the spectrogram used in the evaluation of the mel-frequency cepstral coefficients. |
-| `features_gyro`            | `float [sample_size x feature_size]` | Features estimated based on the windowed data.  |
+| `feature_names`             | `str[]`                  | List of names for the features.                                                      |
+| `excluded_hours`            | `int[]`                  | Scaling factors for excluded hours.                                                   |
+| `sum_features_gyro_scale`   | `str[]`                  | Scaling factors for the sum of gyro features.                                          |
+| `sum_squared_features_gyro_scale` | `str[]`            | Scaling factors for the sum of squared gyro features.                                 |
+| `n_features_gyro_scale`     | `int`                    | Scaling factor for the number of gyro features.                                        |
 
 ### **PPG** pipeline specific fields
 
 | Field                      | Type                 | Description                                                                  |
 |----------------------------|----------------------|------------------------------------------------------------------------------|
-| `post_prob`                | `float [sample_size x 1]`| Posterior probability that a signal is of high quality. |
 | `segment_number`           | `int`                | Order number of the analyzed data segment. |
-| `freq_sampling_original`   | `int`        | Sampling frequency (in Hz) of the original data (before adjustments for the analysis).                                              |
+| `freq_sampling_original`   | `int`                | Sampling frequency (in Hz) of the original data (before adjustments for the analysis).                                              |
 
 
 ## Additional TSDF field descriptions
