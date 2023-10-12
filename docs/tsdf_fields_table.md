@@ -1,6 +1,6 @@
 # TSDF schema - metadata fields
 
-TSDF metadata is represented as a dictionary. In this section, we will comprehensively list the mandatory and optional fields within the TSDF format.
+TSDF metadata is represented as a dictionary (or a JSON object). In this section, we will comprehensively list the mandatory and optional fields within the TSDF format.
 
 ## TSDF v0.1 mandatory fields
 
@@ -32,24 +32,13 @@ TSDF metadata is represented as a dictionary. In this section, we will comprehen
 
 | Field                      | Type         | Description                                                                       |
 |----------------------------|--------------|-----------------------------------------------------------------------------------|
-| `pd_bin_content`         | `bin_content_type`         | Description of the content of the data written in the binary file. The type is specific to the `Digital biomarkers for PD` extension. |
 | `window_size_sec`          | `float`               | Size of the window (in seconds) used in the analysis.                             |
-| `window_overlapped`        | `bool`                | Indicates whether there is overlap between consecutive windows in the analysis.   |
+| `window_overlapped`        | `float`                | Indicates whether there is overlap between consecutive windows in the analysis.   |
 | `step_size_sec`            | `float`               | Duration in seconds for each segment in the written data.                         |
-| `freq_sampling`            | `int`                 | Sampling frequency of the data.                                                   |
+| `freq_sampling`            | `int`                 | Sampling frequency (in Hz) of the input data.                                                   |
+| `channels`         | [channel_type](tsdf_channels_table.md)`[]`         | Description of the content of the data written. `channel_type` is specific to the `Digital biomarkers for PD` extension. |
+| `units`         | [unit_type](tsdf_channels_table.md)`[]`         | Description of the format of the data written. `unit_type` is specific to the `Digital biomarkers for PD` extension. |
 
-where `bin_content_type` can be one of the following:
-- `iso8601_time`:           Time in iso8601 format, where each data window is characterised by the starting time (DateTime,TimeUnixClass).
-- `gyro-tremor-features`:   Tremor-related features estimated (from gyro data) based on the windowed data (FeaturesGyro).
-- `gyro-tremor-prob`:       Probability values indicating the likelihood (on the scale 0 to 1) of tremor activity for each sample (TremorProb)
-- `gyro-tremor-hat`:        Estimated values representing the presence or absence of tremor activity for each sample (TremorHat).
-- `gyro-arm-actv-prob`:     Probability values indicating the likelihood (on the scale 0 to 1) of arm activity for each sample (ArmActvProb).
-- `gyro-arm-actv-hat`:      Estimated values representing the presence or absence of arm activity for each sample (ArmActvHat).
-- `ppg-quality-post-prob`:  Posterior probability that the corresponding PPG signal is of high quality (PostProb).
-- `accel_gait_features`:    Gait-related features estimated (from accelerometer data) based on the windowed data ().
-- `accel_gait_prob`:        Probability values indicating the likelihood (on the scale 0 to 1) of gait activity for each sample ().
-- `accel_arm_swing_features`: Arm swing-related features estimated (from accelerometer data) based on the windowed data ().
-- `accel_arm_swing_prob`:   Probability values indicating the likelihood (on the scale 0 to 1) of arm swing activity for each sample ().
 
 
 ## **Tremor** pipeline specific fields
@@ -61,10 +50,10 @@ where `bin_content_type` can be one of the following:
 | `mfcc_max_freq_filter`     | `float`      | Maximum frequency (in Hz) used for filtering in mel-frequency cepstral coefficients. |
 | `mfcc_window_size`         | `float`      | Size of the sub-window in seconds used to estimate the spectrogram used in the evaluation of the mel-frequency cepstral coefficients. |
 | `feature_names`             | `str[]`                  | List of names for the features.                                                      |
-| `excluded_hours`            | `int[]`                  | Scaling factors for excluded hours.                                                   |
-| `sum_features_gyro_scale`   | `str[]`                  | Scaling factors for the sum of gyro features.                                          |
-| `sum_squared_features_gyro_scale` | `str[]`            | Scaling factors for the sum of squared gyro features.                                 |
-| `n_features_gyro_scale`     | `int`                    | Scaling factor for the number of gyro features.                                        |
+| `excluded_hours`            | `int[]`                  | List of the excluded hours from the analysis (vector scaling?)???                                                   |
+| `sum_features_gyro_scale`   | `float[]`                  | Scaling factors for the sum of tremor-related features (from gyro)???                                          |
+| `sum_squared_features_gyro_scale` | `float[]`            | Scaling factors for the sum of squared tremor-related features (from gyro)???                                 |
+| `n_features_gyro_scale`     | `int`                    | Scaling factor for the number of gyro features???                                        |
 
 ## **PPG** pipeline specific fields
 
