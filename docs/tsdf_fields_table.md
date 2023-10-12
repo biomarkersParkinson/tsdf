@@ -15,7 +15,7 @@ TSDF metadata is represented as a dictionary. In this section, we will comprehen
 | `start_iso8601`  | `str`        | [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) time stamp for the start of the recording, with ms precision.     |
 | `end_iso8601`    | `str`        | Same as `start_iso8601`, but for the end of the recording.                     |
 | `file_name`      | `str`        | The name of the file in consideration, e.g., "eeee.bin".                     |
-| `channels`       | `str[]`      | Labels for each data channel (_e.g.:_ `[time]` for time channel or `[X, Y, Z]` for 3D accelerometry).                      |
+| `channels`       | `str[]`      | Labels for each data channel (_e.g.:_ `[time]` for time data or `[X, Y, Z]` for 3D accelerometry).                      |
 | `time_encode`    | `str`        | Encoding type for time, e.g., "difference".                                  |
 | `units`          | `str[]`      | Units for each channel in the data, e.g., "ms" for milliseconds.             |
 | `data_type`      | `str`        | Number format of the measured data (_e.g.:_ `float`).                                             |
