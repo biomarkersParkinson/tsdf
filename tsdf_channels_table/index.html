@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://biomarkersparkinson.github.io/tsdf/tsdf_channels_table/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Custom field values (TSDF schema Digital biomarkers for PD extension) - tsdf</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Custom field values (TSDF schema Digital biomarkers for PD extension)";
+        var mkdocs_page_input_path = "tsdf_channels_table.md";
+        var mkdocs_page_url = "/tsdf/tsdf_channels_table/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> tsdf
+        </a>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Introduction</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../installation/">Installation</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">The format</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../tsdf_fields_table/">TSDF fields</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Usage</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../basic_reading_and_writing/">Basic reading and writing</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../writing_data_from_scratch/">Writing data from scratch</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../converting_legacy_data/">Converting legacy data</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../validating_files/">Validating files</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">About</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../contact/">Contact</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">tsdf</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a> &raquo;</li>
+      <li class="breadcrumb-item active">Custom field values (TSDF schema Digital biomarkers for PD extension)</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/biomarkersParkinson/tsdf/blob/main/docs/tsdf_channels_table.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="custom-field-values-tsdf-schema-digital-biomarkers-for-pd-extension">Custom field values (TSDF schema <code>Digital biomarkers for PD</code> extension)</h1>
+<p>Within the <code>Digital biomarkers for PD</code> extension, some of the field types are further specialised to provide a better description of the data. These are described in the following sections.</p>
+<h2 id="field-channels">Field: <code>channels</code></h2>
+<p><strong>Type:</strong> <code>channel_type[]</code>       <br />
+<strong>Description:</strong> Describes the content of the data written. <code>channel_type</code> is specific to the <code>Digital biomarkers for PD</code> extension.</p>
+<hr />
+<p><strong>General types</strong>
+|   <code>channel_type</code> name          | Recommended <code>unit</code>       | Description                                                                           |
+|----------------------------|-----------------------|---------------------------------------------------------------------------------------|
+| <code>iso8601_time</code>              | <code>time</code>                | Time in ISO8601 format, characterizing each data window by its starting time.          |</p>
+<hr />
+<details>
+<summary><b>PPG-related types</b></summary>
+
+|   `channel_type` name          | Recommended `unit`       | Description                                                                           |
+|----------------------------|-----------------------|---------------------------------------------------------------------------------------|
+| `ppg_quality_post_prob`     | `probability`         | `[TODO]` Posterior probability that the corresponding PPG signal is of high quality (0 to 1).   |
+</details>
+
+<hr />
+<details>
+<summary><b>Tremor-related types</b></summary>
+
+| `channel_type` name       | Recommended `unit` | Description                                                                         |
+|--------------------------|--------------------|-------------------------------------------------------------------------------------|
+| `gyro_tremor_prob`       | `probability`      | Probability values (0 to 1) indicating the likelihood of tremor activity for each sample. |
+| `gyro_tremor_hat`        | `boolean_num`         | Estimated values representing the presence or absence of tremor activity for each sample. |
+| `gyro_arm_actv_prob`     | `probability`      | Probability values (0 to 1) indicating the likelihood of arm activity for each sample.    |
+| `gyro_arm_actv_hat`      | `boolean_num`         | Estimated values representing the presence or absence of arm activity for each sample.    |
+| `GyMeanDx`               | `unitless`         | Mean gyro derivative in the x axis. |
+| `GyMeanDy`               | `unitless`         | Mean gyro derivative in the y axis. |
+| `GyMeanDz`               | `unitless`         | Mean gyro derivative in the z axis. |
+| `GyLTreDomPowerX`        | `unitless`         | Gyro Low tremor (range [3.5-8 Hz]) dominant power in the x axis. |
+| `GyLTreDomPowerY`        | `unitless`         | Gyro Low tremor (range [3.5-8 Hz]) dominant power in the y axis. |
+| `GyLTreDomPowerZ`        | `unitless`         | Gyro Low tremor (range [3.5-8 Hz]) dominant power in the z axis. |
+| `GyGaitBandPower`        | `unitless`         | Gyro gait bandpower (range [0.4 – 2] Hz) – PSD: sum of the axes. |
+| `GyGaitBandpowerRatio`   | `unitless`         | Gyro gait bandpower sum / total bandpower sum up to 15 Hz – PSD: sum of the axes. |
+| `GyGaitFreqPeak`         | `unitless`         | Frequency peak of the in the gyro gait range – PSD: sum of the axes. |
+| `GyGaitFixedDomPower`    | `unitless`         | `[TODO]` Gyro dominant power in a fixed range (specific frequency range not provided). |
+| `GyGaitFixedDomPowerRatio` | `unitless`       | `[TODO]` Ratio of dominant power in the gyro gait range to total power. |
+| `GyGaitDomPower`         | `unitless`         | `[TODO]` Dominant power in the gyro gait range. |
+| `GyGaitDomPowerRatio`    | `unitless`         | `[TODO]` Ratio of dominant power in the gyro gait range to total power. |
+| `GyGaitPeakFreqWidth`    | `unitless`         | `[TODO]` Width of the frequency peak in the gyro gait range. |
+| `GyLTreBandPower`        | `unitless`         | `[TODO]` Low tremor bandpower (specific frequency range not provided). |
+| `GyLTreBandpower`        | `unitless`         | `[TODO]` Low tremor bandpower (specific frequency range not provided). |
+| `GyLTreFreqPeak`         | `unitless`         | `[TODO]` Frequency peak in the low tremor range. |
+| `GyLTreFixedDomP`        | `unitless`         | `[TODO]` Low tremor dominant power in a fixed range (specific frequency range not provided). |
+| `GyLTreFixedDomP`        | `unitless`         | `[TODO]` Low tremor dominant power in a fixed range (specific frequency range not provided). |
+| `GyLTreDomPower`         | `unitless`         | `[TODO]` Low tremor dominant power (specific frequency range not provided). |
+| `GyLTreDomPowerR`        | `unitless`         | `[TODO]` Ratio of low tremor dominant power to total power. |
+| `GyLTrePeakFreqW`        | `unitless`         | `[TODO]` Width of the frequency peak in the low tremor range. |
+| `GyHTreBandPower`        | `unitless`         | `[TODO]` High tremor bandpower (specific frequency range not provided). |
+| `GyHTreBandpower`        | `unitless`         | `[TODO]` High tremor bandpower (specific frequency range not provided). |
+| `GyHTreFreqPeak`         | `unitless`         | `[TODO]` Frequency peak in the high tremor range. |
+| `GyHTreFixedDomP`        | `unitless`         | `[TODO]` High tremor dominant power in a fixed range (specific frequency range not provided). |
+| `GyHTreFixedDomP`        | `unitless`         | `[TODO]` High tremor dominant power in a fixed range (specific frequency range not provided). |
+| `GyHTreDomPower`         | `unitless`         | `[TODO]` High tremor dominant power (specific frequency range not provided). |
+| `GyHTreDomPowerR`        | `unitless`         | `[TODO]` Ratio of high tremor dominant power to total power. |
+| `GyHTrePeakFreqW`        | `unitless`         | `[TODO]` Width of the frequency peak in the high tremor range. |
+| `GyMFCC1`                | `unitless`         | `[TODO]` Mel-frequency cepstral coefficient 1. |
+| `GyMFCC2`                | `unitless`         | `[TODO]` Mel-frequency cepstral coefficient 2. |
+| `GyMFCC3`                | `unitless`         | `[TODO]` Mel-frequency cepstral coefficient 3. |
+| `GyMFCC4`                | `unitless`         | `[TODO]` Mel-frequency cepstral coefficient 4. |
+| `GyMFCC5`                | `unitless`         | `[TODO]` Mel-frequency cepstral coefficient 5. |
+| `GyMFCC6`                | `unitless`         | `[TODO]` Mel-frequency cepstral coefficient 6. |
+| `GyMFCC7`                | `unitless`         | `[TODO]` Mel-frequency cepstral coefficient 7. |
+| `GyMFCC8`                | `unitless`         | `[TODO]` Mel-frequency cepstral coefficient 8. |
+| `GyMFCC9`                | `unitless`         | `[TODO]` Mel-frequency cepstral coefficient 9. |
+
+
+</details>
+
+<hr />
+<details>
+<summary><b>Gait-related types</b></summary>
+
+| `channel_type` name       | Recommended `unit` | Description                                                                         |
+|--------------------------|--------------------|-------------------------------------------------------------------------------------|
+| `accel_gait_feature_1`       | `unitless`            | `[TODO]` Gait-related feature 1 estimated from accelerometer data based on the windowed data `[TODO]`.     |
+| `accel_gait_feature_2`       | `unitless`            | `[TODO]` Gait-related feature 2 estimated from accelerometer data based on the windowed data `[TODO]`.     |
+| `accel_gait_prob`           | `probability`         | `[TODO]` Probability values (0 to 1) indicating the likelihood of gait activity for each sample.  |
+| `accel_arm_swing_feature1`  | `unitless`            | `[TODO]` Arm swing-related feature 1 estimated from accelerometer data based on the windowed data`[TODO]`. |
+| `accel_arm_swing_feature2`  | `unitless`            | `[TODO]` Arm swing-related feature 2 estimated from accelerometer data based on the windowed data`[TODO]`. |
+| `accel_arm_swing_prob`      | `probability`         | `[TODO]` Probability values (0 to 1) indicating the likelihood of arm swing activity for each sample. |
+</details>
+
+<h2 id="-">---</h2>
+<h2 id="field-units">Field: <code>units</code></h2>
+<p><strong>Type:</strong> <code>unit_type[]</code>       <br />
+<strong>Description:</strong> Describes the format of the data written. <code>unit_type</code> is specific to the <code>Digital biomarkers for PD</code> extension.</p>
+<table>
+<thead>
+<tr>
+<th><code>unit_type</code> name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>time</code></td>
+<td>Time in ISO8601 format, characterizing each data window by its starting time.</td>
+</tr>
+<tr>
+<td><code>probability</code></td>
+<td>Probability values (0 to 1) indicating the likelihood of tremor activity for each sample.</td>
+</tr>
+<tr>
+<td><code>boolean_num</code></td>
+<td><code>[TODO]</code> Integer values (0 or 1) representing the true (1) or false (0) presence of an activity.</td>
+</tr>
+<tr>
+<td><code>unitless</code></td>
+<td>Numerical values without units.</td>
+</tr>
+</tbody>
+</table>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/biomarkersParkinson/tsdf/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

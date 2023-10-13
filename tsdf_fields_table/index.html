@@ -47,11 +47,7 @@
               <ul class="current">
                   <li class="toctree-l1 current"><a class="reference internal current" href="./">TSDF fields</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#tsdf-mandatory-fields">TSDF mandatory fields</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#tsdf-domain-specific-fields">TSDF domain-specific fields</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#legacy-fields">Legacy fields</a>
+    <li class="toctree-l2"><a class="reference internal" href="#tsdf-v01-mandatory-fields">TSDF v0.1 mandatory fields</a>
     </li>
     </ul>
                   </li>
@@ -97,9 +93,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="tsdf-fields">TSDF fields</h1>
-<p>TSDF metadata is represented as a dictionary. In this section, we will comprehensively list the mandatory and optional fields within the TSDF format.</p>
-<h2 id="tsdf-mandatory-fields">TSDF mandatory fields</h2>
+                <h1 id="tsdf-schema-metadata-fields">TSDF schema - metadata fields</h1>
+<p>TSDF metadata is represented as a dictionary (or a JSON object). In this section, we will comprehensively list the mandatory and optional fields within the TSDF format.</p>
+<h2 id="tsdf-v01-mandatory-fields">TSDF v0.1 mandatory fields</h2>
 <table>
 <thead>
 <tr>
@@ -157,7 +153,7 @@
 <tr>
 <td><code>channels</code></td>
 <td><code>str[]</code></td>
-<td>Labels for each data channel (<em>e.g.:</em> <code>["time", "X", "Y", "Z"]</code> for 3D accelerometry).</td>
+<td>Labels for each data channel (<em>e.g.:</em> <code>[time]</code> for time data or <code>[X, Y, Z]</code> for 3D accelerometry).</td>
 </tr>
 <tr>
 <td><code>time_encode</code></td>
@@ -172,7 +168,7 @@
 <tr>
 <td><code>data_type</code></td>
 <td><code>str</code></td>
-<td>Number format of the measured data (<em>e.g.:</em> <code>"float"</code>).</td>
+<td>Number format of the measured data (<em>e.g.:</em> <code>float</code>).</td>
 </tr>
 <tr>
 <td><code>bits</code></td>
@@ -191,7 +187,8 @@
 </tr>
 </tbody>
 </table>
-<h2 id="tsdf-domain-specific-fields">TSDF domain-specific fields</h2>
+<h1 id="tsdf-schema-digital-biomarkers-for-pd-extension">TSDF schema <code>Digital biomarkers for PD</code> extension</h1>
+<h2 id="mandatory-fields">Mandatory fields</h2>
 <table>
 <thead>
 <tr>
@@ -202,6 +199,153 @@
 </thead>
 <tbody>
 <tr>
+<td><code>window_size_sec</code></td>
+<td><code>float</code></td>
+<td>Size of the window (in seconds) used in the analysis.</td>
+</tr>
+<tr>
+<td><code>window_overlapped</code></td>
+<td><code>float</code></td>
+<td>Indicates whether there is overlap between consecutive windows in the analysis.</td>
+</tr>
+<tr>
+<td><code>step_size_sec</code></td>
+<td><code>float</code></td>
+<td>Duration in seconds for each segment in the written data.</td>
+</tr>
+<tr>
+<td><code>freq_sampling</code></td>
+<td><code>int</code></td>
+<td>Sampling frequency (in Hz) of the input data.</td>
+</tr>
+<tr>
+<td><code>channels</code></td>
+<td><a href="../tsdf_channels_table/">channel_type</a><code>[]</code></td>
+<td>Description of the content of the data written. <code>channel_type</code> is specific to the <code>Digital biomarkers for PD</code> extension.</td>
+</tr>
+<tr>
+<td><code>units</code></td>
+<td><a href="../tsdf_channels_table/">unit_type</a><code>[]</code></td>
+<td>Description of the format of the data written. <code>unit_type</code> is specific to the <code>Digital biomarkers for PD</code> extension.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tremor-pipeline-specific-fields"><strong>Tremor</strong> pipeline specific fields</h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mfcc_num_filters</code></td>
+<td><code>float</code></td>
+<td>Number of filters used for estimating the mel-frequency cepstral coefficients.</td>
+</tr>
+<tr>
+<td><code>mfcc_num_mel_coeff</code></td>
+<td><code>float</code></td>
+<td>Number of coefficients used for estimating the mel-frequency cepstral coefficients.</td>
+</tr>
+<tr>
+<td><code>mfcc_max_freq_filter</code></td>
+<td><code>float</code></td>
+<td>Maximum frequency (in Hz) used for filtering in mel-frequency cepstral coefficients.</td>
+</tr>
+<tr>
+<td><code>mfcc_window_size</code></td>
+<td><code>float</code></td>
+<td>Size of the sub-window in seconds used to estimate the spectrogram used in the evaluation of the mel-frequency cepstral coefficients.</td>
+</tr>
+<tr>
+<td><code>feature_names</code></td>
+<td><code>str[]</code></td>
+<td>List of names for the features.</td>
+</tr>
+<tr>
+<td><code>excluded_hours</code></td>
+<td><code>int[]</code></td>
+<td>List of the excluded hours from the analysis (vector scaling?)???</td>
+</tr>
+<tr>
+<td><code>sum_features_gyro_scale</code></td>
+<td><code>float[]</code></td>
+<td>Scaling factors for the sum of tremor-related features (from gyro)???</td>
+</tr>
+<tr>
+<td><code>sum_squared_features_gyro_scale</code></td>
+<td><code>float[]</code></td>
+<td>Scaling factors for the sum of squared tremor-related features (from gyro)???</td>
+</tr>
+<tr>
+<td><code>n_features_gyro_scale</code></td>
+<td><code>int</code></td>
+<td>Scaling factor for the number of gyro features???</td>
+</tr>
+</tbody>
+</table>
+<h2 id="ppg-pipeline-specific-fields"><strong>PPG</strong> pipeline specific fields</h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>segment_number</code></td>
+<td><code>int</code></td>
+<td>Order number of the analyzed data segment.</td>
+</tr>
+<tr>
+<td><code>freq_sampling_original</code></td>
+<td><code>int</code></td>
+<td>Sampling frequency (in Hz) of the original data (before adjustments for the analysis).</td>
+</tr>
+</tbody>
+</table>
+<h2 id="additional-tsdf-field-descriptions">Additional TSDF field descriptions</h2>
+<p>These fields are optional, and provide standardised vocabulary for describing the data.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>week_number</code></td>
+<td><code>int</code></td>
+<td>Denotes the specific week for tracking or comparing weekly data.</td>
+</tr>
+<tr>
+<td><code>interpolated</code></td>
+<td><code>bool</code></td>
+<td>Indicates whether interpolation was performed on the data.</td>
+</tr>
+<tr>
+<td><code>high_pass_filter_applied</code></td>
+<td><code>bool</code></td>
+<td>Indicates whether a high-pass filter was applied to remove low-frequency noise.</td>
+</tr>
+<tr>
+<td><code>high_pass_filter_cutoff</code></td>
+<td><code>float</code></td>
+<td>Cutoff frequency (in Hz) for the high-pass filter, in case it was applied.</td>
+</tr>
+<tr>
+<td><code>z_score_normalised</code></td>
+<td><code>bool</code></td>
+<td>Indicates whether z-score normalization was applied to the data.</td>
+</tr>
+<tr>
 <td><code>start_datetime_unix_ms</code></td>
 <td><code>string</code></td>
 <td>UNIX timestamp for the start of the recording (milliseconds). Equivalent to <code>start_iso8601</code> in UNIX format.</td>
@@ -211,114 +355,9 @@
 <td><code>string</code></td>
 <td>UNIX timestamp for the end of the recording (milliseconds). Equivalent to <code>end_iso8601</code> in UNIX format.</td>
 </tr>
-<tr>
-<td><code>scale_factors</code></td>
-<td><code>float[]</code></td>
-<td>Scale factors applied to each data channel to adjust their values.</td>
-</tr>
-<tr>
-<td><code>week_number</code></td>
-<td><code>int</code></td>
-<td>Denotes the specific week for tracking or comparing weekly data.</td>
-</tr>
-<tr>
-<td><code>freq_sampling_original</code></td>
-<td><code>int</code></td>
-<td>Represents the original sampling frequency at which the data was recorded.</td>
-</tr>
-<tr>
-<td><code>freq_sampling_adjusted</code></td>
-<td><code>int</code></td>
-<td>The adjusted sampling frequency optimized for data processing or analysis.</td>
-</tr>
-<tr>
-<td><code>interpolate</code></td>
-<td><code>bool</code></td>
-<td>If set to true, missing or irregular data points will be estimated and filled.</td>
-</tr>
-<tr>
-<td><code>gravity_removal</code></td>
-<td><code>bool</code></td>
-<td>When true, the gravity component is removed to isolate user motion.</td>
-</tr>
-<tr>
-<td><code>apply_high_pass_filter</code></td>
-<td><code>bool</code></td>
-<td>Indicates if a high-pass filter should be applied to remove low-frequency noise.</td>
-</tr>
-<tr>
-<td><code>normalize_acceleration</code></td>
-<td><code>bool</code></td>
-<td>If true, accelerometer data is normalized using z-score normalization.</td>
-</tr>
-<tr>
-<td><code>motion_intensity_thresholds</code></td>
-<td><code>int[]</code></td>
-<td>List of percentage thresholds for categorizing motion intensity.</td>
-</tr>
-<tr>
-<td><code>accelerometer_burst_thresholds</code></td>
-<td><code>float[]</code></td>
-<td>Threshold values for detecting 'burst' or sudden motion in the accelerometer.</td>
-</tr>
-<tr>
-<td><code>gyroscope_burst_thresholds</code></td>
-<td><code>float[]</code></td>
-<td>Threshold values for detecting 'burst' or sudden motion in the gyroscope.</td>
-</tr>
-<tr>
-<td><code>active_burst_threshold_percentile</code></td>
-<td><code>int</code></td>
-<td>Chosen percentile index for active burst threshold from the list of percentile values.</td>
-</tr>
-<tr>
-<td><code>average_acceleration_across_weeks</code></td>
-<td><code>float</code></td>
-<td>Average accelerometer reading across multiple weeks.</td>
-</tr>
-<tr>
-<td><code>acceleration_stddev_across_weeks</code></td>
-<td><code>float</code></td>
-<td>Standard deviation of accelerometer readings across weeks.</td>
-</tr>
-<tr>
-<td><code>average_gyroscope_across_weeks</code></td>
-<td><code>float</code></td>
-<td>Average gyroscope reading across weeks.</td>
-</tr>
-<tr>
-<td><code>gyroscope_stddev_across_weeks</code></td>
-<td><code>float</code></td>
-<td>Standard deviation of gyroscope readings across weeks.</td>
-</tr>
-<tr>
-<td><code>window_size_sec</code></td>
-<td><code>int</code></td>
-<td>Duration in seconds for each data window used in segmented analysis.</td>
-</tr>
-<tr>
-<td><code>num_ECDE_coeff</code></td>
-<td><code>int</code></td>
-<td>Number of ECDE coefficients considered in the analysis.</td>
-</tr>
-<tr>
-<td><code>num_filters</code></td>
-<td><code>int</code></td>
-<td>Number of filters applied to refine or isolate specific frequency bands.</td>
-</tr>
-<tr>
-<td><code>num_ME1_coeff</code></td>
-<td><code>int</code></td>
-<td>Number of ME1 coefficients considered during data processing.</td>
-</tr>
-<tr>
-<td><code>max_frequency_filter</code></td>
-<td><code>int</code></td>
-<td>Highest frequency limit for any applied filter.</td>
-</tr>
 </tbody>
 </table>
-<h2 id="legacy-fields">Legacy fields</h2>
+<h1 id="legacy-fields">Legacy fields</h1>
 <p>The following table lists the legacy fields from the time when the format was called TSDB, along with their updated counterparts:</p>
 <table>
 <thead>
