@@ -36,8 +36,8 @@ TSDF metadata is represented as a dictionary (or a JSON object). In this section
 | `window_overlapped`        | `float`                | Indicates whether there is overlap between consecutive windows in the analysis.   |
 | `step_size_sec`            | `float`               | Duration in seconds for each segment in the written data.                         |
 | `freq_sampling`            | `int`                 | Sampling frequency (in Hz) of the input data.                                                   |
-| `channels`         | [channel_type](tsdf_channels_table.md)`[]`         | Description of the content of the data written. `channel_type` is specific to the `Digital biomarkers for PD` extension. |
-| `units`         | [unit_type](tsdf_channels_table.md)`[]`         | Description of the format of the data written. `unit_type` is specific to the `Digital biomarkers for PD` extension. |
+| `channels`         | [channel_type](tsdf_field_types.md)`[]`         | Description of the content of the data written. `channel_type` is specific to the `Digital biomarkers for PD` extension. |
+| `units`         | [unit_type](tsdf_field_types.md)`[]`         | Description of the format of the data written. `unit_type` is specific to the `Digital biomarkers for PD` extension. |
 
 
 
