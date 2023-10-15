@@ -9,6 +9,7 @@ Within the `Digital biomarkers for PD` extension, some of the field types are fu
 ---
 
 **General types**
+
 |   `channel_type` name          | Recommended `unit`       | Description                                                                           |
 |----------------------------|-----------------------|---------------------------------------------------------------------------------------|
 | `iso8601_time`              | `time`                | Time in ISO8601 format, characterizing each data window by its starting time.          |

@@ -15,6 +15,7 @@ nav:
   
   - The format:
     - TSDF fields: tsdf_fields_table.md
+    - TSDF field types: tsdf_field_types.md
 
   - Usage:
     - Basic reading and writing: basic_reading_and_writing.ipynb
