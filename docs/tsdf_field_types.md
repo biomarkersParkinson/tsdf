@@ -10,9 +10,16 @@ Within the `Digital biomarkers for PD` extension, some of the field types are fu
 
 **General types**
 
-|   `channel_type` name          | Recommended `unit`       | Description                                                                           |
-|----------------------------|-----------------------|---------------------------------------------------------------------------------------|
-| `iso8601_time`              | `time`                | Time in ISO8601 format, characterizing each data window by its starting time.          |
+| `channel_type` name       | Recommended `unit` | Description                                                                        
+|--------------------------|--------------------|------------------------------------------------------------------------------------|
+| `time`                   | `ms`               | Time in ISO8601 format, characterizing each data window by its starting time.          |
+| `acceleration_x`         | `m/s²`             | Acceleration along the x-axis.                                                       |
+| `acceleration_y`         | `m/s²`             | Acceleration along the y-axis.                                                       |
+| `acceleration_z`         | `m/s²`             | Acceleration along the z-axis.                                                       |
+| `rotation_x`             | `deg/s`            | Angular rotation rate around the x-axis.                                              |
+| `rotation_y`             | `deg/s`            | Angular rotation rate around the y-axis.                                              |
+| `rotation_z`             | `deg/s`            | Angular rotation rate around the z-axis.                                              |
+
 
 ---
 
@@ -32,9 +39,9 @@ Within the `Digital biomarkers for PD` extension, some of the field types are fu
 | `channel_type` name       | Recommended `unit` | Description                                                                         |
 |--------------------------|--------------------|-------------------------------------------------------------------------------------|
 | `gyro_tremor_prob`       | `probability`      | Probability values (0 to 1) indicating the likelihood of tremor activity for each sample. |
-| `gyro_tremor_hat`        | `boolean_num`         | Estimated values representing the presence or absence of tremor activity for each sample. |
+| `gyro_tremor_hat`        | `boolean_num`      | Estimated values representing the presence or absence of tremor activity for each sample. |
 | `gyro_arm_actv_prob`     | `probability`      | Probability values (0 to 1) indicating the likelihood of arm activity for each sample.    |
-| `gyro_arm_actv_hat`      | `boolean_num`         | Estimated values representing the presence or absence of arm activity for each sample.    |
+| `gyro_arm_actv_hat`      | `boolean_num`      | Estimated values representing the presence or absence of arm activity for each sample.    |
 | `GyMeanDx`               | `unitless`         | Mean gyro derivative in the x axis. |
 | `GyMeanDy`               | `unitless`         | Mean gyro derivative in the y axis. |
 | `GyMeanDz`               | `unitless`         | Mean gyro derivative in the z axis. |
@@ -103,7 +110,9 @@ Within the `Digital biomarkers for PD` extension, some of the field types are fu
 
 |   `unit_type` name          | Description                                                                           |
 |----------------------------|---------------------------------------------------------------------------------------|
-| `time`              | Time in ISO8601 format, characterizing each data window by its starting time.                |
+| `ms`              | Time in ISO8601 format (precision in ms), characterizing each data window by its starting time.                |
 | `probability`       | Probability values (0 to 1) indicating the likelihood of tremor activity for each sample.    |
 | `boolean_num`       | `[TODO]` Integer values (0 or 1) representing the true (1) or false (0) presence of an activity.      |
 | `unitless`          | Numerical values without units.                                                              |
+| `m/s²`             | Acceleration in meters per second squared.                                           |
+| `deg/s`            | Angular velocity in degrees per second.  

@@ -30,6 +30,8 @@ TSDF metadata is represented as a dictionary (or a JSON object). In this section
 
 ## Mandatory fields
 
+This is a preliminary list of mandatory fields for the `Digital biomarkers for PD` extension. The list will be updated based on the upcoming discussions.
+
 | Field                      | Type         | Description                                                                       |
 |----------------------------|--------------|-----------------------------------------------------------------------------------|
 | `window_size_sec`          | `float`               | Size of the window (in seconds) used in the analysis.                             |
@@ -43,6 +45,8 @@ TSDF metadata is represented as a dictionary (or a JSON object). In this section
 
 ## **Tremor** pipeline specific fields
 
+Non-mandatory fields used in the tremor pipeline.
+
 | Field                      | Type         | Description                                                                  |
 |----------------------------|--------------|------------------------------------------------------------------------------|
 | `mfcc_num_filters`         | `float`      | Number of filters used for estimating the mel-frequency cepstral coefficients. |
@@ -50,22 +54,31 @@ TSDF metadata is represented as a dictionary (or a JSON object). In this section
 | `mfcc_max_freq_filter`     | `float`      | Maximum frequency (in Hz) used for filtering in mel-frequency cepstral coefficients. |
 | `mfcc_window_size`         | `float`      | Size of the sub-window in seconds used to estimate the spectrogram used in the evaluation of the mel-frequency cepstral coefficients. |
 | `feature_names`             | `str[]`                  | List of names for the features.                                                      |
-| `excluded_hours`            | `int[]`                  | List of the excluded hours from the analysis (vector scaling?)???                                                   |
-| `sum_features_gyro_scale`   | `float[]`                  | Scaling factors for the sum of tremor-related features (from gyro)???                                          |
-| `sum_squared_features_gyro_scale` | `float[]`            | Scaling factors for the sum of squared tremor-related features (from gyro)???                                 |
-| `n_features_gyro_scale`     | `int`                    | Scaling factor for the number of gyro features???                                        |
+| `excluded_hours`            | `int[]`                  | `[TODO]` List of the excluded hours from the analysis (vector scaling?)                                                  |
+| `sum_features_gyro_scale`   | `float[]`                  | `[TODO]` Scaling factors for the sum of tremor-related features (from gyro)                                          |
+| `sum_squared_features_gyro_scale` | `float[]`            | `[TODO]` Scaling factors for the sum of squared tremor-related features (from gyro)                                 |
+| `n_features_gyro_scale`     | `int`                    | `[TODO]` Scaling factor for the number of gyro features                                        |
 
 ## **PPG** pipeline specific fields
+
+Non-mandatory fields used in the PPG pipeline.
 
 | Field                      | Type                 | Description                                                                  |
 |----------------------------|----------------------|------------------------------------------------------------------------------|
 | `segment_number`           | `int`                | Order number of the analyzed data segment. |
 | `freq_sampling_original`   | `int`                | Sampling frequency (in Hz) of the original data (before adjustments for the analysis).                                              |
 
+## **Gait** pipeline specific fields
+
+Non-mandatory fields used in the gait pipeline. We currently do not have information about the fields used in the gait pipeline, but we will update this section as soon as we have more information.
+
+| Field                      | Type                 | Description                                                                  |
+|----------------------------|----------------------|------------------------------------------------------------------------------|
+| `field_name`           | `int`                | `[TODO]` Field description. |
 
 ## Additional TSDF field descriptions
 
-These fields are optional, and provide standardised vocabulary for describing the data.
+These fields are non-mandatory, and provide standardised vocabulary for describing the data.
 
 
 | Field                        | Type         | Description                                          |
