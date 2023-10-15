@@ -191,6 +191,7 @@
 </table>
 <h1 id="tsdf-schema-digital-biomarkers-for-pd-extension">TSDF schema <code>Digital biomarkers for PD</code> extension</h1>
 <h2 id="mandatory-fields">Mandatory fields</h2>
+<p>This is a preliminary list of mandatory fields for the <code>Digital biomarkers for PD</code> extension. The list will be updated based on the upcoming discussions.</p>
 <table>
 <thead>
 <tr>
@@ -233,6 +234,7 @@
 </tbody>
 </table>
 <h2 id="tremor-pipeline-specific-fields"><strong>Tremor</strong> pipeline specific fields</h2>
+<p>Non-mandatory fields used in the tremor pipeline.</p>
 <table>
 <thead>
 <tr>
@@ -270,26 +272,27 @@
 <tr>
 <td><code>excluded_hours</code></td>
 <td><code>int[]</code></td>
-<td>List of the excluded hours from the analysis (vector scaling?)???</td>
+<td><code>[TODO]</code> List of the excluded hours from the analysis (vector scaling?)</td>
 </tr>
 <tr>
 <td><code>sum_features_gyro_scale</code></td>
 <td><code>float[]</code></td>
-<td>Scaling factors for the sum of tremor-related features (from gyro)???</td>
+<td><code>[TODO]</code> Scaling factors for the sum of tremor-related features (from gyro)</td>
 </tr>
 <tr>
 <td><code>sum_squared_features_gyro_scale</code></td>
 <td><code>float[]</code></td>
-<td>Scaling factors for the sum of squared tremor-related features (from gyro)???</td>
+<td><code>[TODO]</code> Scaling factors for the sum of squared tremor-related features (from gyro)</td>
 </tr>
 <tr>
 <td><code>n_features_gyro_scale</code></td>
 <td><code>int</code></td>
-<td>Scaling factor for the number of gyro features???</td>
+<td><code>[TODO]</code> Scaling factor for the number of gyro features</td>
 </tr>
 </tbody>
 </table>
 <h2 id="ppg-pipeline-specific-fields"><strong>PPG</strong> pipeline specific fields</h2>
+<p>Non-mandatory fields used in the PPG pipeline.</p>
 <table>
 <thead>
 <tr>
@@ -311,8 +314,26 @@
 </tr>
 </tbody>
 </table>
+<h2 id="gait-pipeline-specific-fields"><strong>Gait</strong> pipeline specific fields</h2>
+<p>Non-mandatory fields used in the gait pipeline. We currently do not have information about the fields used in the gait pipeline, but we will update this section as soon as we have more information.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>field_name</code></td>
+<td><code>int</code></td>
+<td><code>[TODO]</code> Field description.</td>
+</tr>
+</tbody>
+</table>
 <h2 id="additional-tsdf-field-descriptions">Additional TSDF field descriptions</h2>
-<p>These fields are optional, and provide standardised vocabulary for describing the data.</p>
+<p>These fields are non-mandatory, and provide standardised vocabulary for describing the data.</p>
 <table>
 <thead>
 <tr>

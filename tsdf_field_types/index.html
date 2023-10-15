@@ -116,9 +116,39 @@
 </thead>
 <tbody>
 <tr>
-<td><code>iso8601_time</code></td>
 <td><code>time</code></td>
+<td><code>ms</code></td>
 <td>Time in ISO8601 format, characterizing each data window by its starting time.</td>
+</tr>
+<tr>
+<td><code>acceleration_x</code></td>
+<td><code>m/s²</code></td>
+<td>Acceleration along the x-axis.</td>
+</tr>
+<tr>
+<td><code>acceleration_y</code></td>
+<td><code>m/s²</code></td>
+<td>Acceleration along the y-axis.</td>
+</tr>
+<tr>
+<td><code>acceleration_z</code></td>
+<td><code>m/s²</code></td>
+<td>Acceleration along the z-axis.</td>
+</tr>
+<tr>
+<td><code>rotation_x</code></td>
+<td><code>deg/s</code></td>
+<td>Angular rotation rate around the x-axis.</td>
+</tr>
+<tr>
+<td><code>rotation_y</code></td>
+<td><code>deg/s</code></td>
+<td>Angular rotation rate around the y-axis.</td>
+</tr>
+<tr>
+<td><code>rotation_z</code></td>
+<td><code>deg/s</code></td>
+<td>Angular rotation rate around the z-axis.</td>
 </tr>
 </tbody>
 </table>
@@ -138,9 +168,9 @@
 | `channel_type` name       | Recommended `unit` | Description                                                                         |
 |--------------------------|--------------------|-------------------------------------------------------------------------------------|
 | `gyro_tremor_prob`       | `probability`      | Probability values (0 to 1) indicating the likelihood of tremor activity for each sample. |
-| `gyro_tremor_hat`        | `boolean_num`         | Estimated values representing the presence or absence of tremor activity for each sample. |
+| `gyro_tremor_hat`        | `boolean_num`      | Estimated values representing the presence or absence of tremor activity for each sample. |
 | `gyro_arm_actv_prob`     | `probability`      | Probability values (0 to 1) indicating the likelihood of arm activity for each sample.    |
-| `gyro_arm_actv_hat`      | `boolean_num`         | Estimated values representing the presence or absence of arm activity for each sample.    |
+| `gyro_arm_actv_hat`      | `boolean_num`      | Estimated values representing the presence or absence of arm activity for each sample.    |
 | `GyMeanDx`               | `unitless`         | Mean gyro derivative in the x axis. |
 | `GyMeanDy`               | `unitless`         | Mean gyro derivative in the y axis. |
 | `GyMeanDz`               | `unitless`         | Mean gyro derivative in the z axis. |
@@ -211,8 +241,8 @@
 </thead>
 <tbody>
 <tr>
-<td><code>time</code></td>
-<td>Time in ISO8601 format, characterizing each data window by its starting time.</td>
+<td><code>ms</code></td>
+<td>Time in ISO8601 format (precision in ms), characterizing each data window by its starting time.</td>
 </tr>
 <tr>
 <td><code>probability</code></td>
@@ -225,6 +255,14 @@
 <tr>
 <td><code>unitless</code></td>
 <td>Numerical values without units.</td>
+</tr>
+<tr>
+<td><code>m/s²</code></td>
+<td>Acceleration in meters per second squared.</td>
+</tr>
+<tr>
+<td><code>deg/s</code></td>
+<td>Angular velocity in degrees per second.</td>
 </tr>
 </tbody>
 </table>
