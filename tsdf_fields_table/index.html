@@ -178,11 +178,6 @@
 <td>Bit-length of the number format (e.g., 32-bit).</td>
 </tr>
 <tr>
-<td><code>columns</code></td>
-<td><code>int</code></td>
-<td>Number of columns in the data matrix.</td>
-</tr>
-<tr>
 <td><code>rows</code></td>
 <td><code>int</code></td>
 <td>Number of rows in the data matrix.</td>
@@ -205,11 +200,6 @@
 <td><code>window_size_sec</code></td>
 <td><code>float</code></td>
 <td>Size of the window (in seconds) used in the analysis.</td>
-</tr>
-<tr>
-<td><code>window_overlapped</code></td>
-<td><code>float</code></td>
-<td>Indicates whether there is overlap between consecutive windows in the analysis.</td>
 </tr>
 <tr>
 <td><code>step_size_sec</code></td>
@@ -246,12 +236,12 @@
 <tbody>
 <tr>
 <td><code>mfcc_num_filters</code></td>
-<td><code>float</code></td>
+<td><code>int</code></td>
 <td>Number of filters used for estimating the mel-frequency cepstral coefficients.</td>
 </tr>
 <tr>
 <td><code>mfcc_num_mel_coeff</code></td>
-<td><code>float</code></td>
+<td><code>int</code></td>
 <td>Number of coefficients used for estimating the mel-frequency cepstral coefficients.</td>
 </tr>
 <tr>
@@ -263,11 +253,6 @@
 <td><code>mfcc_window_size</code></td>
 <td><code>float</code></td>
 <td>Size of the sub-window in seconds used to estimate the spectrogram used in the evaluation of the mel-frequency cepstral coefficients.</td>
-</tr>
-<tr>
-<td><code>feature_names</code></td>
-<td><code>str[]</code></td>
-<td>List of names for the features.</td>
 </tr>
 <tr>
 <td><code>excluded_hours</code></td>
@@ -346,7 +331,12 @@
 <tr>
 <td><code>week_number</code></td>
 <td><code>int</code></td>
-<td>Denotes the specific week for tracking or comparing weekly data.</td>
+<td>Denotes the specific study week number used for tracking or comparing data.</td>
+</tr>
+<tr>
+<td><code>columns</code></td>
+<td><code>int</code></td>
+<td>Number of columns in the data matrix.</td>
 </tr>
 <tr>
 <td><code>interpolated</code></td>
