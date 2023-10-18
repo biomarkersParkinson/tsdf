@@ -129,7 +129,7 @@ Within the `Digital biomarkers for PD` extension, some of the field types are fu
 
 |   `unit_type` name          | Description                                                                           |
 |----------------------------|---------------------------------------------------------------------------------------|
-| `ms`              | Time in ISO8601 format (precision in ms), characterizing each data window by its starting time.                |
+| `ms`              | `[TODO]` Time in ISO8601 format (precision in ms), characterizing each data window by its starting time.                |
 | `probability`       | Probability values (0 to 1) indicating the likelihood of tremor activity for each sample.    |
 | `boolean_num`       | `[TODO]` Integer values (0 or 1) representing the true (1) or false (0) presence of an activity.      |
 | `unitless`          | Numerical values without units.                                                              |

@@ -20,7 +20,6 @@ TSDF metadata is represented as a dictionary (or a JSON object). In this section
 | `units`          | `str[]`      | Units for each channel in the data, e.g., "ms" for milliseconds.             |
 | `data_type`      | `str`        | Number format of the measured data (_e.g.:_ `float`).                                             |
 | `bits`           | `int`        | Bit-length of the number format (e.g., 32-bit).                                         |
-| `columns`        | `int`        | Number of columns in the data matrix.                                        |
 | `rows`           | `int`        | Number of rows in the data matrix.                                          |
 
 
@@ -35,7 +34,6 @@ This is a preliminary list of mandatory fields for the `Digital biomarkers for P
 | Field                      | Type         | Description                                                                       |
 |----------------------------|--------------|-----------------------------------------------------------------------------------|
 | `window_size_sec`          | `float`               | Size of the window (in seconds) used in the analysis.                             |
-| `window_overlapped`        | `float`                | Indicates whether there is overlap between consecutive windows in the analysis.   |
 | `step_size_sec`            | `float`               | Duration in seconds for each segment in the written data.                         |
 | `freq_sampling`            | `int`                 | Sampling frequency (in Hz) of the input data.                                                   |
 | `channels`         | [channel_type](tsdf_field_types.md)`[]`         | Description of the content of the data written. `channel_type` is specific to the `Digital biomarkers for PD` extension. |
@@ -49,11 +47,10 @@ Non-mandatory fields used in the tremor pipeline.
 
 | Field                      | Type         | Description                                                                  |
 |----------------------------|--------------|------------------------------------------------------------------------------|
-| `mfcc_num_filters`         | `float`      | Number of filters used for estimating the mel-frequency cepstral coefficients. |
-| `mfcc_num_mel_coeff`       | `float`      | Number of coefficients used for estimating the mel-frequency cepstral coefficients. |
+| `mfcc_num_filters`         | `int`      | Number of filters used for estimating the mel-frequency cepstral coefficients. |
+| `mfcc_num_mel_coeff`       | `int`      | Number of coefficients used for estimating the mel-frequency cepstral coefficients. |
 | `mfcc_max_freq_filter`     | `float`      | Maximum frequency (in Hz) used for filtering in mel-frequency cepstral coefficients. |
 | `mfcc_window_size`         | `float`      | Size of the sub-window in seconds used to estimate the spectrogram used in the evaluation of the mel-frequency cepstral coefficients. |
-| `feature_names`             | `str[]`                  | List of names for the features.                                                      |
 | `excluded_hours`            | `int[]`                  | `[TODO]` List of the excluded hours from the analysis (vector scaling?)                                                  |
 | `sum_features_gyro_scale`   | `float[]`                  | `[TODO]` Scaling factors for the sum of tremor-related features (from gyro)                                          |
 | `sum_squared_features_gyro_scale` | `float[]`            | `[TODO]` Scaling factors for the sum of squared tremor-related features (from gyro)                                 |
@@ -83,7 +80,8 @@ These fields are non-mandatory, and provide standardised vocabulary for describi
 
 | Field                        | Type         | Description                                          |
 |------------------------------|--------------|------------------------------------------------------|
-| `week_number`                | `int`        | Denotes the specific week for tracking or comparing weekly data. |
+| `week_number`                | `int`        | Denotes the specific study week number used for tracking or comparing data. |
+| `columns`        | `int`        | Number of columns in the data matrix.                                        |
 | `interpolated`               | `bool`       | Indicates whether interpolation was performed on the data. |
 | `high_pass_filter_applied`   | `bool`       | Indicates whether a high-pass filter was applied to remove low-frequency noise. |
 | `high_pass_filter_cutoff`    | `float`      | Cutoff frequency (in Hz) for the high-pass filter, in case it was applied. |
