@@ -74,7 +74,7 @@ Non-mandatory fields used in the gait pipeline. We currently do not have informa
 
 | Field                      | Type                 | Description                                                                  |
 |----------------------------|----------------------|------------------------------------------------------------------------------|
-| `field_name`           | `int`                | `[TODO]` Field description. |
+| `side_watch`               | `string`             | `[TODO]` Possible values: ['left', 'right']. |
 
 ## Additional TSDF field descriptions
 
