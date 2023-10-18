@@ -220,12 +220,31 @@
 
 | `channel_type` name       | Recommended `unit` | Description                                                                         |
 |--------------------------|--------------------|-------------------------------------------------------------------------------------|
-| `accel_gait_feature_1`       | `unitless`            | `[TODO]` Gait-related feature 1 estimated from accelerometer data based on the windowed data `[TODO]`.     |
-| `accel_gait_feature_2`       | `unitless`            | `[TODO]` Gait-related feature 2 estimated from accelerometer data based on the windowed data `[TODO]`.     |
-| `accel_gait_prob`           | `probability`         | `[TODO]` Probability values (0 to 1) indicating the likelihood of gait activity for each sample.  |
-| `accel_arm_swing_feature1`  | `unitless`            | `[TODO]` Arm swing-related feature 1 estimated from accelerometer data based on the windowed data`[TODO]`. |
-| `accel_arm_swing_feature2`  | `unitless`            | `[TODO]` Arm swing-related feature 2 estimated from accelerometer data based on the windowed data`[TODO]`. |
-| `accel_arm_swing_prob`      | `probability`         | `[TODO]` Probability values (0 to 1) indicating the likelihood of arm swing activity for each sample. |
+| `gd_std_accel_norm`       | `m/s²`            | Standard deviation of the norm of the accelerometer axes in the temporal domain.     |
+| `gd_x_accel_grav_mean`    | `m/s²`            | Mean of the x-axis acceleration gravity component.     |
+| `gd_y_accel_grav_mean`    | `m/s²`            | Mean of the y-axis acceleration gravity component.  |
+| `gd_z_accel_grav_mean`    | `m/s²`            | Mean of the z-axis acceleration gravity component. |
+| `gd_x_accel_grav_std`     | `m/s²`            | Standard deviation of the x-axis acceleration gravity component. |
+| `gd_y_accel_grav_std`     | `m/s²`            | Standard deviation of the y-axis acceleration gravity component. |
+| `gd_z_accel_grav_std`     | `m/s²`            | Standard deviation of the z-axis acceleration gravity component.. |
+| `gd_x_accel_power_below_gait`  | `m/s²Hz^-1`            | Total power in the [0, 0.7] Hz range of the x-axis accelerometer |
+| `gd_y_accel_power_below_gait`  | `m/s²Hz^-1`            | Total power in the [0, 0.7] Hz range of the y-axis accelerometer |
+| `gd_z_accel_power_below_gait`  | `m/s²Hz^-1`            | Total power in the [0, 0.7] Hz range of the z-axis accelerometer |
+| `gd_x_accel_power_gait`  | `m/s²Hz^-1`            | Total power in the [0.7, 3.5] Hz range of the x-axis accelerometer |
+| `gd_y_accel_power_gait`  | `m/s²Hz^-1`            | Total power in the [0.7, 3.5] Hz range of the y-axis accelerometer |
+| `gd_z_accel_power_gait`  | `m/s²Hz^-1`            | Total power in the [0.7, 3.5] Hz range of the z-axis accelerometer |
+| `gd_x_accel_power_tremor`  | `m/s²Hz^-1`            | Total power in the [3.5, 8] Hz range of the x-axis accelerometer |
+| `gd_y_accel_power_tremor`  | `m/s²Hz^-1`            | Total power in the [3.5, 8] Hz range of the y-axis accelerometer |
+| `gd_z_accel_power_tremor`  | `m/s²Hz^-1`            | Total power in the [3.5, 8] Hz range of the z-axis accelerometer |
+| `gd_x_accel_power_above_tremor`  | `m/s²Hz^-1`            | Total power in the [8, 50] Hz range of the x-axis accelerometer |
+| `gd_y_accel_power_above_tremor`  | `m/s²Hz^-1`            | Total power in the [8, 50] Hz range of the y-axis accelerometer |
+| `gd_z_accel_power_above_tremor`  | `m/s²Hz^-1`            | Total power in the [8, 50] Hz range of the z-axis accelerometer |
+| `gd_x_accel_dominant_frequency`  | `Hz`            | Dominant frequency of the x-axis accelerometer |
+| `gd_y_accel_dominant_frequency`  | `Hz`            | Dominant frequency of the x-axis accelerometer |
+| `gd_z_accel_dominant_frequency`  | `Hz`            | Dominant frequency of the x-axis accelerometer |
+| `gd_accel_norm_cc_{n}`  | `?`            | Cepstral coefficient n with n $\in$ [1,2,...,16]. |
+| `gd_pred_gait_proba`  | `probability`            | Predicted probability of gait being the predominant activity within the window span. |
+
 </details>
 
 <h2 id="-">---</h2>
