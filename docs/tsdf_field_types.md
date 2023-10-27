@@ -23,12 +23,15 @@ Within the `Digital biomarkers for PD` extension, some of the field types are fu
 
 ---
 
-<details markdown="1">
+<details>
 <summary><b>PPG-related types</b></summary>
-
+<section markdown="block">
+  
 |   `channel_type` name          | Recommended `unit`       | Description                                                                           |
 |----------------------------|-----------------------|---------------------------------------------------------------------------------------|
 | `ppg_quality_post_prob`     | `probability`         | `[TODO]` Posterior probability that the corresponding PPG signal is of high quality (0 to 1).   |
+
+</section>
 </details>
 
 ---
