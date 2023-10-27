@@ -23,7 +23,7 @@ Within the `Digital biomarkers for PD` extension, some of the field types are fu
 
 ---
 
-<details>
+<details markdown="1">
 <summary><b>PPG-related types</b></summary>
 
 |   `channel_type` name          | Recommended `unit`       | Description                                                                           |
