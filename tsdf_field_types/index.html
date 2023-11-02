@@ -51,8 +51,6 @@
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#field-channels">Field: channels</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#-">---</a>
-    </li>
     <li class="toctree-l2"><a class="reference internal" href="#field-units">Field: units</a>
     </li>
     </ul>
@@ -155,105 +153,392 @@
 <hr />
 <details>
 <summary><b>PPG-related types</b></summary>
-<section markdown="block">
-
-|   `channel_type` name          | Recommended `unit`       | Description                                                                           |
-|----------------------------|-----------------------|---------------------------------------------------------------------------------------|
-| `ppg_quality_post_prob`     | `probability`         | `[TODO]` Posterior probability that the corresponding PPG signal is of high quality (0 to 1).   |
-
-</section>
+<table>
+<thead>
+<tr>
+<th><code>channel_type</code> name</th>
+<th>Recommended <code>unit</code></th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ppg_quality_post_prob</code></td>
+<td><code>probability</code></td>
+<td><code>[TODO]</code> Posterior probability that the corresponding PPG signal is of high quality (0 to 1).</td>
+</tr>
+</tbody>
+</table>
 </details>
-
 <hr />
 <details>
 <summary><b>Tremor-related types</b></summary>
-
-| `channel_type` name       | Recommended `unit` | Description                                                                         |
-|--------------------------|--------------------|-------------------------------------------------------------------------------------|
-| `gyro_tremor_prob`       | `probability`      | Probability values (0 to 1) indicating the likelihood of tremor activity for each sample. |
-| `gyro_tremor_hat`        | `boolean_num`      | Estimated values representing the presence or absence of tremor activity for each sample. |
-| `gyro_arm_actv_prob`     | `probability`      | Probability values (0 to 1) indicating the likelihood of arm activity for each sample.    |
-| `gyro_arm_actv_hat`      | `boolean_num`      | Estimated values representing the presence or absence of arm activity for each sample.    |
-| `GyMeanDx`               | `unitless`         | Mean gyro derivative in the x axis. |
-| `GyMeanDy`               | `unitless`         | Mean gyro derivative in the y axis. |
-| `GyMeanDz`               | `unitless`         | Mean gyro derivative in the z axis. |
-| `GyLTreDomPowerX`        | `unitless`         | Gyro Low tremor (range [3.5-8 Hz]) dominant power in the x axis. |
-| `GyLTreDomPowerY`        | `unitless`         | Gyro Low tremor (range [3.5-8 Hz]) dominant power in the y axis. |
-| `GyLTreDomPowerZ`        | `unitless`         | Gyro Low tremor (range [3.5-8 Hz]) dominant power in the z axis. |
-| `GyGaitBandPower`        | `unitless`         | Gyro gait bandpower (range [0.4 – 2] Hz) – PSD: sum of the axes. |
-| `GyGaitBandpowerRatio`   | `unitless`         | Gyro gait bandpower sum / total bandpower sum up to 15 Hz – PSD: sum of the axes. |
-| `GyGaitFreqPeak`         | `unitless`         | Frequency peak of the in the gyro gait range – PSD: sum of the axes. |
-| `GyGaitFixedDomPower`    | `unitless`         | `[TODO]` Gyro dominant power in a fixed range (specific frequency range not provided). |
-| `GyGaitFixedDomPowerRatio` | `unitless`       | `[TODO]` Ratio of dominant power in the gyro gait range to total power. |
-| `GyGaitDomPower`         | `unitless`         | `[TODO]` Dominant power in the gyro gait range. |
-| `GyGaitDomPowerRatio`    | `unitless`         | `[TODO]` Ratio of dominant power in the gyro gait range to total power. |
-| `GyGaitPeakFreqWidth`    | `unitless`         | `[TODO]` Width of the frequency peak in the gyro gait range. |
-| `GyLTreBandPower`        | `unitless`         | `[TODO]` Low tremor bandpower (specific frequency range not provided). |
-| `GyLTreBandpower`        | `unitless`         | `[TODO]` Low tremor bandpower (specific frequency range not provided). |
-| `GyLTreFreqPeak`         | `unitless`         | `[TODO]` Frequency peak in the low tremor range. |
-| `GyLTreFixedDomP`        | `unitless`         | `[TODO]` Low tremor dominant power in a fixed range (specific frequency range not provided). |
-| `GyLTreFixedDomP`        | `unitless`         | `[TODO]` Low tremor dominant power in a fixed range (specific frequency range not provided). |
-| `GyLTreDomPower`         | `unitless`         | `[TODO]` Low tremor dominant power (specific frequency range not provided). |
-| `GyLTreDomPowerR`        | `unitless`         | `[TODO]` Ratio of low tremor dominant power to total power. |
-| `GyLTrePeakFreqW`        | `unitless`         | `[TODO]` Width of the frequency peak in the low tremor range. |
-| `GyHTreBandPower`        | `unitless`         | `[TODO]` High tremor bandpower (specific frequency range not provided). |
-| `GyHTreBandpower`        | `unitless`         | `[TODO]` High tremor bandpower (specific frequency range not provided). |
-| `GyHTreFreqPeak`         | `unitless`         | `[TODO]` Frequency peak in the high tremor range. |
-| `GyHTreFixedDomP`        | `unitless`         | `[TODO]` High tremor dominant power in a fixed range (specific frequency range not provided). |
-| `GyHTreFixedDomP`        | `unitless`         | `[TODO]` High tremor dominant power in a fixed range (specific frequency range not provided). |
-| `GyHTreDomPower`         | `unitless`         | `[TODO]` High tremor dominant power (specific frequency range not provided). |
-| `GyHTreDomPowerR`        | `unitless`         | `[TODO]` Ratio of high tremor dominant power to total power. |
-| `GyHTrePeakFreqW`        | `unitless`         | `[TODO]` Width of the frequency peak in the high tremor range. |
-| `GyMFCC1`                | `unitless`         | `[TODO]` Mel-frequency cepstral coefficient 1. |
-| `GyMFCC2`                | `unitless`         | `[TODO]` Mel-frequency cepstral coefficient 2. |
-| `GyMFCC3`                | `unitless`         | `[TODO]` Mel-frequency cepstral coefficient 3. |
-| `GyMFCC4`                | `unitless`         | `[TODO]` Mel-frequency cepstral coefficient 4. |
-| `GyMFCC5`                | `unitless`         | `[TODO]` Mel-frequency cepstral coefficient 5. |
-| `GyMFCC6`                | `unitless`         | `[TODO]` Mel-frequency cepstral coefficient 6. |
-| `GyMFCC7`                | `unitless`         | `[TODO]` Mel-frequency cepstral coefficient 7. |
-| `GyMFCC8`                | `unitless`         | `[TODO]` Mel-frequency cepstral coefficient 8. |
-| `GyMFCC9`                | `unitless`         | `[TODO]` Mel-frequency cepstral coefficient 9. |
-
-
+<table>
+<thead>
+<tr>
+<th><code>channel_type</code> name</th>
+<th>Recommended <code>unit</code></th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>gyro_tremor_prob</code></td>
+<td><code>probability</code></td>
+<td>Probability values (0 to 1) indicating the likelihood of tremor activity for each sample.</td>
+</tr>
+<tr>
+<td><code>gyro_tremor_hat</code></td>
+<td><code>boolean_num</code></td>
+<td>Estimated values representing the presence or absence of tremor activity for each sample.</td>
+</tr>
+<tr>
+<td><code>gyro_arm_actv_prob</code></td>
+<td><code>probability</code></td>
+<td>Probability values (0 to 1) indicating the likelihood of arm activity for each sample.</td>
+</tr>
+<tr>
+<td><code>gyro_arm_actv_hat</code></td>
+<td><code>boolean_num</code></td>
+<td>Estimated values representing the presence or absence of arm activity for each sample.</td>
+</tr>
+<tr>
+<td><code>GyMeanDx</code></td>
+<td><code>unitless</code></td>
+<td>Mean gyro derivative in the x axis.</td>
+</tr>
+<tr>
+<td><code>GyMeanDy</code></td>
+<td><code>unitless</code></td>
+<td>Mean gyro derivative in the y axis.</td>
+</tr>
+<tr>
+<td><code>GyMeanDz</code></td>
+<td><code>unitless</code></td>
+<td>Mean gyro derivative in the z axis.</td>
+</tr>
+<tr>
+<td><code>GyLTreDomPowerX</code></td>
+<td><code>unitless</code></td>
+<td>Gyro Low tremor (range [3.5-8 Hz]) dominant power in the x axis.</td>
+</tr>
+<tr>
+<td><code>GyLTreDomPowerY</code></td>
+<td><code>unitless</code></td>
+<td>Gyro Low tremor (range [3.5-8 Hz]) dominant power in the y axis.</td>
+</tr>
+<tr>
+<td><code>GyLTreDomPowerZ</code></td>
+<td><code>unitless</code></td>
+<td>Gyro Low tremor (range [3.5-8 Hz]) dominant power in the z axis.</td>
+</tr>
+<tr>
+<td><code>GyGaitBandPower</code></td>
+<td><code>unitless</code></td>
+<td>Gyro gait bandpower (range [0.4 – 2] Hz) – PSD: sum of the axes.</td>
+</tr>
+<tr>
+<td><code>GyGaitBandpowerRatio</code></td>
+<td><code>unitless</code></td>
+<td>Gyro gait bandpower sum / total bandpower sum up to 15 Hz – PSD: sum of the axes.</td>
+</tr>
+<tr>
+<td><code>GyGaitFreqPeak</code></td>
+<td><code>unitless</code></td>
+<td>Frequency peak of the in the gyro gait range – PSD: sum of the axes.</td>
+</tr>
+<tr>
+<td><code>GyGaitFixedDomPower</code></td>
+<td><code>unitless</code></td>
+<td><code>[TODO]</code> Gyro dominant power in a fixed range (specific frequency range not provided).</td>
+</tr>
+<tr>
+<td><code>GyGaitFixedDomPowerRatio</code></td>
+<td><code>unitless</code></td>
+<td><code>[TODO]</code> Ratio of dominant power in the gyro gait range to total power.</td>
+</tr>
+<tr>
+<td><code>GyGaitDomPower</code></td>
+<td><code>unitless</code></td>
+<td><code>[TODO]</code> Dominant power in the gyro gait range.</td>
+</tr>
+<tr>
+<td><code>GyGaitDomPowerRatio</code></td>
+<td><code>unitless</code></td>
+<td><code>[TODO]</code> Ratio of dominant power in the gyro gait range to total power.</td>
+</tr>
+<tr>
+<td><code>GyGaitPeakFreqWidth</code></td>
+<td><code>unitless</code></td>
+<td><code>[TODO]</code> Width of the frequency peak in the gyro gait range.</td>
+</tr>
+<tr>
+<td><code>GyLTreBandPower</code></td>
+<td><code>unitless</code></td>
+<td><code>[TODO]</code> Low tremor bandpower (specific frequency range not provided).</td>
+</tr>
+<tr>
+<td><code>GyLTreBandpower</code></td>
+<td><code>unitless</code></td>
+<td><code>[TODO]</code> Low tremor bandpower (specific frequency range not provided).</td>
+</tr>
+<tr>
+<td><code>GyLTreFreqPeak</code></td>
+<td><code>unitless</code></td>
+<td><code>[TODO]</code> Frequency peak in the low tremor range.</td>
+</tr>
+<tr>
+<td><code>GyLTreFixedDomP</code></td>
+<td><code>unitless</code></td>
+<td><code>[TODO]</code> Low tremor dominant power in a fixed range (specific frequency range not provided).</td>
+</tr>
+<tr>
+<td><code>GyLTreFixedDomP</code></td>
+<td><code>unitless</code></td>
+<td><code>[TODO]</code> Low tremor dominant power in a fixed range (specific frequency range not provided).</td>
+</tr>
+<tr>
+<td><code>GyLTreDomPower</code></td>
+<td><code>unitless</code></td>
+<td><code>[TODO]</code> Low tremor dominant power (specific frequency range not provided).</td>
+</tr>
+<tr>
+<td><code>GyLTreDomPowerR</code></td>
+<td><code>unitless</code></td>
+<td><code>[TODO]</code> Ratio of low tremor dominant power to total power.</td>
+</tr>
+<tr>
+<td><code>GyLTrePeakFreqW</code></td>
+<td><code>unitless</code></td>
+<td><code>[TODO]</code> Width of the frequency peak in the low tremor range.</td>
+</tr>
+<tr>
+<td><code>GyHTreBandPower</code></td>
+<td><code>unitless</code></td>
+<td><code>[TODO]</code> High tremor bandpower (specific frequency range not provided).</td>
+</tr>
+<tr>
+<td><code>GyHTreBandpower</code></td>
+<td><code>unitless</code></td>
+<td><code>[TODO]</code> High tremor bandpower (specific frequency range not provided).</td>
+</tr>
+<tr>
+<td><code>GyHTreFreqPeak</code></td>
+<td><code>unitless</code></td>
+<td><code>[TODO]</code> Frequency peak in the high tremor range.</td>
+</tr>
+<tr>
+<td><code>GyHTreFixedDomP</code></td>
+<td><code>unitless</code></td>
+<td><code>[TODO]</code> High tremor dominant power in a fixed range (specific frequency range not provided).</td>
+</tr>
+<tr>
+<td><code>GyHTreFixedDomP</code></td>
+<td><code>unitless</code></td>
+<td><code>[TODO]</code> High tremor dominant power in a fixed range (specific frequency range not provided).</td>
+</tr>
+<tr>
+<td><code>GyHTreDomPower</code></td>
+<td><code>unitless</code></td>
+<td><code>[TODO]</code> High tremor dominant power (specific frequency range not provided).</td>
+</tr>
+<tr>
+<td><code>GyHTreDomPowerR</code></td>
+<td><code>unitless</code></td>
+<td><code>[TODO]</code> Ratio of high tremor dominant power to total power.</td>
+</tr>
+<tr>
+<td><code>GyHTrePeakFreqW</code></td>
+<td><code>unitless</code></td>
+<td><code>[TODO]</code> Width of the frequency peak in the high tremor range.</td>
+</tr>
+<tr>
+<td><code>GyMFCC1</code></td>
+<td><code>unitless</code></td>
+<td><code>[TODO]</code> Mel-frequency cepstral coefficient 1.</td>
+</tr>
+<tr>
+<td><code>GyMFCC2</code></td>
+<td><code>unitless</code></td>
+<td><code>[TODO]</code> Mel-frequency cepstral coefficient 2.</td>
+</tr>
+<tr>
+<td><code>GyMFCC3</code></td>
+<td><code>unitless</code></td>
+<td><code>[TODO]</code> Mel-frequency cepstral coefficient 3.</td>
+</tr>
+<tr>
+<td><code>GyMFCC4</code></td>
+<td><code>unitless</code></td>
+<td><code>[TODO]</code> Mel-frequency cepstral coefficient 4.</td>
+</tr>
+<tr>
+<td><code>GyMFCC5</code></td>
+<td><code>unitless</code></td>
+<td><code>[TODO]</code> Mel-frequency cepstral coefficient 5.</td>
+</tr>
+<tr>
+<td><code>GyMFCC6</code></td>
+<td><code>unitless</code></td>
+<td><code>[TODO]</code> Mel-frequency cepstral coefficient 6.</td>
+</tr>
+<tr>
+<td><code>GyMFCC7</code></td>
+<td><code>unitless</code></td>
+<td><code>[TODO]</code> Mel-frequency cepstral coefficient 7.</td>
+</tr>
+<tr>
+<td><code>GyMFCC8</code></td>
+<td><code>unitless</code></td>
+<td><code>[TODO]</code> Mel-frequency cepstral coefficient 8.</td>
+</tr>
+<tr>
+<td><code>GyMFCC9</code></td>
+<td><code>unitless</code></td>
+<td><code>[TODO]</code> Mel-frequency cepstral coefficient 9.</td>
+</tr>
+</tbody>
+</table>
 </details>
-
 <hr />
 <details>
 <summary><b>Gait-related types</b></summary>
-
-| `channel_type` name       | Recommended `unit` | Description                                                                         |
-|--------------------------|--------------------|-------------------------------------------------------------------------------------|
-| `gd_std_accel_norm`       | `m/s²`            | Standard deviation of the norm of the accelerometer axes in the temporal domain.     |
-| `gd_x_accel_grav_mean`    | `m/s²`            | Mean of the x-axis acceleration gravity component.     |
-| `gd_y_accel_grav_mean`    | `m/s²`            | Mean of the y-axis acceleration gravity component.  |
-| `gd_z_accel_grav_mean`    | `m/s²`            | Mean of the z-axis acceleration gravity component. |
-| `gd_x_accel_grav_std`     | `m/s²`            | Standard deviation of the x-axis acceleration gravity component. |
-| `gd_y_accel_grav_std`     | `m/s²`            | Standard deviation of the y-axis acceleration gravity component. |
-| `gd_z_accel_grav_std`     | `m/s²`            | Standard deviation of the z-axis acceleration gravity component.. |
-| `gd_x_accel_power_below_gait`  | `m/s²Hz^-1`            | Total power in the [0, 0.7] Hz range of the x-axis accelerometer |
-| `gd_y_accel_power_below_gait`  | `m/s²Hz^-1`            | Total power in the [0, 0.7] Hz range of the y-axis accelerometer |
-| `gd_z_accel_power_below_gait`  | `m/s²Hz^-1`            | Total power in the [0, 0.7] Hz range of the z-axis accelerometer |
-| `gd_x_accel_power_gait`  | `m/s²Hz^-1`            | Total power in the [0.7, 3.5] Hz range of the x-axis accelerometer |
-| `gd_y_accel_power_gait`  | `m/s²Hz^-1`            | Total power in the [0.7, 3.5] Hz range of the y-axis accelerometer |
-| `gd_z_accel_power_gait`  | `m/s²Hz^-1`            | Total power in the [0.7, 3.5] Hz range of the z-axis accelerometer |
-| `gd_x_accel_power_tremor`  | `m/s²Hz^-1`            | Total power in the [3.5, 8] Hz range of the x-axis accelerometer |
-| `gd_y_accel_power_tremor`  | `m/s²Hz^-1`            | Total power in the [3.5, 8] Hz range of the y-axis accelerometer |
-| `gd_z_accel_power_tremor`  | `m/s²Hz^-1`            | Total power in the [3.5, 8] Hz range of the z-axis accelerometer |
-| `gd_x_accel_power_above_tremor`  | `m/s²Hz^-1`            | Total power in the [8, 50] Hz range of the x-axis accelerometer |
-| `gd_y_accel_power_above_tremor`  | `m/s²Hz^-1`            | Total power in the [8, 50] Hz range of the y-axis accelerometer |
-| `gd_z_accel_power_above_tremor`  | `m/s²Hz^-1`            | Total power in the [8, 50] Hz range of the z-axis accelerometer |
-| `gd_x_accel_dominant_frequency`  | `Hz`            | Dominant frequency of the x-axis accelerometer |
-| `gd_y_accel_dominant_frequency`  | `Hz`            | Dominant frequency of the x-axis accelerometer |
-| `gd_z_accel_dominant_frequency`  | `Hz`            | Dominant frequency of the x-axis accelerometer |
-| `gd_accel_norm_cc_{n}`  | `?`            | Cepstral coefficient n with n $\in$ [1,2,...,16]. |
-| `gd_pred_gait_proba`  | `probability`            | Predicted probability of gait being the predominant activity within the window span. |
-
+<table>
+<thead>
+<tr>
+<th><code>channel_type</code> name</th>
+<th>Recommended <code>unit</code></th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>gd_std_accel_norm</code></td>
+<td><code>m/s²</code></td>
+<td>Standard deviation of the norm of the accelerometer axes in the temporal domain.</td>
+</tr>
+<tr>
+<td><code>gd_x_accel_grav_mean</code></td>
+<td><code>m/s²</code></td>
+<td>Mean of the x-axis acceleration gravity component.</td>
+</tr>
+<tr>
+<td><code>gd_y_accel_grav_mean</code></td>
+<td><code>m/s²</code></td>
+<td>Mean of the y-axis acceleration gravity component.</td>
+</tr>
+<tr>
+<td><code>gd_z_accel_grav_mean</code></td>
+<td><code>m/s²</code></td>
+<td>Mean of the z-axis acceleration gravity component.</td>
+</tr>
+<tr>
+<td><code>gd_x_accel_grav_std</code></td>
+<td><code>m/s²</code></td>
+<td>Standard deviation of the x-axis acceleration gravity component.</td>
+</tr>
+<tr>
+<td><code>gd_y_accel_grav_std</code></td>
+<td><code>m/s²</code></td>
+<td>Standard deviation of the y-axis acceleration gravity component.</td>
+</tr>
+<tr>
+<td><code>gd_z_accel_grav_std</code></td>
+<td><code>m/s²</code></td>
+<td>Standard deviation of the z-axis acceleration gravity component..</td>
+</tr>
+<tr>
+<td><code>gd_x_accel_power_below_gait</code></td>
+<td><code>m/s²Hz^-1</code></td>
+<td>Total power in the [0, 0.7] Hz range of the x-axis accelerometer</td>
+</tr>
+<tr>
+<td><code>gd_y_accel_power_below_gait</code></td>
+<td><code>m/s²Hz^-1</code></td>
+<td>Total power in the [0, 0.7] Hz range of the y-axis accelerometer</td>
+</tr>
+<tr>
+<td><code>gd_z_accel_power_below_gait</code></td>
+<td><code>m/s²Hz^-1</code></td>
+<td>Total power in the [0, 0.7] Hz range of the z-axis accelerometer</td>
+</tr>
+<tr>
+<td><code>gd_x_accel_power_gait</code></td>
+<td><code>m/s²Hz^-1</code></td>
+<td>Total power in the [0.7, 3.5] Hz range of the x-axis accelerometer</td>
+</tr>
+<tr>
+<td><code>gd_y_accel_power_gait</code></td>
+<td><code>m/s²Hz^-1</code></td>
+<td>Total power in the [0.7, 3.5] Hz range of the y-axis accelerometer</td>
+</tr>
+<tr>
+<td><code>gd_z_accel_power_gait</code></td>
+<td><code>m/s²Hz^-1</code></td>
+<td>Total power in the [0.7, 3.5] Hz range of the z-axis accelerometer</td>
+</tr>
+<tr>
+<td><code>gd_x_accel_power_tremor</code></td>
+<td><code>m/s²Hz^-1</code></td>
+<td>Total power in the [3.5, 8] Hz range of the x-axis accelerometer</td>
+</tr>
+<tr>
+<td><code>gd_y_accel_power_tremor</code></td>
+<td><code>m/s²Hz^-1</code></td>
+<td>Total power in the [3.5, 8] Hz range of the y-axis accelerometer</td>
+</tr>
+<tr>
+<td><code>gd_z_accel_power_tremor</code></td>
+<td><code>m/s²Hz^-1</code></td>
+<td>Total power in the [3.5, 8] Hz range of the z-axis accelerometer</td>
+</tr>
+<tr>
+<td><code>gd_x_accel_power_above_tremor</code></td>
+<td><code>m/s²Hz^-1</code></td>
+<td>Total power in the [8, 50] Hz range of the x-axis accelerometer</td>
+</tr>
+<tr>
+<td><code>gd_y_accel_power_above_tremor</code></td>
+<td><code>m/s²Hz^-1</code></td>
+<td>Total power in the [8, 50] Hz range of the y-axis accelerometer</td>
+</tr>
+<tr>
+<td><code>gd_z_accel_power_above_tremor</code></td>
+<td><code>m/s²Hz^-1</code></td>
+<td>Total power in the [8, 50] Hz range of the z-axis accelerometer</td>
+</tr>
+<tr>
+<td><code>gd_x_accel_dominant_frequency</code></td>
+<td><code>Hz</code></td>
+<td>Dominant frequency of the x-axis accelerometer</td>
+</tr>
+<tr>
+<td><code>gd_y_accel_dominant_frequency</code></td>
+<td><code>Hz</code></td>
+<td>Dominant frequency of the x-axis accelerometer</td>
+</tr>
+<tr>
+<td><code>gd_z_accel_dominant_frequency</code></td>
+<td><code>Hz</code></td>
+<td>Dominant frequency of the x-axis accelerometer</td>
+</tr>
+<tr>
+<td><code>gd_accel_norm_cc_{n}</code></td>
+<td><code>?</code></td>
+<td>Cepstral coefficient n with n $\in$ [1,2,...,16].</td>
+</tr>
+<tr>
+<td><code>gd_pred_gait_proba</code></td>
+<td><code>probability</code></td>
+<td>Predicted probability of gait being the predominant activity within the window span.</td>
+</tr>
+</tbody>
+</table>
 </details>
-
-<h2 id="-">---</h2>
+<hr />
 <h2 id="field-units">Field: <code>units</code></h2>
-<p><strong>Type:</strong> <code>unit_type[]</code>       <br />
-<strong>Description:</strong> Describes the format of the data written. <code>unit_type</code> is specific to the <code>Digital biomarkers for PD</code> extension.</p>
+<p><strong>Type:</strong> <code>unit_type[]</code></p>
+<p><strong>Description:</strong> Describes the format of the data written. <code>unit_type</code> is specific to the <code>Digital biomarkers for PD</code> extension.</p>
 <table>
 <thead>
 <tr>
