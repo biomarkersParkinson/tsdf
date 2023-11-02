@@ -25,3 +25,6 @@ nav:
 
   - About:
     - Contact: contact.md
+
+markdown_extensions:
+  - extra

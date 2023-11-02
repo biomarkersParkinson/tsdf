@@ -23,20 +23,20 @@ Within the `Digital biomarkers for PD` extension, some of the field types are fu
 
 ---
 
-<details>
+<details markdown="1">
+
 <summary><b>PPG-related types</b></summary>
-<section markdown="block">
-  
+
 |   `channel_type` name          | Recommended `unit`       | Description                                                                           |
 |----------------------------|-----------------------|---------------------------------------------------------------------------------------|
 | `ppg_quality_post_prob`     | `probability`         | `[TODO]` Posterior probability that the corresponding PPG signal is of high quality (0 to 1).   |
 
-</section>
 </details>
 
 ---
 
-<details>
+<details markdown="1">
+
 <summary><b>Tremor-related types</b></summary>
 
 | `channel_type` name       | Recommended `unit` | Description                                                                         |
@@ -90,7 +90,8 @@ Within the `Digital biomarkers for PD` extension, some of the field types are fu
 
 ---
 
-<details>
+<details markdown="1">
+
 <summary><b>Gait-related types</b></summary>
 
 | `channel_type` name       | Recommended `unit` | Description                                                                         |
@@ -123,12 +124,12 @@ Within the `Digital biomarkers for PD` extension, some of the field types are fu
 </details>
 
 ---
----
 
 ## Field: `units`
-**Type:** `unit_type[]`         
-**Description:** Describes the format of the data written. `unit_type` is specific to the `Digital biomarkers for PD` extension.
 
+**Type:** `unit_type[]`
+
+**Description:** Describes the format of the data written. `unit_type` is specific to the `Digital biomarkers for PD` extension.
 
 |   `unit_type` name          | Description                                                                           |
 |----------------------------|---------------------------------------------------------------------------------------|
