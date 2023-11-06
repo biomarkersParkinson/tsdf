@@ -96,31 +96,43 @@ Within the `Digital biomarkers for PD` extension, some of the field types are fu
 
 | `channel_type` name       | Recommended `unit` | Description                                                                         |
 |--------------------------|--------------------|-------------------------------------------------------------------------------------|
-| `gd_std_accel_norm`       | `m/s²`            | Standard deviation of the norm of the accelerometer axes in the temporal domain.     |
-| `gd_x_accel_grav_mean`    | `m/s²`            | Mean of the x-axis acceleration gravity component.     |
-| `gd_y_accel_grav_mean`    | `m/s²`            | Mean of the y-axis acceleration gravity component.  |
-| `gd_z_accel_grav_mean`    | `m/s²`            | Mean of the z-axis acceleration gravity component. |
-| `gd_x_accel_grav_std`     | `m/s²`            | Standard deviation of the x-axis acceleration gravity component. |
-| `gd_y_accel_grav_std`     | `m/s²`            | Standard deviation of the y-axis acceleration gravity component. |
-| `gd_z_accel_grav_std`     | `m/s²`            | Standard deviation of the z-axis acceleration gravity component.. |
-| `gd_x_accel_power_below_gait`  | `m/s²Hz^-1`            | Total power in the [0, 0.7] Hz range of the x-axis accelerometer |
-| `gd_y_accel_power_below_gait`  | `m/s²Hz^-1`            | Total power in the [0, 0.7] Hz range of the y-axis accelerometer |
-| `gd_z_accel_power_below_gait`  | `m/s²Hz^-1`            | Total power in the [0, 0.7] Hz range of the z-axis accelerometer |
-| `gd_x_accel_power_gait`  | `m/s²Hz^-1`            | Total power in the [0.7, 3.5] Hz range of the x-axis accelerometer |
-| `gd_y_accel_power_gait`  | `m/s²Hz^-1`            | Total power in the [0.7, 3.5] Hz range of the y-axis accelerometer |
-| `gd_z_accel_power_gait`  | `m/s²Hz^-1`            | Total power in the [0.7, 3.5] Hz range of the z-axis accelerometer |
-| `gd_x_accel_power_tremor`  | `m/s²Hz^-1`            | Total power in the [3.5, 8] Hz range of the x-axis accelerometer |
-| `gd_y_accel_power_tremor`  | `m/s²Hz^-1`            | Total power in the [3.5, 8] Hz range of the y-axis accelerometer |
-| `gd_z_accel_power_tremor`  | `m/s²Hz^-1`            | Total power in the [3.5, 8] Hz range of the z-axis accelerometer |
-| `gd_x_accel_power_above_tremor`  | `m/s²Hz^-1`            | Total power in the [8, 50] Hz range of the x-axis accelerometer |
-| `gd_y_accel_power_above_tremor`  | `m/s²Hz^-1`            | Total power in the [8, 50] Hz range of the y-axis accelerometer |
-| `gd_z_accel_power_above_tremor`  | `m/s²Hz^-1`            | Total power in the [8, 50] Hz range of the z-axis accelerometer |
-| `gd_x_accel_dominant_frequency`  | `Hz`            | Dominant frequency of the x-axis accelerometer |
-| `gd_y_accel_dominant_frequency`  | `Hz`            | Dominant frequency of the x-axis accelerometer |
-| `gd_z_accel_dominant_frequency`  | `Hz`            | Dominant frequency of the x-axis accelerometer |
-| `gd_accel_norm_cc_{n}`  | `?`            | Cepstral coefficient n with n $\in$ [1,2,...,16]. |
+| `std_accel_norm`       | `m/s²`            | Standard deviation of the norm of the accelerometer axes in the temporal domain.     |
+| `x_accel_grav_mean`    | `m/s²`            | Mean of the x-axis acceleration gravity component.     |
+| `y_accel_grav_mean`    | `m/s²`            | Mean of the y-axis acceleration gravity component.  |
+| `z_accel_grav_mean`    | `m/s²`            | Mean of the z-axis acceleration gravity component. |
+| `x_accel_grav_std`     | `m/s²`            | Standard deviation of the x-axis acceleration gravity component. |
+| `y_accel_grav_std`     | `m/s²`            | Standard deviation of the y-axis acceleration gravity component. |
+| `z_accel_grav_std`     | `m/s²`            | Standard deviation of the z-axis acceleration gravity component.. |
+| `x_accel_power_below_gait`  | `m/s²Hz^-1`            | Total power in the [0, 0.7] Hz range of the x-axis accelerometer |
+| `y_accel_power_below_gait`  | `m/s²Hz^-1`            | Total power in the [0, 0.7] Hz range of the y-axis accelerometer |
+| `z_accel_power_below_gait`  | `m/s²Hz^-1`            | Total power in the [0, 0.7] Hz range of the z-axis accelerometer |
+| `x_accel_power_gait`  | `m/s²Hz^-1`            | Total power in the [0.7, 3.5] Hz range of the x-axis accelerometer |
+| `y_accel_power_gait`  | `m/s²Hz^-1`            | Total power in the [0.7, 3.5] Hz range of the y-axis accelerometer |
+| `z_accel_power_gait`  | `m/s²Hz^-1`            | Total power in the [0.7, 3.5] Hz range of the z-axis accelerometer |
+| `x_accel_power_tremor`  | `m/s²Hz^-1`            | Total power in the [3.5, 8] Hz range of the x-axis accelerometer |
+| `y_accel_power_tremor`  | `m/s²Hz^-1`            | Total power in the [3.5, 8] Hz range of the y-axis accelerometer |
+| `z_accel_power_tremor`  | `m/s²Hz^-1`            | Total power in the [3.5, 8] Hz range of the z-axis accelerometer |
+| `x_accel_power_above_tremor`  | `m/s²Hz^-1`            | Total power in the [8, 50] Hz range of the x-axis accelerometer |
+| `y_accel_power_above_tremor`  | `m/s²Hz^-1`            | Total power in the [8, 50] Hz range of the y-axis accelerometer |
+| `z_accel_power_above_tremor`  | `m/s²Hz^-1`            | Total power in the [8, 50] Hz range of the z-axis accelerometer |
+| `x_accel_dominant_frequency`  | `Hz`            | Dominant frequency of the x-axis accelerometer |
+| `y_accel_dominant_frequency`  | `Hz`            | Dominant frequency of the x-axis accelerometer |
+| `z_accel_dominant_frequency`  | `Hz`            | Dominant frequency of the x-axis accelerometer |
+| `accel_norm_cc_{n}`  | `?`            | Cepstral coefficient n with n $\in$ [1,2,...,16] of the accelerometer. |
 | `gd_pred_gait_proba`  | `probability`            | Predicted probability of gait being the predominant activity within the window span. |
-
+| `gyro_norm_cc_{n}` | `?` | Cepstral coefficient n with n $\in$ [1,2,...,16] of the gyroscope. |
+| `x_gyro_dominant_frequency`  | `Hz`            | Dominant frequency of the x-axis gyroscope |
+| `y_gyro_dominant_frequency`  | `Hz`            | Dominant frequency of the x-axis gyroscope |
+| `z_gyro_dominant_frequency`  | `Hz`            | Dominant frequency of the x-axis gyroscope |
+| `angle_mean_amplitude` | `deg` | Mean of the sum of consecutive minima and maxima angles (angle amplitude is often referred to as range of motion) | 
+| `angle_std_amplitude` | `deg` | Std of the sum of consecutive minima and maxima angles |
+| `angle_sum_amplitude` | `deg` | Sum of the sum of consecutive minima and maxima angles |
+| `ange_perc_95_amplitude` | `deg` | 95th percentile of the sum of consecutive minima and maxima angles | 
+| `forward_peak_ang_vel_mean` | `deg/s` | Angular velocity mean in forward direction of the first principal component |
+| `forward_peak_ang_vel_std` | `deg/s` | Angular velocity standard deviation in forward direction of the first principal component |
+| `backward_peak_ang_vel_mean` | `deg/s` | Angular velocity mean in backward direction of the first principal component | 
+| `backward_peak_ang_vel_std` | `deg/s` | Angular velocity standard deviation in backward direction of the first principal component |
+| `angle_perc_power` | `percentage` | Percentage of total power in the arm swing frequency band [0.3 - 3 Hz] |
 </details>
 
 ---
