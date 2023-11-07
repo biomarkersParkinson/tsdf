@@ -143,11 +143,11 @@ Within the `Digital biomarkers for PD` extension, some of the field types are fu
 
 **Description:** Describes the format of the data written. `unit_type` is specific to the `Digital biomarkers for PD` extension.
 
-|   `unit_type` name          | Description                                                                           |
-|----------------------------|---------------------------------------------------------------------------------------|
-| `ms`              | `[TODO]` Time in ISO8601 format (precision in ms), characterizing each data window by its starting time.                |
-| `probability`       | Probability values (0 to 1) indicating the likelihood of tremor activity for each sample.    |
-| `boolean_num`       | `[TODO]` Integer values (0 or 1) representing the true (1) or false (0) presence of an activity.      |
-| `unitless`          | Numerical values without units.                                                              |
-| `m/s²`             | Acceleration in meters per second squared.                                           |
-| `deg/s`            | Angular velocity in degrees per second.  
+| `unit_type`     | Description                                                                                         |
+|-----------------|-----------------------------------------------------------------------------------------------------|
+| `ms`            | Time in ms, characterizing each data window by its starting time.                                   |
+| `probability`   | Probability values (0 to 1) indicating the likelihood of tremor activity for each sample.           |
+| `boolean_num`   | `[TODO]` Integer values (0 or 1) representing the true (1) or false (0) presence of an activity.    |
+| `unitless`      | Numerical values without units.                                                                     |
+| `m/s^2`         | Acceleration in meters per second squared.                                                          |
+| `deg/s`         | Angular velocity in degrees per second.                                                             |
