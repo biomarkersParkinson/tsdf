@@ -3,18 +3,18 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://biomarkersparkinson.github.io/tsdf/tsdf_field_types/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://biomarkersparkinson.github.io/tsdf/tsdf_dbpd_channels_and_units/" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>TSDF field types - tsdf</title>
+    <title>DBPD channels and units - tsdf</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "TSDF field types";
-        var mkdocs_page_input_path = "tsdf_field_types.md";
-        var mkdocs_page_url = "/tsdf/tsdf_field_types/";
+        var mkdocs_page_name = "DBPD channels and units";
+        var mkdocs_page_input_path = "tsdf_dbpd_channels_and_units.md";
+        var mkdocs_page_url = "/tsdf/tsdf_dbpd_channels_and_units/";
       </script>
     
     <!--[if lt IE 9]>
@@ -47,7 +47,9 @@
               <ul class="current">
                   <li class="toctree-l1"><a class="reference internal" href="../tsdf_fields_table/">TSDF fields</a>
                   </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="./">TSDF field types</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../tsdf_dbpd_schemas/">DBPD schemas</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">DBPD channels and units</a>
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#field-channels">Field: channels</a>
     </li>
@@ -87,9 +89,9 @@
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a> &raquo;</li>
           <li>The format &raquo;</li>
-      <li class="breadcrumb-item active">TSDF field types</li>
+      <li class="breadcrumb-item active">DBPD channels and units</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/biomarkersParkinson/tsdf/blob/main/docs/tsdf_field_types.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/biomarkersParkinson/tsdf/blob/main/docs/tsdf_dbpd_channels_and_units.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -97,8 +99,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="custom-field-values-tsdf-schema-digital-biomarkers-for-pd-extension">Custom field values (TSDF schema <code>Digital biomarkers for PD</code> extension)</h1>
-<p>Within the <code>Digital biomarkers for PD</code> extension, some of the field types are further specialised to provide a better description of the data. These are described in the following sections.</p>
+                <h1 id="channels-and-units-in-digital-biomarkers-for-parkinsons-disease-dbpd-schemas">Channels and units in Digital Biomarkers for Parkinson's Disease (<code>DBPD</code>) schemas</h1>
+<p>Within the <code>DBPD</code> project, some of the field types are further specialised to provide a better description of the data. These are described in the following sections.</p>
 <h2 id="field-channels">Field: <code>channels</code></h2>
 <p><strong>Type:</strong> <code>channel_type[]</code>       <br />
 <strong>Description:</strong> Describes the content of the data written. <code>channel_type</code> is specific to the <code>Digital biomarkers for PD</code> extension.</p>
@@ -115,22 +117,22 @@
 <tbody>
 <tr>
 <td><code>time</code></td>
-<td><code>ms</code></td>
-<td>Time in ISO8601 format, characterizing each data window by its starting time.</td>
+<td><code>time_relative_ms</code></td>
+<td>Time corresponding to each datapoint (also see units below)</td>
 </tr>
 <tr>
 <td><code>acceleration_x</code></td>
-<td><code>m/s²</code></td>
+<td><code>m/s^2</code></td>
 <td>Acceleration along the x-axis.</td>
 </tr>
 <tr>
 <td><code>acceleration_y</code></td>
-<td><code>m/s²</code></td>
+<td><code>m/s^2</code></td>
 <td>Acceleration along the y-axis.</td>
 </tr>
 <tr>
 <td><code>acceleration_z</code></td>
-<td><code>m/s²</code></td>
+<td><code>m/s^2</code></td>
 <td>Acceleration along the z-axis.</td>
 </tr>
 <tr>
@@ -414,113 +416,113 @@
 <tbody>
 <tr>
 <td><code>std_accel_norm</code></td>
-<td><code>m/s²</code></td>
+<td><code>m/s^2</code></td>
 <td>Standard deviation of the norm of the accelerometer axes in the temporal domain.</td>
 </tr>
 <tr>
 <td><code>x_accel_grav_mean</code></td>
-<td><code>m/s²</code></td>
+<td><code>m/s^2</code></td>
 <td>Mean of the x-axis acceleration gravity component.</td>
 </tr>
 <tr>
 <td><code>y_accel_grav_mean</code></td>
-<td><code>m/s²</code></td>
+<td><code>m/s^2</code></td>
 <td>Mean of the y-axis acceleration gravity component.</td>
 </tr>
 <tr>
 <td><code>z_accel_grav_mean</code></td>
-<td><code>m/s²</code></td>
+<td><code>m/s^2</code></td>
 <td>Mean of the z-axis acceleration gravity component.</td>
 </tr>
 <tr>
 <td><code>x_accel_grav_std</code></td>
-<td><code>m/s²</code></td>
+<td><code>m/s^2</code></td>
 <td>Standard deviation of the x-axis acceleration gravity component.</td>
 </tr>
 <tr>
 <td><code>y_accel_grav_std</code></td>
-<td><code>m/s²</code></td>
+<td><code>m/s^2</code></td>
 <td>Standard deviation of the y-axis acceleration gravity component.</td>
 </tr>
 <tr>
 <td><code>z_accel_grav_std</code></td>
-<td><code>m/s²</code></td>
+<td><code>m/s^2</code></td>
 <td>Standard deviation of the z-axis acceleration gravity component..</td>
 </tr>
 <tr>
 <td><code>x_accel_power_below_gait</code></td>
-<td><code>m/s²Hz^-1</code></td>
-<td>Total power in the [0, 0.7] Hz range of the x-axis accelerometer</td>
+<td><code>(m/s^2)^2/Hz</code></td>
+<td>Total power in the [0, 0.7] Hz range of the x-axis accelerometer.</td>
 </tr>
 <tr>
 <td><code>y_accel_power_below_gait</code></td>
-<td><code>m/s²Hz^-1</code></td>
-<td>Total power in the [0, 0.7] Hz range of the y-axis accelerometer</td>
+<td><code>(m/s^2)^2/Hz</code></td>
+<td>Total power in the [0, 0.7] Hz range of the y-axis accelerometer.</td>
 </tr>
 <tr>
 <td><code>z_accel_power_below_gait</code></td>
-<td><code>m/s²Hz^-1</code></td>
-<td>Total power in the [0, 0.7] Hz range of the z-axis accelerometer</td>
+<td><code>(m/s^2)^2/Hz</code></td>
+<td>Total power in the [0, 0.7] Hz range of the z-axis accelerometer.</td>
 </tr>
 <tr>
 <td><code>x_accel_power_gait</code></td>
-<td><code>m/s²Hz^-1</code></td>
-<td>Total power in the [0.7, 3.5] Hz range of the x-axis accelerometer</td>
+<td><code>(m/s^2)^2/Hz</code></td>
+<td>Total power in the [0.7, 3.5] Hz range of the x-axis accelerometer.</td>
 </tr>
 <tr>
 <td><code>y_accel_power_gait</code></td>
-<td><code>m/s²Hz^-1</code></td>
-<td>Total power in the [0.7, 3.5] Hz range of the y-axis accelerometer</td>
+<td><code>(m/s^2)^2/Hz</code></td>
+<td>Total power in the [0.7, 3.5] Hz range of the y-axis accelerometer.</td>
 </tr>
 <tr>
 <td><code>z_accel_power_gait</code></td>
-<td><code>m/s²Hz^-1</code></td>
-<td>Total power in the [0.7, 3.5] Hz range of the z-axis accelerometer</td>
+<td><code>(m/s^2)^2/Hz</code></td>
+<td>Total power in the [0.7, 3.5] Hz range of the z-axis accelerometer.</td>
 </tr>
 <tr>
 <td><code>x_accel_power_tremor</code></td>
-<td><code>m/s²Hz^-1</code></td>
-<td>Total power in the [3.5, 8] Hz range of the x-axis accelerometer</td>
+<td><code>(m/s^2)^2/Hz</code></td>
+<td>Total power in the [3.5, 8] Hz range of the x-axis accelerometer.</td>
 </tr>
 <tr>
 <td><code>y_accel_power_tremor</code></td>
-<td><code>m/s²Hz^-1</code></td>
-<td>Total power in the [3.5, 8] Hz range of the y-axis accelerometer</td>
+<td><code>(m/s^2)^2/Hz</code></td>
+<td>Total power in the [3.5, 8] Hz range of the y-axis accelerometer.</td>
 </tr>
 <tr>
 <td><code>z_accel_power_tremor</code></td>
-<td><code>m/s²Hz^-1</code></td>
-<td>Total power in the [3.5, 8] Hz range of the z-axis accelerometer</td>
+<td><code>(m/s^2)^2/Hz</code></td>
+<td>Total power in the [3.5, 8] Hz range of the z-axis accelerometer.</td>
 </tr>
 <tr>
 <td><code>x_accel_power_above_tremor</code></td>
-<td><code>m/s²Hz^-1</code></td>
-<td>Total power in the [8, 50] Hz range of the x-axis accelerometer</td>
+<td><code>(m/s^2)^2/Hz</code></td>
+<td>Total power in the [8, 50] Hz range of the x-axis accelerometer.</td>
 </tr>
 <tr>
 <td><code>y_accel_power_above_tremor</code></td>
-<td><code>m/s²Hz^-1</code></td>
-<td>Total power in the [8, 50] Hz range of the y-axis accelerometer</td>
+<td><code>(m/s^2)^2/Hz</code></td>
+<td>Total power in the [8, 50] Hz range of the y-axis accelerometer.</td>
 </tr>
 <tr>
 <td><code>z_accel_power_above_tremor</code></td>
-<td><code>m/s²Hz^-1</code></td>
-<td>Total power in the [8, 50] Hz range of the z-axis accelerometer</td>
+<td><code>(m/s^2)^2/Hz</code></td>
+<td>Total power in the [8, 50] Hz range of the z-axis accelerometer.</td>
 </tr>
 <tr>
 <td><code>x_accel_dominant_frequency</code></td>
 <td><code>Hz</code></td>
-<td>Dominant frequency of the x-axis accelerometer</td>
+<td>Dominant frequency of the x-axis accelerometer.</td>
 </tr>
 <tr>
 <td><code>y_accel_dominant_frequency</code></td>
 <td><code>Hz</code></td>
-<td>Dominant frequency of the x-axis accelerometer</td>
+<td>Dominant frequency of the x-axis accelerometer.</td>
 </tr>
 <tr>
 <td><code>z_accel_dominant_frequency</code></td>
 <td><code>Hz</code></td>
-<td>Dominant frequency of the x-axis accelerometer</td>
+<td>Dominant frequency of the x-axis accelerometer.</td>
 </tr>
 <tr>
 <td><code>accel_norm_cc_{n}</code></td>
@@ -613,8 +615,16 @@
 </thead>
 <tbody>
 <tr>
-<td><code>ms</code></td>
-<td>Time in ms, characterizing each data window by its starting time.</td>
+<td><code>time_relative_ms</code></td>
+<td>Time in milliseconds, relative to the <code>start_iso8601</code>.</td>
+</tr>
+<tr>
+<td><code>time_absolute_unix_s</code></td>
+<td>Absolute time in seconds, relative to unix epoch.</td>
+</tr>
+<tr>
+<td><code>time_absolute_unix_ms</code></td>
+<td>[TODO] Absolute time in milliseconds, relative to unix epoch.</td>
 </tr>
 <tr>
 <td><code>probability</code></td>
@@ -642,7 +652,7 @@
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../tsdf_fields_table/" class="btn btn-neutral float-left" title="TSDF fields"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../tsdf_dbpd_schemas/" class="btn btn-neutral float-left" title="DBPD schemas"><span class="icon icon-circle-arrow-left"></span> Previous</a>
         <a href="../basic_reading_and_writing/" class="btn btn-neutral float-right" title="Basic reading and writing">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
@@ -670,7 +680,7 @@
         </span>
     
     
-      <span><a href="../tsdf_fields_table/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../tsdf_dbpd_schemas/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
       <span><a href="../basic_reading_and_writing/" style="color: #fcfcfc">Next &raquo;</a></span>
