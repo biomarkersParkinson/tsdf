@@ -12,10 +12,10 @@ Within the `Digital biomarkers for PD` extension, some of the field types are fu
 
 | `channel_type` name       | Recommended `unit` | Description                                                                        
 |--------------------------|--------------------|------------------------------------------------------------------------------------|
-| `time`                   | `ms`               | Time in ISO8601 format, characterizing each data window by its starting time.          |
-| `acceleration_x`         | `m/s²`             | Acceleration along the x-axis.                                                       |
-| `acceleration_y`         | `m/s²`             | Acceleration along the y-axis.                                                       |
-| `acceleration_z`         | `m/s²`             | Acceleration along the z-axis.                                                       |
+| `time`                   | `time_relative_ms`               | Time corresponding to each datapoint (also see units below)    |
+| `acceleration_x`         | `m/s^2`             | Acceleration along the x-axis.                                                       |
+| `acceleration_y`         | `m/s^2`             | Acceleration along the y-axis.                                                       |
+| `acceleration_z`         | `m/s^2`             | Acceleration along the z-axis.                                                       |
 | `rotation_x`             | `deg/s`            | Angular rotation rate around the x-axis.                                              |
 | `rotation_y`             | `deg/s`            | Angular rotation rate around the y-axis.                                              |
 | `rotation_z`             | `deg/s`            | Angular rotation rate around the z-axis.                                              |
@@ -96,28 +96,28 @@ Within the `Digital biomarkers for PD` extension, some of the field types are fu
 
 | `channel_type` name       | Recommended `unit` | Description                                                                         |
 |--------------------------|--------------------|-------------------------------------------------------------------------------------|
-| `std_accel_norm`       | `m/s²`            | Standard deviation of the norm of the accelerometer axes in the temporal domain.     |
-| `x_accel_grav_mean`    | `m/s²`            | Mean of the x-axis acceleration gravity component.     |
-| `y_accel_grav_mean`    | `m/s²`            | Mean of the y-axis acceleration gravity component.  |
-| `z_accel_grav_mean`    | `m/s²`            | Mean of the z-axis acceleration gravity component. |
-| `x_accel_grav_std`     | `m/s²`            | Standard deviation of the x-axis acceleration gravity component. |
-| `y_accel_grav_std`     | `m/s²`            | Standard deviation of the y-axis acceleration gravity component. |
-| `z_accel_grav_std`     | `m/s²`            | Standard deviation of the z-axis acceleration gravity component.. |
-| `x_accel_power_below_gait`  | `m/s²Hz^-1`            | Total power in the [0, 0.7] Hz range of the x-axis accelerometer |
-| `y_accel_power_below_gait`  | `m/s²Hz^-1`            | Total power in the [0, 0.7] Hz range of the y-axis accelerometer |
-| `z_accel_power_below_gait`  | `m/s²Hz^-1`            | Total power in the [0, 0.7] Hz range of the z-axis accelerometer |
-| `x_accel_power_gait`  | `m/s²Hz^-1`            | Total power in the [0.7, 3.5] Hz range of the x-axis accelerometer |
-| `y_accel_power_gait`  | `m/s²Hz^-1`            | Total power in the [0.7, 3.5] Hz range of the y-axis accelerometer |
-| `z_accel_power_gait`  | `m/s²Hz^-1`            | Total power in the [0.7, 3.5] Hz range of the z-axis accelerometer |
-| `x_accel_power_tremor`  | `m/s²Hz^-1`            | Total power in the [3.5, 8] Hz range of the x-axis accelerometer |
-| `y_accel_power_tremor`  | `m/s²Hz^-1`            | Total power in the [3.5, 8] Hz range of the y-axis accelerometer |
-| `z_accel_power_tremor`  | `m/s²Hz^-1`            | Total power in the [3.5, 8] Hz range of the z-axis accelerometer |
-| `x_accel_power_above_tremor`  | `m/s²Hz^-1`            | Total power in the [8, 50] Hz range of the x-axis accelerometer |
-| `y_accel_power_above_tremor`  | `m/s²Hz^-1`            | Total power in the [8, 50] Hz range of the y-axis accelerometer |
-| `z_accel_power_above_tremor`  | `m/s²Hz^-1`            | Total power in the [8, 50] Hz range of the z-axis accelerometer |
-| `x_accel_dominant_frequency`  | `Hz`            | Dominant frequency of the x-axis accelerometer |
-| `y_accel_dominant_frequency`  | `Hz`            | Dominant frequency of the x-axis accelerometer |
-| `z_accel_dominant_frequency`  | `Hz`            | Dominant frequency of the x-axis accelerometer |
+| `std_accel_norm`       | `m/s^2`            | Standard deviation of the norm of the accelerometer axes in the temporal domain.     |
+| `x_accel_grav_mean`    | `m/s^2`            | Mean of the x-axis acceleration gravity component.     |
+| `y_accel_grav_mean`    | `m/s^2`            | Mean of the y-axis acceleration gravity component.  |
+| `z_accel_grav_mean`    | `m/s^2`            | Mean of the z-axis acceleration gravity component. |
+| `x_accel_grav_std`     | `m/s^2`            | Standard deviation of the x-axis acceleration gravity component. |
+| `y_accel_grav_std`     | `m/s^2`            | Standard deviation of the y-axis acceleration gravity component. |
+| `z_accel_grav_std`     | `m/s^2`            | Standard deviation of the z-axis acceleration gravity component.. |
+| `x_accel_power_below_gait`  | `(m/s^2)^2/Hz`            | Total power in the [0, 0.7] Hz range of the x-axis accelerometer. |
+| `y_accel_power_below_gait`  | `(m/s^2)^2/Hz`            | Total power in the [0, 0.7] Hz range of the y-axis accelerometer. |
+| `z_accel_power_below_gait`  | `(m/s^2)^2/Hz`            | Total power in the [0, 0.7] Hz range of the z-axis accelerometer. |
+| `x_accel_power_gait`  | `(m/s^2)^2/Hz`            | Total power in the [0.7, 3.5] Hz range of the x-axis accelerometer. |
+| `y_accel_power_gait`  | `(m/s^2)^2/Hz`            | Total power in the [0.7, 3.5] Hz range of the y-axis accelerometer. |
+| `z_accel_power_gait`  | `(m/s^2)^2/Hz`            | Total power in the [0.7, 3.5] Hz range of the z-axis accelerometer. |
+| `x_accel_power_tremor`  | `(m/s^2)^2/Hz`            | Total power in the [3.5, 8] Hz range of the x-axis accelerometer. |
+| `y_accel_power_tremor`  | `(m/s^2)^2/Hz`            | Total power in the [3.5, 8] Hz range of the y-axis accelerometer. |
+| `z_accel_power_tremor`  | `(m/s^2)^2/Hz`            | Total power in the [3.5, 8] Hz range of the z-axis accelerometer. |
+| `x_accel_power_above_tremor`  | `(m/s^2)^2/Hz`            | Total power in the [8, 50] Hz range of the x-axis accelerometer. |
+| `y_accel_power_above_tremor`  | `(m/s^2)^2/Hz`            | Total power in the [8, 50] Hz range of the y-axis accelerometer. |
+| `z_accel_power_above_tremor`  | `(m/s^2)^2/Hz`            | Total power in the [8, 50] Hz range of the z-axis accelerometer. |
+| `x_accel_dominant_frequency`  | `Hz`            | Dominant frequency of the x-axis accelerometer. |
+| `y_accel_dominant_frequency`  | `Hz`            | Dominant frequency of the x-axis accelerometer. |
+| `z_accel_dominant_frequency`  | `Hz`            | Dominant frequency of the x-axis accelerometer. |
 | `accel_norm_cc_{n}`  | `?`            | Cepstral coefficient n with n $\in$ [1,2,...,16] of the accelerometer. |
 | `gd_pred_gait_proba`  | `probability`            | Predicted probability of gait being the predominant activity within the window span. |
 | `gyro_norm_cc_{n}` | `?` | Cepstral coefficient n with n $\in$ [1,2,...,16] of the gyroscope. |
@@ -145,7 +145,9 @@ Within the `Digital biomarkers for PD` extension, some of the field types are fu
 
 | `unit_type`     | Description                                                                                         |
 |-----------------|-----------------------------------------------------------------------------------------------------|
-| `ms`            | Time in ms, characterizing each data window by its starting time.                                   |
+| `time_relative_ms`  | Time in milliseconds, relative to the `start_iso8601`.                                                          |
+| `time_absolute_unix_s`  | Absolute time in seconds, relative to unix epoch.                                                                 |
+| `time_absolute_unix_ms`  | [TODO] Absolute time in milliseconds, relative to unix epoch.                                                                 |
 | `probability`   | Probability values (0 to 1) indicating the likelihood of tremor activity for each sample.           |
 | `boolean_num`   | `[TODO]` Integer values (0 or 1) representing the true (1) or false (0) presence of an activity.    |
 | `unitless`      | Numerical values without units.                                                                     |
