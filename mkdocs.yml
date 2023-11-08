@@ -15,7 +15,8 @@ nav:
   
   - The format:
     - TSDF fields: tsdf_fields_table.md
-    - TSDF field types: tsdf_field_types.md
+    - DBPD schemas: tsdf_dbpd_schemas.md
+    - DBPD channels and units: tsdf_dbpd_channels_and_units.md
 
   - Usage:
     - Basic reading and writing: basic_reading_and_writing.ipynb

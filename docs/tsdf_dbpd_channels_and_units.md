@@ -1,6 +1,6 @@
-# Custom field values (TSDF schema `Digital biomarkers for PD` extension)
+# Channels and units in Digital Biomarkers for Parkinson's Disease (`DBPD`) schemas
 
-Within the `Digital biomarkers for PD` extension, some of the field types are further specialised to provide a better description of the data. These are described in the following sections.
+Within the `DBPD` project, some of the field types are further specialised to provide a better description of the data. These are described in the following sections.
 
 ## Field: `channels`
 **Type:** `channel_type[]`         
