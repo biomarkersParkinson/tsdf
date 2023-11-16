@@ -47,13 +47,13 @@
               <ul class="current">
                   <li class="toctree-l1 current"><a class="reference internal current" href="./">TSDF fields</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#tsdf-v01-mandatory-fields">TSDF v0.1 mandatory fields</a>
+    <li class="toctree-l2"><a class="reference internal" href="#tsdf-mandatory-fields">TSDF mandatory fields</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#tsdf-domain-specific-fields">TSDF domain-specific fields</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#legacy-fields">Legacy fields</a>
     </li>
     </ul>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../tsdf_dbpd_schemas/">DBPD schemas</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../tsdf_dbpd_channels_and_units/">DBPD channels and units</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Usage</span></p>
@@ -97,9 +97,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="tsdf-schema-metadata-fields">TSDF schema - metadata fields</h1>
-<p>TSDF metadata is represented as a dictionary (or a JSON object). In this section, we will comprehensively list the mandatory and optional fields within the TSDF format.</p>
-<h2 id="tsdf-v01-mandatory-fields">TSDF v0.1 mandatory fields</h2>
+                <h1 id="tsdf-fields">TSDF fields</h1>
+<p>TSDF metadata is represented as a dictionary. In this section, we will comprehensively list the mandatory and optional fields within the TSDF format.</p>
+<h2 id="tsdf-mandatory-fields">TSDF mandatory fields</h2>
 <table>
 <thead>
 <tr>
@@ -157,7 +157,7 @@
 <tr>
 <td><code>channels</code></td>
 <td><code>str[]</code></td>
-<td>Labels for each data channel (<em>e.g.:</em> <code>[time]</code> for time data or <code>[X, Y, Z]</code> for 3D accelerometry).</td>
+<td>Labels for each data channel (<em>e.g.:</em> <code>["time", "X", "Y", "Z"]</code> for 3D accelerometry).</td>
 </tr>
 <tr>
 <td><code>time_encode</code></td>
@@ -172,12 +172,17 @@
 <tr>
 <td><code>data_type</code></td>
 <td><code>str</code></td>
-<td>Number format of the measured data (<em>e.g.:</em> <code>float</code>).</td>
+<td>Number format of the measured data (<em>e.g.:</em> <code>"float"</code>).</td>
 </tr>
 <tr>
 <td><code>bits</code></td>
 <td><code>int</code></td>
 <td>Bit-length of the number format (e.g., 32-bit).</td>
+</tr>
+<tr>
+<td><code>columns</code></td>
+<td><code>int</code></td>
+<td>Number of columns in the data matrix.</td>
 </tr>
 <tr>
 <td><code>rows</code></td>
@@ -186,7 +191,134 @@
 </tr>
 </tbody>
 </table>
-<h1 id="legacy-fields">Legacy fields</h1>
+<h2 id="tsdf-domain-specific-fields">TSDF domain-specific fields</h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>start_datetime_unix_ms</code></td>
+<td><code>string</code></td>
+<td>UNIX timestamp for the start of the recording (milliseconds). Equivalent to <code>start_iso8601</code> in UNIX format.</td>
+</tr>
+<tr>
+<td><code>end_datetime_unix_ms</code></td>
+<td><code>string</code></td>
+<td>UNIX timestamp for the end of the recording (milliseconds). Equivalent to <code>end_iso8601</code> in UNIX format.</td>
+</tr>
+<tr>
+<td><code>scale_factors</code></td>
+<td><code>float[]</code></td>
+<td>Scale factors applied to each data channel to adjust their values.</td>
+</tr>
+<tr>
+<td><code>week_number</code></td>
+<td><code>int</code></td>
+<td>Denotes the specific week for tracking or comparing weekly data.</td>
+</tr>
+<tr>
+<td><code>freq_sampling_original</code></td>
+<td><code>int</code></td>
+<td>Represents the original sampling frequency at which the data was recorded.</td>
+</tr>
+<tr>
+<td><code>freq_sampling_adjusted</code></td>
+<td><code>int</code></td>
+<td>The adjusted sampling frequency optimized for data processing or analysis.</td>
+</tr>
+<tr>
+<td><code>interpolate</code></td>
+<td><code>bool</code></td>
+<td>If set to true, missing or irregular data points will be estimated and filled.</td>
+</tr>
+<tr>
+<td><code>gravity_removal</code></td>
+<td><code>bool</code></td>
+<td>When true, the gravity component is removed to isolate user motion.</td>
+</tr>
+<tr>
+<td><code>apply_high_pass_filter</code></td>
+<td><code>bool</code></td>
+<td>Indicates if a high-pass filter should be applied to remove low-frequency noise.</td>
+</tr>
+<tr>
+<td><code>normalize_acceleration</code></td>
+<td><code>bool</code></td>
+<td>If true, accelerometer data is normalized using z-score normalization.</td>
+</tr>
+<tr>
+<td><code>motion_intensity_thresholds</code></td>
+<td><code>int[]</code></td>
+<td>List of percentage thresholds for categorizing motion intensity.</td>
+</tr>
+<tr>
+<td><code>accelerometer_burst_thresholds</code></td>
+<td><code>float[]</code></td>
+<td>Threshold values for detecting 'burst' or sudden motion in the accelerometer.</td>
+</tr>
+<tr>
+<td><code>gyroscope_burst_thresholds</code></td>
+<td><code>float[]</code></td>
+<td>Threshold values for detecting 'burst' or sudden motion in the gyroscope.</td>
+</tr>
+<tr>
+<td><code>active_burst_threshold_percentile</code></td>
+<td><code>int</code></td>
+<td>Chosen percentile index for active burst threshold from the list of percentile values.</td>
+</tr>
+<tr>
+<td><code>average_acceleration_across_weeks</code></td>
+<td><code>float</code></td>
+<td>Average accelerometer reading across multiple weeks.</td>
+</tr>
+<tr>
+<td><code>acceleration_stddev_across_weeks</code></td>
+<td><code>float</code></td>
+<td>Standard deviation of accelerometer readings across weeks.</td>
+</tr>
+<tr>
+<td><code>average_gyroscope_across_weeks</code></td>
+<td><code>float</code></td>
+<td>Average gyroscope reading across weeks.</td>
+</tr>
+<tr>
+<td><code>gyroscope_stddev_across_weeks</code></td>
+<td><code>float</code></td>
+<td>Standard deviation of gyroscope readings across weeks.</td>
+</tr>
+<tr>
+<td><code>window_size_sec</code></td>
+<td><code>int</code></td>
+<td>Duration in seconds for each data window used in segmented analysis.</td>
+</tr>
+<tr>
+<td><code>num_ECDE_coeff</code></td>
+<td><code>int</code></td>
+<td>Number of ECDE coefficients considered in the analysis.</td>
+</tr>
+<tr>
+<td><code>num_filters</code></td>
+<td><code>int</code></td>
+<td>Number of filters applied to refine or isolate specific frequency bands.</td>
+</tr>
+<tr>
+<td><code>num_ME1_coeff</code></td>
+<td><code>int</code></td>
+<td>Number of ME1 coefficients considered during data processing.</td>
+</tr>
+<tr>
+<td><code>max_frequency_filter</code></td>
+<td><code>int</code></td>
+<td>Highest frequency limit for any applied filter.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="legacy-fields">Legacy fields</h2>
 <p>The following table lists the legacy fields from the time when the format was called TSDB, along with their updated counterparts:</p>
 <table>
 <thead>
@@ -236,7 +368,7 @@
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
         <a href="../installation/" class="btn btn-neutral float-left" title="Installation"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../tsdf_dbpd_schemas/" class="btn btn-neutral float-right" title="DBPD schemas">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../basic_reading_and_writing/" class="btn btn-neutral float-right" title="Basic reading and writing">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -266,7 +398,7 @@
       <span><a href="../installation/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../tsdf_dbpd_schemas/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../basic_reading_and_writing/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
