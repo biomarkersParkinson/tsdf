@@ -30,6 +30,21 @@ def _get_metadata_from_ndarray(data: np.ndarray) -> Dict[str, Any]:
     }
     return metadata
 
+def verify_metadata_compatibility(metadata: dict, data: np.ndarray) -> bool:
+    """
+    Verify if the metadata is compatible with the data.
+
+    :param metadata: dictionary containing the metadata.
+    :param data: NumPy array containing the data.
+
+    :return: True if the metadata is compatible with the data, False otherwise.
+    """
+    compatible = True
+    compatible &= len(metadata["channels"]) == data.shape[1]
+    
+    return compatible
+        
+
 
 def write_binary_file(
     file_dir: str, file_name: str, data: np.ndarray, metadata: dict
@@ -44,6 +59,8 @@ def write_binary_file(
 
     :return: TSDFMetadata object.
     """
+    if (not verify_metadata_compatibility(metadata, data)):
+        raise ValueError("Metadata is not compatible with the data.")
     path = os.path.join(file_dir, file_name)
     data.tofile(path)
     metadata.update(_get_metadata_from_ndarray(data))
