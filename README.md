@@ -11,7 +11,7 @@
 
 
 
-A package to load [TSDF data](https://arxiv.org/abs/2211.11294) into Python
+A package ([documentation](https://biomarkersparkinson.github.io/tsdf/)) to load TSDF data ([specification](https://arxiv.org/abs/2211.11294)) into Python.
 
 ## Installation
 
