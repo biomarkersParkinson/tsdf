@@ -19,6 +19,8 @@ def read_data(data: Any, source_path: str) -> Dict[str, 'tsdfmetadata.TSDFMetada
     :param source_path: path to the metadata file.
 
     :return: list of TSDFMetadata objects.
+
+    :raises tsdf_metadata.TSDFMetadataFieldValueError: if the TSDF metadata file is missing a mandatory field.
     """
 
     # Check if the version is supported
