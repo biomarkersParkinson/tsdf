@@ -19,6 +19,7 @@ from .write_binary import (
 )
 from .read_binary import (
     load_binary_from_metadata,
+    load_binaries_to_dataframe,
 )
 
 from .tsdfmetadata import TSDFMetadata
@@ -32,6 +33,7 @@ __all__ = [
     'write_metadata',
     'write_binary_file',
     'load_binary_from_metadata',
+    'load_binaries_to_dataframe',
     'TSDFMetadata',
     'constants'
 ]

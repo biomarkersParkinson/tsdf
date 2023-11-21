@@ -6,8 +6,28 @@ Reference: https://arxiv.org/abs/2211.11294
 
 import os
 import numpy as np
+import pandas as pd
 from tsdf import numpy_utils 
 from tsdf import tsdfmetadata
+
+
+def load_binaries_to_dataframe(metadatas: '[tsdfmetadata.TSDFMetadata]') -> pd.DataFrame:
+    """
+    Load binary files associated with TSDF and return a combined pandas DataFrame.
+
+    :param metadatas: list of TSDFMetadata objects.
+
+    :return: pandas DataFrame containing the combined data.
+    """
+    # Load the data
+    dataFrames = []
+    for metadata in metadatas:
+        data = load_binary_from_metadata(metadata)
+        df = pd.DataFrame(data, columns=metadata.channels)
+        dataFrames.append(df)
+
+    # Merge the data
+    return pd.concat(dataFrames, axis=1)
 
 
 def load_binary_from_metadata(
