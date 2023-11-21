@@ -49,3 +49,9 @@ def test_random_access(shared_datadir):
     data = tsdf.load_binary_from_metadata(metadata[name + ".bin"], 2, 6)
     assert(data.shape == (4, 3))
     assert(data.dtype == "int16")
+
+def test_load_binary_to_dataframe(shared_datadir):
+    metadata = tsdf.load_metadata_from_path(shared_datadir / "ppp_format_meta.json")
+    df = tsdf.load_binaries_to_dataframe([metadata["ppp_format_time.bin"], metadata["ppp_format_samples.bin"]])
+    assert(df.shape == (17, 7))
+    assert(df.columns.tolist() == ["time", "acceleration_x", "acceleration_y", "acceleration_z", "rotation_x", "rotation_y", "rotation_z"])
