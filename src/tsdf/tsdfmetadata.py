@@ -50,7 +50,7 @@ class TSDFMetadata:
 
     def __init__(
         self, dictionary: Dict[str, Any], dir_path: str, file_name: str = ""
-    ) -> None:
+    ) -> None: #TODO: why not get file_name from dictionary? Which one is used; is this clear?
         """
         The default constructor takes a dictionary as an argument and creates each
         field as a separate property.\\
@@ -60,7 +60,7 @@ class TSDFMetadata:
         :param dir_path: path to the directory where the metadata file is stored.
         :param file_name: (optional) name of the metadata file.
         """
-        parse_metadata.contains_tsdf_mandatory_fields(dictionary)
+        parse_metadata.contains_tsdf_mandatory_fields(dictionary) #TODO: how to load a dict that is not complete yet?
         for key, value in dictionary.items():
             setattr(self, key, value)
         self.file_dir_path = dir_path

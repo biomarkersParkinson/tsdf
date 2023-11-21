@@ -16,6 +16,7 @@ from .write_tsdf import (
     
 from .write_binary import (
     write_binary_file,
+    write_dataframe_to_binaries,
 )
 from .read_binary import (
     load_binary_from_metadata,
@@ -32,6 +33,7 @@ __all__ = [
     'load_metadata_legacy_file',
     'write_metadata',
     'write_binary_file',
+    'write_dataframe_to_binaries',
     'load_binary_from_metadata',
     'load_binaries_to_dataframe',
     'TSDFMetadata',

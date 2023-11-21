@@ -7,10 +7,37 @@ Reference: https://arxiv.org/abs/2211.11294
 import os
 from typing import Any, Dict
 import numpy as np
+import pandas as pd
 from tsdf import numpy_utils 
 
 from tsdf.tsdfmetadata import TSDFMetadata
 
+
+def write_dataframe_to_binaries(
+    file_dir: str, df: pd.DataFrame, metadatas: [TSDFMetadata]
+) -> None:
+    """
+    Save binary file based on the provided pandas DataFrame.
+
+    :param file_dir: path to the directory where the file will be saved.
+    :param file_name: name of the file to be saved.
+    :param data: pandas DataFrame containing the data.
+    :param metadata: dictionary containing the metadata.
+
+    :return: TSDFMetadata object.
+    """
+    for metadata in metadatas:
+        file_name = metadata.file_name
+        path = os.path.join(file_dir, file_name)
+        
+        # Write
+        data = df[metadata.channels].to_numpy() # TODO: derive channels from dataframe or use specified in metadata? Also for file_name?
+        data.tofile(path)
+
+        # Update metadata with data properties
+        data_props = _get_metadata_from_ndarray(data)
+        for key in data_props:
+            metadata.__setattr__(key, data_props[key])
 
 
 def _get_metadata_from_ndarray(data: np.ndarray) -> Dict[str, Any]:
@@ -48,5 +75,6 @@ def write_binary_file(
     data.tofile(path)
     metadata.update(_get_metadata_from_ndarray(data))
     metadata.update({"file_name": file_name})
+    #TODO: update file_dir_path?
 
     return TSDFMetadata(metadata, file_dir)
