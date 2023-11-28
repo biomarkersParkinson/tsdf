@@ -117,8 +117,8 @@
 <tbody>
 <tr>
 <td><code>time</code></td>
-<td><code>time_relative_ms</code></td>
-<td>Time corresponding to each datapoint (also see units below)</td>
+<td><code>absolute_ms</code></td>
+<td>Time corresponding to the start of each window/segment (also see units below).</td>
 </tr>
 <tr>
 <td><code>acceleration_x</code></td>
@@ -149,6 +149,11 @@
 <td><code>rotation_z</code></td>
 <td><code>deg/s</code></td>
 <td>Angular rotation rate around the z-axis.</td>
+</tr>
+<tr>
+<td><code>green</code></td>
+<td><code>deg/s</code></td>
+<td>Green signal values indicate blood volume changes for physiological analysis.</td>
 </tr>
 </tbody>
 </table>
@@ -615,16 +620,16 @@
 </thead>
 <tbody>
 <tr>
-<td><code>time_relative_ms</code></td>
-<td>Time in milliseconds, relative to the <code>start_iso8601</code>.</td>
+<td><code>relative_ms</code></td>
+<td>Time (in milliseconds), relative to the <code>start_iso8601</code>, i.e., time elapsed since the start time of the recording.</td>
 </tr>
 <tr>
-<td><code>time_absolute_unix_s</code></td>
-<td>Absolute time in seconds, relative to unix epoch.</td>
+<td><code>difference_ms</code></td>
+<td>Time (in milliseconds) elapsed since the previous sample.</td>
 </tr>
 <tr>
-<td><code>time_absolute_unix_ms</code></td>
-<td>[TODO] Absolute time in milliseconds, relative to unix epoch.</td>
+<td><code>absolute_ms</code></td>
+<td>Absolute time in milliseconds, relative to Unix epoch.</td>
 </tr>
 <tr>
 <td><code>probability</code></td>
