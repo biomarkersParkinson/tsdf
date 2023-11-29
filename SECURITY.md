@@ -25,7 +25,7 @@ We are committed to responding promptly to security reports. We will acknowledge
 
 Our security response team consists of the following individuals:
 
-- Vedran Kasalica (p.kok[at]esciencecenter.nl)
+- Peter Kok (p.kok[at]esciencecenter.nl)
 
 Please contact the team directly for security-related matters.
 
