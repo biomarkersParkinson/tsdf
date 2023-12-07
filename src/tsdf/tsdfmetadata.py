@@ -1,11 +1,14 @@
 import copy
 from typing import Any, Dict, List
-from numpy import ndarray
-from tsdf import parse_metadata, read_binary
+
+from tsdf import parse_metadata
 
 class TSDFMetadataFieldError(Exception):
     "Raised when the TSDFMetadata is missing an obligatory field."
-    pass
+    @classmethod
+    def missing_field(cls, field_name: str):
+        message = f"Value for the obligatory TSDF field '{field_name}' is missing in the provided TSDF metadata file."
+        return cls(message)
 
 
 class TSDFMetadataFieldValueError(Exception):
