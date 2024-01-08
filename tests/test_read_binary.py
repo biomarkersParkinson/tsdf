@@ -2,6 +2,7 @@ import numpy as np
 from pathlib import Path
 import tsdf
 from tsdf import parse_metadata
+from tsdf.constants import ConcatenationType
 from utils import load_single_bin_file
 
 
@@ -52,6 +53,28 @@ def test_random_access(shared_datadir):
 
 def test_load_binary_to_dataframe(shared_datadir):
     metadata = tsdf.load_metadata_from_path(shared_datadir / "ppp_format_meta.json")
-    df = tsdf.load_binaries_to_dataframe([metadata["ppp_format_time.bin"], metadata["ppp_format_samples.bin"]])
+    df = tsdf.load_binaries_to_dataframe([metadata["ppp_format_time.bin"], metadata["ppp_format_samples.bin"]], ConcatenationType.columns)
     assert(df.shape == (17, 7))
     assert(df.columns.tolist() == ["time", "acceleration_x", "acceleration_y", "acceleration_z", "rotation_x", "rotation_y", "rotation_z"])
+
+def test_load_dataframe_concatenation_rows(shared_datadir):
+    metadata = tsdf.load_metadata_from_path(shared_datadir / "hierarchical/hierarchical_meta.json")
+    df_accel = tsdf.load_binaries_to_dataframe([metadata["accelerometer_t1.bin"], metadata["accelerometer_t2.bin"]], ConcatenationType.rows)
+    assert(df_accel.shape == (46, 3))
+    df_time = tsdf.load_binaries_to_dataframe([metadata["time_t1.bin"], metadata["time_t2.bin"]], ConcatenationType.rows)
+    assert(df_time.shape == (46, 1))
+
+def test_load_dataframe_concatenation_columns(shared_datadir):
+    metadata = tsdf.load_metadata_from_path(shared_datadir / "hierarchical/hierarchical_meta.json")
+    df_t1 = tsdf.load_binaries_to_dataframe([metadata["time_t1.bin"], metadata["accelerometer_t1.bin"]], ConcatenationType.columns)
+    assert(df_t1.shape == (17, 4))
+    df_t2 = tsdf.load_binaries_to_dataframe([metadata["time_t2.bin"], metadata["accelerometer_t2.bin"]], ConcatenationType.columns)
+    assert(df_t2.shape == (29, 4))
+
+def test_load_dataframe_concatenation_none(shared_datadir):
+    metadata = tsdf.load_metadata_from_path(shared_datadir / "hierarchical/hierarchical_meta.json")
+    dataframes = tsdf.load_binaries_to_dataframe([metadata["time_t1.bin"], metadata["accelerometer_t1.bin"], metadata["accelerometer_t2.bin"]], ConcatenationType.none)
+    assert(len(dataframes) == 3)
+    assert(dataframes[0].shape == (17, 1))
+    assert(dataframes[1].shape == (17, 3))
+    assert(dataframes[2].shape == (29, 3))
