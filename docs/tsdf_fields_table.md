@@ -1,6 +1,7 @@
-# TSDF schema - metadata fields
+# TSDF metadata fields
 
-TSDF metadata is represented as a dictionary (or a JSON object). In this section, we will comprehensively list the mandatory and optional fields within the TSDF format.
+TSDF metadata is represented as a dictionary (or a JSON object). In this section, we will list the fields within the TSDF format, as described in the [format specification](https://arxiv.org/abs/2211.11294). In addition to the mandatory fields, any custom fields and structures can be added.
+
 
 ## TSDF v0.1 mandatory fields
 
@@ -23,8 +24,7 @@ TSDF metadata is represented as a dictionary (or a JSON object). In this section
 | `rows`           | `int`        | Number of rows in the data matrix.                                          |
 
 
-
-# Legacy fields
+## Legacy fields
 
 The following table lists the legacy fields from the time when the format was called TSDB, along with their updated counterparts:
 
