@@ -9,9 +9,10 @@ import numpy as np
 import pandas as pd
 from tsdf import numpy_utils 
 from tsdf import tsdfmetadata
+from tsdf.constants import ConcatenationType
 
 
-def load_binaries_to_dataframe(metadatas: '[tsdfmetadata.TSDFMetadata]') -> pd.DataFrame:
+def load_binaries_to_dataframe(metadatas: '[tsdfmetadata.TSDFMetadata]', concatenation: ConcatenationType = ConcatenationType.none) -> pd.DataFrame:
     """
     Load binary files associated with TSDF and return a combined pandas DataFrame.
 
@@ -27,7 +28,12 @@ def load_binaries_to_dataframe(metadatas: '[tsdfmetadata.TSDFMetadata]') -> pd.D
         dataFrames.append(df)
 
     # Merge the data
-    return pd.concat(dataFrames, axis=1)
+    if concatenation == ConcatenationType.rows:
+        return pd.concat(dataFrames)
+    elif concatenation == ConcatenationType.columns:
+        return pd.concat(dataFrames, axis=1)
+    elif concatenation == ConcatenationType.none:
+        return dataFrames
 
 
 def load_binary_from_metadata(

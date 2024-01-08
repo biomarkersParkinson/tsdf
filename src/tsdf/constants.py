@@ -1,4 +1,4 @@
-import os
+from enum import Enum
 
 # Reference: https://arxiv.org/abs/2211.11294
 
@@ -55,3 +55,4 @@ KEY_VALUE_TYPES = {
 METADATA_NAMING_PATTERN = "**meta.json"
 """ Naming convention for the metadata files. ** allows for any prefix, including additional directories. """
 
+ConcatenationType = Enum("ConcatenationType", ["rows", "columns", "none"])
