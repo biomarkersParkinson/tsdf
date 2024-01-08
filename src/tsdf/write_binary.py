@@ -75,6 +75,5 @@ def write_binary_file(
     data.tofile(path)
     metadata.update(_get_metadata_from_ndarray(data))
     metadata.update({"file_name": file_name})
-    #TODO: update file_dir_path?
 
     return TSDFMetadata(metadata, file_dir)
