@@ -1,0 +1,75 @@
+{
+    "subject_id": "example",
+    "study_id": "example",
+    "device_id": "example",
+    "endianness": "little",
+    "metadata_version": "0.1",
+    "start_datetime_unix_ms": 1571135957025,
+    "start_iso8601": "2019-10-15T10:39:17.025000+00:00",
+    "end_datetime_unix_ms": 1571168851826,
+    "end_iso8601": "2019-10-15T19:47:31.826000+00:00",
+    "sensors": [
+        {
+            "rows": 17,
+            "sensors": [
+                {
+                    "channels": [
+                        "time"
+                    ],
+                    "units": [
+                        "s"
+                    ],
+                    "data_type": "float",
+                    "bits": 32,
+                    "file_name": "time_t1.bin"
+                },
+                {
+                    "channels": [
+                        "x",
+                        "y",
+                        "z"
+                    ],
+                    "units": [
+                        "m/s/s",
+                        "m/s/s",
+                        "m/s/s"
+                    ],
+                    "data_type": "int",
+                    "bits": 16,
+                    "file_name": "accelerometer_t1.bin"
+                }
+            ]
+        },
+        {
+            "rows": 29,
+            "sensors": [
+                {
+                    "channels": [
+                        "time"
+                    ],
+                    "units": [
+                        "s"
+                    ],
+                    "data_type": "float",
+                    "bits": 32,
+                    "file_name": "time_t2.bin"
+                },
+                {
+                    "channels": [
+                        "x",
+                        "y",
+                        "z"
+                    ],
+                    "units": [
+                        "m/s/s",
+                        "m/s/s",
+                        "m/s/s"
+                    ],
+                    "data_type": "int",
+                    "bits": 16,
+                    "file_name": "accelerometer_t2.bin"
+                }
+            ]
+        }
+    ]
+}
