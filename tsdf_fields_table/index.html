@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://biomarkersparkinson.github.io/tsdf/tsdf_fields_table/" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>TSDF fields - tsdf</title>
+    <title>TSDF metadata fields - tsdf</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "TSDF fields";
+        var mkdocs_page_name = "TSDF metadata fields";
         var mkdocs_page_input_path = "tsdf_fields_table.md";
         var mkdocs_page_url = "/tsdf/tsdf_fields_table/";
       </script>
@@ -45,22 +45,18 @@
               </ul>
               <p class="caption"><span class="caption-text">The format</span></p>
               <ul class="current">
-                  <li class="toctree-l1 current"><a class="reference internal current" href="./">TSDF fields</a>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">TSDF metadata fields</a>
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#tsdf-v01-mandatory-fields">TSDF v0.1 mandatory fields</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#legacy-fields">Legacy fields</a>
+    </li>
     </ul>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../tsdf_dbpd_schemas/">DBPD schemas</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../tsdf_dbpd_channels_and_units/">DBPD channels and units</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Usage</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../basic_reading_and_writing_numpy/">Basic reading and writing (numpy)</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../basic_reading_and_writing_pandas/">Basic reading and writing (pandas)</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../basic_reading_and_writing/">Basic reading and writing</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../writing_data_from_scratch/">Writing data from scratch</a>
                   </li>
@@ -89,7 +85,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a> &raquo;</li>
           <li>The format &raquo;</li>
-      <li class="breadcrumb-item active">TSDF fields</li>
+      <li class="breadcrumb-item active">TSDF metadata fields</li>
     <li class="wy-breadcrumbs-aside">
           <a href="https://github.com/biomarkersParkinson/tsdf/blob/main/docs/tsdf_fields_table.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
@@ -99,8 +95,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="tsdf-schema-metadata-fields">TSDF schema - metadata fields</h1>
-<p>TSDF metadata is represented as a dictionary (or a JSON object). In this section, we will comprehensively list the mandatory and optional fields within the TSDF format.</p>
+                <h1 id="tsdf-metadata-fields">TSDF metadata fields</h1>
+<p>TSDF metadata is represented as a dictionary (or a JSON object). In this section, we will list the fields within the TSDF format, as described in the <a href="https://arxiv.org/abs/2211.11294">format specification</a>. In addition to the mandatory fields, any custom fields and structures can be added.</p>
 <h2 id="tsdf-v01-mandatory-fields">TSDF v0.1 mandatory fields</h2>
 <table>
 <thead>
@@ -188,7 +184,7 @@
 </tr>
 </tbody>
 </table>
-<h1 id="legacy-fields">Legacy fields</h1>
+<h2 id="legacy-fields">Legacy fields</h2>
 <p>The following table lists the legacy fields from the time when the format was called TSDB, along with their updated counterparts:</p>
 <table>
 <thead>
@@ -238,7 +234,7 @@
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
         <a href="../installation/" class="btn btn-neutral float-left" title="Installation"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../tsdf_dbpd_schemas/" class="btn btn-neutral float-right" title="DBPD schemas">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../basic_reading_and_writing/" class="btn btn-neutral float-right" title="Basic reading and writing">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -268,7 +264,7 @@
       <span><a href="../installation/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../tsdf_dbpd_schemas/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../basic_reading_and_writing/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
