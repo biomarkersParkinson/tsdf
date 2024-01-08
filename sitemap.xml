@@ -6,7 +6,12 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://biomarkersparkinson.github.io/tsdf/basic_reading_and_writing/</loc>
+         <loc>https://biomarkersparkinson.github.io/tsdf/basic_reading_and_writing_numpy/</loc>
+         <lastmod>2024-01-08</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://biomarkersparkinson.github.io/tsdf/basic_reading_and_writing_pandas/</loc>
          <lastmod>2024-01-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
