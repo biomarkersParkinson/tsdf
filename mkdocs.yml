@@ -12,11 +12,9 @@ theme: readthedocs
 nav:
   - Introduction: index.md
   - Installation: installation.md
-  
+
   - The format:
-    - TSDF fields: tsdf_fields_table.md
-    - DBPD schemas: tsdf_dbpd_schemas.md
-    - DBPD channels and units: tsdf_dbpd_channels_and_units.md
+    - TSDF metadata fields: tsdf_fields_table.md
 
   - Usage:
     - Basic reading and writing: basic_reading_and_writing.ipynb
