@@ -12,7 +12,7 @@ from tsdf import tsdfmetadata
 from tsdf.constants import ConcatenationType
 
 
-def load_binaries_to_dataframe(metadatas: '[tsdfmetadata.TSDFMetadata]', concatenation: ConcatenationType = ConcatenationType.none) -> pd.DataFrame:
+def load_binaries_to_dataframe(metadatas: '[tsdfmetadata.TSDFMetadata]', concatenation: ConcatenationType = ConcatenationType.none) -> pd.DataFrame | List[pd.DataFrame]:
     """
     Load binary files associated with TSDF and return a combined pandas DataFrame.
 
