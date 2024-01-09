@@ -17,7 +17,8 @@ nav:
     - TSDF metadata fields: tsdf_fields_table.md
 
   - Usage:
-    - Basic reading and writing: basic_reading_and_writing.ipynb
+    - Basic reading and writing (numpy): basic_reading_and_writing_numpy.ipynb
+    - Basic reading and writing (pandas): basic_reading_and_writing_pandas.ipynb
     - Writing data from scratch: writing_data_from_scratch.ipynb
     - Converting legacy data: converting_legacy_data.ipynb
     - Validating files: validating_files.ipynb

@@ -5,9 +5,37 @@ Reference: https://arxiv.org/abs/2211.11294
 """
 
 import os
+from typing import List, Union
 import numpy as np
+import pandas as pd
 from tsdf import numpy_utils 
 from tsdf import tsdfmetadata
+from tsdf.constants import ConcatenationType
+
+
+def load_binaries_to_dataframe(metadatas: '[tsdfmetadata.TSDFMetadata]', concatenation: ConcatenationType = ConcatenationType.none) -> Union[pd.DataFrame, List[pd.DataFrame]]:
+    """
+    Load binary files associated with TSDF and return a combined pandas DataFrame.
+
+    :param metadatas: list of TSDFMetadata objects.
+:param concatenation: concatenation rule, i.e., determines whether the data frames (content of binary files) should be concatenated horizontally (ConcatenationType.columns), vertically (ConcatenationType.rows) or not concatenated (ConcatenationType.none), but provided as a list of data frames.
+
+    :return: pandas DataFrame containing the combined data.
+    """
+    # Load the data
+    dataFrames = []
+    for metadata in metadatas:
+        data = load_binary_from_metadata(metadata)
+        df = pd.DataFrame(data, columns=metadata.channels)
+        dataFrames.append(df)
+
+    # Merge the data
+    if concatenation == ConcatenationType.rows:
+        return pd.concat(dataFrames)
+    elif concatenation == ConcatenationType.columns:
+        return pd.concat(dataFrames, axis=1)
+    elif concatenation == ConcatenationType.none:
+        return dataFrames
 
 
 def load_binary_from_metadata(

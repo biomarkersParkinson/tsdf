@@ -45,11 +45,11 @@ class TSDFMetadata:
 
     file_dir_path: str
     """ A reference to the directory path, so we don't need it again when reading associated binary files. """
-    source_file_name: str
+    metadata_file_name: str
     """ A reference to the source path, so we don't need it again when reading associated binary files. """
 
     def __init__(
-        self, dictionary: Dict[str, Any], dir_path: str, file_name: str = ""
+        self, dictionary: Dict[str, Any], dir_path: str, metadata_file_name: str = ""
     ) -> None:
         """
         The default constructor takes a dictionary as an argument and creates each
@@ -60,11 +60,11 @@ class TSDFMetadata:
         :param dir_path: path to the directory where the metadata file is stored.
         :param file_name: (optional) name of the metadata file.
         """
-        parse_metadata.contains_tsdf_mandatory_fields(dictionary)
+        parse_metadata.contains_tsdf_mandatory_fields(dictionary) #TODO: how to load a dict that is not complete yet?
         for key, value in dictionary.items():
             setattr(self, key, value)
         self.file_dir_path = dir_path
-        self.source_file_name = file_name
+        self.metadata_file_name = metadata_file_name
 
     def get_plain_tsdf_dict_copy(self) -> Dict[str, Any]:
         """
@@ -75,6 +75,6 @@ class TSDFMetadata:
         simple_dict = copy.deepcopy(self.__dict__)
         if simple_dict.get("file_dir_path") is not None:
             simple_dict.pop("file_dir_path")
-        if simple_dict.get("source_file_name") is not None:
-            simple_dict.pop("source_file_name")
+        if simple_dict.get("metadata_file_name") is not None:
+            simple_dict.pop("metadata_file_name")
         return simple_dict
