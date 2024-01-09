@@ -5,6 +5,7 @@ Reference: https://arxiv.org/abs/2211.11294
 """
 
 import os
+from typing import List
 import numpy as np
 import pandas as pd
 from tsdf import numpy_utils 
