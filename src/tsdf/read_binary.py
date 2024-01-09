@@ -17,6 +17,7 @@ def load_binaries_to_dataframe(metadatas: '[tsdfmetadata.TSDFMetadata]', concate
     Load binary files associated with TSDF and return a combined pandas DataFrame.
 
     :param metadatas: list of TSDFMetadata objects.
+:param concatenation: concatenation rule, i.e., determines whether the data frames (content of binary files) should be concatenated horizontally (ConcatenationType.columns), vertically (ConcatenationType.rows) or not concatenated (ConcatenationType.none), but provided as a list of data frames.
 
     :return: pandas DataFrame containing the combined data.
     """
