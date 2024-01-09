@@ -29,7 +29,7 @@ def test_write_binary(shared_datadir):
 
 
 def test_write_dataframe(shared_datadir):
-    
+    """Test writing of binary files from a loaded data frame."""
     test_file_name = "tmp_test_pandas.bin"
     test_meta_dict = {
         "study_id": "voicedata",
