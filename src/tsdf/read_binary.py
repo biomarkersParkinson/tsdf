@@ -8,49 +8,52 @@ import os
 from typing import List, Union
 import numpy as np
 import pandas as pd
-from tsdf import numpy_utils 
+from tsdf import numpy_utils
 from tsdf import tsdfmetadata
 from tsdf.constants import ConcatenationType
 
 
-def load_binaries_to_dataframe(metadatas: '[tsdfmetadata.TSDFMetadata]', concatenation: ConcatenationType = ConcatenationType.none) -> Union[pd.DataFrame, List[pd.DataFrame]]:
+def load_dataframe_from_binaries(
+    metadatas: List["tsdfmetadata.TSDFMetadata"],
+    concatenation: ConcatenationType = ConcatenationType.none,
+) -> Union[pd.DataFrame, List[pd.DataFrame]]:
     """
-    Load binary files associated with TSDF and return a combined pandas DataFrame.
+    Load content of binary files associated with TSDF into a pandas DataFrame. The data frames can be concatenated horizontally (ConcatenationType.columns), vertically (ConcatenationType.rows) or provided as a list of data frames (ConcatenationType.none).
 
     :param metadatas: list of TSDFMetadata objects.
-:param concatenation: concatenation rule, i.e., determines whether the data frames (content of binary files) should be concatenated horizontally (ConcatenationType.columns), vertically (ConcatenationType.rows) or not concatenated (ConcatenationType.none), but provided as a list of data frames.
+    :param concatenation: concatenation rule, i.e., determines whether the data frames (content of binary files) should be concatenated horizontally (ConcatenationType.columns), vertically (ConcatenationType.rows) or provided as a list of data frames (ConcatenationType.none).
 
     :return: pandas DataFrame containing the combined data.
     """
     # Load the data
-    dataFrames = []
+    data_frames = []
     for metadata in metadatas:
-        data = load_binary_from_metadata(metadata)
+        data = load_ndarray_from_binary(metadata)
         df = pd.DataFrame(data, columns=metadata.channels)
-        dataFrames.append(df)
+        data_frames.append(df)
 
     # Merge the data
     if concatenation == ConcatenationType.rows:
-        return pd.concat(dataFrames)
+        return pd.concat(data_frames)
     elif concatenation == ConcatenationType.columns:
-        return pd.concat(dataFrames, axis=1)
+        return pd.concat(data_frames, axis=1)
     elif concatenation == ConcatenationType.none:
-        return dataFrames
+        return data_frames
 
 
-def load_binary_from_metadata(
-    metadata: 'tsdfmetadata.TSDFMetadata', start_row: int = 0, end_row: int = -1
+def load_ndarray_from_binary(
+    metadata: "tsdfmetadata.TSDFMetadata", start_row: int = 0, end_row: int = -1
 ) -> np.ndarray:
     """
     Use metadata properties to load and return numpy array from a binary file (located the same directory where the metadata is saved).
-    
+
     :param metadata: TSDFMetadata object.
     :param start_row: (optional) first row to load.
     :param end_row: (optional) last row to load. If -1, load all rows.
 
     :return: numpy array containing the data."""
     metadata_dir = metadata.file_dir_path
-    
+
     bin_path = os.path.join(metadata_dir, metadata.file_name)
     return _load_binary_file(
         bin_path,
@@ -75,7 +78,7 @@ def _load_binary_file(
     end_row: int = -1,
 ) -> np.ndarray:
     """
-    Use provided parameters to load and return a numpy array from a binary file
+    Use provided parameters to load and return a numpy array from a binary file.
 
     :param bin_file_path: path to the binary file.
     :param data_type: data type of the binary file.

@@ -4,6 +4,7 @@ import traceback
 import json
 from tsdf import read_tsdf, read_binary
 
+
 def validate_tsdf_format(file_path):
     try:
         # Read the meta data (this will check for compulsory fields and such)
@@ -15,27 +16,31 @@ def validate_tsdf_format(file_path):
 
         # Loop through all the files in the metadata
         for file_name, file_metadata in metadata.items():
-
             # print the file_metadata as json
             # print(json.dumps(file_metadata.get_plain_tsdf_dict_copy(), indent=4))
 
             # Load the binary data
-            binary_data = read_binary.load_binary_from_metadata(file_metadata)
+            binary_data = read_binary.load_ndarray_from_binary(file_metadata)
 
             # Success message
-            print(f"Successfully loaded binary file {file_name}, resulting shape: {binary_data.shape}")
+            print(
+                f"Successfully loaded binary file {file_name}, resulting shape: {binary_data.shape}"
+            )
 
         return True
 
     except Exception as e:
         print(f"Error while validating: {e}")
-        #traceback.print_exc()
+        # traceback.print_exc()
         return False
+
 
 def main():
     # Parse the arguments
-    parser = argparse.ArgumentParser(description='Validate a file content against the TSDF format.')
-    parser.add_argument('file_path', help='Path to the file to validate')
+    parser = argparse.ArgumentParser(
+        description="Validate a file content against the TSDF format."
+    )
+    parser.add_argument("file_path", help="Path to the file to validate")
     args = parser.parse_args()
 
     # Perform validation
@@ -44,5 +49,6 @@ def main():
     # Exit with error code 1 if the validation failed
     exit(0 if is_valid else 1)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()
