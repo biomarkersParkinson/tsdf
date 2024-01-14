@@ -141,3 +141,4 @@ def test_load_dataframe_concatenation_none(shared_datadir):
     assert dataframes[0].shape == (17, 1)
     assert dataframes[1].shape == (17, 3)
     assert dataframes[2].shape == (29, 3)
+
