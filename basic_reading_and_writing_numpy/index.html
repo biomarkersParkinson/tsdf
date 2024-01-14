@@ -1221,7 +1221,7 @@ Licensed under the Apache License, Version 2.0.
 <span class="n">metadata</span> <span class="o">=</span> <span class="n">metadata_dict</span><span class="p">[</span><span class="n">binary_filename</span><span class="p">]</span>
 
 <span class="c1"># Load the data</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">tsdf</span><span class="o">.</span><span class="n">load_binary_from_metadata</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">tsdf</span><span class="o">.</span><span class="n">load_ndarray_from_binary</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span>
 
 <span class="c1"># Print some info</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data type:</span><span class="se">\t</span><span class="s2"> </span><span class="si">{</span><span class="n">data</span><span class="o">.</span><span class="n">dtype</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -1239,7 +1239,7 @@ metadata_dict = tsdf.load_metadata_from_path(metadata_path)
 metadata = metadata_dict[binary_filename]
 
 # Load the data
-data = tsdf.load_binary_from_metadata(metadata)
+data = tsdf.load_ndarray_from_binary(metadata)
 
 # Print some info
 print(f"Data type:\t {data.dtype}")
