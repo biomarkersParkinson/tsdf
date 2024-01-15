@@ -45,10 +45,11 @@ def test_save_metadata(shared_datadir):
     # Read the written metadata
     meta = tsdf.load_metadata_from_path(shared_datadir / (test_name + "_meta.json"))
 
-    assert(len(meta) == 3)
-    assert(meta[test_name + "_1.bin"].rows == 17)
-    assert(meta[test_name + "_2.bin"].rows == 15)
-    assert(meta[test_name + "_3.bin"].rows == 10)
+    assert len(meta) == 3
+    assert meta[test_name + "_1.bin"].rows == 17
+    assert meta[test_name + "_2.bin"].rows == 15
+    assert meta[test_name + "_3.bin"].rows == 10
+
 
 def test_bin_processing_and_writing_metadata(shared_datadir):
     """Test binary file reading, processing, and writing of the new binary and metadata files."""
@@ -56,7 +57,7 @@ def test_bin_processing_and_writing_metadata(shared_datadir):
     name = "example_10_3_int16"
     metas = tsdf.load_metadata_from_path(shared_datadir / (name + "_meta.json"))
     original_metadata = metas[name + ".bin"]
-    original_data = tsdf.load_binary_from_metadata(original_metadata)
+    original_data = tsdf.load_ndarray_from_binary(original_metadata)
 
     # Perform light data processing
     new_data = (original_data / 10).astype("float32")
@@ -75,5 +76,5 @@ def test_bin_processing_and_writing_metadata(shared_datadir):
 
     # Read file again to check contents
     final_data = load_single_bin_file(shared_datadir, new_name)
-    assert(final_data.shape == (10, 3))
-    assert(final_data.dtype == "float32")
+    assert final_data.shape == (10, 3)
+    assert final_data.dtype == "float32"
