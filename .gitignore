@@ -146,3 +146,4 @@ dmypy.json
 
 tests/data/tmp_*
 docs/data/tmp_*
+local/*
