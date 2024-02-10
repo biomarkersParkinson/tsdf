@@ -61,6 +61,7 @@ _map_from_numpy_endianness = {
     "<": "little",
     ">": "big",
     "=": sys.byteorder,
+    "|": "not applicable",
 }
 """ Supported endianness values. """
 
@@ -79,6 +80,7 @@ def endianness_numpy_to_tsdf(data: np.ndarray) -> str:
 _map_to_numpy_endianness = {
     "little": "<",
     "big": ">",
+    "not applicable": "|",
 }
 """ Supported endianness values. """
 
