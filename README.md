@@ -48,7 +48,11 @@ mkdocs gh-deploy   # deploy the documentation to GitHub pages
 
 ## Contributing
 
-Interested in contributing? Check out the contributing guidelines. Please note that this project is released with a Code of Conduct. By contributing to this project, you agree to abide by its terms.
+We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for more details on coding standards, how to get started, and the submission process.
+
+## Code of Conduct
+
+To ensure a welcoming and respectful community, all contributors and participants are expected to adhere to our [Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project, you agree to abide by its terms.
 
 ## License
 
