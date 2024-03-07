@@ -1,4 +1,4 @@
-name: pytype Type Check
+name: Pytype Type Check
 
 on:
   push:
