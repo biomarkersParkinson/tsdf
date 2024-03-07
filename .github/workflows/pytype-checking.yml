@@ -24,4 +24,4 @@ jobs:
         poetry install
 
     - name: Run pytype
-      run: poetry run pytype
+      run: poetry run pytype .
