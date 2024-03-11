@@ -5,16 +5,16 @@ Reference: https://arxiv.org/abs/2211.11294
 """
 
 import os
-from typing import Any, Dict
+from typing import Any, Dict, List
 import numpy as np
 import pandas as pd
-from tsdf import numpy_utils 
+from tsdf import numpy_utils
 
 from tsdf.tsdfmetadata import TSDFMetadata
 
 
 def write_dataframe_to_binaries(
-    file_dir: str, df: pd.DataFrame, metadatas: [TSDFMetadata]
+    file_dir: str, df: pd.DataFrame, metadatas: List[TSDFMetadata]
 ) -> None:
     """
     Save binary file based on the provided pandas DataFrame.

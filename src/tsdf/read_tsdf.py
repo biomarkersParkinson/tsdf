@@ -6,6 +6,7 @@ Reference: https://arxiv.org/abs/2211.11294
 
 import json
 import os
+from pathlib import Path
 from typing import Dict, List
 from tsdf import file_utils 
 from tsdf.constants import METADATA_NAMING_PATTERN
@@ -71,7 +72,7 @@ def load_metadatas_from_dir(
     return metadatas
 
 
-def load_metadata_from_path(path: str) -> Dict[str, TSDFMetadata]:
+def load_metadata_from_path(path: Path) -> Dict[str, TSDFMetadata]:
     """
     Loads a TSDF metadata file, returns a dictionary
 
