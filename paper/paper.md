@@ -11,39 +11,39 @@ authors:
   - name: Vedran Kasalica
     email: v.kasalica@esciencecenter.nl
     affiliation: 1
-    orcid: 'https://orcid.org/0000-0002-0097-1056'
+    orcid: 0000-0002-0097-1056
 
   - name: Pablo Rodríguez-Sánchez
     email: p.rodriguez-sanchez@esciencecenter.nl
     affiliation: 1
-    orcid: 'https://orcid.org/0000-0002-2855-940X'
+    orcid: 0000-0002-2855-940X
 
   - name: Luc J.W. Evers
     email: luc.evers@radboudumc.nl
     affiliation: 2, 3
-    orcid: 'https://orcid.org/0000-0002-8241-5087'
+    orcid: 0000-0002-8241-5087
     corresponding: false
 
   - name: Erik Post
     email: erik.post@radboudumc.nl
     affiliation: 2, 3
-    orcid: 'https://orcid.org/0000-0002-1937-9976'
+    orcid: 0000-0002-1937-9976
 
   - name: Yordan P. Raykov
     email: yordan.raykov@nottingham.ac.uk
     affiliation: 4, 5
-    orcid: 'https://orcid.org/0000-0002-8241-5087'
+    orcid: 0000-0002-8241-5087
     corresponding: false
 
   - name: Max A. Little
     email: maxl@mit.edu
     affiliation: 6, 7
-    orcid: 'https://orcid.org/0000-0003-0753-717X'
+    orcid: 0000-0003-0753-717X
 
   - name: Peter Kok
     email: p.kok@esciencecenter.nl
     affiliation: 1
-    orcid: 'https://orcid.org/0000-0002-6630-7326'
+    orcid: 0000-0002-6630-7326
     corresponding: true
 
 affiliations:
