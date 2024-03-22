@@ -52,7 +52,7 @@ We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.
 
 ## Code of Conduct
 
-To ensure a welcoming and respectful community, all contributors and participants are expected to adhere to our [Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project, you agree to abide by its terms.
+To ensure a welcoming and respectful community, all contributors and participants are expected to adhere to our [Code of Conduct](CONDUCT.md). By participating in this project, you agree to abide by its terms.
 
 ## License
 
