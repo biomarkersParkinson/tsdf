@@ -42,7 +42,7 @@ def write_metadata(metadatas: List[TSDFMetadata], file_name: str) -> None:
         )
 
     if len(plain_meta) > 0:
-        overlap["sensors"] = _calculate_ovelaps_rec(plain_meta)
+        overlap["sensors"] = _calculate_overlaps_rec(plain_meta)
     file_utils.write_to_file(overlap, metadatas[0].file_dir_path, file_name)
 
 
@@ -76,7 +76,7 @@ def _extract_common_fields(metadatas: List[Dict[str, Any]]) -> Dict[str, Any]:
     return meta_overlap
 
 
-def _calculate_ovelaps_rec(metadatas: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+def _calculate_overlaps_rec(metadatas: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     """
     A recursive call that optimises the structure of the TSDF metadata, by grouping common values. For the input the list of dictionaries
     corresponds to a list of "flat" metadata dictionaries. The output is a list of dictionaries (potentially of length 1) that contain
@@ -107,11 +107,11 @@ def _calculate_ovelaps_rec(metadatas: List[Dict[str, Any]]) -> List[Dict[str, An
     # Handle the first group
     first_overlap = _extract_common_fields(first_group)
     if len(first_group) > 0:
-        first_overlap["sensors"] = _calculate_ovelaps_rec(first_group)
+        first_overlap["sensors"] = _calculate_overlaps_rec(first_group)
     final_metadata.append(first_overlap)
 
     # Handle the rest of the elements
-    second_overlap = _calculate_ovelaps_rec(second_grop)
+    second_overlap = _calculate_overlaps_rec(second_grop)
     final_metadata.extend(second_overlap)
 
     return final_metadata
