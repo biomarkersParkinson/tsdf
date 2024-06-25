@@ -19,6 +19,9 @@ def write_metadata(metadatas: List[TSDFMetadata], file_name: str) -> None:
 
     :raises TSDFMetadataFieldValueError: if the metadata files cannot be combined (e.g. they have no common fields) or if the list of TSDFMetadata objects is empty.
     """
+    for meta in metadatas:
+        meta.validate()
+
     if len(metadatas) == 0:
         raise TSDFMetadataFieldValueError(
             "Metadata cannot be saved, as the list of TSDFMetadata objects is empty."
