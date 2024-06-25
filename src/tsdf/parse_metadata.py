@@ -82,7 +82,7 @@ def _read_struct(
     # levels of the TSDF structure.
     # Extend the mapping recursively with values provided at those levels.
     for key, value in remaining_data.items():
-        if _is_a_list(value):
+        if isinstance(value, list):
             for each_value in value:
                 all_streams = all_streams | _read_struct(
                     each_value, defined_properties.copy(), source_path, version
@@ -133,17 +133,6 @@ def _contains_file_name(data: Any) -> bool:
         if _contains_file_name(value):
             return True
     return False
-
-
-def _is_a_list(value) -> bool:
-    """
-    Function returns True if the value is a list, otherwise it returns False.
-
-    :param value: value to be checked.
-
-    :return: True if the value is a list, otherwise False.
-    """
-    return isinstance(value, list)
 
 
 def contains_tsdf_mandatory_fields(dictionary: Dict[str, Any]) -> bool:
@@ -242,4 +231,5 @@ def confirm_dir_of_metadata(metadatas: List["tsdfmetadata.TSDFMetadata"]) -> Non
         if init_metadata.file_name == curr_metadata.file_name:
             raise tsdfmetadata.TSDFMetadataFieldValueError(
                 "Two metadata objects cannot reference the same binary file (file_name)."
+                #TODO: why not?
             )
