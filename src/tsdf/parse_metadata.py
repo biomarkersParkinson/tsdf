@@ -6,6 +6,8 @@ Reference: https://arxiv.org/abs/2211.11294
 
 import os
 from typing import Any, Dict, List
+import re
+from dateutil import parser
 
 from tsdf import constants
 from tsdf import tsdfmetadata
@@ -233,3 +235,31 @@ def confirm_dir_of_metadata(metadatas: List["tsdfmetadata.TSDFMetadata"]) -> Non
                 "Two metadata objects cannot reference the same binary file (file_name)."
                 #TODO: why not?
             )
+
+def is_iso8601(date_string: str) -> bool:
+    """
+    Checks if the given date string is in ISO8601 format.
+
+    :param date_string: date string to be checked.
+    """
+    # Note that we need both the regex and the parser to validate the date string
+    # The regex only still allows for invalid dates, e.g. 2021-02-29
+    # The parser is too lenient in accepting different formats
+    iso8601_regex = r"^(-?(?:[1-9][0-9]*)?[0-9]{4})-(1[0-2]|0[1-9])-(3[01]|0[1-9]|[12][0-9])(T(2[0-3]|[01][0-9]):[0-5][0-9]:[0-5][0-9](?:\.[0-9]+)?(?:Z|[+-](?:2[0-3]|[01][0-9]):[0-5][0-9])?)?$"
+    if re.match(iso8601_regex, date_string):
+        try:
+            parser.parse(date_string)
+            return True
+        except tsdfmetadata.TSDFMetadataFieldValueError:
+            return False
+    return False
+
+def validate_datetimes(metadata: tsdfmetadata) -> None:
+    """
+    Validates the start and end date format of the TSDFMetaData object.
+    """
+    if not is_iso8601(metadata.start_iso8601):
+        raise tsdfmetadata.TSDFMetadataFieldValueError(f"Invalid start_iso8601: {metadata.start_iso8601}")
+    if not is_iso8601(metadata.end_iso8601):
+        raise tsdfmetadata.TSDFMetadataFieldValueError(f"Invalid end_iso8601: {metadata.end_iso8601}")
+    return True
