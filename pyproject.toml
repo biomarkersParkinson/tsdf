@@ -30,7 +30,7 @@ coverage = "^7.0.0"
 matplotlib = "^3.6.3"
 mkdocs = "^1.4.2"
 mkdocs-jupyter = "^0.22.0"
-pytype = "^2024.2.27"
+pytype = "^2024.4.11"
 
 [tool.poetry.scripts]
 validate-tsdf = "tsdf.validator:main"
