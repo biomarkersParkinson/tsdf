@@ -254,7 +254,7 @@ def is_iso8601(date_string: str) -> bool:
             return False
     return False
 
-def validate_datetimes(metadata: tsdfmetadata) -> None:
+def validate_datetimes(metadata: tsdfmetadata.TSDFMetadata) -> bool:
     """
     Validates the start and end date format of the TSDFMetaData object.
     """
