@@ -35,3 +35,12 @@ def test_load_flat_structure(shared_datadir):
     for key, value in data.items():
         if parse_metadata.is_mandatory_type(key, version):
             assert(value == first_stream.__getattribute__(key))
+
+def test_date_format_fail(shared_datadir):
+    """Test that a file with wrong date formats raises an exception."""
+
+    path = shared_datadir / "date_format_fail.json"
+    with open(path, "r") as file:
+        data = json.load(file)
+        with pytest.raises(TSDFMetadataFieldValueError):
+            parse_metadata.read_data(data, path)  # This should trigger an exception

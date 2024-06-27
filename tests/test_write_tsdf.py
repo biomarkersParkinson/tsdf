@@ -1,6 +1,9 @@
+import os
 import numpy as np
+import pytest
 import tsdf
 from tsdf import TSDFMetadata
+from tsdf.tsdfmetadata import TSDFMetadataFieldValueError
 from utils import load_single_bin_file
 
 
@@ -78,3 +81,53 @@ def test_bin_processing_and_writing_metadata(shared_datadir):
     final_data = load_single_bin_file(shared_datadir, new_name)
     assert final_data.shape == (10, 3)
     assert final_data.dtype == "float32"
+
+
+def test_write_metadata_only(shared_datadir):
+    """ Construct simple metadata from scratch and write it to a file. """
+    # Define the metadata
+    basic_metadata = {
+        "subject_id": "example",
+        "study_id": "example",
+        "device_id": "example",
+        "endianness": "little",
+        "metadata_version": "0.1",
+        "start_datetime_unix_ms": 1571135957025,
+        "start_iso8601": "2019-10-15T10:39:17.025000+00:00", # not iso8601 format
+        "end_datetime_unix_ms": 1571168851826,
+        "end_iso8601": "2019-10-15T19:47:31.826000+00:00",
+        "channels": ["x", "y", "z"],
+        "units": ["m/s/s", "m/s/s", "m/s/s"],
+        "data_type": "float",
+        "bits": 32,
+        "rows": 17,
+        "file_name": "example_17_1_float32.bin",
+    }
+    metadata = TSDFMetadata(basic_metadata, shared_datadir)
+    tsdf.write_metadata([metadata], "tmp_meta.json")
+    assert os.path.exists(os.path.join(shared_datadir, "tmp_meta.json"))
+
+
+def test_write_metadata_validate_fail(shared_datadir):
+    """ Should fail on writing metadata with wrong date format. """
+    # Define the metadata
+    basic_metadata = {
+        "subject_id": "example",
+        "study_id": "example",
+        "device_id": "example",
+        "endianness": "little",
+        "metadata_version": "0.1",
+        "start_datetime_unix_ms": 1571135957025,
+        "start_iso8601": "2019-10-15 10:39:17.025000+00:00", # not iso8601 format
+        "end_datetime_unix_ms": 1571168851826,
+        "end_iso8601": "2019-10-15T19:47:31.826000+00:00",
+        "channels": ["x", "y", "z"],
+        "units": ["m/s/s", "m/s/s", "m/s/s"],
+        "data_type": "float",
+        "bits": 32,
+        "rows": 17,
+        "file_name": "example_17_1_float32.bin",
+    }
+    metadata = TSDFMetadata(basic_metadata, shared_datadir, do_validate=False) # Should validate on write below
+    with pytest.raises(TSDFMetadataFieldValueError):
+        tsdf.write_metadata([metadata], "tmp_meta.json")
