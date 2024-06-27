@@ -49,7 +49,7 @@ jobs:
         poetry install
     - name: Build the docs  # just to see whether the build passes
       run: |
-        poetry run mkdocs build
+        poetry run make html --directory docs
     - name: Test with pytest
       run: |
         poetry run pytest
