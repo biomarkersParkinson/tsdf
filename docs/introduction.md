@@ -1,4 +1,6 @@
-# Welcome to the TSDF (Time Series Data Format) Python package
+# Introduction
+
+Welcome to the TSDF (Time Series Data Format) Python package!
 
 A package to work with TSDF data in Python. This implementation is based on the the TSDF format specification, which can be found in this [preprint](https://arxiv.org/abs/2211.11294).
 

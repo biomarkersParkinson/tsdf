@@ -38,12 +38,10 @@ poetry run pytest
 
 ### Building the documentation
 
-We use [mkdocs](https://www.mkdocs.org/) to build the documentation. If you want to build the documentation locally, the following commands will prove useful:
+We use [Sphinx](https://www.sphinx-doc.org/) to build the documentation. Use this command to build the documentation locally:
 
 ```bash
-mkdocs build       # build the documentation
-mkdocs serve       # serve the documentation on a local server
-mkdocs gh-deploy   # deploy the documentation to GitHub pages
+poetry run make html --directory docs
 ```
 
 ## Contributing
