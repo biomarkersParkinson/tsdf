@@ -2,7 +2,7 @@
 # https://packaging.python.org/en/latest/guides/publishing-package-distribution-releases-using-github-actions-ci-cd-workflows/#workflow-definition
 # https://github.com/marketplace/actions/pypi-publish
 
-name: Publish to PyPI
+name: Publish package and docs
 
 on:
   push:
@@ -94,3 +94,22 @@ jobs:
         gh release upload
         "v${VERSION}" dist/**
         --repo '${{ github.repository }}'
+
+
+  publish-docs:
+    name: Publish documentation
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Download the documentation
+        uses: actions/download-artifact@v4
+        with:
+          name: docs-html
+          path: docs/
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: docs/
