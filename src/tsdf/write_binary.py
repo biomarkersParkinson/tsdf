@@ -19,12 +19,10 @@ def write_dataframe_to_binaries(
     """
     Save binary file based on the provided pandas DataFrame.
 
-    :param file_dir: path to the directory where the file will be saved.
-    :param file_name: name of the file to be saved.
-    :param data: pandas DataFrame containing the data.
-    :param metadata: dictionary containing the metadata.
-
-    :return: TSDFMetadata object.
+    :param file_dir:    path to the directory where the file will be saved.
+    :param df:          pandas DataFrame containing the data.
+    :param metadatas:   list of metadata objects to be saved, also contains
+                        channels to be retrieved from dataframe.
     """
     for metadata in metadatas:
         file_name = metadata.file_name

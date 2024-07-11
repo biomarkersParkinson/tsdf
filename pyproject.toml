@@ -40,6 +40,7 @@ sphinx-rtd-theme = "^2.0.0"
 
 [tool.poetry.scripts]
 validate-tsdf = "tsdf.validator:main"
+#docs = "sphinx.cmd.build:main"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

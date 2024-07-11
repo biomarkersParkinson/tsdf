@@ -34,6 +34,7 @@ jobs:
         python-version: ${{ matrix.python-version }}
 
     # Get the version from pyproject.toml
+    # This will be used to tag the release in the publishing workflow
     - name: Install toml package
       run: pip install toml
     - name: Get version from pyproject.toml
@@ -43,22 +44,38 @@ jobs:
         echo Version: $VERSION
         echo "version=$VERSION" >> $GITHUB_OUTPUT
 
+    # Installation
     - name: Install dependencies
       run: |
         python -m pip install poetry
         poetry install
-    - name: Build the docs  # just to see whether the build passes
-      run: |
-        poetry run make html --directory docs
+
+    # Testing and checking
     - name: Test with pytest
       run: |
         poetry run pytest
-    # TODO: run pytype here?
+    - name: Type check
+      run: |
+        poetry run pytype .
+
+    # Build the package
     - name: Build the package
       run: |
         poetry build
     - name: Archive build artifacts
       uses: actions/upload-artifact@v4
+      if: github.ref == 'refs/heads/release'
       with:
         name: build-artifacts
         path: dist/
+  
+    # Build the docs
+    - name: Build the docs
+      run: |
+        poetry run make html --directory docs
+    - name: Archive documentation
+      uses: actions/upload-artifact@v4
+      if: github.ref == 'refs/heads/release'
+      with:
+        name: docs-html
+        path: docs/_build/html/

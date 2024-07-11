@@ -1,5 +1,7 @@
 import copy
 from typing import Any, Dict, List
+from datetime import datetime
+from dateutil import parser
 
 from tsdf import parse_metadata
 
@@ -48,11 +50,11 @@ class TSDFMetadata:
 
     file_dir_path: str
     """ A reference to the directory path, so we don't need it again when reading associated binary files. """
-    metadata_file_name: str
+    metadata_file_name: str #TODO: do we need this?? / is it used?
     """ A reference to the source path, so we don't need it again when reading associated binary files. """
 
     def __init__(
-        self, dictionary: Dict[str, Any], dir_path: str, metadata_file_name: str = ""
+        self, dictionary: Dict[str, Any], dir_path: str, metadata_file_name: str = "", do_validate: bool = True
     ) -> None:
         """
         The default constructor takes a dictionary as an argument and creates each
@@ -61,13 +63,33 @@ class TSDFMetadata:
 
         :param dictionary: dictionary containing TSDF metadata.
         :param dir_path: path to the directory where the metadata file is stored.
-        :param file_name: (optional) name of the metadata file.
+        :param metadata_file_name: (optional) name of the metadata file.
+        :param do_validate: (optional) flag to validate the metadata.
         """
-        parse_metadata.contains_tsdf_mandatory_fields(dictionary) #TODO: how to load a dict that is not complete yet?
+
+        # Copy the attributes from the dictionary to the object
         for key, value in dictionary.items():
             setattr(self, key, value)
         self.file_dir_path = dir_path
         self.metadata_file_name = metadata_file_name
+
+        # Validate the metadata
+        if do_validate:
+            if not self.validate():
+                raise TSDFMetadataFieldValueError("The provided metadata is invalid.")
+
+
+    def validate(self) -> bool:
+        isValid: bool = True
+
+        # Validate presence of mandatory fields
+        dict = self.get_plain_tsdf_dict_copy()
+        isValid = isValid and parse_metadata.contains_tsdf_mandatory_fields(dict)
+
+        # Validate datetimes
+        isValid = isValid and parse_metadata.validate_datetimes(self)
+
+        return isValid
 
     def get_plain_tsdf_dict_copy(self) -> Dict[str, Any]:
         """
@@ -81,3 +103,31 @@ class TSDFMetadata:
         if simple_dict.get("metadata_file_name") is not None:
             simple_dict.pop("metadata_file_name")
         return simple_dict
+
+    def set_start_datetime(self, date_time: datetime) -> None:
+        """
+        Sets the start date of the recording in ISO8601 format.
+        :param date_time: datetime object containing the start date.
+        """
+        self.start_iso8601 = date_time.isoformat()
+
+    def get_start_datetime(self) -> datetime:
+        """
+        Returns the start date of the recording as a datetime object.
+        :return: datetime object containing the start date.
+        """
+        return parser.parse(self.start_iso8601)
+
+    def set_end_datetime(self, date_time: datetime) -> None:
+        """
+        Sets the end date of the recording in ISO8601 format.
+        :param date_time: datetime object containing the end date.
+        """
+        self.end_iso8601 = date_time.isoformat()
+
+    def get_end_datetime(self) -> datetime:
+        """
+        Returns the end date of the recording as a datetime object.
+        :return: datetime object containing the end date.
+        """
+        return parser.parse(self.end_iso8601)
