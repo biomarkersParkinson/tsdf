@@ -78,4 +78,4 @@ jobs:
       if: github.ref == 'refs/heads/release'
       with:
         name: docs-html
-        path: docs/_build/html/
+        path: docs/build/html/
