@@ -4,7 +4,7 @@
 | Badges | |
 |:----:|----|
 | **Packages and Releases** | [![Latest release](https://img.shields.io/github/release/biomarkersparkinson/tsdf.svg)](https://github.com/biomarkersparkinson/tsdf/releases/latest) [![PyPI](https://img.shields.io/pypi/v/tsdf.svg)](https://pypi.python.org/pypi/tsdf/)  [![Static Badge](https://img.shields.io/badge/RSD-tsdf-lib)](https://research-software-directory.org/software/tsdf) |
-| **Build Status** | [![](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/) ![Python package](https://github.com/biomarkersparkinson/tsdf/workflows/Python%20package/badge.svg) [![pytype Type Check](https://github.com/biomarkersParkinson/tsdf/actions/workflows/pytype-checking.yml/badge.svg)](https://github.com/biomarkersParkinson/tsdf/actions/workflows/pytype-checking.yml) |
+| **Build Status** | [![](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/) ![Python package](https://github.com/biomarkersparkinson/tsdf/workflows/Python%20package/badge.svg) [![pytype Type Check](https://github.com/biomarkersParkinson/tsdf/actions/workflows/pytype-checking.yml/badge.svg)](https://github.com/biomarkersParkinson/tsdf/actions/workflows/pytype-checking.yml) |
 | **DOI** | [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7867899.svg)](https://doi.org/10.5281/zenodo.7867899) |
 | **License** |  [![GitHub license](https://img.shields.io/github/license/biomarkersParkinson/tsdf)](https://github.com/biomarkersparkinson/tsdf/blob/main/LICENSE) |
 | **Fairness** |  [![fair-software.eu](https://img.shields.io/badge/fair--software.eu-%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8F-green)](https://fair-software.eu) [![OpenSSF Best Practices](https://bestpractices.coreinfrastructure.org/projects/8083/badge)](https://www.bestpractices.dev/projects/8083) |
@@ -17,7 +17,7 @@ A package ([documentation](https://biomarkersparkinson.github.io/tsdf/)) to load
 
 ### Using `pip`
 
-The package is available in PyPi and requires [Python 3.9](https://www.python.org/downloads/) or higher. It can be installed using:
+The package is available in PyPi and requires [Python 3.10](https://www.python.org/downloads/) or higher. It can be installed using:
 
 ```bash
 $ pip install tsdf
@@ -38,12 +38,10 @@ poetry run pytest
 
 ### Building the documentation
 
-We use [mkdocs](https://www.mkdocs.org/) to build the documentation. If you want to build the documentation locally, the following commands will prove useful:
+We use [Sphinx](https://www.sphinx-doc.org/) to build the documentation. Use this command to build the documentation locally:
 
 ```bash
-mkdocs build       # build the documentation
-mkdocs serve       # serve the documentation on a local server
-mkdocs gh-deploy   # deploy the documentation to GitHub pages
+poetry run make html --directory docs
 ```
 
 ## Contributing

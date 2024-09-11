@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "tsdf"
-version = "0.5.2"
+version = "0.6.0"
 description = "A Python library that provides methods for encoding and decoding TSDF (Time Series Data Format) data, which allows you to easily create, manipulate and serialize TSDF files in your Python code."
 authors = ["Peter Kok <p.kok@esciencecenter.nl>",
             "Pablo Rodríguez <p.rodriguez-sanchez@esciencecenter.nl>",
@@ -16,24 +16,31 @@ keywords = ["Time Series Data Format (TSDF)", "binary data", "digital sensors"]
 repository = "https://github.com/biomarkersParkinson/tsdf"
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.10"
 numpy = "^1.24.1"
 pandas = "^2.1.3"
 
 [tool.poetry.group.dev.dependencies]
+coverage = "^7.0.0"
+matplotlib = "^3.6.3"
+pytype = "^2024.4.11"
+myst-parser = "^3.0.1"
+
+[tool.poetry.group.testing.dependencies]
+ipykernel = "^6.19.2"
 pytest = "^7.2.0"
 pytest-cov = "^4.0.0"
 pytest-datadir = "^1.4.1"
-jupyter = "^1.0.0"
-ipykernel = "^6.19.2"
-coverage = "^7.0.0"
-matplotlib = "^3.6.3"
-mkdocs = "^1.4.2"
-mkdocs-jupyter = "^0.22.0"
-pytype = "^2024.2.27"
+
+[tool.poetry.group.docs.dependencies]
+sphinx = "^7.3.7"
+myst-nb = "^1.1.0"
+sphinx-autoapi = "^3.1.2"
+sphinx-rtd-theme = "^2.0.0"
 
 [tool.poetry.scripts]
 validate-tsdf = "tsdf.validator:main"
+#docs = "sphinx.cmd.build:main"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
