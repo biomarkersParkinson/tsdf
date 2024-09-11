@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TSDF metadata fields &mdash; tsdf  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=fd3f3429" />
+
+  
+    <link rel="canonical" href="https://biomarkersparkinson.github.io/tsdf/tsdf_fields_table.html"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Basic reading and writing (numpy)" href="basic_reading_and_writing_numpy.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            tsdf
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">The format</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">TSDF metadata fields</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#tsdf-v0-1-mandatory-fields">TSDF v0.1 mandatory fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#legacy-fields">Legacy fields</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Usage</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="basic_reading_and_writing_numpy.html">Basic reading and writing (numpy)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basic_reading_and_writing_pandas.html">Basic reading and writing (pandas)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing_data_from_scratch.html">Writing data from scratch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="converting_legacy_data.html">Transform legacy format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="validating_files.html">Validate TSDF file</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="autoapi/tsdf/index.html">tsdf</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contact.html">Contact</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">tsdf</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">TSDF metadata fields</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/biomarkersParkinson/tsdf/blob/main/docs/tsdf_fields_table.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="tsdf-metadata-fields">
+<h1>TSDF metadata fields<a class="headerlink" href="#tsdf-metadata-fields" title="Link to this heading"></a></h1>
+<p>TSDF metadata is represented as a dictionary (or a JSON object). In this section, we will list the fields within the TSDF format, as described in the <a class="reference external" href="https://arxiv.org/abs/2211.11294">format specification</a>. In addition to the mandatory fields, any custom fields and structures can be added.</p>
+<section id="tsdf-v0-1-mandatory-fields">
+<h2>TSDF v0.1 mandatory fields<a class="headerlink" href="#tsdf-v0-1-mandatory-fields" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">study_id</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p></td>
+<td><p>Unique identifier for the particular study.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">device_id</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p></td>
+<td><p>Specifies the device used for data collection.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">subject_id</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p></td>
+<td><p>Unique identifier for the subject or participant in the study.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">source_file_name</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p></td>
+<td><p>Name of the original source file containing the data.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">endianness</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p></td>
+<td><p><a class="reference external" href="https://en.wikipedia.org/wiki/Endianness">Byte order</a> for numerical values in binary data (“big” or “little”).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">metadata_version</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p></td>
+<td><p>Version information for the metadata.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">start_iso8601</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p></td>
+<td><p><a class="reference external" href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> time stamp for the start of the recording, with ms precision.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">end_iso8601</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p></td>
+<td><p>Same as <code class="docutils literal notranslate"><span class="pre">start_iso8601</span></code>, but for the end of the recording.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">file_name</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p></td>
+<td><p>The name of the file in consideration, e.g., “eeee.bin”.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">channels</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">str[]</span></code></p></td>
+<td><p>Labels for each data channel (<em>e.g.:</em> <code class="docutils literal notranslate"><span class="pre">[time]</span></code> for time data or <code class="docutils literal notranslate"><span class="pre">[X,</span> <span class="pre">Y,</span> <span class="pre">Z]</span></code> for 3D accelerometry).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">time_encode</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p></td>
+<td><p>Encoding type for time, e.g., “difference”.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">units</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">str[]</span></code></p></td>
+<td><p>Units for each channel in the data, e.g., “ms” for milliseconds.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">data_type</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p></td>
+<td><p>Number format of the measured data (<em>e.g.:</em> <code class="docutils literal notranslate"><span class="pre">float</span></code>).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bits</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><p>Bit-length of the number format (e.g., 32-bit).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rows</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><p>Number of rows in the data matrix.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="legacy-fields">
+<h2>Legacy fields<a class="headerlink" href="#legacy-fields" title="Link to this heading"></a></h2>
+<p>The following table lists the legacy fields from the time when the format was called TSDB, along with their updated counterparts:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Legacy field</p></th>
+<th class="head"><p>Updated field</p></th>
+<th class="head"><p>Updated data type</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">project_id</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">study_id</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">quantities</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">channels</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">str[]</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">units</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">units</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">str[]</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">datatype</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">data_type</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">start_datetime_iso8601</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">start_iso8601</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">end_datetime_iso8601</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">end_iso8601</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Note</strong></p>
+<p>As presented in the table above, the <code class="docutils literal notranslate"><span class="pre">quantities</span></code> and <code class="docutils literal notranslate"><span class="pre">units</span></code> fields are required to be arrays within the TSDF standard.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="basic_reading_and_writing_numpy.html" class="btn btn-neutral float-right" title="Basic reading and writing (numpy)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Netherlands eScience Center.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

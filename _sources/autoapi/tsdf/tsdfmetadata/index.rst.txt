@@ -1,0 +1,181 @@
+tsdf.tsdfmetadata
+=================
+
+.. py:module:: tsdf.tsdfmetadata
+
+
+Exceptions
+----------
+
+.. autoapisummary::
+
+   tsdf.tsdfmetadata.TSDFMetadataFieldError
+   tsdf.tsdfmetadata.TSDFMetadataFieldValueError
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   tsdf.tsdfmetadata.TSDFMetadata
+
+
+Module Contents
+---------------
+
+.. py:exception:: TSDFMetadataFieldError
+
+   Bases: :py:obj:`Exception`
+
+
+   Raised when the TSDFMetadata is missing an obligatory field.
+
+
+   .. py:method:: missing_field(field_name: str)
+      :classmethod:
+
+
+
+.. py:exception:: TSDFMetadataFieldValueError
+
+   Bases: :py:obj:`Exception`
+
+
+   Raised when a TSDFMetadata field is wrongly annotated.
+
+
+.. py:class:: TSDFMetadata(dictionary: Dict[str, Any], dir_path: str, metadata_file_name: str = '', do_validate: bool = True)
+
+   Structure that provides metadata needed for reading a data stream.
+
+
+   .. py:attribute:: metadata_version
+      :type:  str
+
+      Version of the TSDF metadata file.
+
+
+   .. py:attribute:: study_id
+      :type:  str
+
+      Study ID.
+
+
+   .. py:attribute:: subject_id
+      :type:  str
+
+      Subject ID.
+
+
+   .. py:attribute:: device_id
+      :type:  str
+
+      Device ID.
+
+
+   .. py:attribute:: start_iso8601
+      :type:  str
+
+      Start time of the recording in ISO8601 format.
+
+
+   .. py:attribute:: end_iso8601
+      :type:  str
+
+      End time of the recording in ISO8601 format.
+
+
+   .. py:attribute:: file_name
+      :type:  str
+
+      Name of the binary file containing the data.
+
+
+   .. py:attribute:: rows
+      :type:  int
+
+      Number of rows in the binary file.
+
+
+   .. py:attribute:: channels
+      :type:  List[str]
+
+      List of channels in the binary file.
+
+
+   .. py:attribute:: units
+      :type:  List[str]
+
+      List of units for each channel in the binary file.
+
+
+   .. py:attribute:: data_type
+      :type:  str
+
+      Data type of the binary file.
+
+
+   .. py:attribute:: bits
+      :type:  int
+
+      Number of bits per sample in the binary file.
+
+
+   .. py:attribute:: endianness
+      :type:  str
+
+      Endianness of the binary file.
+
+
+   .. py:attribute:: file_dir_path
+      :type:  str
+
+      A reference to the directory path, so we don't need it again when reading associated binary files.
+
+
+   .. py:attribute:: metadata_file_name
+      :type:  str
+
+      A reference to the source path, so we don't need it again when reading associated binary files.
+
+
+   .. py:method:: validate() -> bool
+
+
+   .. py:method:: get_plain_tsdf_dict_copy() -> Dict[str, Any]
+
+      Method returns the a copy of the dict containing fields needed for the TSDF file.
+
+      :return: a copy of the dict containing fields needed for the TSDF file.
+
+
+
+   .. py:method:: set_start_datetime(date_time: datetime.datetime) -> None
+
+      Sets the start date of the recording in ISO8601 format.
+      :param date_time: datetime object containing the start date.
+
+
+
+   .. py:method:: get_start_datetime() -> datetime.datetime
+
+      Returns the start date of the recording as a datetime object.
+      :return: datetime object containing the start date.
+
+
+
+   .. py:method:: set_end_datetime(date_time: datetime.datetime) -> None
+
+      Sets the end date of the recording in ISO8601 format.
+      :param date_time: datetime object containing the end date.
+
+
+
+   .. py:method:: get_end_datetime() -> datetime.datetime
+
+      Returns the end date of the recording as a datetime object.
+      :return: datetime object containing the end date.
+
+
+

@@ -1,231 +1,197 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="description" content="None" /><link rel="canonical" href="https://biomarkersparkinson.github.io/tsdf/" />
-      <link rel="shortcut icon" href="img/favicon.ico" />
-    <title>tsdf</title>
-    <link rel="stylesheet" href="css/theme.css" />
-    <link rel="stylesheet" href="css/theme_extra.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
-    
-      <script>
-        // Current page data
-        var mkdocs_page_name = "Introduction";
-        var mkdocs_page_input_path = "index.md";
-        var mkdocs_page_url = "/tsdf/";
-      </script>
-    
-    <!--[if lt IE 9]>
-      <script src="js/html5shiv.min.js"></script>
-    <![endif]-->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
-      <script>hljs.highlightAll();</script> 
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>&lt;no title&gt; &mdash; tsdf  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=fd3f3429" />
+
+  
+    <link rel="canonical" href="https://biomarkersparkinson.github.io/tsdf/index.html"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Introduction" href="introduction.html" /> 
 </head>
 
-<body class="wy-body-for-nav" role="document">
-
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
-    <div class="wy-side-scroll">
-      <div class="wy-side-nav-search">
-          <a href="." class="icon icon-home"> tsdf
-        </a>
-      </div>
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
 
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href=".">Introduction</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#what-is-tsdf-data">What is TSDF data?</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#example-tsdf-metadata">Example: TSDF Metadata</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#the-python-library-tsdf">The python library - tsdf</a>
-    </li>
-    </ul>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="installation/">Installation</a>
-                </li>
-              </ul>
-              <p class="caption"><span class="caption-text">The format</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="tsdf_fields_table/">TSDF metadata fields</a>
-                  </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Usage</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="basic_reading_and_writing_numpy/">Basic reading and writing (numpy)</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="basic_reading_and_writing_pandas/">Basic reading and writing (pandas)</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="writing_data_from_scratch/">Writing data from scratch</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="converting_legacy_data/">Converting legacy data</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="validating_files/">Validating files</a>
-                  </li>
-              </ul>
-              <p class="caption"><span class="caption-text">About</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="contact/">Contact</a>
-                  </li>
-              </ul>
+          
+          
+          <a href="#" class="icon icon-home">
+            tsdf
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">The format</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tsdf_fields_table.html">TSDF metadata fields</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Usage</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="basic_reading_and_writing_numpy.html">Basic reading and writing (numpy)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basic_reading_and_writing_pandas.html">Basic reading and writing (pandas)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing_data_from_scratch.html">Writing data from scratch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="converting_legacy_data.html">Transform legacy format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="validating_files.html">Validate TSDF file</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="autoapi/tsdf/index.html">tsdf</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contact.html">Contact</a></li>
+</ul>
+
+        </div>
       </div>
-    </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href=".">tsdf</a>
-        
+          <a href="#">tsdf</a>
       </nav>
+
       <div class="wy-nav-content">
-        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href="." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Introduction</li>
-    <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/biomarkersParkinson/tsdf/blob/main/docs/index.md" class="icon icon-github"> Edit on GitHub</a>
-    </li>
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">&lt;no title&gt;</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/biomarkersParkinson/tsdf/blob/main/docs/index.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
   </ul>
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-            <div class="section" itemprop="articleBody">
-              
-                <h1 id="welcome-to-the-tsdf-time-series-data-format-python-package">Welcome to the TSDF (Time Series Data Format) Python package</h1>
-<p>A package to work with TSDF data in Python. This implementation is based on the the TSDF format specification, which can be found in this <a href="https://arxiv.org/abs/2211.11294">preprint</a>.</p>
-<h2 id="what-is-tsdf-data">What is TSDF data?</h2>
-<p>TSDF provides a unified, user-friendly format for both numerical sensor data and metadata, utilizing raw binary data and JSON-format text files for measurements/timestamps and metadata, respectively. It defines essential metadata fields to enhance data interpretability and exchangeability, aiming to bolster scientific reproducibility in studies reliant on digital biosensor data as a critical evidence base across various disease domains.</p>
-<h2 id="example-tsdf-metadata">Example: TSDF Metadata</h2>
-<p>This example demonstrates a TSDF metadata JSON file, showcasing the structured format used to easily interpret and read the corresponding binary data. For more intricate examples and detailed specifications, the paper serves as a comprehensive reference.</p>
-<pre><code class="language-json">{
-    &quot;study_id&quot;: &quot;voicedata&quot;,
-    &quot;subject_id&quot;: &quot;recruit089&quot;,
-    &quot;device_id&quot;: &quot;audiotechnica02&quot;,
-    &quot;endianness&quot;: &quot;little&quot;,
-    &quot;metadata_version&quot;: &quot;0.1&quot;,
-    &quot;start_iso8601&quot;: &quot;2016-08-09T10:31:00.000+00:00&quot;,
-    &quot;end_iso8601&quot;: &quot;2016-08-10T10:31:30.000+00:00&quot;,
-    &quot;sampling_rate&quot;: 44100,
-    &quot;rows&quot;: 1323000,
-    &quot;channels&quot;: [
-        &quot;left&quot;,
-        &quot;right&quot;
-    ],
-    &quot;units&quot;: [
-        &quot;unitless&quot;,
-        &quot;unitless&quot;
-    ],
-    &quot;compression&quot;: &quot;none&quot;,
-    &quot;data_type&quot;: &quot;int&quot;,
-    &quot;bits&quot;: 16,
-    &quot;file_name&quot;: &quot;audio_voice_089.raw&quot;
-}
-</code></pre>
-<p><strong>Explanation:</strong></p>
+           <div itemprop="articleBody">
+             
+  <div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul>
-<li>
-<p><code>study_id</code>: Identifies the study as "voicedata".</p>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#what-is-tsdf-data">What is TSDF data?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#example-tsdf-metadata">Example: TSDF Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#the-python-library-tsdf">The python library - <code class="docutils literal notranslate"><span class="pre">tsdf</span></code></a></li>
+</ul>
 </li>
-<li>
-<p><code>subject_id</code>: Specifies the subject as "recruit089".</p>
-</li>
-<li>
-<p><code>device_id</code>: Indicates the device used as "audiotechnica02".</p>
-</li>
-<li>
-<p><code>endianness</code>: Specifies the byte order as "little".</p>
-</li>
-<li>
-<p><code>metadata_version</code>: Denotes the metadata version as "0.1".</p>
-</li>
-<li>
-<p><code>start_iso8601</code> and <code>end_iso8601</code>: Define the start and end timestamps of data collection in ISO 8601 format.</p>
-</li>
-<li>
-<p><code>sampling_rate</code>: Represents the data sampling rate as 44,100 samples per second.</p>
-</li>
-<li>
-<p><code>rows</code>: Specifies the number of data rows as 1,323,000.</p>
-</li>
-<li>
-<p><code>channels</code>: Lists the data channels as "left" and "right".</p>
-</li>
-<li>
-<p><code>units</code>: Specifies the units for each channel as "unitless".</p>
-</li>
-<li>
-<p><code>compression</code>: Indicates that no compression has been applied to the data.</p>
-</li>
-<li>
-<p><code>data_type</code>: Defines the data type as "int".</p>
-</li>
-<li>
-<p><code>bits</code>: Specifies the bit length as 16.</p>
-</li>
-<li>
-<p><code>file_name</code>: Names the binary file "audio_voice_089.raw" that contains the described data.</p>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#installing-the-development-version">Installing the development version</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#what-now">What now?</a></li>
+</ul>
 </li>
 </ul>
-<h2 id="the-python-library-tsdf">The python library - <code>tsdf</code></h2>
-<p>This Python library facilitates the manipulation of Time Series Data Format (TSDF) metadata and binary files, providing users with a familiar and structured interface. Leveraging the power of numpy arrays, it simplifies the process of working with TSDF data, allowing users to efficiently read, write, and manipulate both metadata and binary data. This approach enhances data management and analysis, making it a valuable tool for researchers and data scientists dealing with extensive physiological sensor data.</p>
-<p>The package is available in <a href="https://pypi.org/project/tsdf/">PyPI</a>.</p>
-              
-            </div>
-          </div><footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="installation/" class="btn btn-neutral float-right" title="Installation">Next <span class="icon icon-circle-arrow-right"></span></a>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">The format</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tsdf_fields_table.html">TSDF metadata fields</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tsdf_fields_table.html#tsdf-v0-1-mandatory-fields">TSDF v0.1 mandatory fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tsdf_fields_table.html#legacy-fields">Legacy fields</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Usage</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="basic_reading_and_writing_numpy.html">Basic reading and writing (numpy)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="basic_reading_and_writing_numpy.html#load-some-data">Load some data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic_reading_and_writing_numpy.html#perform-basic-data-processing">Perform basic data processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic_reading_and_writing_numpy.html#write-the-processed-data">Write the processed data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic_reading_and_writing_numpy.html#write-the-tsdf-metadata-file">Write the TSDF metadata file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic_reading_and_writing_numpy.html#write-a-metadata-file-that-combines-multiple-binary-files">Write a metadata file that combines multiple binary files</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="basic_reading_and_writing_pandas.html">Basic reading and writing (pandas)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="basic_reading_and_writing_pandas.html#load-some-data">Load some data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic_reading_and_writing_pandas.html#perform-basic-data-processing">Perform basic data processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic_reading_and_writing_pandas.html#write-the-processed-data">Write the processed data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic_reading_and_writing_pandas.html#write-the-tsdf-metadata-file">Write the TSDF metadata file</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="writing_data_from_scratch.html">Writing data from scratch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="converting_legacy_data.html">Transform legacy format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="validating_files.html">Validate TSDF file</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="autoapi/tsdf/index.html">tsdf</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/tsdf/index.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/tsdf/index.html#classes">Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/tsdf/index.html#functions">Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/tsdf/index.html#package-contents">Package Contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contact.html">Contact</a></li>
+</ul>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="introduction.html" class="btn btn-neutral float-right" title="Introduction" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <!-- Copyright etc -->
+    <p>&#169; Copyright 2024, Netherlands eScience Center.</p>
   </div>
 
-  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
 </footer>
-          
         </div>
       </div>
-
     </section>
-
   </div>
-
-  <div class="rst-versions" role="note" aria-label="Versions">
-  <span class="rst-current-version" data-toggle="rst-current-version">
-    
-        <span>
-          <a href="https://github.com/biomarkersParkinson/tsdf/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
-        </span>
-    
-    
-    
-      <span><a href="installation/" style="color: #fcfcfc">Next &raquo;</a></span>
-    
-  </span>
-</div>
-    <script src="js/jquery-3.6.0.min.js"></script>
-    <script>var base_url = ".";</script>
-    <script src="js/theme_extra.js"></script>
-    <script src="js/theme.js"></script>
-    <script>
-        jQuery(function () {
-            SphinxRtdTheme.Navigation.enable(true);
-        });
-    </script>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
 
 </body>
 </html>
-
-<!--
-MkDocs version : 1.5.3
-Build Date UTC : 2024-03-25 13:09:08.202996+00:00
--->

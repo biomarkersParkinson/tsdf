@@ -1,0 +1,48 @@
+tsdf.constants
+==============
+
+.. py:module:: tsdf.constants
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   tsdf.constants.SUPPORTED_TSDF_VERSIONS
+   tsdf.constants.MANDATORY_TSDF_KEYS
+   tsdf.constants.MANDATORY_TSDF_KEYS_VALUES
+   tsdf.constants.KEY_VALUE_TYPES
+   tsdf.constants.METADATA_NAMING_PATTERN
+   tsdf.constants.ConcatenationType
+
+
+Module Contents
+---------------
+
+.. py:data:: SUPPORTED_TSDF_VERSIONS
+   :value: ['0.1']
+
+
+   List of currently supported versions.
+
+.. py:data:: MANDATORY_TSDF_KEYS
+
+   Dictionary linking mandatory keys for different versions
+
+.. py:data:: MANDATORY_TSDF_KEYS_VALUES
+
+   Dictionary linking mandatory keys to their values
+
+.. py:data:: KEY_VALUE_TYPES
+
+   List of data types that are supported within the TSDF metadata file.
+
+.. py:data:: METADATA_NAMING_PATTERN
+   :value: '**meta.json'
+
+
+   Naming convention for the metadata files. ** allows for any prefix, including additional directories.
+
+.. py:data:: ConcatenationType
+

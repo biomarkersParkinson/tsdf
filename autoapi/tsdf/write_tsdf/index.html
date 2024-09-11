@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tsdf.write_tsdf &mdash; tsdf  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
+
+  
+    <link rel="canonical" href="https://biomarkersparkinson.github.io/tsdf/autoapi/tsdf/write_tsdf/index.html"/>
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Contact" href="../../../contact.html" />
+    <link rel="prev" title="tsdf.write_binary" href="../write_binary/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            tsdf
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">The format</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../tsdf_fields_table.html">TSDF metadata fields</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Usage</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../basic_reading_and_writing_numpy.html">Basic reading and writing (numpy)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../basic_reading_and_writing_pandas.html">Basic reading and writing (pandas)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../writing_data_from_scratch.html">Writing data from scratch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../converting_legacy_data.html">Transform legacy format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../validating_files.html">Validate TSDF file</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">tsdf</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../constants/index.html">tsdf.constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../file_utils/index.html">tsdf.file_utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../legacy_tsdf_utils/index.html">tsdf.legacy_tsdf_utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../numpy_utils/index.html">tsdf.numpy_utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../parse_metadata/index.html">tsdf.parse_metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../read_binary/index.html">tsdf.read_binary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../read_tsdf/index.html">tsdf.read_tsdf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tsdfmetadata/index.html">tsdf.tsdfmetadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../validator/index.html">tsdf.validator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../write_binary/index.html">tsdf.write_binary</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">tsdf.write_tsdf</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-contents">Module Contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#classes">Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#functions">Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#package-contents">Package Contents</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contact.html">Contact</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">tsdf</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">tsdf</a></li>
+      <li class="breadcrumb-item active">tsdf.write_tsdf</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/biomarkersParkinson/tsdf/blob/main/docs/autoapi/tsdf/write_tsdf/index.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-tsdf.write_tsdf">
+<span id="tsdf-write-tsdf"></span><h1>tsdf.write_tsdf<a class="headerlink" href="#module-tsdf.write_tsdf" title="Link to this heading"></a></h1>
+<p>Module for writing TSDF files.</p>
+<p>Reference: <a class="reference external" href="https://arxiv.org/abs/2211.11294">https://arxiv.org/abs/2211.11294</a></p>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tsdf.write_tsdf.write_metadata" title="tsdf.write_tsdf.write_metadata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_metadata</span></code></a>(→ None)</p></td>
+<td><p>Combine and save the TSDF metadata objects as a json file.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tsdf.write_tsdf._extract_common_fields" title="tsdf.write_tsdf._extract_common_fields"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_extract_common_fields</span></code></a>(→ Dict[str, Any])</p></td>
+<td><p>Extract the fields that are the same for all the metadata files.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tsdf.write_tsdf._calculate_overlaps_rec" title="tsdf.write_tsdf._calculate_overlaps_rec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_calculate_overlaps_rec</span></code></a>(→ List[Dict[str, Any]])</p></td>
+<td><p>A recursive call that optimises the structure of the TSDF metadata, by grouping common values. For the input the list of dictionaries</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tsdf.write_tsdf._get_all_keys" title="tsdf.write_tsdf._get_all_keys"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_get_all_keys</span></code></a>(→ List[str])</p></td>
+<td><p>Get all the keys from the metadata files.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tsdf.write_tsdf.calculate_max_overlap" title="tsdf.write_tsdf.calculate_max_overlap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculate_max_overlap</span></code></a>(→ List[Dict[str, Any]])</p></td>
+<td><p>Calculate the maximum overlap between the metadata files, for a specific key.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tsdf.write_tsdf.max_len_key" title="tsdf.write_tsdf.max_len_key"><code class="xref py py-obj docutils literal notranslate"><span class="pre">max_len_key</span></code></a>(→ str)</p></td>
+<td><p>Return the key in a dictionary that has the longest list as a value.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="tsdf.write_tsdf.write_metadata">
+<span class="sig-prename descclassname"><span class="pre">tsdf.write_tsdf.</span></span><span class="sig-name descname"><span class="pre">write_metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metadatas</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../tsdfmetadata/index.html#tsdf.tsdfmetadata.TSDFMetadata" title="tsdf.tsdfmetadata.TSDFMetadata"><span class="pre">tsdf.tsdfmetadata.TSDFMetadata</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../../_modules/tsdf/write_tsdf.html#write_metadata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tsdf.write_tsdf.write_metadata" title="Link to this definition"></a></dt>
+<dd><p>Combine and save the TSDF metadata objects as a json file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>metadatas</strong> – List of TSDFMetadata objects to be saved.</p></li>
+<li><p><strong>file_name</strong> – Name of the file to be saved. The file will be saved in the directory of the first TSDFMetadata object in the list.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="../tsdfmetadata/index.html#tsdf.tsdfmetadata.TSDFMetadataFieldValueError" title="tsdf.tsdfmetadata.TSDFMetadataFieldValueError"><strong>TSDFMetadataFieldValueError</strong></a> – if the metadata files cannot be combined (e.g. they have no common fields) or if the list of TSDFMetadata objects is empty.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tsdf.write_tsdf._extract_common_fields">
+<span class="sig-prename descclassname"><span class="pre">tsdf.write_tsdf.</span></span><span class="sig-name descname"><span class="pre">_extract_common_fields</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metadatas</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../_modules/tsdf/write_tsdf.html#_extract_common_fields"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tsdf.write_tsdf._extract_common_fields" title="Link to this definition"></a></dt>
+<dd><p>Extract the fields that are the same for all the metadata files.
+A new dict is created and the fields are removed from the original dictionaries.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>metadatas</strong> – List of dictionaries containing the metadata.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary containing the common fields.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tsdf.write_tsdf._calculate_overlaps_rec">
+<span class="sig-prename descclassname"><span class="pre">tsdf.write_tsdf.</span></span><span class="sig-name descname"><span class="pre">_calculate_overlaps_rec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metadatas</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../_modules/tsdf/write_tsdf.html#_calculate_overlaps_rec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tsdf.write_tsdf._calculate_overlaps_rec" title="Link to this definition"></a></dt>
+<dd><p>A recursive call that optimises the structure of the TSDF metadata, by grouping common values. For the input the list of dictionaries
+corresponds to a list of “flat” metadata dictionaries. The output is a list of dictionaries (potentially of length 1) that contain
+the metadata in a tree structure. The tree structure is created by grouping the common values in the metadata.
+The grouping is done recursively, until no more grouping is possible.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>metadatas</strong> – List of dictionaries containing the metadata.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of dictionaries containing the metadata in a tree structure.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tsdf.write_tsdf._get_all_keys">
+<span class="sig-prename descclassname"><span class="pre">tsdf.write_tsdf.</span></span><span class="sig-name descname"><span class="pre">_get_all_keys</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metadatas</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../_modules/tsdf/write_tsdf.html#_get_all_keys"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tsdf.write_tsdf._get_all_keys" title="Link to this definition"></a></dt>
+<dd><p>Get all the keys from the metadata files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>metadatas</strong> – List of dictionaries containing the metadata.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of keys.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tsdf.write_tsdf.calculate_max_overlap">
+<span class="sig-prename descclassname"><span class="pre">tsdf.write_tsdf.</span></span><span class="sig-name descname"><span class="pre">calculate_max_overlap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meta_files</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../_modules/tsdf/write_tsdf.html#calculate_max_overlap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tsdf.write_tsdf.calculate_max_overlap" title="Link to this definition"></a></dt>
+<dd><p>Calculate the maximum overlap between the metadata files, for a specific key.
+It returns the biggest group of dictionaries that contain the same value for the given meta_key.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>meta_files</strong> – List of dictionaries containing the metadata.</p></li>
+<li><p><strong>meta_key</strong> – The key for which the overlap is calculated.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of dictionaries containing the metadata.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tsdf.write_tsdf.max_len_key">
+<span class="sig-prename descclassname"><span class="pre">tsdf.write_tsdf.</span></span><span class="sig-name descname"><span class="pre">max_len_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">elements</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../../_modules/tsdf/write_tsdf.html#max_len_key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tsdf.write_tsdf.max_len_key" title="Link to this definition"></a></dt>
+<dd><p>Return the key in a dictionary that has the longest list as a value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>elements</strong> – Dictionary containing the elements.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The key that has the longest list as a value.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../write_binary/index.html" class="btn btn-neutral float-left" title="tsdf.write_binary" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../../contact.html" class="btn btn-neutral float-right" title="Contact" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Netherlands eScience Center.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
