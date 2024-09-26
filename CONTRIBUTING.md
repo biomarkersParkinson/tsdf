@@ -1,6 +1,6 @@
-# Contributing
+# Contributing guidelines
 
-Contributions are welcome, and they are greatly appreciated! Every little bit helps, and credit will always be given.
+We welcome any kind of contribution to our software, from simple comment or question to a full fledged [pull request](https://help.github.com/articles/about-pull-requests/). Please read and follow our [Code of Conduct](CODE_OF_CONDUCT.md).
 
 ## Types of Contributions
 
@@ -75,6 +75,44 @@ Before you submit a pull request, ensure it meets these guidelines:
 1. The pull request should include tests that prove any new functionality works as expected.
 2. If the pull request adds functionality, the documentation should be updated accordingly.
 3. The pull request should work for Python's currently supported versions and major operating systems.
+
+## Code Style Guide
+
+Please follow the coding standards and conventions outlined below when contributing to this project.
+
+1. **Use PEP 8 for Python code**: We follow the [PEP 8](https://www.python.org/dev/peps/pep-0008/) style guide for Python code. You can use tools like `black` to help enforce this.
+
+2. **Naming Conventions**:
+   * Function names: `snake_case`.
+   * Class names: `PascalCase`.
+   * Constants: `UPPER_CASE_WITH_UNDERSCORES`.
+
+3. **Docstrings**: All public methods, functions, and classes should have clear and complete docstrings. We use the [NumPy docstring style guide](https://numpydoc.readthedocs.io/en/latest/format.html) for consistency. Here is an example:
+
+    ```python
+    def my_function(param1: int, param2: str) -> None:
+        """
+        Brief summary of the function.
+
+        Parameters
+        ----------
+        param1 : int
+            Description of `param1`.
+        param2 : str
+            Description of `param2`.
+
+        Returns
+        -------
+        None
+        """
+        print(f"{param1}, {param2}")
+    ```
+
+4. **Type Annotations**: We use [PEP 484](https://www.python.org/dev/peps/pep-0484/) type hints throughout the codebase. Please ensure that all functions and methods are properly annotated.
+
+5. **Testing**: Ensure that your code is covered by unit tests. We use `pytest` for testing. Add new tests for any added functionality.
+
+We appreciate your contributions and adherence to the style guide. This helps maintain the quality and readability of the codebase.
 
 ## Code of Conduct
 
