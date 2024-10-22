@@ -106,7 +106,7 @@ class TSDFMetadata:
 
     def set_start_datetime(self, date_time: datetime) -> None:
         """
-        Sets the start date of the recording in ISO8601 format.
+        Sets the start date of the recording as a datetime object.
         :param date_time: datetime object containing the start date.
         """
         self.start_iso8601 = date_time.isoformat()
@@ -120,7 +120,7 @@ class TSDFMetadata:
 
     def set_end_datetime(self, date_time: datetime) -> None:
         """
-        Sets the end date of the recording in ISO8601 format.
+        Sets the end date of the recording as a datetime object.
         :param date_time: datetime object containing the end date.
         """
         self.end_iso8601 = date_time.isoformat()
@@ -131,3 +131,13 @@ class TSDFMetadata:
         :return: datetime object containing the end date.
         """
         return parser.parse(self.end_iso8601)
+
+    start = property(get_start_datetime, set_start_datetime, doc=
+        """
+        Start time of the recording.
+        """)
+
+    end = property(get_end_datetime, set_end_datetime, doc=
+        """
+        End time of the recording.
+        """)
