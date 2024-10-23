@@ -31,7 +31,7 @@ def test_read_single_recording(shared_datadir):
     assert np.array_equal(imu_data, imu_data2)
     # compare reading dataframes
     df = recording.read_dataframe()
-    df2 = tsdf.load_dataframe_from_binaries(metas.values(), concatenation=ConcatenationType.columns)
+    df2 = tsdf.load_dataframe_from_binaries(list(metas.values()), concatenation=ConcatenationType.columns)
     pd.testing.assert_frame_equal(df, df2)
     assert get_metadata(df) == recording.meta, "df should have metadata"
     # reading only some columns

@@ -319,20 +319,22 @@ def from_tsdf_metadata(meta: TSDFMetadata) -> Tuple[RecordingMetadata, BinaryDat
 
 def metadata_to_recordings(metas: List[TSDFMetadata]) -> List[TSDFRecording]:
     out = []
+    processed = [False for _ in metas]
     for i in range(len(metas)):
-        if metas[i] is not None:
+        if not processed[i]:
             # Split metadata
             combined_meta, file = from_tsdf_metadata(metas[i])
             files = [file]
+            processed[i] = True
             # Find metas with the same recording
             for j in range(i+1, len(metas)):
-                if metas[j] is not None and same_recording(metas[i], metas[j]):
+                if not processed[j] and same_recording(metas[i], metas[j]):
                     # Combine metadata
                     meta, file = from_tsdf_metadata(metas[j])
                     combined_meta.channel_groups.extend(meta.channel_groups)
                     combined_meta.channel_metadata.update(meta.channel_metadata)
                     files.append(file)
-                    metas[j] = None
+                    processed[j] = True # Set to None to indicate we processed this file
             recording = TSDFRecording(combined_meta, files)
             out.append(recording)
     return out
