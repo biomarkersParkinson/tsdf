@@ -1,11 +1,4 @@
----
-name: Blank issue
-about: Any other issue
-title: ''
-labels: ''
-assignees: ''
-
----
+# Blank issue
 
 ## Checklist before submitting an issue
 
