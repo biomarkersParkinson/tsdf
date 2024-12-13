@@ -43,9 +43,9 @@ class ChannelGroup:
         self.name = name
 
 
-class RecordingMetadata:
+class TimeSeriesMetadata:
     """
-    Metadata for the recording in a tsdf file.
+    Metadata for a time series in a tsdf file.
 
     In contrast to `tsdfmetadata.TSDFMetadata` this class only stores user-relevant attributes, and not the details of how the data is stored into a file.
     """
@@ -86,7 +86,7 @@ class RecordingMetadata:
         self.channel_groups = channel_groups
 
     def to_dict(self) -> Dict[str, Any]:
-        """Return a dictionary of recording related TSDF metadata attributes"""
+        """Return a dictionary of time series related TSDF metadata attributes"""
         return {
             "study_id": self.study_id,
             "subject_id": self.subject_id,
@@ -99,7 +99,7 @@ class RecordingMetadata:
 
 class DataFile:
     """
-    A data file that stores one or more channels from a TSDFRecording.
+    A data file that stores one or more channels from a TSDFTimeSeries.
     """
     path: Path
     """Absolute path of this data file."""
@@ -109,7 +109,7 @@ class DataFile:
 
 class BinaryDataFile(DataFile):
     """
-    A binary data file that stores one or more channels from a TSDFRecording
+    A binary data file that stores one or more channels from a TSDFTimeSeries
     """
     data_type: str
     bits: int
@@ -149,25 +149,25 @@ class BinaryDataFile(DataFile):
         )
 
 
-class TSDFRecording:
+class TSDFTimeSeries:
     """
-    A single recording from a TSDF file.
+    A single time series from a TSDF file.
     """
 
-    meta: RecordingMetadata
-    """Metadata for this recording."""
+    meta: TimeSeriesMetadata
+    """Metadata for this time series."""
 
     _files: List[BinaryDataFile]
-    """Files used to store this recording."""
+    """Files used to store this time series."""
 
-    def __init__(self, meta: RecordingMetadata, files: List[BinaryDataFile]):
+    def __init__(self, meta: TimeSeriesMetadata, files: List[BinaryDataFile]):
         self.meta = meta
         self._files = files
         assert [g.channels for g in meta.channel_groups] == [file.channels for file in files]
 
     @property
     def channels(self) -> List[str]:
-        """Names of all channels in this recording."""
+        """Names of all channels in this time series."""
         return [channel for file in self._files for channel in file.channels]
 
     @property
@@ -209,7 +209,7 @@ class TSDFRecording:
                 assert channels == file.channels, "Channels must match exactly with the channels in one of the data files."
                 data = file.read_numpy()
                 return data
-        raise Exception(f"The requested channels are not found in any of the recording's files: {channels}")
+        raise Exception(f"The requested channels are not found in any of the time series' files: {channels}")
 
     def read_dataframe(self, channels: Optional[List[str] | ChannelGroup] = None) -> pd.DataFrame:
         """
@@ -235,7 +235,7 @@ class TSDFRecording:
 
 # Store metadata in dataframe attributes
 
-def get_metadata(df: pd.DataFrame) -> RecordingMetadata:
+def get_metadata(df: pd.DataFrame) -> TimeSeriesMetadata:
     """
     Get the metadata associated with a data frame.
     Fails if the data frame does not have metadata.
@@ -244,7 +244,7 @@ def get_metadata(df: pd.DataFrame) -> RecordingMetadata:
         raise Exception('DataFrame does not have associated metadata. Use `set_metadata` to set it.')
     return df.attrs['tsdf_metadata']
 
-def set_metadata(df: pd.DataFrame, metadata: RecordingMetadata) -> None:
+def set_metadata(df: pd.DataFrame, metadata: TimeSeriesMetadata) -> None:
     """
     Set the metadata associated with a data frame.
     """
@@ -256,21 +256,21 @@ pd.DataFrame.tsdf_metadata = property(get_metadata, set_metadata)
 
 # Metadata conversion
 
-def to_tsdf_metadata(recording: RecordingMetadata, file: BinaryDataFile) -> TSDFMetadata:
+def to_tsdf_metadata(time_series: TimeSeriesMetadata, file: BinaryDataFile) -> TSDFMetadata:
     """
-    Combine metadata for a recording and a file into a TSDFMetadata object
+    Combine metadata for a time series and a file into a TSDFMetadata object
     """
-    dict = recording.to_dict() | file.to_dict()
-    channel_metas = [recording.channel_metadata[c] for c in file.channels]
+    dict = time_series.to_dict() | file.to_dict()
+    channel_metas = [time_series.channel_metadata[c] for c in file.channels]
     dict['units'] = [c.unit for c in channel_metas]
     #if any(c.scale_factor is not None for c in channel_metas):
     #    dict['scale_factor'] = [(c.scale_factor if c.scale_factor is not None else 1.0) for c in channel_metas]
     dict['metadata_version'] = '0.1'
     return TSDFMetadata(dict, dir_path=str(file.path.parent))
 
-def same_recording(meta1: TSDFMetadata, meta2: TSDFMetadata) -> bool:
+def same_time_series(meta1: TSDFMetadata, meta2: TSDFMetadata) -> bool:
     """
-    Are two metadatas from the same recording?
+    Are two metadatas from the same time series?
     """
     return \
         meta1.study_id == meta2.study_id and \
@@ -293,13 +293,13 @@ def channel_group_name(file_name: str) -> Optional[str]:
         return None
 
 
-def from_tsdf_metadata(meta: TSDFMetadata) -> Tuple[RecordingMetadata, BinaryDataFile]:
+def from_tsdf_metadata(meta: TSDFMetadata) -> Tuple[TimeSeriesMetadata, BinaryDataFile]:
     """
-    Split TSDF metadata into recording metadata and file metadata
+    Split TSDF metadata into time series metadata and file metadata
     """
     channel_group = ChannelGroup(meta.channels, channel_group_name(meta.file_name))
     channel_metadata = {channel: ChannelMetadata(unit=unit) for channel, unit in zip(meta.channels, meta.units)}
-    recording_meta = RecordingMetadata(
+    time_series_meta = TimeSeriesMetadata(
         study_id=meta.study_id,
         subject_id=meta.subject_id,
         device_id=meta.device_id,
@@ -315,9 +315,9 @@ def from_tsdf_metadata(meta: TSDFMetadata) -> Tuple[RecordingMetadata, BinaryDat
         endianness=meta.endianness,
         rows=meta.rows,
     )
-    return recording_meta, file_meta
+    return time_series_meta, file_meta
 
-def metadata_to_recordings(metas: List[TSDFMetadata]) -> List[TSDFRecording]:
+def metadata_to_time_series(metas: List[TSDFMetadata]) -> List[TSDFTimeSeries]:
     out = []
     processed = [False for _ in metas]
     for i in range(len(metas)):
@@ -326,60 +326,60 @@ def metadata_to_recordings(metas: List[TSDFMetadata]) -> List[TSDFRecording]:
             combined_meta, file = from_tsdf_metadata(metas[i])
             files = [file]
             processed[i] = True
-            # Find metas with the same recording
+            # Find metas with the same time series
             for j in range(i+1, len(metas)):
-                if not processed[j] and same_recording(metas[i], metas[j]):
+                if not processed[j] and same_time_series(metas[i], metas[j]):
                     # Combine metadata
                     meta, file = from_tsdf_metadata(metas[j])
                     combined_meta.channel_groups.extend(meta.channel_groups)
                     combined_meta.channel_metadata.update(meta.channel_metadata)
                     files.append(file)
                     processed[j] = True # Set to None to indicate we processed this file
-            recording = TSDFRecording(combined_meta, files)
-            out.append(recording)
+            time_series = TSDFTimeSeries(combined_meta, files)
+            out.append(time_series)
     return out
 
 
 # Reading
 
 
-def read_multi_recording_metadata(metadata_path: Path | str) -> List[TSDFRecording]:
+def read_multi_time_series_metadata(metadata_path: Path | str) -> List[TSDFTimeSeries]:
     """
-    Load a tsdf metadata file that contains one or more TSDF recordings.
+    Load a tsdf metadata file that contains one or more TSDF time series.
 
     :param metadata_path: Full path to the metadata file.
     """
     metas = load_metadata_from_path(Path(metadata_path))
-    return metadata_to_recordings(list(metas.values()))
+    return metadata_to_time_series(list(metas.values()))
 
-def read_single_recording_metadata(metadata_path: Path | str) -> TSDFRecording:
+def read_single_time_series_metadata(metadata_path: Path | str) -> TSDFTimeSeries:
     """
-    Load a tsdf metadata file that contains a single TSDF recording.
+    Load a tsdf metadata file that contains a single TSDF time series.
 
-    Raises an Exception if there is not exactly one recording in the metadata file.
+    Raises an Exception if there is not exactly one time series in the metadata file.
 
     :param metadata_path: Full path to the metadata file.
     """
-    recordings = read_multi_recording_metadata(metadata_path)
-    if len(recordings) == 1:
-        return recordings[0]
+    time_series = read_multi_time_series_metadata(metadata_path)
+    if len(time_series) == 1:
+        return time_series[0]
     else:
-        raise Exception(f"File does not contain a single recording, found {len(recordings)} recordings in metadata")
+        raise Exception(f"File does not contain a single time series, found {len(time_series)} time series in metadata")
 
-def read_single_recording_dataframe(metadata_path: Path | str, channels: Optional[List[str] | ChannelGroup] = None) -> pd.DataFrame:
+def read_single_time_series_dataframe(metadata_path: Path | str, channels: Optional[List[str] | ChannelGroup] = None) -> pd.DataFrame:
     """
-    Load a dataframe from a tsdf metadata file that contains a single TSDF recording.
+    Load a dataframe from a tsdf metadata file that contains a single TSDF time series.
 
-    Raises an Exception if there is not exactly one recording in the metadata file.
+    Raises an Exception if there is not exactly one time series in the metadata file.
 
     :param metadata_path: Full path to the metadata file.
     :param channels: Names of the channels to read. If None, then all channels are read.
     """
-    return read_single_recording_metadata(metadata_path).read_dataframe(channels)
+    return read_single_time_series_metadata(metadata_path).read_dataframe(channels)
 
 # alias
-read_recording = read_single_recording_metadata
-read_dataframe = read_single_recording_dataframe
+read_time_series = read_single_time_series_metadata
+read_dataframe = read_single_time_series_dataframe
 
 
 # Writing
@@ -436,31 +436,31 @@ def write_dataframe_without_metadata(metadata_path: Path | str, df: pd.DataFrame
         out.append(file)
     return out
 
-def write_recording_metadata(metadata_path: Path | str, recordings: TSDFRecording | List[TSDFRecording]) -> None:
+def write_time_series_metadata(metadata_path: Path | str, time_series: TSDFTimeSeries | List[TSDFTimeSeries]) -> None:
     """"
-    Write metadata for one or more TSDFRecordings.
+    Write metadata for one or more TSDFTimeSeries.
 
-    This function assumes that the data for the recordings is already written to files.
+    This function assumes that the data for the time series is already written to files.
 
     :param metadata_path: Full path to the metadata file.
     """
-    if not isinstance(recordings, List):
-        recordings = [recordings]
+    if not isinstance(time_series, List):
+        time_series = [time_series]
     # Gather metadata for all files
-    meta = [to_tsdf_metadata(recording.meta, file) for recording in recordings for file in recording._files]
+    meta = [to_tsdf_metadata(time_series.meta, file) for time_series in time_series for file in time_series._files]
     write_metadata(meta, str(metadata_path))
 
-def write_dataframe(path, df: pd.DataFrame) -> TSDFRecording:
+def write_dataframe(path, df: pd.DataFrame) -> TSDFTimeSeries:
     """
     Write a dataframe to a tsdf metadata file and associated data files.
 
     :param path: Path to the metadata file that will be written.
     :param df: DataFrame to write to the file. This dataframe should have associated metadata, set with `set_metadata`.
 
-    :return: TSDFRecording object for the saved file.
+    :return: TSDFTimeSeries object for the saved file.
     """
     meta = get_metadata(df)
     files = write_dataframe_without_metadata(path, df, meta.channel_groups)
-    recording = TSDFRecording(meta, files)
-    write_recording_metadata(path, recording)
-    return recording
+    time_series = TSDFTimeSeries(meta, files)
+    write_time_series_metadata(path, time_series)
+    return time_series
