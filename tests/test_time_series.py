@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 
 import tsdf
-from tsdf.time_series import TSDFTimeSeries, ChannelMetadata, channel_group_name, read_single_time_series_metadata, read_multi_time_series_metadata, read_dataframe, write_dataframe, get_metadata
+from tsdf.time_series import TSDFTimeSeries, ChannelMetadata, channel_group_name, read_single_time_series_metadata, read_multi_time_series_metadata, write_time_series_metadata, read_dataframe, write_dataframe, get_metadata
 from tsdf.constants import ConcatenationType
 
 def test_channel_group_name():
@@ -39,6 +39,29 @@ def test_read_single_time_series(shared_datadir):
     assert np.array_equal(time_df.to_numpy(), time_data[:,None])
     acc_df = time_series.read_dataframe(["acceleration_x", "acceleration_y", "acceleration_z"])
     assert np.array_equal(acc_df.to_numpy(), imu_data[:,0:3])
+
+def test_non_standard_time_series_metadata(shared_datadir):
+    """
+    Test loading and saving metadata with non-standard attributes.
+    The non-standard metadata attributes should be preserved.
+    """
+    file = shared_datadir / "flat_meta.json"
+    file2 = shared_datadir / "tmp_test_non_standard_time_series_metadata.json"
+    time_series = read_single_time_series_metadata(file)
+    write_time_series_metadata(file2, time_series)
+    assert set(time_series.meta.extra.keys()) == set(['compression', 'sampling_rate']), 'This file has non-standard metadata'
+    # compare metadata with old style interface
+    metas = tsdf.load_metadata_from_path(file)
+    metas2 = tsdf.load_metadata_from_path(file2)
+    assert len(metas) == len(metas2)
+    metas = list(metas.values())[0]
+    metas2 = list(metas2.values())[0]
+    metas.metadata_file_name =  metas2.metadata_file_name = 'Ignore filename'
+    assert metas.get_start_datetime() == metas2.get_start_datetime() # Compare as date times, not as strings
+    metas.start_iso8601 = metas2.start_iso8601
+    assert metas.get_end_datetime() == metas2.get_end_datetime()
+    metas.end_iso8601 = metas2.end_iso8601
+    assert metas.__dict__ == metas2.__dict__
 
 def test_read_multi_time_series(shared_datadir):
     file = shared_datadir / "hierarchical_meta.json"

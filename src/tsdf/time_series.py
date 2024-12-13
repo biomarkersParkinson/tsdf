@@ -28,6 +28,7 @@ class ChannelMetadata:
     def __init__(self, unit) -> None:
         self.unit = unit
 
+
 class ChannelGroup:
     """
     A `ChannelGroup` is a group of channels that share the same data type, and that are stored together in a single data file.
@@ -66,6 +67,9 @@ class TimeSeriesMetadata:
     end: datetime
     """End time of the recording."""
 
+    extra: Dict[str, Any]
+    """Extra attributes."""
+
     channel_metadata: Dict[str, ChannelMetadata]
     """Units and other metadata of the channels."""
 
@@ -77,7 +81,14 @@ class TimeSeriesMetadata:
         """Names of all channels"""
         return [channel for group in self.channel_groups for channel in group.channels]
 
-    def __init__(self, study_id, subject_id, device_id, start, end, channel_metadata={}, channel_groups=[]) -> None:
+    def __getattr__(self, name: str):
+        """Get the value of an extra/non-standard attribute"""
+        try:
+            return self.extra[name]
+        except:
+            raise AttributeError()
+
+    def __init__(self, study_id, subject_id, device_id, start, end, channel_metadata={}, channel_groups=[], **kwargs) -> None:
         self.study_id = study_id
         self.subject_id = subject_id
         self.device_id = device_id
@@ -85,17 +96,21 @@ class TimeSeriesMetadata:
         self.end = end
         self.channel_metadata = channel_metadata
         self.channel_groups = channel_groups
+        self.extra = kwargs
 
     def to_dict(self) -> Dict[str, Any]:
-        """Return a dictionary of time series related TSDF metadata attributes"""
-        return {
+        """
+        Return a dictionary of time series related TSDF metadata attributes.
+        """
+        out = {
             "study_id": self.study_id,
             "subject_id": self.subject_id,
             "device_id": self.device_id,
             "start_iso8601": self.start.isoformat(),
             "end_iso8601": self.end.isoformat(),
         }
-        pass
+        out |= self.extra
+        return out
 
     def restrict_channels(self, channels: List[str] | Set[str] | ChannelGroup):
         """
@@ -134,6 +149,7 @@ class TimeSeriesMetadata:
         :param channel_meta: Meta data of the new channel.
         """
         self.add_channel_group({channel_name: channel_meta}, channel_name)
+
 
 class DataFile:
     """
@@ -336,12 +352,18 @@ def channel_group_name(file_name: str) -> Optional[str]:
         return None
 
 
+STANDARD_METADATA_KEYS = set([
+        'metadata_version', 'metadata_file_name', 'file_name', 'file_dir_path',
+        'study_id', 'subject_id', 'device_id', 'start_iso8601', 'end_iso8601',
+        'channels', 'units', 'data_type', 'bits', 'endianness', 'rows',
+    ])
 def from_tsdf_metadata(meta: TSDFMetadata) -> Tuple[TimeSeriesMetadata, BinaryDataFile]:
     """
     Split TSDF metadata into time series metadata and file metadata
     """
     channel_group = ChannelGroup(meta.channels, channel_group_name(meta.file_name))
     channel_metadata = {channel: ChannelMetadata(unit=unit) for channel, unit in zip(meta.channels, meta.units)}
+    extra_metadata = {k: v for k, v in meta.__dict__.items() if k not in STANDARD_METADATA_KEYS}
     time_series_meta = TimeSeriesMetadata(
         study_id=meta.study_id,
         subject_id=meta.subject_id,
@@ -349,7 +371,8 @@ def from_tsdf_metadata(meta: TSDFMetadata) -> Tuple[TimeSeriesMetadata, BinaryDa
         start=meta.get_start_datetime(),
         end=meta.get_end_datetime(),
         channel_metadata=channel_metadata,
-        channel_groups=[channel_group])
+        channel_groups=[channel_group],
+        **extra_metadata)
     file_meta = BinaryDataFile(
         path=Path(meta.file_dir_path, meta.file_name),
         channels=meta.channels,
