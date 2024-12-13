@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 
 import tsdf
-from tsdf.time_series import TSDFTimeSeries, channel_group_name, read_single_time_series_metadata, read_multi_time_series_metadata, read_dataframe, write_dataframe, get_metadata
+from tsdf.time_series import TSDFTimeSeries, ChannelMetadata, channel_group_name, read_single_time_series_metadata, read_multi_time_series_metadata, read_dataframe, write_dataframe, get_metadata
 from tsdf.constants import ConcatenationType
 
 def test_channel_group_name():
@@ -49,6 +49,29 @@ def test_write_time_series(shared_datadir):
     file = shared_datadir / "ppp_format_meta.json"
     file2 = shared_datadir / "tmp_test_write_time_series.json"
     df = read_dataframe(file)
+    write_dataframe(file2, df)
+    df2 = read_dataframe(file2)
+    pd.testing.assert_frame_equal(df, df2)
+    assert get_metadata(df).to_dict() == get_metadata(df2).to_dict()
+
+def test_write_time_series_subset(shared_datadir):
+    """
+    Test writing and reading a subset of the channels
+    """
+    file = shared_datadir / "ppp_format_meta.json"
+    file2 = shared_datadir / "test_write_time_series_subset.json"
+    df = read_dataframe(file, ["time", "acceleration_x"])
+    write_dataframe(file2, df)
+    df2 = read_dataframe(file2)
+    pd.testing.assert_frame_equal(df, df2)
+    assert get_metadata(df).to_dict() == get_metadata(df2).to_dict()
+
+def test_write_time_series_add_channel(shared_datadir):
+    file = shared_datadir / "ppp_format_meta.json"
+    file2 = shared_datadir / "test_write_time_series_add_channel.json"
+    df = read_dataframe(file, ["time"])
+    df['double_time'] = 2 * df['time']
+    df.tsdf_metadata.add_channel('double_time', ChannelMetadata('m/s/s'))
     write_dataframe(file2, df)
     df2 = read_dataframe(file2)
     pd.testing.assert_frame_equal(df, df2)

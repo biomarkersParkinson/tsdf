@@ -2,10 +2,11 @@
 More convenient interface around TSDF files and datatypes.
 """
 
+from copy import copy
 from datetime import datetime
 from pathlib import Path
 import re
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Set, Tuple
 
 import numpy as np
 import pandas as pd
@@ -96,6 +97,43 @@ class TimeSeriesMetadata:
         }
         pass
 
+    def restrict_channels(self, channels: List[str] | Set[str] | ChannelGroup):
+        """
+        Keep only the metadata for the channels with the given names.
+        Also keep only channel groups that contain kept channels.
+
+        :param channels: Names of the channels to keep.
+        """
+        if isinstance(channels, ChannelGroup):
+            channels = channels.channels
+        # filter channel metadata
+        self.channel_metadata = {k: v for k, v in self.channel_metadata.items() if k in channels}
+        # filter channel groups
+        self.channel_groups = [
+            ChannelGroup(new_channels, group.name)
+            for group in self.channel_groups
+            if len(new_channels := [c for c in group.channels if c in channels]) > 0
+        ]
+
+    def add_channel_group(self, channel_metadata: Dict[str, ChannelMetadata], name: Optional[str] = None):
+        """
+        Add a channel group.
+        """
+        assert self.channel_metadata.keys().isdisjoint(channel_metadata.keys()), "Duplicate channel names"
+        assert name not in [group.name for group in self.channel_groups], "Duplicate channel group name"
+        group = ChannelGroup(list(channel_metadata.keys()), name)
+        self.channel_metadata |= channel_metadata
+        self.channel_groups.append(group)
+
+    def add_channel(self, channel_name: str, channel_meta: ChannelMetadata):
+        """
+        Add a single channel.
+        This creates a new channel group with the same name.
+
+        :param channel_name: Names of the channels to add.
+        :param channel_meta: Meta data of the new channel.
+        """
+        self.add_channel_group({channel_name: channel_meta}, channel_name)
 
 class DataFile:
     """
@@ -229,7 +267,12 @@ class TSDFTimeSeries:
         df = pd.concat(data_frames, axis=1)
         if channels is not None:
             df = df[channels]
-        set_metadata(df, self.meta)
+            # restrict channels in metadata
+            meta = copy(self.meta)
+            meta.restrict_channels(channels)
+            set_metadata(df, meta)
+        else:
+            set_metadata(df, self.meta)
         return df
 
 
