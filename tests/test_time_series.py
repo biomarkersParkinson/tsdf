@@ -90,6 +90,9 @@ def test_write_time_series_subset(shared_datadir):
     assert get_metadata(df).to_dict() == get_metadata(df2).to_dict()
 
 def test_write_time_series_add_channel(shared_datadir):
+    """
+    Test adding a channel and then writing&reading a file
+    """
     file = shared_datadir / "ppp_format_meta.json"
     file2 = shared_datadir / "test_write_time_series_add_channel.json"
     df = read_dataframe(file, ["time"])
