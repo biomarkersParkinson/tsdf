@@ -13,6 +13,11 @@
 
 A package ([documentation](https://biomarkersparkinson.github.io/tsdf/)) to load TSDF data ([specification](https://arxiv.org/abs/2211.11294)) into Python.
 
+## Overview
+The [tsdf package](10.5281/zenodo.7867899) is a comprehensively documented reference implementation of the Time Series Data Format (TSDF) standard [[1]](https://arxiv.org/abs/2211.11294). TSDF simplifies data storage and exchange of multi-channel digital sensor data, thereby promoting interpretability and reproducibility of scientific results. Sensor measurements and timestamps are stored as raw tabular binary array files. To ensure unambiguous reconstruction, binary array files are accompanied by human-readable JavaScript Object Notation (JSON) metadata files, which contain a set of mandatory fields limited to essential sensor measurement information.
+
+The tsdf Python package implements functions for reading and writing TSDF files. It guarantees formatting and metadata consistency. It enforces usage of the essential metadata such as study identification, time frame, data channel descriptions and data attributes corresponding to the binary data.
+
 ## Installation
 
 ### Using `pip`
