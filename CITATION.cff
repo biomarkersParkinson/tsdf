@@ -3,7 +3,15 @@
 
 cff-version: 1.2.0
 title: tsdf
-abstract: 'A package to load TSDF data into Python'
+abstract: >
+  The tsdf package is a comprehensively documented2 reference implementation of the Time Series Data Format (TSDF) 
+  standard [1](https://arxiv.org/abs/2211.11294). TSDF simplifies data storage and exchange of multi-channel digital 
+  sensor data, thereby promoting interpretability and reproducibility of scientific results. Sensor measurements and 
+  timestamps are stored as raw tabular binary array files. To ensure unambiguous reconstruction, binary array files are 
+  accompanied by human-readable JavaScript Object Notation (JSON) metadata files, which contain a set of mandatory fields 
+  limited to essential sensor measurement information.
+
+The tsdf Python package implements functions for reading and writing TSDF files. It guarantees formatting and metadata consistency. It enforces usage of the essential metadata such as study identification, time frame, data channel descriptions and data attributes corresponding to the binary data.'
 message: >-
   If you use this software, please cite it using the
   metadata from this file.
