@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tsdf.numpy_utils &mdash; tsdf  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
+
+  
+    <link rel="canonical" href="https://biomarkersparkinson.github.io/tsdf/_modules/tsdf/numpy_utils.html"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            tsdf
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">The format</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tsdf_fields_table.html">TSDF metadata fields</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Usage</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../basic_reading_and_writing_numpy.html">Basic reading and writing (numpy)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../basic_reading_and_writing_pandas.html">Basic reading and writing (pandas)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing_data_from_scratch.html">Writing data from scratch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../converting_legacy_data.html">Transform legacy format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../validating_files.html">Validate TSDF file</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../autoapi/tsdf/index.html">tsdf</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contact.html">Contact</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">tsdf</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">tsdf.numpy_utils</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for tsdf.numpy_utils</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+
+<span class="n">_map_from_numpy_types</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;i&quot;</span><span class="p">:</span> <span class="s2">&quot;int&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;f&quot;</span><span class="p">:</span> <span class="s2">&quot;float&quot;</span><span class="p">,</span>
+    <span class="c1"># etc</span>
+<span class="p">}</span>
+<span class="sd">&quot;&quot;&quot; Mapping of NumPy data types to their TSDF metadata annotations. &quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="data_type_numpy_to_tsdf">
+<a class="viewcode-back" href="../../autoapi/tsdf/numpy_utils/index.html#tsdf.numpy_utils.data_type_numpy_to_tsdf">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">data_type_numpy_to_tsdf</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute the TSDF metadata &#39;data_type&#39; value, based on the NumPy data.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_map_from_numpy_types</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">kind</span><span class="p">]</span></div>
+
+
+
+<span class="n">_map_to_numpy_types</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;int&quot;</span><span class="p">:</span> <span class="s2">&quot;i&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;float&quot;</span><span class="p">:</span> <span class="s2">&quot;f&quot;</span><span class="p">,</span>
+    <span class="c1"># etc</span>
+<span class="p">}</span>
+<span class="sd">&quot;&quot;&quot; Mapping of data types that are supported by TSDF to </span>
+<span class="sd">    their NumPy representation used for parsing. &quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="data_type_tsdf_to_numpy">
+<a class="viewcode-back" href="../../autoapi/tsdf/numpy_utils/index.html#tsdf.numpy_utils.data_type_tsdf_to_numpy">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">data_type_tsdf_to_numpy</span><span class="p">(</span><span class="n">data_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute the the NumPy data type, based on the TSDF metadata &#39;data_type&#39; value.</span>
+
+<span class="sd">    :param data_type: TSDF metadata &#39;data_type&#39; value.</span>
+
+<span class="sd">    :return: NumPy data type (as a char).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_map_to_numpy_types</span><span class="p">[</span><span class="n">data_type</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="bits_numpy_to_tsdf">
+<a class="viewcode-back" href="../../autoapi/tsdf/numpy_utils/index.html#tsdf.numpy_utils.bits_numpy_to_tsdf">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">bits_numpy_to_tsdf</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute TSDF metadata &#39;n_bits&#39; value, based on the NumPy data.</span>
+
+<span class="sd">    :param data: NumPy data.</span>
+
+<span class="sd">    :return: TSDF metadata &#39;n_bits&#39; value.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">itemsize</span> <span class="o">*</span> <span class="mi">8</span></div>
+
+
+
+<div class="viewcode-block" id="bytes_tsdf_to_numpy">
+<a class="viewcode-back" href="../../autoapi/tsdf/numpy_utils/index.html#tsdf.numpy_utils.bytes_tsdf_to_numpy">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">bytes_tsdf_to_numpy</span><span class="p">(</span><span class="n">n_bits</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute the the NumPy byte number, based on the TSDF metadata &#39;n_bits&#39; value.</span>
+
+<span class="sd">    :param n_bits: TSDF metadata &#39;n_bits&#39; value.</span>
+
+<span class="sd">    :return: NumPy byte number.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">n_bits</span> <span class="o">//</span> <span class="mi">8</span><span class="p">)</span></div>
+
+
+
+<span class="n">_map_from_numpy_endianness</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;&lt;&quot;</span><span class="p">:</span> <span class="s2">&quot;little&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;&gt;&quot;</span><span class="p">:</span> <span class="s2">&quot;big&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;=&quot;</span><span class="p">:</span> <span class="n">sys</span><span class="o">.</span><span class="n">byteorder</span><span class="p">,</span>
+    <span class="s2">&quot;|&quot;</span><span class="p">:</span> <span class="s2">&quot;not applicable&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="sd">&quot;&quot;&quot; Supported endianness values. &quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="endianness_numpy_to_tsdf">
+<a class="viewcode-back" href="../../autoapi/tsdf/numpy_utils/index.html#tsdf.numpy_utils.endianness_numpy_to_tsdf">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">endianness_numpy_to_tsdf</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute TSDF metadata &#39;data_type&#39; value, based on the NumPy data.</span>
+
+<span class="sd">    :param data: NumPy data.</span>
+
+<span class="sd">    :return: TSDF metadata &#39;data_type&#39; value (as a string).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_map_from_numpy_endianness</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">byteorder</span><span class="p">]</span></div>
+
+
+
+<span class="n">_map_to_numpy_endianness</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;little&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;big&quot;</span><span class="p">:</span> <span class="s2">&quot;&gt;&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;not applicable&quot;</span><span class="p">:</span> <span class="s2">&quot;|&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="sd">&quot;&quot;&quot; Supported endianness values. &quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="endianness_tsdf_to_numpy">
+<a class="viewcode-back" href="../../autoapi/tsdf/numpy_utils/index.html#tsdf.numpy_utils.endianness_tsdf_to_numpy">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">endianness_tsdf_to_numpy</span><span class="p">(</span><span class="n">endianness</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute TSDF metadata &#39;data_type&#39; value, based on the NumPy data.</span>
+
+<span class="sd">    :param endianness: TSDF metadata &#39;data_type&#39; value.</span>
+
+<span class="sd">    :return: NumPy data type (as a char).&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_map_to_numpy_endianness</span><span class="p">[</span><span class="n">endianness</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="rows_numpy_to_tsdf">
+<a class="viewcode-back" href="../../autoapi/tsdf/numpy_utils/index.html#tsdf.numpy_utils.rows_numpy_to_tsdf">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">rows_numpy_to_tsdf</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute TSDF metadata &#39;rows&#39; value, based on the NumPy data.</span>
+
+<span class="sd">    :param data: NumPy data.</span>
+
+<span class="sd">    :return: TSDF metadata &#39;rows&#39; value.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Netherlands eScience Center.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

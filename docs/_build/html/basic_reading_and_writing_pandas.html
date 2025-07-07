@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Basic reading and writing (pandas) &mdash; tsdf  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=fd3f3429" />
+
+  
+    <link rel="canonical" href="https://biomarkersparkinson.github.io/tsdf/basic_reading_and_writing_pandas.html"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Writing data from scratch" href="writing_data_from_scratch.html" />
+    <link rel="prev" title="Basic reading and writing (numpy)" href="basic_reading_and_writing_numpy.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            tsdf
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">The format</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tsdf_fields_table.html">TSDF metadata fields</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Usage</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="basic_reading_and_writing_numpy.html">Basic reading and writing (numpy)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Basic reading and writing (pandas)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#load-some-data">Load some data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#perform-basic-data-processing">Perform basic data processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#write-the-processed-data">Write the processed data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#write-the-tsdf-metadata-file">Write the TSDF metadata file</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="writing_data_from_scratch.html">Writing data from scratch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="converting_legacy_data.html">Transform legacy format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="validating_files.html">Validate TSDF file</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="autoapi/tsdf/index.html">tsdf</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contact.html">Contact</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">tsdf</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Basic reading and writing (pandas)</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/biomarkersParkinson/tsdf/blob/main/docs/basic_reading_and_writing_pandas.ipynb" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="basic-reading-and-writing-pandas">
+<h1>Basic reading and writing (pandas)<a class="headerlink" href="#basic-reading-and-writing-pandas" title="Link to this heading"></a></h1>
+<p>These are some examples on how to read and write TSDF data into and from a numpy array, using the <code class="docutils literal notranslate"><span class="pre">tsdf</span></code> library.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">tsdf</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="load-some-data">
+<h2>Load some data<a class="headerlink" href="#load-some-data" title="Link to this heading"></a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the metadata</span>
+<span class="n">metadata_path</span> <span class="o">=</span> <span class="s2">&quot;data/ppp_format_meta.json&quot;</span>
+<span class="n">metadata_dict</span> <span class="o">=</span> <span class="n">tsdf</span><span class="o">.</span><span class="n">load_metadata_from_path</span><span class="p">(</span><span class="n">metadata_path</span><span class="p">)</span>
+<span class="n">metadata_time</span> <span class="o">=</span> <span class="n">metadata_dict</span><span class="p">[</span><span class="s2">&quot;ppp_format_time.bin&quot;</span><span class="p">]</span>
+<span class="n">metadata_samples</span> <span class="o">=</span> <span class="n">metadata_dict</span><span class="p">[</span><span class="s2">&quot;ppp_format_samples.bin&quot;</span><span class="p">]</span>
+
+<span class="c1"># Load the data</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">tsdf</span><span class="o">.</span><span class="n">load_dataframe_from_binaries</span><span class="p">([</span><span class="n">metadata_time</span><span class="p">,</span> <span class="n">metadata_samples</span><span class="p">],</span> <span class="n">tsdf</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">ConcatenationType</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+
+<span class="c1"># Print some info</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data shape:</span><span class="se">\t</span><span class="s2"> </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data shape:	 (17, 7)
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>time</th>
+      <th>acceleration_x</th>
+      <th>acceleration_y</th>
+      <th>acceleration_z</th>
+      <th>rotation_x</th>
+      <th>rotation_y</th>
+      <th>rotation_z</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.374540</td>
+      <td>6</td>
+      <td>1</td>
+      <td>3</td>
+      <td>2</td>
+      <td>5</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.950714</td>
+      <td>7</td>
+      <td>9</td>
+      <td>1</td>
+      <td>4</td>
+      <td>6</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.731994</td>
+      <td>9</td>
+      <td>2</td>
+      <td>2</td>
+      <td>6</td>
+      <td>7</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.598659</td>
+      <td>7</td>
+      <td>4</td>
+      <td>3</td>
+      <td>2</td>
+      <td>7</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.156019</td>
+      <td>7</td>
+      <td>4</td>
+      <td>2</td>
+      <td>0</td>
+      <td>5</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="perform-basic-data-processing">
+<h2>Perform basic data processing<a class="headerlink" href="#perform-basic-data-processing" title="Link to this heading"></a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scale_factors</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">metadata_samples</span><span class="p">,</span> <span class="s2">&quot;scale_factors&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Scale factors: </span><span class="si">{</span><span class="n">scale_factors</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Perform scaling</span>
+<span class="n">df_scaled</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">df_scaled</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="n">df_scaled</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">scale_factors</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Print some info</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data shape:</span><span class="se">\t\t</span><span class="s2"> </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">df_scaled</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Scale factors: [0.00469378, 0.00469378, 0.00469378, 0.06097561, 0.06097561, 0.06097561]
+Data shape:		 (17, 7)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\erik_\AppData\Local\Temp\ipykernel_3148\4007094660.py:6: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise in a future error of pandas. Value &#39;0     0.028163
+1     0.032856
+2     0.042244
+3     0.032856
+4     0.032856
+5     0.018775
+6     0.023469
+7     0.000000
+8     0.028163
+9     0.009388
+10    0.042244
+11    0.042244
+12    0.037550
+13    0.037550
+14    0.014081
+15    0.037550
+16    0.042244
+Name: acceleration_x, dtype: float64&#39; has dtype incompatible with int16, please explicitly cast to a compatible dtype first.
+  df_scaled.iloc[:, 1:] = df_scaled.iloc[:, 1:].multiply(scale_factors, axis=1)
+C:\Users\erik_\AppData\Local\Temp\ipykernel_3148\4007094660.py:6: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise in a future error of pandas. Value &#39;0     0.004694
+1     0.042244
+2     0.009388
+3     0.018775
+4     0.018775
+5     0.000000
+6     0.004694
+7     0.014081
+8     0.014081
+9     0.042244
+10    0.028163
+11    0.028163
+12    0.009388
+13    0.028163
+14    0.028163
+15    0.018775
+16    0.037550
+Name: acceleration_y, dtype: float64&#39; has dtype incompatible with int16, please explicitly cast to a compatible dtype first.
+  df_scaled.iloc[:, 1:] = df_scaled.iloc[:, 1:].multiply(scale_factors, axis=1)
+C:\Users\erik_\AppData\Local\Temp\ipykernel_3148\4007094660.py:6: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise in a future error of pandas. Value &#39;0     0.014081
+1     0.004694
+2     0.009388
+3     0.014081
+4     0.009388
+5     0.004694
+6     0.014081
+7     0.009388
+8     0.037550
+9     0.023469
+10    0.004694
+11    0.018775
+12    0.018775
+13    0.037550
+14    0.032856
+15    0.014081
+16    0.042244
+Name: acceleration_z, dtype: float64&#39; has dtype incompatible with int16, please explicitly cast to a compatible dtype first.
+  df_scaled.iloc[:, 1:] = df_scaled.iloc[:, 1:].multiply(scale_factors, axis=1)
+C:\Users\erik_\AppData\Local\Temp\ipykernel_3148\4007094660.py:6: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise in a future error of pandas. Value &#39;0     0.121951
+1     0.243902
+2     0.365854
+3     0.121951
+4     0.000000
+5     0.426829
+6     0.060976
+7     0.548780
+8     0.426829
+9     0.121951
+10    0.060976
+11    0.182927
+12    0.243902
+13    0.243902
+14    0.060976
+15    0.182927
+16    0.365854
+Name: rotation_x, dtype: float64&#39; has dtype incompatible with int16, please explicitly cast to a compatible dtype first.
+  df_scaled.iloc[:, 1:] = df_scaled.iloc[:, 1:].multiply(scale_factors, axis=1)
+C:\Users\erik_\AppData\Local\Temp\ipykernel_3148\4007094660.py:6: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise in a future error of pandas. Value &#39;0     0.304878
+1     0.365854
+2     0.426829
+3     0.426829
+4     0.304878
+5     0.243902
+6     0.243902
+7     0.304878
+8     0.000000
+9     0.548780
+10    0.060976
+11    0.304878
+12    0.304878
+13    0.426829
+14    0.304878
+15    0.060976
+16    0.243902
+Name: rotation_y, dtype: float64&#39; has dtype incompatible with int16, please explicitly cast to a compatible dtype first.
+  df_scaled.iloc[:, 1:] = df_scaled.iloc[:, 1:].multiply(scale_factors, axis=1)
+C:\Users\erik_\AppData\Local\Temp\ipykernel_3148\4007094660.py:6: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise in a future error of pandas. Value &#39;0     0.182927
+1     0.000000
+2     0.060976
+3     0.121951
+4     0.304878
+5     0.243902
+6     0.182927
+7     0.304878
+8     0.426829
+9     0.487805
+10    0.121951
+11    0.487805
+12    0.121951
+13    0.487805
+14    0.182927
+15    0.182927
+16    0.060976
+Name: rotation_z, dtype: float64&#39; has dtype incompatible with int16, please explicitly cast to a compatible dtype first.
+  df_scaled.iloc[:, 1:] = df_scaled.iloc[:, 1:].multiply(scale_factors, axis=1)
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>time</th>
+      <th>acceleration_x</th>
+      <th>acceleration_y</th>
+      <th>acceleration_z</th>
+      <th>rotation_x</th>
+      <th>rotation_y</th>
+      <th>rotation_z</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.374540</td>
+      <td>0.028163</td>
+      <td>0.004694</td>
+      <td>0.014081</td>
+      <td>0.121951</td>
+      <td>0.304878</td>
+      <td>0.182927</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.950714</td>
+      <td>0.032856</td>
+      <td>0.042244</td>
+      <td>0.004694</td>
+      <td>0.243902</td>
+      <td>0.365854</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.731994</td>
+      <td>0.042244</td>
+      <td>0.009388</td>
+      <td>0.009388</td>
+      <td>0.365854</td>
+      <td>0.426829</td>
+      <td>0.060976</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.598659</td>
+      <td>0.032856</td>
+      <td>0.018775</td>
+      <td>0.014081</td>
+      <td>0.121951</td>
+      <td>0.426829</td>
+      <td>0.121951</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.156019</td>
+      <td>0.032856</td>
+      <td>0.018775</td>
+      <td>0.009388</td>
+      <td>0.000000</td>
+      <td>0.304878</td>
+      <td>0.304878</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="write-the-processed-data">
+<h2>Write the processed data<a class="headerlink" href="#write-the-processed-data" title="Link to this heading"></a></h2>
+<p>Write the processed data in binary format. The call updates the metadata object with the data attributes of the dataframe.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The new name of the file</span>
+<span class="n">output_bin_filename</span> <span class="o">=</span> <span class="s2">&quot;tmp_pandas_example_processed.bin&quot;</span>
+<span class="n">metadata_samples</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="s2">&quot;file_name&quot;</span><span class="p">,</span> <span class="n">output_bin_filename</span><span class="p">)</span>
+
+<span class="c1"># Write the data to a new binary file</span>
+<span class="n">tsdf</span><span class="o">.</span><span class="n">write_dataframe_to_binaries</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="n">df_scaled</span><span class="p">,</span> <span class="p">[</span><span class="n">metadata_time</span><span class="p">,</span> <span class="n">metadata_samples</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File written to data/</span><span class="si">{</span><span class="n">output_bin_filename</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File written to data/tmp_pandas_example_processed.bin
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="write-the-tsdf-metadata-file">
+<h2>Write the TSDF metadata file<a class="headerlink" href="#write-the-tsdf-metadata-file" title="Link to this heading"></a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Write new metadata file</span>
+<span class="n">output_meta_filename</span> <span class="o">=</span> <span class="s2">&quot;tmp_pandas_example_processed_meta.json&quot;</span>
+<span class="n">tsdf</span><span class="o">.</span><span class="n">write_metadata</span><span class="p">([</span><span class="n">metadata_time</span><span class="p">,</span> <span class="n">metadata_samples</span><span class="p">],</span> <span class="n">output_meta_filename</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File written to data/</span><span class="si">{</span><span class="n">output_meta_filename</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File written to data/tmp_pandas_example_processed_meta.json
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="basic_reading_and_writing_numpy.html" class="btn btn-neutral float-left" title="Basic reading and writing (numpy)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="writing_data_from_scratch.html" class="btn btn-neutral float-right" title="Writing data from scratch" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Netherlands eScience Center.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,74 @@
+tsdf.read_tsdf
+==============
+
+.. py:module:: tsdf.read_tsdf
+
+.. autoapi-nested-parse::
+
+   Module for reading TSDF files.
+
+   Reference: https://arxiv.org/abs/2211.11294
+
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   tsdf.read_tsdf.load_metadata_file
+   tsdf.read_tsdf.load_metadata_legacy_file
+   tsdf.read_tsdf.load_metadatas_from_dir
+   tsdf.read_tsdf.load_metadata_from_path
+   tsdf.read_tsdf.load_metadata_string
+
+
+Module Contents
+---------------
+
+.. py:function:: load_metadata_file(file) -> Dict[str, tsdf.tsdfmetadata.TSDFMetadata]
+
+   Loads a TSDF metadata file, returns a dictionary
+
+   :param file: file object containing the TSDF metadata.
+
+   :return: dictionary of TSDFMetadata objects.
+
+
+.. py:function:: load_metadata_legacy_file(file) -> Dict[str, tsdf.tsdfmetadata.TSDFMetadata]
+
+   Loads a TSDB metadata file, i.e., legacy format of the TSDF. It returns a dictionary representing the metadata.
+
+   :param file: file object containing the TSDF metadata.
+
+   :return: dictionary of TSDFMetadata objects.
+
+
+.. py:function:: load_metadatas_from_dir(dir_path: str, naming_pattern=METADATA_NAMING_PATTERN) -> List[Dict[str, tsdf.tsdfmetadata.TSDFMetadata]]
+
+   Loads all TSDF metadata files in a directory, returns a dictionary
+
+   :param dir_path: path to the directory containing the TSDF metadata files.
+   :param naming_pattern: (optional) naming pattern of the TSDF metadata files .
+
+   :return: dictionary of TSDFMetadata objects.
+
+
+.. py:function:: load_metadata_from_path(path: pathlib.Path) -> Dict[str, tsdf.tsdfmetadata.TSDFMetadata]
+
+   Loads a TSDF metadata file, returns a dictionary
+
+   :param path: path to the TSDF metadata file.
+
+   :return: dictionary of TSDFMetadata objects.
+
+
+.. py:function:: load_metadata_string(json_str) -> Dict[str, tsdf.tsdfmetadata.TSDFMetadata]
+
+   Loads a TSDF metadata string, returns a dictionary.
+
+   :param json_str: string containing the TSDF metadata.
+
+   :return: dictionary of TSDFMetadata objects.
+
+

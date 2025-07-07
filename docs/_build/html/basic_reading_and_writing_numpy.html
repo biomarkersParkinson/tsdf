@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Basic reading and writing (numpy) &mdash; tsdf  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=fd3f3429" />
+
+  
+    <link rel="canonical" href="https://biomarkersparkinson.github.io/tsdf/basic_reading_and_writing_numpy.html"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Basic reading and writing (pandas)" href="basic_reading_and_writing_pandas.html" />
+    <link rel="prev" title="TSDF metadata fields" href="tsdf_fields_table.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            tsdf
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">The format</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tsdf_fields_table.html">TSDF metadata fields</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Usage</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Basic reading and writing (numpy)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#load-some-data">Load some data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#perform-basic-data-processing">Perform basic data processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#write-the-processed-data">Write the processed data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#write-the-tsdf-metadata-file">Write the TSDF metadata file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#write-a-metadata-file-that-combines-multiple-binary-files">Write a metadata file that combines multiple binary files</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="basic_reading_and_writing_pandas.html">Basic reading and writing (pandas)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing_data_from_scratch.html">Writing data from scratch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="converting_legacy_data.html">Transform legacy format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="validating_files.html">Validate TSDF file</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="autoapi/tsdf/index.html">tsdf</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contact.html">Contact</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">tsdf</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Basic reading and writing (numpy)</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/biomarkersParkinson/tsdf/blob/main/docs/basic_reading_and_writing_numpy.ipynb" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="basic-reading-and-writing-numpy">
+<h1>Basic reading and writing (numpy)<a class="headerlink" href="#basic-reading-and-writing-numpy" title="Link to this heading"></a></h1>
+<p>These are some examples on how to read and write TSDF data into and from a numpy array, using the <code class="docutils literal notranslate"><span class="pre">tsdf</span></code> library.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">tsdf</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="load-some-data">
+<h2>Load some data<a class="headerlink" href="#load-some-data" title="Link to this heading"></a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The file names</span>
+<span class="n">metadata_path</span> <span class="o">=</span> <span class="s2">&quot;data/example_meta.json&quot;</span>
+<span class="n">binary_filename</span> <span class="o">=</span> <span class="s2">&quot;example_binary.bin&quot;</span>
+
+<span class="c1"># Multiple metadata files (one for each binary) are loaded into a dictionary</span>
+<span class="c1"># mapping the binary file name to the metadata object</span>
+<span class="n">metadata_dict</span> <span class="o">=</span> <span class="n">tsdf</span><span class="o">.</span><span class="n">load_metadata_from_path</span><span class="p">(</span><span class="n">metadata_path</span><span class="p">)</span>
+
+<span class="c1"># Retrieve the metadata object we want, using the name of the binary as key</span>
+<span class="n">metadata</span> <span class="o">=</span> <span class="n">metadata_dict</span><span class="p">[</span><span class="n">binary_filename</span><span class="p">]</span>
+
+<span class="c1"># Load the data</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">tsdf</span><span class="o">.</span><span class="n">load_ndarray_from_binary</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span>
+
+<span class="c1"># Print some info</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data type:</span><span class="se">\t</span><span class="s2"> </span><span class="si">{</span><span class="n">data</span><span class="o">.</span><span class="n">dtype</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data shape:</span><span class="se">\t</span><span class="s2"> </span><span class="si">{</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data type:	 int16
+Data shape:	 (10, 3)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="perform-basic-data-processing">
+<h2>Perform basic data processing<a class="headerlink" href="#perform-basic-data-processing" title="Link to this heading"></a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Perform an operation, resulting in a different data type</span>
+<span class="n">processed_data_1</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span> <span class="o">/</span> <span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
+
+<span class="c1"># Print some info</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Processed data type:</span><span class="se">\t</span><span class="s2"> </span><span class="si">{</span><span class="n">processed_data_1</span><span class="o">.</span><span class="n">dtype</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data shape:</span><span class="se">\t\t</span><span class="s2"> </span><span class="si">{</span><span class="n">processed_data_1</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Processed data type:	 float32
+Data shape:		 (10, 3)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="write-the-processed-data">
+<h2>Write the processed data<a class="headerlink" href="#write-the-processed-data" title="Link to this heading"></a></h2>
+<p>Write the processed data in binary format. The call returns the corresponding metadata object.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The new name of the file</span>
+<span class="n">output_bin_filename</span> <span class="o">=</span> <span class="s2">&quot;tmp_example_processed.bin&quot;</span>
+
+<span class="c1"># Write the data to a new binary file</span>
+<span class="n">processed_metadata_1</span> <span class="o">=</span> <span class="n">tsdf</span><span class="o">.</span><span class="n">write_binary_file</span><span class="p">(</span>
+        <span class="s2">&quot;data&quot;</span><span class="p">,</span>
+        <span class="n">output_bin_filename</span><span class="p">,</span>
+        <span class="n">processed_data_1</span><span class="p">,</span>
+        <span class="n">metadata</span><span class="o">.</span><span class="n">get_plain_tsdf_dict_copy</span><span class="p">(),</span>
+    <span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File written to data/</span><span class="si">{</span><span class="n">output_bin_filename</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File written to data/tmp_example_processed.bin
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="write-the-tsdf-metadata-file">
+<h2>Write the TSDF metadata file<a class="headerlink" href="#write-the-tsdf-metadata-file" title="Link to this heading"></a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Write new metadata file</span>
+<span class="n">output_meta_filename</span> <span class="o">=</span> <span class="s2">&quot;tmp_example_processed_meta.json&quot;</span>
+<span class="n">tsdf</span><span class="o">.</span><span class="n">write_metadata</span><span class="p">([</span><span class="n">processed_metadata_1</span><span class="p">],</span> <span class="n">output_meta_filename</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File written to data/</span><span class="si">{</span><span class="n">output_meta_filename</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File written to data/tmp_example_processed_meta.json
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="write-a-metadata-file-that-combines-multiple-binary-files">
+<h2>Write a metadata file that combines multiple binary files<a class="headerlink" href="#write-a-metadata-file-that-combines-multiple-binary-files" title="Link to this heading"></a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Preprocess the original data to generate another data source</span>
+<span class="n">processed_data_2</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;int32&quot;</span><span class="p">)</span>
+
+<span class="c1"># Adjust the metadata slightly</span>
+<span class="n">updated_metadata</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">get_plain_tsdf_dict_copy</span><span class="p">()</span>
+<span class="n">updated_metadata</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;scale_factors&quot;</span><span class="p">)</span>  <span class="c1"># remove the &#39;scale_factors&#39;</span>
+
+<span class="c1"># Save the new binary file</span>
+<span class="n">output_bin_filename_2</span> <span class="o">=</span> <span class="s2">&quot;tmp_example_processed_2.bin&quot;</span>
+<span class="n">processed_metadata_2</span> <span class="o">=</span> <span class="n">tsdf</span><span class="o">.</span><span class="n">write_binary_file</span><span class="p">(</span>
+    <span class="s2">&quot;data&quot;</span><span class="p">,</span>
+    <span class="n">output_bin_filename_2</span><span class="p">,</span>
+    <span class="n">processed_data_2</span><span class="p">,</span>
+    <span class="n">updated_metadata</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File written to data/</span><span class="si">{</span><span class="n">output_bin_filename_2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Write a metadata file that combines the two binary files</span>
+<span class="n">output_meta_filename_2</span> <span class="o">=</span> <span class="s2">&quot;tmp_example_processed_2_meta.json&quot;</span>
+<span class="n">tsdf</span><span class="o">.</span><span class="n">write_metadata</span><span class="p">([</span><span class="n">processed_metadata_1</span><span class="p">,</span> <span class="n">processed_metadata_2</span><span class="p">],</span>
+    <span class="n">output_meta_filename_2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File written to data/</span><span class="si">{</span><span class="n">output_meta_filename_2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File written to data/tmp_example_processed_2.bin
+File written to data/tmp_example_processed_2_meta.json
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="tsdf_fields_table.html" class="btn btn-neutral float-left" title="TSDF metadata fields" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="basic_reading_and_writing_pandas.html" class="btn btn-neutral float-right" title="Basic reading and writing (pandas)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Netherlands eScience Center.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

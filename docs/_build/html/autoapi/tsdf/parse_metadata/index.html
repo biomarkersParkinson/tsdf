@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tsdf.parse_metadata &mdash; tsdf  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
+
+  
+    <link rel="canonical" href="https://biomarkersparkinson.github.io/tsdf/autoapi/tsdf/parse_metadata/index.html"/>
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="tsdf.read_binary" href="../read_binary/index.html" />
+    <link rel="prev" title="tsdf.numpy_utils" href="../numpy_utils/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            tsdf
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">The format</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../tsdf_fields_table.html">TSDF metadata fields</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Usage</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../basic_reading_and_writing_numpy.html">Basic reading and writing (numpy)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../basic_reading_and_writing_pandas.html">Basic reading and writing (pandas)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../writing_data_from_scratch.html">Writing data from scratch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../converting_legacy_data.html">Transform legacy format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../validating_files.html">Validate TSDF file</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">tsdf</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../constants/index.html">tsdf.constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../file_utils/index.html">tsdf.file_utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../legacy_tsdf_utils/index.html">tsdf.legacy_tsdf_utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../numpy_utils/index.html">tsdf.numpy_utils</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">tsdf.parse_metadata</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-contents">Module Contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../read_binary/index.html">tsdf.read_binary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../read_tsdf/index.html">tsdf.read_tsdf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tsdfmetadata/index.html">tsdf.tsdfmetadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../validator/index.html">tsdf.validator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../write_binary/index.html">tsdf.write_binary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../write_tsdf/index.html">tsdf.write_tsdf</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#classes">Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#functions">Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#package-contents">Package Contents</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contact.html">Contact</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">tsdf</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">tsdf</a></li>
+      <li class="breadcrumb-item active">tsdf.parse_metadata</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/biomarkersParkinson/tsdf/blob/main/docs/autoapi/tsdf/parse_metadata/index.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-tsdf.parse_metadata">
+<span id="tsdf-parse-metadata"></span><h1>tsdf.parse_metadata<a class="headerlink" href="#module-tsdf.parse_metadata" title="Link to this heading"></a></h1>
+<p>Module for parsing TSDF metadata files.</p>
+<p>Reference: <a class="reference external" href="https://arxiv.org/abs/2211.11294">https://arxiv.org/abs/2211.11294</a></p>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tsdf.parse_metadata.read_data" title="tsdf.parse_metadata.read_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_data</span></code></a>(→ Dict[str, tsdf.tsdfmetadata.TSDFMetadata])</p></td>
+<td><p>Function used to parse the JSON object containing TSDF metadata. It returns a</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tsdf.parse_metadata._read_struct" title="tsdf.parse_metadata._read_struct"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_read_struct</span></code></a>(→ Dict[str, tsdf.tsdfmetadata.TSDFMetadata])</p></td>
+<td><p>Recursive method used to parse the TSDF metadata in a hierarchical</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tsdf.parse_metadata.is_mandatory_type" title="tsdf.parse_metadata.is_mandatory_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_mandatory_type</span></code></a>(→ bool)</p></td>
+<td><p>Function returns True if the field that corresponds to the</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tsdf.parse_metadata._contains_file_name" title="tsdf.parse_metadata._contains_file_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_contains_file_name</span></code></a>(→ bool)</p></td>
+<td><p>Function return True if the data contains the &quot;file_name&quot; key,</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tsdf.parse_metadata.contains_tsdf_mandatory_fields" title="tsdf.parse_metadata.contains_tsdf_mandatory_fields"><code class="xref py py-obj docutils literal notranslate"><span class="pre">contains_tsdf_mandatory_fields</span></code></a>(→ bool)</p></td>
+<td><p>Verifies that all the mandatory properties for TSDF metadata are provided,</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tsdf.parse_metadata._check_tsdf_property_format" title="tsdf.parse_metadata._check_tsdf_property_format"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_check_tsdf_property_format</span></code></a>(→ None)</p></td>
+<td><p>Function checks whether the value of the mandatory TSDF field specified by the key</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tsdf.parse_metadata.get_file_metadata_at_index" title="tsdf.parse_metadata.get_file_metadata_at_index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_file_metadata_at_index</span></code></a>(...)</p></td>
+<td><p>Returns the metadata object at the position defined by the index.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tsdf.parse_metadata.confirm_dir_of_metadata" title="tsdf.parse_metadata.confirm_dir_of_metadata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">confirm_dir_of_metadata</span></code></a>(→ None)</p></td>
+<td><p>The method is used to confirm whether all the metadata files are expected in the same directory.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tsdf.parse_metadata.is_iso8601" title="tsdf.parse_metadata.is_iso8601"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_iso8601</span></code></a>(→ bool)</p></td>
+<td><p>Checks if the given date string is in ISO8601 format.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tsdf.parse_metadata.validate_datetimes" title="tsdf.parse_metadata.validate_datetimes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_datetimes</span></code></a>(→ bool)</p></td>
+<td><p>Validates the start and end date format of the TSDFMetaData object.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="tsdf.parse_metadata.read_data">
+<span class="sig-prename descclassname"><span class="pre">tsdf.parse_metadata.</span></span><span class="sig-name descname"><span class="pre">read_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="../tsdfmetadata/index.html#tsdf.tsdfmetadata.TSDFMetadata" title="tsdf.tsdfmetadata.TSDFMetadata"><span class="pre">tsdf.tsdfmetadata.TSDFMetadata</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../_modules/tsdf/parse_metadata.html#read_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tsdf.parse_metadata.read_data" title="Link to this definition"></a></dt>
+<dd><p>Function used to parse the JSON object containing TSDF metadata. It returns a
+list of TSDFMetadata objects, where each object describes formatting of a binary file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> – JSON object containing TSDF metadata.</p></li>
+<li><p><strong>source_path</strong> – path to the metadata file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of TSDFMetadata objects.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>tsdf_metadata.TSDFMetadataFieldValueError</strong> – if the TSDF metadata file is missing a mandatory field.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tsdf.parse_metadata._read_struct">
+<span class="sig-prename descclassname"><span class="pre">tsdf.parse_metadata.</span></span><span class="sig-name descname"><span class="pre">_read_struct</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">defined_properties</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="../tsdfmetadata/index.html#tsdf.tsdfmetadata.TSDFMetadata" title="tsdf.tsdfmetadata.TSDFMetadata"><span class="pre">tsdf.tsdfmetadata.TSDFMetadata</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../_modules/tsdf/parse_metadata.html#_read_struct"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tsdf.parse_metadata._read_struct" title="Link to this definition"></a></dt>
+<dd><p>Recursive method used to parse the TSDF metadata in a hierarchical
+order (from the root towards the leaves).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> – JSON object containing TSDF metadata.</p></li>
+<li><p><strong>defined_properties</strong> – dictionary containing all the properties defined at the current level of the TSDF structure.</p></li>
+<li><p><strong>source_path</strong> – path to the metadata file.</p></li>
+<li><p><strong>version</strong> – version of the TSDF used within the file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of TSDFMetadata objects.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>tsdf_metadata.TSDFMetadataFieldError</strong> – if the TSDF metadata file is missing a mandatory field.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tsdf.parse_metadata.is_mandatory_type">
+<span class="sig-prename descclassname"><span class="pre">tsdf.parse_metadata.</span></span><span class="sig-name descname"><span class="pre">is_mandatory_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../../_modules/tsdf/parse_metadata.html#is_mandatory_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tsdf.parse_metadata.is_mandatory_type" title="Link to this definition"></a></dt>
+<dd><p>Function returns True if the field that corresponds to the
+key is mandatory for the given TSDF version, otherwise it returns False.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key</strong> – key of the TSDF metadata field.</p></li>
+<li><p><strong>version</strong> – version of the TSDF used within the file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the field is mandatory, otherwise False.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tsdf.parse_metadata._contains_file_name">
+<span class="sig-prename descclassname"><span class="pre">tsdf.parse_metadata.</span></span><span class="sig-name descname"><span class="pre">_contains_file_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../../_modules/tsdf/parse_metadata.html#_contains_file_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tsdf.parse_metadata._contains_file_name" title="Link to this definition"></a></dt>
+<dd><p>Function return True if the data contains the “file_name” key,
+and thus, represents nested data elements.
+Otherwise it returns False.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> – data to be checked.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the data contains the “file_name” key, otherwise False.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tsdf.parse_metadata.contains_tsdf_mandatory_fields">
+<span class="sig-prename descclassname"><span class="pre">tsdf.parse_metadata.</span></span><span class="sig-name descname"><span class="pre">contains_tsdf_mandatory_fields</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dictionary</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../../_modules/tsdf/parse_metadata.html#contains_tsdf_mandatory_fields"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tsdf.parse_metadata.contains_tsdf_mandatory_fields" title="Link to this definition"></a></dt>
+<dd><p>Verifies that all the mandatory properties for TSDF metadata are provided,
+and are in the right format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dictionary</strong> – dictionary containing TSDF metadata.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the metadata is well formatted.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tsdf_metadata.TSDFMetadataFieldError</strong> – if the TSDF metadata file is missing a mandatory field.</p></li>
+<li><p><strong>tsdf_metadata.TSDFMetadataFieldValueError</strong> – if the TSDF metadata file contains an invalid value.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tsdf.parse_metadata._check_tsdf_property_format">
+<span class="sig-prename descclassname"><span class="pre">tsdf.parse_metadata.</span></span><span class="sig-name descname"><span class="pre">_check_tsdf_property_format</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../../_modules/tsdf/parse_metadata.html#_check_tsdf_property_format"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tsdf.parse_metadata._check_tsdf_property_format" title="Link to this definition"></a></dt>
+<dd><p>Function checks whether the value of the mandatory TSDF field specified by the key
+is of the expected data format.<cite>Note: If the key is not mandatory the function does not perform any checks.</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key</strong> – key of the TSDF metadata field.</p></li>
+<li><p><strong>value</strong> – value of the TSDF metadata field.</p></li>
+<li><p><strong>version</strong> – version of the TSDF used within the file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>tsdf_metadata.TSDFMetadataFieldValueError</strong> – if the TSDF metadata file contains an invalid value.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tsdf.parse_metadata.get_file_metadata_at_index">
+<span class="sig-prename descclassname"><span class="pre">tsdf.parse_metadata.</span></span><span class="sig-name descname"><span class="pre">get_file_metadata_at_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metadata</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="../tsdfmetadata/index.html#tsdf.tsdfmetadata.TSDFMetadata" title="tsdf.tsdfmetadata.TSDFMetadata"><span class="pre">tsdf.tsdfmetadata.TSDFMetadata</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../tsdfmetadata/index.html#tsdf.tsdfmetadata.TSDFMetadata" title="tsdf.tsdfmetadata.TSDFMetadata"><span class="pre">tsdf.tsdfmetadata.TSDFMetadata</span></a></span></span><a class="reference internal" href="../../../_modules/tsdf/parse_metadata.html#get_file_metadata_at_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tsdf.parse_metadata.get_file_metadata_at_index" title="Link to this definition"></a></dt>
+<dd><p>Returns the metadata object at the position defined by the index.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>metadata</strong> – dictionary containing TSDF metadata.</p></li>
+<li><p><strong>index</strong> – index of the metadata object to be returned.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>metadata object at the position defined by the index.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>IndexError</strong> – if the index is out of range.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tsdf.parse_metadata.confirm_dir_of_metadata">
+<span class="sig-prename descclassname"><span class="pre">tsdf.parse_metadata.</span></span><span class="sig-name descname"><span class="pre">confirm_dir_of_metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metadatas</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../tsdfmetadata/index.html#tsdf.tsdfmetadata.TSDFMetadata" title="tsdf.tsdfmetadata.TSDFMetadata"><span class="pre">tsdf.tsdfmetadata.TSDFMetadata</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../../_modules/tsdf/parse_metadata.html#confirm_dir_of_metadata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tsdf.parse_metadata.confirm_dir_of_metadata" title="Link to this definition"></a></dt>
+<dd><p>The method is used to confirm whether all the metadata files are expected in the same directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>metadatas</strong> – list of metadata objects.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>tsdf_metadata.TSDFMetadataFieldValueError</strong> – if the metadata files are not in the same directory or describe the same binaries.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tsdf.parse_metadata.is_iso8601">
+<span class="sig-prename descclassname"><span class="pre">tsdf.parse_metadata.</span></span><span class="sig-name descname"><span class="pre">is_iso8601</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">date_string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../../_modules/tsdf/parse_metadata.html#is_iso8601"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tsdf.parse_metadata.is_iso8601" title="Link to this definition"></a></dt>
+<dd><p>Checks if the given date string is in ISO8601 format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>date_string</strong> – date string to be checked.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tsdf.parse_metadata.validate_datetimes">
+<span class="sig-prename descclassname"><span class="pre">tsdf.parse_metadata.</span></span><span class="sig-name descname"><span class="pre">validate_datetimes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metadata</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../tsdfmetadata/index.html#tsdf.tsdfmetadata.TSDFMetadata" title="tsdf.tsdfmetadata.TSDFMetadata"><span class="pre">tsdf.tsdfmetadata.TSDFMetadata</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../../_modules/tsdf/parse_metadata.html#validate_datetimes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tsdf.parse_metadata.validate_datetimes" title="Link to this definition"></a></dt>
+<dd><p>Validates the start and end date format of the TSDFMetaData object.</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../numpy_utils/index.html" class="btn btn-neutral float-left" title="tsdf.numpy_utils" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../read_binary/index.html" class="btn btn-neutral float-right" title="tsdf.read_binary" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Netherlands eScience Center.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

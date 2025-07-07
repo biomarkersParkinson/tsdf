@@ -1,0 +1,292 @@
+tsdf
+====
+
+.. py:module:: tsdf
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/tsdf/constants/index
+   /autoapi/tsdf/file_utils/index
+   /autoapi/tsdf/legacy_tsdf_utils/index
+   /autoapi/tsdf/numpy_utils/index
+   /autoapi/tsdf/parse_metadata/index
+   /autoapi/tsdf/read_binary/index
+   /autoapi/tsdf/read_tsdf/index
+   /autoapi/tsdf/tsdfmetadata/index
+   /autoapi/tsdf/validator/index
+   /autoapi/tsdf/write_binary/index
+   /autoapi/tsdf/write_tsdf/index
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   tsdf.TSDFMetadata
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   tsdf.load_metadata_file
+   tsdf.load_metadata_from_path
+   tsdf.load_metadatas_from_dir
+   tsdf.load_metadata_string
+   tsdf.load_metadata_legacy_file
+   tsdf.write_metadata
+   tsdf.write_binary_file
+   tsdf.write_dataframe_to_binaries
+   tsdf.load_ndarray_from_binary
+   tsdf.load_dataframe_from_binaries
+
+
+Package Contents
+----------------
+
+.. py:function:: load_metadata_file(file) -> Dict[str, tsdf.tsdfmetadata.TSDFMetadata]
+
+   Loads a TSDF metadata file, returns a dictionary
+
+   :param file: file object containing the TSDF metadata.
+
+   :return: dictionary of TSDFMetadata objects.
+
+
+.. py:function:: load_metadata_from_path(path: pathlib.Path) -> Dict[str, tsdf.tsdfmetadata.TSDFMetadata]
+
+   Loads a TSDF metadata file, returns a dictionary
+
+   :param path: path to the TSDF metadata file.
+
+   :return: dictionary of TSDFMetadata objects.
+
+
+.. py:function:: load_metadatas_from_dir(dir_path: str, naming_pattern=METADATA_NAMING_PATTERN) -> List[Dict[str, tsdf.tsdfmetadata.TSDFMetadata]]
+
+   Loads all TSDF metadata files in a directory, returns a dictionary
+
+   :param dir_path: path to the directory containing the TSDF metadata files.
+   :param naming_pattern: (optional) naming pattern of the TSDF metadata files .
+
+   :return: dictionary of TSDFMetadata objects.
+
+
+.. py:function:: load_metadata_string(json_str) -> Dict[str, tsdf.tsdfmetadata.TSDFMetadata]
+
+   Loads a TSDF metadata string, returns a dictionary.
+
+   :param json_str: string containing the TSDF metadata.
+
+   :return: dictionary of TSDFMetadata objects.
+
+
+.. py:function:: load_metadata_legacy_file(file) -> Dict[str, tsdf.tsdfmetadata.TSDFMetadata]
+
+   Loads a TSDB metadata file, i.e., legacy format of the TSDF. It returns a dictionary representing the metadata.
+
+   :param file: file object containing the TSDF metadata.
+
+   :return: dictionary of TSDFMetadata objects.
+
+
+.. py:function:: write_metadata(metadatas: List[tsdf.tsdfmetadata.TSDFMetadata], file_name: str) -> None
+
+   Combine and save the TSDF metadata objects as a json file.
+
+   :param metadatas: List of TSDFMetadata objects to be saved.
+   :param file_name: Name of the file to be saved. The file will be saved in the directory of the first TSDFMetadata object in the list.
+
+   :raises TSDFMetadataFieldValueError: if the metadata files cannot be combined (e.g. they have no common fields) or if the list of TSDFMetadata objects is empty.
+
+
+.. py:function:: write_binary_file(file_dir: str, file_name: str, data: numpy.ndarray, metadata: dict) -> tsdf.tsdfmetadata.TSDFMetadata
+
+   Save binary file based on the provided NumPy array.
+
+   :param file_dir: path to the directory where the file will be saved.
+   :param file_name: name of the file to be saved.
+   :param data: NumPy array containing the data.
+   :param metadata: dictionary containing the metadata.
+
+   :return: TSDFMetadata object.
+
+
+.. py:function:: write_dataframe_to_binaries(file_dir: str, df: pandas.DataFrame, metadatas: List[tsdf.tsdfmetadata.TSDFMetadata]) -> None
+
+   Save binary file based on the provided pandas DataFrame.
+
+   :param file_dir:    path to the directory where the file will be saved.
+   :param df:          pandas DataFrame containing the data.
+   :param metadatas:   list of metadata objects to be saved, also contains
+                       channels to be retrieved from dataframe.
+
+
+.. py:function:: load_ndarray_from_binary(metadata: tsdf.tsdfmetadata.TSDFMetadata, start_row: int = 0, end_row: int = -1) -> numpy.ndarray
+
+   Use metadata properties to load and return numpy array from a binary file (located the same directory where the metadata is saved).
+
+   :param metadata: TSDFMetadata object.
+   :param start_row: (optional) first row to load.
+   :param end_row: (optional) last row to load. If -1, load all rows.
+
+   :return: numpy array containing the data.
+
+
+.. py:function:: load_dataframe_from_binaries(metadatas: List[tsdf.tsdfmetadata.TSDFMetadata], concatenation: tsdf.constants.ConcatenationType = ConcatenationType.none) -> Union[pandas.DataFrame, List[pandas.DataFrame]]
+
+   Load content of binary files associated with TSDF into a pandas DataFrame. The data frames can be concatenated horizontally (ConcatenationType.columns), vertically (ConcatenationType.rows) or provided as a list of data frames (ConcatenationType.none).
+
+   :param metadatas: list of TSDFMetadata objects.
+   :param concatenation: concatenation rule, i.e., determines whether the data frames (content of binary files) should be concatenated horizontally (ConcatenationType.columns), vertically (ConcatenationType.rows) or provided as a list of data frames (ConcatenationType.none).
+
+   :return: pandas DataFrame containing the combined data.
+
+
+.. py:class:: TSDFMetadata(dictionary: Dict[str, Any], dir_path: str, metadata_file_name: str = '', do_validate: bool = True)
+
+   Structure that provides metadata needed for reading a data stream.
+
+
+   .. py:attribute:: metadata_version
+      :type:  str
+
+      Version of the TSDF metadata file.
+
+
+   .. py:attribute:: study_id
+      :type:  str
+
+      Study ID.
+
+
+   .. py:attribute:: subject_id
+      :type:  str
+
+      Subject ID.
+
+
+   .. py:attribute:: device_id
+      :type:  str
+
+      Device ID.
+
+
+   .. py:attribute:: start_iso8601
+      :type:  str
+
+      Start time of the recording in ISO8601 format.
+
+
+   .. py:attribute:: end_iso8601
+      :type:  str
+
+      End time of the recording in ISO8601 format.
+
+
+   .. py:attribute:: file_name
+      :type:  str
+
+      Name of the binary file containing the data.
+
+
+   .. py:attribute:: rows
+      :type:  int
+
+      Number of rows in the binary file.
+
+
+   .. py:attribute:: channels
+      :type:  List[str]
+
+      List of channels in the binary file.
+
+
+   .. py:attribute:: units
+      :type:  List[str]
+
+      List of units for each channel in the binary file.
+
+
+   .. py:attribute:: data_type
+      :type:  str
+
+      Data type of the binary file.
+
+
+   .. py:attribute:: bits
+      :type:  int
+
+      Number of bits per sample in the binary file.
+
+
+   .. py:attribute:: endianness
+      :type:  str
+
+      Endianness of the binary file.
+
+
+   .. py:attribute:: file_dir_path
+      :type:  str
+
+      A reference to the directory path, so we don't need it again when reading associated binary files.
+
+
+   .. py:attribute:: metadata_file_name
+      :type:  str
+
+      A reference to the source path, so we don't need it again when reading associated binary files.
+
+
+   .. py:method:: validate() -> bool
+
+
+   .. py:method:: get_plain_tsdf_dict_copy() -> Dict[str, Any]
+
+      Method returns the a copy of the dict containing fields needed for the TSDF file.
+
+      :return: a copy of the dict containing fields needed for the TSDF file.
+
+
+
+   .. py:method:: set_start_datetime(date_time: datetime.datetime) -> None
+
+      Sets the start date of the recording as a datetime object.
+      :param date_time: datetime object containing the start date.
+
+
+
+   .. py:method:: get_start_datetime() -> datetime.datetime
+
+      Returns the start date of the recording as a datetime object.
+      :return: datetime object containing the start date.
+
+
+
+   .. py:method:: set_end_datetime(date_time: datetime.datetime) -> None
+
+      Sets the end date of the recording as a datetime object.
+      :param date_time: datetime object containing the end date.
+
+
+
+   .. py:method:: get_end_datetime() -> datetime.datetime
+
+      Returns the end date of the recording as a datetime object.
+      :return: datetime object containing the end date.
+
+
+
+   .. py:attribute:: start
+
+
+   .. py:attribute:: end
+
+

@@ -1,0 +1,87 @@
+tsdf.legacy_tsdf_utils
+======================
+
+.. py:module:: tsdf.legacy_tsdf_utils
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   tsdf.legacy_tsdf_utils.TSDB_TSDF_KEY_MAP
+   tsdf.legacy_tsdf_utils.TSDB_ARRAY_KEYS
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   tsdf.legacy_tsdf_utils._rename_keys_in_metadata
+   tsdf.legacy_tsdf_utils._convert_to_array
+   tsdf.legacy_tsdf_utils.convert_tsdb_to_tsdf
+   tsdf.legacy_tsdf_utils.generate_tsdf_metadata_from_tsdb
+   tsdf.legacy_tsdf_utils.convert_file_tsdb_to_tsdf
+   tsdf.legacy_tsdf_utils.convert_files_tsdb_to_tsdf
+
+
+Module Contents
+---------------
+
+.. py:data:: TSDB_TSDF_KEY_MAP
+
+.. py:data:: TSDB_ARRAY_KEYS
+
+.. py:function:: _rename_keys_in_metadata(old_dict: Dict[str, Any]) -> Dict[str, Any]
+
+   This function renames the keys in a metadata file.
+   If a key in the metadata matches a key in the provided dictionary, it is renamed to the corresponding value in the dictionary.
+   It handles nested dictionaries and lists of dictionaries.
+
+   :param old_dict: The metadata file (dictionary) with keys to rename
+   :return: The updated metadata file (dictionary)
+
+
+.. py:function:: _convert_to_array(data: Dict[str, Any], key: str) -> Dict[str, Any]
+
+   This function converts the value of a specified key in a dictionary to an array if it's not already an array.
+   It handles nested dictionaries and lists of dictionaries.
+
+   :param data: The dictionary with a value to convert
+   :param key: The key in the dictionary whose value to convert
+   :return: The updated dictionary
+
+
+.. py:function:: convert_tsdb_to_tsdf(data: Dict[str, Any]) -> Dict[str, Any]
+
+   Converts a data from TSDB (legacy) to TSDF (0.1) format.
+
+   :param data: The data in legacy (tsdb) format.
+   :return: The data in tsdf format.
+
+
+.. py:function:: generate_tsdf_metadata_from_tsdb(filepath_existing: str, filepath_new: str) -> None
+
+   This function creates a metadata file (JSON) file in TSDF (0.1) format from a TSDB (legacy) file.
+
+   :param filepath_existing: The path to the JSON file to process
+   :param filepath_new: The path to the new JSON file
+
+
+.. py:function:: convert_file_tsdb_to_tsdf(filepath: str) -> None
+
+   This function converts a metadata file (JSON) from TSDB (legacy) to TSDF (0.1) format. It overwrites the original file.
+
+   :param filepath: The path to the JSON file to process
+
+
+.. py:function:: convert_files_tsdb_to_tsdf(directory: str) -> None
+
+   This function converts all metadata files in a directory (and its subdirectories) from TSDB (legacy) to TSDF (0.1) format.
+   It walks through all files in a directory (and its subdirectories),
+   and processes all files with a .json extension.
+
+   :param directory: The directory to process files in
+
+
