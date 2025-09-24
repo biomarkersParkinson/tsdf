@@ -2,9 +2,14 @@
 name = "tsdf"
 version = "0.6.0"
 description = "A Python library that provides methods for encoding and decoding TSDF (Time Series Data Format) data, which allows you to easily create, manipulate and serialize TSDF files in your Python code."
-authors = ["Peter Kok <p.kok@esciencecenter.nl>",
-            "Pablo Rodríguez <p.rodriguez-sanchez@esciencecenter.nl>",
-            "Vedran Kasalica <v.kaslica@esciencecenter.nl>"]
+authors = ["Vedran Kasalica <v.kaslica@esciencecenter.nl>",
+           "Pablo Rodríguez <p.rodriguez-sanchez@esciencecenter.nl>",
+           "Luc Evers <luc.evers@radboudumc.nl>",
+           "Erik Post <erik.post@radboudumc.nl>",
+           "Yordan Raykov <yordan.raykov@nottingham.ac.uk>",
+           "Max Little <maxl@mit.edu>",
+           "Peter Kok <p.kok@esciencecenter.nl>",
+            ]
 license = "Apache-2.0"
 classifiers = [
     "License :: OSI Approved :: Apache Software License",
