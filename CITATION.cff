@@ -4,7 +4,7 @@
 cff-version: 1.2.0
 title: tsdf
 abstract: >
-  The tsdf package is a comprehensively documented2 reference implementation of the Time Series Data Format (TSDF) 
+  The [tsdf package](10.5281/zenodo.7867899) is a comprehensively documented reference implementation of the Time Series Data Format (TSDF) 
   standard [1](https://arxiv.org/abs/2211.11294). TSDF simplifies data storage and exchange of multi-channel digital 
   sensor data, thereby promoting interpretability and reproducibility of scientific results. Sensor measurements and 
   timestamps are stored as raw tabular binary array files. To ensure unambiguous reconstruction, binary array files are 
