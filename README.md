@@ -4,7 +4,7 @@
 | Badges | |
 |:----:|----|
 | **Packages and Releases** | [![Latest release](https://img.shields.io/github/release/biomarkersparkinson/tsdf.svg)](https://github.com/biomarkersparkinson/tsdf/releases/latest) [![PyPI](https://img.shields.io/pypi/v/tsdf.svg)](https://pypi.python.org/pypi/tsdf/)  [![Static Badge](https://img.shields.io/badge/RSD-tsdf-lib)](https://research-software-directory.org/software/tsdf) |
-| **Build Status** | [![](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/) ![Python package](https://github.com/biomarkersparkinson/tsdf/workflows/Python%20package/badge.svg) |
+| **Build Status** | [![](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/) ![Build and test](https://github.com/biomarkersparkinson/tsdf/workflows/build-and-test.yml/badge.svg) |
 | **DOI** | [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7867899.svg)](https://doi.org/10.5281/zenodo.7867899) |
 | **License** |  [![GitHub license](https://img.shields.io/github/license/biomarkersParkinson/tsdf)](https://github.com/biomarkersparkinson/tsdf/blob/main/LICENSE) |
 | **Fairness** |  [![fair-software.eu](https://img.shields.io/badge/fair--software.eu-%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8F-green)](https://fair-software.eu) [![OpenSSF Best Practices](https://bestpractices.coreinfrastructure.org/projects/8083/badge)](https://www.bestpractices.dev/projects/8083) |
