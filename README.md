@@ -22,7 +22,7 @@ The tsdf Python package implements functions for reading and writing TSDF files.
 
 ### Using `pip`
 
-The package is available in PyPi and requires [Python 3.10](https://www.python.org/downloads/) or higher. It can be installed using:
+The package is available in PyPi and requires [Python 3.11](https://www.python.org/downloads/) or higher. It can be installed using:
 
 ```bash
 $ pip install tsdf
