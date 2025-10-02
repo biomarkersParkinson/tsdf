@@ -1,3 +1,12 @@
+---
+name: Bug report
+about: Create a report to help us improve
+title: ''
+labels: ''
+assignees: ''
+
+---
+
 # Bug report
 
 ## Checklist before submitting an issue
@@ -7,20 +16,16 @@
 ## Bug details
 
 **Describe the bug**
-
 A clear and concise description of what the bug is.
 
 **To Reproduce**
-
 Steps to reproduce the behavior:
-1. install `tsdf` using pip
-2. run method `example_method` with parameters
-3. ...
-
-**Error Message**
-
-If applicable, add the error message.
 
 **Expected behavior**
-
 A clear and concise description of what you expected to happen.
+
+**Screenshots**
+If applicable, add screenshots to help explain your problem.
+
+**Additional context**
+Add any other context about the problem here.
