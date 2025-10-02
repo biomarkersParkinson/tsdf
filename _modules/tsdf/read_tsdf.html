@@ -4,9 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>tsdf.read_tsdf &mdash; tsdf  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
 
   
@@ -101,20 +101,20 @@
 <span class="sd">Reference: https://arxiv.org/abs/2211.11294</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span>
-<span class="kn">from</span> <span class="nn">tsdf</span> <span class="kn">import</span> <span class="n">file_utils</span> 
-<span class="kn">from</span> <span class="nn">tsdf.constants</span> <span class="kn">import</span> <span class="n">METADATA_NAMING_PATTERN</span>
-<span class="kn">from</span> <span class="nn">tsdf</span> <span class="kn">import</span> <span class="n">parse_metadata</span> 
-<span class="kn">from</span> <span class="nn">tsdf</span> <span class="kn">import</span> <span class="n">legacy_tsdf_utils</span> 
-<span class="kn">from</span> <span class="nn">tsdf.tsdfmetadata</span> <span class="kn">import</span> <span class="n">TSDFMetadata</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tsdf</span><span class="w"> </span><span class="kn">import</span> <span class="n">file_utils</span> 
+<span class="kn">from</span><span class="w"> </span><span class="nn">tsdf.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">METADATA_NAMING_PATTERN</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tsdf</span><span class="w"> </span><span class="kn">import</span> <span class="n">parse_metadata</span> 
+<span class="kn">from</span><span class="w"> </span><span class="nn">tsdf</span><span class="w"> </span><span class="kn">import</span> <span class="n">legacy_tsdf_utils</span> 
+<span class="kn">from</span><span class="w"> </span><span class="nn">tsdf.tsdfmetadata</span><span class="w"> </span><span class="kn">import</span> <span class="n">TSDFMetadata</span>
 
 
 <div class="viewcode-block" id="load_metadata_file">
 <a class="viewcode-back" href="../../autoapi/tsdf/read_tsdf/index.html#tsdf.load_metadata_file">[docs]</a>
-<span class="k">def</span> <span class="nf">load_metadata_file</span><span class="p">(</span><span class="n">file</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">TSDFMetadata</span><span class="p">]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">load_metadata_file</span><span class="p">(</span><span class="n">file</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">TSDFMetadata</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Loads a TSDF metadata file, returns a dictionary</span>
 
 <span class="sd">    :param file: file object containing the TSDF metadata.</span>
@@ -133,7 +133,7 @@
 
 <div class="viewcode-block" id="load_metadata_legacy_file">
 <a class="viewcode-back" href="../../autoapi/tsdf/read_tsdf/index.html#tsdf.load_metadata_legacy_file">[docs]</a>
-<span class="k">def</span> <span class="nf">load_metadata_legacy_file</span><span class="p">(</span><span class="n">file</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">TSDFMetadata</span><span class="p">]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">load_metadata_legacy_file</span><span class="p">(</span><span class="n">file</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">TSDFMetadata</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Loads a TSDB metadata file, i.e., legacy format of the TSDF. It returns a dictionary representing the metadata.</span>
 
 <span class="sd">    :param file: file object containing the TSDF metadata.</span>
@@ -154,7 +154,7 @@
 
 <div class="viewcode-block" id="load_metadatas_from_dir">
 <a class="viewcode-back" href="../../autoapi/tsdf/read_tsdf/index.html#tsdf.load_metadatas_from_dir">[docs]</a>
-<span class="k">def</span> <span class="nf">load_metadatas_from_dir</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">load_metadatas_from_dir</span><span class="p">(</span>
     <span class="n">dir_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">naming_pattern</span><span class="o">=</span><span class="n">METADATA_NAMING_PATTERN</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">TSDFMetadata</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
@@ -180,7 +180,7 @@
 
 <div class="viewcode-block" id="load_metadata_from_path">
 <a class="viewcode-back" href="../../autoapi/tsdf/read_tsdf/index.html#tsdf.load_metadata_from_path">[docs]</a>
-<span class="k">def</span> <span class="nf">load_metadata_from_path</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">TSDFMetadata</span><span class="p">]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">load_metadata_from_path</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">TSDFMetadata</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Loads a TSDF metadata file, returns a dictionary</span>
 
@@ -200,7 +200,7 @@
 
 <div class="viewcode-block" id="load_metadata_string">
 <a class="viewcode-back" href="../../autoapi/tsdf/read_tsdf/index.html#tsdf.load_metadata_string">[docs]</a>
-<span class="k">def</span> <span class="nf">load_metadata_string</span><span class="p">(</span><span class="n">json_str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">TSDFMetadata</span><span class="p">]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">load_metadata_string</span><span class="p">(</span><span class="n">json_str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">TSDFMetadata</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Loads a TSDF metadata string, returns a dictionary.</span>
 

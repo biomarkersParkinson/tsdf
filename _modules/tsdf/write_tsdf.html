@@ -4,9 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>tsdf.write_tsdf &mdash; tsdf  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
 
   
@@ -101,15 +101,15 @@
 <span class="sd">Reference: https://arxiv.org/abs/2211.11294</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span>
-<span class="kn">from</span> <span class="nn">tsdf</span> <span class="kn">import</span> <span class="n">file_utils</span>
-<span class="kn">from</span> <span class="nn">tsdf</span> <span class="kn">import</span> <span class="n">parse_metadata</span>
-<span class="kn">from</span> <span class="nn">tsdf.tsdfmetadata</span> <span class="kn">import</span> <span class="n">TSDFMetadata</span><span class="p">,</span> <span class="n">TSDFMetadataFieldValueError</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tsdf</span><span class="w"> </span><span class="kn">import</span> <span class="n">file_utils</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tsdf</span><span class="w"> </span><span class="kn">import</span> <span class="n">parse_metadata</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tsdf.tsdfmetadata</span><span class="w"> </span><span class="kn">import</span> <span class="n">TSDFMetadata</span><span class="p">,</span> <span class="n">TSDFMetadataFieldValueError</span>
 
 
 <div class="viewcode-block" id="write_metadata">
 <a class="viewcode-back" href="../../autoapi/tsdf/write_tsdf/index.html#tsdf.write_metadata">[docs]</a>
-<span class="k">def</span> <span class="nf">write_metadata</span><span class="p">(</span><span class="n">metadatas</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">TSDFMetadata</span><span class="p">],</span> <span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">write_metadata</span><span class="p">(</span><span class="n">metadatas</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">TSDFMetadata</span><span class="p">],</span> <span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Combine and save the TSDF metadata objects as a json file.</span>
 
@@ -151,7 +151,7 @@
 
 <div class="viewcode-block" id="_extract_common_fields">
 <a class="viewcode-back" href="../../autoapi/tsdf/write_tsdf/index.html#tsdf._extract_common_fields">[docs]</a>
-<span class="k">def</span> <span class="nf">_extract_common_fields</span><span class="p">(</span><span class="n">metadatas</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_extract_common_fields</span><span class="p">(</span><span class="n">metadatas</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Extract the fields that are the same for all the metadata files.</span>
 <span class="sd">    A new dict is created and the fields are removed from the original dictionaries.</span>
@@ -184,7 +184,7 @@
 
 <div class="viewcode-block" id="_calculate_overlaps_rec">
 <a class="viewcode-back" href="../../autoapi/tsdf/write_tsdf/index.html#tsdf._calculate_overlaps_rec">[docs]</a>
-<span class="k">def</span> <span class="nf">_calculate_overlaps_rec</span><span class="p">(</span><span class="n">metadatas</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_calculate_overlaps_rec</span><span class="p">(</span><span class="n">metadatas</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A recursive call that optimises the structure of the TSDF metadata, by grouping common values. For the input the list of dictionaries</span>
 <span class="sd">    corresponds to a list of &quot;flat&quot; metadata dictionaries. The output is a list of dictionaries (potentially of length 1) that contain</span>
@@ -228,7 +228,7 @@
 
 <div class="viewcode-block" id="_get_all_keys">
 <a class="viewcode-back" href="../../autoapi/tsdf/write_tsdf/index.html#tsdf._get_all_keys">[docs]</a>
-<span class="k">def</span> <span class="nf">_get_all_keys</span><span class="p">(</span><span class="n">metadatas</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_get_all_keys</span><span class="p">(</span><span class="n">metadatas</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get all the keys from the metadata files.</span>
 
@@ -245,7 +245,7 @@
 
 <div class="viewcode-block" id="calculate_max_overlap">
 <a class="viewcode-back" href="../../autoapi/tsdf/write_tsdf/index.html#tsdf.calculate_max_overlap">[docs]</a>
-<span class="k">def</span> <span class="nf">calculate_max_overlap</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">calculate_max_overlap</span><span class="p">(</span>
     <span class="n">meta_files</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]],</span> <span class="n">meta_key</span><span class="p">:</span> <span class="nb">str</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
@@ -277,7 +277,7 @@
 
 <div class="viewcode-block" id="max_len_key">
 <a class="viewcode-back" href="../../autoapi/tsdf/write_tsdf/index.html#tsdf.max_len_key">[docs]</a>
-<span class="k">def</span> <span class="nf">max_len_key</span><span class="p">(</span><span class="n">elements</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">max_len_key</span><span class="p">(</span><span class="n">elements</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return the key in a dictionary that has the longest list as a value.</span>
 

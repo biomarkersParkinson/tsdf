@@ -5,9 +5,9 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Basic reading and writing (pandas) &mdash; tsdf  documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+      <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
       <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=fd3f3429" />
 
   
@@ -108,7 +108,7 @@
 <p>These are some examples on how to read and write TSDF data into and from a numpy array, using the <code class="docutils literal notranslate"><span class="pre">tsdf</span></code> library.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tsdf</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">tsdf</span>
 </pre></div>
 </div>
 </div>
@@ -241,7 +241,7 @@
 Data shape:		 (17, 7)
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2035/4007094660.py:6: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise in a future error of pandas. Value &#39;0     0.028163
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2225/4007094660.py:6: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise in a future error of pandas. Value &#39;0     0.028163
 1     0.032856
 2     0.042244
 3     0.032856
@@ -260,7 +260,7 @@ Data shape:		 (17, 7)
 16    0.042244
 Name: acceleration_x, dtype: float64&#39; has dtype incompatible with int16, please explicitly cast to a compatible dtype first.
   df_scaled.iloc[:, 1:] = df_scaled.iloc[:, 1:].multiply(scale_factors, axis=1)
-/tmp/ipykernel_2035/4007094660.py:6: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise in a future error of pandas. Value &#39;0     0.004694
+/tmp/ipykernel_2225/4007094660.py:6: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise in a future error of pandas. Value &#39;0     0.004694
 1     0.042244
 2     0.009388
 3     0.018775
@@ -279,7 +279,7 @@ Name: acceleration_x, dtype: float64&#39; has dtype incompatible with int16, ple
 16    0.037550
 Name: acceleration_y, dtype: float64&#39; has dtype incompatible with int16, please explicitly cast to a compatible dtype first.
   df_scaled.iloc[:, 1:] = df_scaled.iloc[:, 1:].multiply(scale_factors, axis=1)
-/tmp/ipykernel_2035/4007094660.py:6: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise in a future error of pandas. Value &#39;0     0.014081
+/tmp/ipykernel_2225/4007094660.py:6: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise in a future error of pandas. Value &#39;0     0.014081
 1     0.004694
 2     0.009388
 3     0.014081
@@ -298,7 +298,7 @@ Name: acceleration_y, dtype: float64&#39; has dtype incompatible with int16, ple
 16    0.042244
 Name: acceleration_z, dtype: float64&#39; has dtype incompatible with int16, please explicitly cast to a compatible dtype first.
   df_scaled.iloc[:, 1:] = df_scaled.iloc[:, 1:].multiply(scale_factors, axis=1)
-/tmp/ipykernel_2035/4007094660.py:6: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise in a future error of pandas. Value &#39;0     0.121951
+/tmp/ipykernel_2225/4007094660.py:6: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise in a future error of pandas. Value &#39;0     0.121951
 1     0.243902
 2     0.365854
 3     0.121951
@@ -317,7 +317,7 @@ Name: acceleration_z, dtype: float64&#39; has dtype incompatible with int16, ple
 16    0.365854
 Name: rotation_x, dtype: float64&#39; has dtype incompatible with int16, please explicitly cast to a compatible dtype first.
   df_scaled.iloc[:, 1:] = df_scaled.iloc[:, 1:].multiply(scale_factors, axis=1)
-/tmp/ipykernel_2035/4007094660.py:6: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise in a future error of pandas. Value &#39;0     0.304878
+/tmp/ipykernel_2225/4007094660.py:6: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise in a future error of pandas. Value &#39;0     0.304878
 1     0.365854
 2     0.426829
 3     0.426829
@@ -336,7 +336,7 @@ Name: rotation_x, dtype: float64&#39; has dtype incompatible with int16, please 
 16    0.243902
 Name: rotation_y, dtype: float64&#39; has dtype incompatible with int16, please explicitly cast to a compatible dtype first.
   df_scaled.iloc[:, 1:] = df_scaled.iloc[:, 1:].multiply(scale_factors, axis=1)
-/tmp/ipykernel_2035/4007094660.py:6: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise in a future error of pandas. Value &#39;0     0.182927
+/tmp/ipykernel_2225/4007094660.py:6: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise in a future error of pandas. Value &#39;0     0.182927
 1     0.000000
 2     0.060976
 3     0.121951

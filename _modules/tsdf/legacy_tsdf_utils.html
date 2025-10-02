@@ -4,9 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>tsdf.legacy_tsdf_utils &mdash; tsdf  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
 
   
@@ -95,10 +95,10 @@
            <div itemprop="articleBody">
              
   <h1>Source code for tsdf.legacy_tsdf_utils</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span>
-<span class="kn">from</span> <span class="nn">tsdf.constants</span> <span class="kn">import</span> <span class="n">METADATA_NAMING_PATTERN</span>
-<span class="kn">from</span> <span class="nn">tsdf</span> <span class="kn">import</span> <span class="n">file_utils</span> 
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tsdf.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">METADATA_NAMING_PATTERN</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tsdf</span><span class="w"> </span><span class="kn">import</span> <span class="n">file_utils</span> 
 
 
 <span class="c1"># the old (TSDB) and new field (TSDF) names</span>
@@ -116,7 +116,7 @@
 
 <div class="viewcode-block" id="_rename_keys_in_metadata">
 <a class="viewcode-back" href="../../autoapi/tsdf/legacy_tsdf_utils/index.html#tsdf.legacy_tsdf_utils._rename_keys_in_metadata">[docs]</a>
-<span class="k">def</span> <span class="nf">_rename_keys_in_metadata</span><span class="p">(</span><span class="n">old_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_rename_keys_in_metadata</span><span class="p">(</span><span class="n">old_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This function renames the keys in a metadata file.</span>
 <span class="sd">    If a key in the metadata matches a key in the provided dictionary, it is renamed to the corresponding value in the dictionary.</span>
@@ -142,7 +142,7 @@
 
 <div class="viewcode-block" id="_convert_to_array">
 <a class="viewcode-back" href="../../autoapi/tsdf/legacy_tsdf_utils/index.html#tsdf.legacy_tsdf_utils._convert_to_array">[docs]</a>
-<span class="k">def</span> <span class="nf">_convert_to_array</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_convert_to_array</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This function converts the value of a specified key in a dictionary to an array if it&#39;s not already an array.</span>
 <span class="sd">    It handles nested dictionaries and lists of dictionaries.</span>
@@ -165,7 +165,7 @@
 
 <div class="viewcode-block" id="convert_tsdb_to_tsdf">
 <a class="viewcode-back" href="../../autoapi/tsdf/legacy_tsdf_utils/index.html#tsdf.legacy_tsdf_utils.convert_tsdb_to_tsdf">[docs]</a>
-<span class="k">def</span> <span class="nf">convert_tsdb_to_tsdf</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">convert_tsdb_to_tsdf</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Converts a data from TSDB (legacy) to TSDF (0.1) format.</span>
 
@@ -184,7 +184,7 @@
 
 <div class="viewcode-block" id="generate_tsdf_metadata_from_tsdb">
 <a class="viewcode-back" href="../../autoapi/tsdf/legacy_tsdf_utils/index.html#tsdf.legacy_tsdf_utils.generate_tsdf_metadata_from_tsdb">[docs]</a>
-<span class="k">def</span> <span class="nf">generate_tsdf_metadata_from_tsdb</span><span class="p">(</span><span class="n">filepath_existing</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">filepath_new</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">generate_tsdf_metadata_from_tsdb</span><span class="p">(</span><span class="n">filepath_existing</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">filepath_new</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This function creates a metadata file (JSON) file in TSDF (0.1) format from a TSDB (legacy) file.</span>
 
@@ -200,7 +200,7 @@
 
 <div class="viewcode-block" id="convert_file_tsdb_to_tsdf">
 <a class="viewcode-back" href="../../autoapi/tsdf/legacy_tsdf_utils/index.html#tsdf.legacy_tsdf_utils.convert_file_tsdb_to_tsdf">[docs]</a>
-<span class="k">def</span> <span class="nf">convert_file_tsdb_to_tsdf</span><span class="p">(</span><span class="n">filepath</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">convert_file_tsdb_to_tsdf</span><span class="p">(</span><span class="n">filepath</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This function converts a metadata file (JSON) from TSDB (legacy) to TSDF (0.1) format. It overwrites the original file.</span>
 
@@ -216,7 +216,7 @@
 
 <div class="viewcode-block" id="convert_files_tsdb_to_tsdf">
 <a class="viewcode-back" href="../../autoapi/tsdf/legacy_tsdf_utils/index.html#tsdf.legacy_tsdf_utils.convert_files_tsdb_to_tsdf">[docs]</a>
-<span class="k">def</span> <span class="nf">convert_files_tsdb_to_tsdf</span><span class="p">(</span><span class="n">directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">convert_files_tsdb_to_tsdf</span><span class="p">(</span><span class="n">directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This function converts all metadata files in a directory (and its subdirectories) from TSDB (legacy) to TSDF (0.1) format.</span>
 <span class="sd">    It walks through all files in a directory (and its subdirectories),</span>

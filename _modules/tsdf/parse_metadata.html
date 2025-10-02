@@ -4,9 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>tsdf.parse_metadata &mdash; tsdf  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
 
   
@@ -101,18 +101,18 @@
 <span class="sd">Reference: https://arxiv.org/abs/2211.11294</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span>
-<span class="kn">import</span> <span class="nn">re</span>
-<span class="kn">from</span> <span class="nn">dateutil</span> <span class="kn">import</span> <span class="n">parser</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dateutil</span><span class="w"> </span><span class="kn">import</span> <span class="n">parser</span>
 
-<span class="kn">from</span> <span class="nn">tsdf</span> <span class="kn">import</span> <span class="n">constants</span>
-<span class="kn">from</span> <span class="nn">tsdf</span> <span class="kn">import</span> <span class="n">tsdfmetadata</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tsdf</span><span class="w"> </span><span class="kn">import</span> <span class="n">constants</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tsdf</span><span class="w"> </span><span class="kn">import</span> <span class="n">tsdfmetadata</span>
 
 
 <div class="viewcode-block" id="read_data">
 <a class="viewcode-back" href="../../autoapi/tsdf/parse_metadata/index.html#tsdf.parse_metadata.read_data">[docs]</a>
-<span class="k">def</span> <span class="nf">read_data</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">source_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;tsdfmetadata.TSDFMetadata&quot;</span><span class="p">]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">read_data</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">source_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;tsdfmetadata.TSDFMetadata&quot;</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Function used to parse the JSON object containing TSDF metadata. It returns a</span>
 <span class="sd">    list of TSDFMetadata objects, where each object describes formatting of a binary file.</span>
@@ -139,7 +139,7 @@
 
 <div class="viewcode-block" id="_read_struct">
 <a class="viewcode-back" href="../../autoapi/tsdf/parse_metadata/index.html#tsdf.parse_metadata._read_struct">[docs]</a>
-<span class="k">def</span> <span class="nf">_read_struct</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_read_struct</span><span class="p">(</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">defined_properties</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">source_path</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;tsdfmetadata.TSDFMetadata&quot;</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
@@ -202,7 +202,7 @@
 
 <div class="viewcode-block" id="is_mandatory_type">
 <a class="viewcode-back" href="../../autoapi/tsdf/parse_metadata/index.html#tsdf.parse_metadata.is_mandatory_type">[docs]</a>
-<span class="k">def</span> <span class="nf">is_mandatory_type</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">is_mandatory_type</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Function returns True if the field that corresponds to the</span>
 <span class="sd">    key is mandatory for the given TSDF version, otherwise it returns False.</span>
@@ -218,7 +218,7 @@
 
 <div class="viewcode-block" id="_contains_file_name">
 <a class="viewcode-back" href="../../autoapi/tsdf/parse_metadata/index.html#tsdf.parse_metadata._contains_file_name">[docs]</a>
-<span class="k">def</span> <span class="nf">_contains_file_name</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_contains_file_name</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Function return True if the data contains the &quot;file_name&quot; key,</span>
 <span class="sd">    and thus, represents nested data elements.</span>
@@ -248,7 +248,7 @@
 
 <div class="viewcode-block" id="contains_tsdf_mandatory_fields">
 <a class="viewcode-back" href="../../autoapi/tsdf/parse_metadata/index.html#tsdf.parse_metadata.contains_tsdf_mandatory_fields">[docs]</a>
-<span class="k">def</span> <span class="nf">contains_tsdf_mandatory_fields</span><span class="p">(</span><span class="n">dictionary</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">contains_tsdf_mandatory_fields</span><span class="p">(</span><span class="n">dictionary</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Verifies that all the mandatory properties for TSDF metadata are provided,</span>
 <span class="sd">    and are in the right format.</span>
@@ -284,7 +284,7 @@
 
 <div class="viewcode-block" id="_check_tsdf_property_format">
 <a class="viewcode-back" href="../../autoapi/tsdf/parse_metadata/index.html#tsdf.parse_metadata._check_tsdf_property_format">[docs]</a>
-<span class="k">def</span> <span class="nf">_check_tsdf_property_format</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_check_tsdf_property_format</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Function checks whether the value of the mandatory TSDF field specified by the key</span>
 <span class="sd">    is of the expected data format.\\</span>
@@ -311,7 +311,7 @@
 
 <div class="viewcode-block" id="get_file_metadata_at_index">
 <a class="viewcode-back" href="../../autoapi/tsdf/parse_metadata/index.html#tsdf.parse_metadata.get_file_metadata_at_index">[docs]</a>
-<span class="k">def</span> <span class="nf">get_file_metadata_at_index</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_file_metadata_at_index</span><span class="p">(</span>
     <span class="n">metadata</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;tsdfmetadata.TSDFMetadata&quot;</span><span class="p">],</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;tsdfmetadata.TSDFMetadata&quot;</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
@@ -334,7 +334,7 @@
 
 <div class="viewcode-block" id="confirm_dir_of_metadata">
 <a class="viewcode-back" href="../../autoapi/tsdf/parse_metadata/index.html#tsdf.parse_metadata.confirm_dir_of_metadata">[docs]</a>
-<span class="k">def</span> <span class="nf">confirm_dir_of_metadata</span><span class="p">(</span><span class="n">metadatas</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="s2">&quot;tsdfmetadata.TSDFMetadata&quot;</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">confirm_dir_of_metadata</span><span class="p">(</span><span class="n">metadatas</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="s2">&quot;tsdfmetadata.TSDFMetadata&quot;</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The method is used to confirm whether all the metadata files are expected in the same directory.</span>
 
@@ -359,7 +359,7 @@
 
 <div class="viewcode-block" id="is_iso8601">
 <a class="viewcode-back" href="../../autoapi/tsdf/parse_metadata/index.html#tsdf.parse_metadata.is_iso8601">[docs]</a>
-<span class="k">def</span> <span class="nf">is_iso8601</span><span class="p">(</span><span class="n">date_string</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">is_iso8601</span><span class="p">(</span><span class="n">date_string</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Checks if the given date string is in ISO8601 format.</span>
 
@@ -380,7 +380,7 @@
 
 <div class="viewcode-block" id="validate_datetimes">
 <a class="viewcode-back" href="../../autoapi/tsdf/parse_metadata/index.html#tsdf.parse_metadata.validate_datetimes">[docs]</a>
-<span class="k">def</span> <span class="nf">validate_datetimes</span><span class="p">(</span><span class="n">metadata</span><span class="p">:</span> <span class="n">tsdfmetadata</span><span class="o">.</span><span class="n">TSDFMetadata</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_datetimes</span><span class="p">(</span><span class="n">metadata</span><span class="p">:</span> <span class="n">tsdfmetadata</span><span class="o">.</span><span class="n">TSDFMetadata</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Validates the start and end date format of the TSDFMetaData object.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
