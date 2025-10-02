@@ -4,7 +4,7 @@
 | Badges | |
 |:----:|----|
 | **Packages and Releases** | [![Latest release](https://img.shields.io/github/release/biomarkersparkinson/tsdf.svg)](https://github.com/biomarkersparkinson/tsdf/releases/latest) [![PyPI](https://img.shields.io/pypi/v/tsdf.svg)](https://pypi.python.org/pypi/tsdf/)  [![Static Badge](https://img.shields.io/badge/RSD-tsdf-lib)](https://research-software-directory.org/software/tsdf) |
-| **Build Status** | [![](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/) ![Python package](https://github.com/biomarkersparkinson/tsdf/workflows/Python%20package/badge.svg) [![pytype Type Check](https://github.com/biomarkersParkinson/tsdf/actions/workflows/pytype-checking.yml/badge.svg)](https://github.com/biomarkersParkinson/tsdf/actions/workflows/pytype-checking.yml) |
+| **Build Status** | [![](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/) ![Build and test](https://github.com/biomarkersparkinson/tsdf/workflows/build-and-test.yml/badge.svg) |
 | **DOI** | [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7867899.svg)](https://doi.org/10.5281/zenodo.7867899) |
 | **License** |  [![GitHub license](https://img.shields.io/github/license/biomarkersParkinson/tsdf)](https://github.com/biomarkersparkinson/tsdf/blob/main/LICENSE) |
 | **Fairness** |  [![fair-software.eu](https://img.shields.io/badge/fair--software.eu-%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8F-green)](https://fair-software.eu) [![OpenSSF Best Practices](https://bestpractices.coreinfrastructure.org/projects/8083/badge)](https://www.bestpractices.dev/projects/8083) |
@@ -13,11 +13,16 @@
 
 A package ([documentation](https://biomarkersparkinson.github.io/tsdf/)) to load TSDF data ([specification](https://arxiv.org/abs/2211.11294)) into Python.
 
+## Overview
+The [tsdf package](10.5281/zenodo.7867899) is a comprehensively documented reference implementation of the Time Series Data Format (TSDF) standard [[1]](https://arxiv.org/abs/2211.11294). TSDF simplifies data storage and exchange of multi-channel digital sensor data, thereby promoting interpretability and reproducibility of scientific results. Sensor measurements and timestamps are stored as raw tabular binary array files. To ensure unambiguous reconstruction, binary array files are accompanied by human-readable JavaScript Object Notation (JSON) metadata files, which contain a set of mandatory fields limited to essential sensor measurement information.
+
+The tsdf Python package implements functions for reading and writing TSDF files. It guarantees formatting and metadata consistency. It enforces usage of the essential metadata such as study identification, time frame, data channel descriptions and data attributes corresponding to the binary data.
+
 ## Installation
 
 ### Using `pip`
 
-The package is available in PyPi and requires [Python 3.10](https://www.python.org/downloads/) or higher. It can be installed using:
+The package is available in PyPi and requires [Python 3.11](https://www.python.org/downloads/) or higher. It can be installed using:
 
 ```bash
 $ pip install tsdf

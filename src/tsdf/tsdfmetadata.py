@@ -131,3 +131,13 @@ class TSDFMetadata:
         :return: datetime object containing the end date.
         """
         return parser.parse(self.end_iso8601)
+
+    start = property(get_start_datetime, set_start_datetime, doc=
+        """
+        Start time of the recording.
+        """)
+
+    end = property(get_end_datetime, set_end_datetime, doc=
+        """
+        End time of the recording.
+        """)
