@@ -81,7 +81,7 @@ jobs:
         gh release create
         "v${VERSION}"
         --repo '${{ github.repository }}'
-        --notes ""
+        --notes "See changelog for details: https://github.com/${{ github.repository }}/compare/v${VERSION}...HEAD"
 
     - name: Upload artifact signatures to GitHub Release
       env:
