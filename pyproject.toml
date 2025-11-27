@@ -21,7 +21,7 @@ keywords = ["Time Series Data Format (TSDF)", "binary data", "digital sensors"]
 repository = "https://github.com/biomarkersParkinson/tsdf"
 
 [tool.poetry.dependencies]
-python = ">=3.11,<3.14"
+python = "^3.11"
 numpy = "^1.24.1"
 pandas = "^2.1.3"
 
