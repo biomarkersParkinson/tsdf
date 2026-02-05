@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "tsdf"
-version = "0.6.1"
+version = "0.6.2"
 description = "A Python library that provides methods for encoding and decoding TSDF (Time Series Data Format) data, which allows you to easily create, manipulate and serialize TSDF files in your Python code."
 authors = ["Vedran Kasalica <v.kaslica@esciencecenter.nl>",
            "Pablo Rodríguez <p.rodriguez-sanchez@esciencecenter.nl>",
@@ -22,7 +22,7 @@ repository = "https://github.com/biomarkersParkinson/tsdf"
 
 [tool.poetry.dependencies]
 python = "^3.11"
-numpy = "^2.1"
+numpy = ">=1.24.1,<3.0"
 pandas = "^2.1.3"
 
 [tool.poetry.group.dev.dependencies]
