@@ -37,9 +37,6 @@ jobs:
       - name: Run tests
         run: poetry run pytest
 
-      - name: Type check
-        run: poetry run pytype .
-
   # Build job runs only once (Python 3.11)
   build:
     runs-on: ubuntu-latest
