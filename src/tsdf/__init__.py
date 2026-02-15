@@ -25,6 +25,17 @@ from .read_binary import (
 
 from .tsdfmetadata import TSDFMetadata
 
+from .time_series import (
+    ChannelMetadata,
+    ChannelGroup,
+    TimeSeriesMetadata,
+    TSDFTimeSeries,
+    read_multi_time_series_metadata,
+    read_time_series,
+    read_dataframe,
+    write_dataframe,
+)
+
 __all__ = [
     "load_metadata_file",
     "load_metadata_from_path",
@@ -37,5 +48,12 @@ __all__ = [
     "load_ndarray_from_binary",
     "load_dataframe_from_binaries",
     "TSDFMetadata",
-    "constants",
+    "ChannelMetadata",
+    "ChannelGroup",
+    "TimeSeriesMetadata",
+    "TSDFTimeSeries",
+    "read_multi_time_series_metadata",
+    "read_time_series",
+    "read_dataframe",
+    "write_dataframe",
 ]
